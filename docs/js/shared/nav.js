@@ -11,6 +11,12 @@ const ITEMS = [
   { href: 'encuentros_roshar.html',           label: 'Encuentros',  icon: '⚔',  match: ['encuentros_roshar.html'] }
 ];
 
+const PAGE_TITLES = {
+  'index.html': 'Cosmere · Roshar',
+  'hoja_personaje_roshar.html': 'Cosmere · Roshar',
+  'encuentros_roshar.html': 'COSMERE RPG · STORMLIGHT'
+};
+
 const STYLES = `
 .cr-nav{position:sticky;top:0;z-index:50;background:#1a1418;border-bottom:1px solid #3a2a30;
   padding:6px 12px;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;
@@ -24,6 +30,9 @@ const STYLES = `
 .cr-nav a:hover{background:#2a2026;color:#fff}
 .cr-nav a.active{background:#5a1414;color:#fff;border-color:#7a1f1f}
 .cr-nav a .ic{font-size:13px;line-height:1}
+.cr-search{font-size:13px;padding:8px 14px;border-radius:20px;border:1px solid #4a3040;background:#2e1e2e;color:#e9ebf0;font-family:Georgia,serif;outline:none}
+.cr-search::placeholder{color:#8a7a8a}
+.cr-search:focus{border-color:#7a5a80;background:#3a2830}
 .cr-nav-slot{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
 .cr-nav-slot .estado-guardado{font-size:11px;color:#8a7a8a;font-style:italic;white-space:nowrap}
 .cr-nav-slot .nav-sel{font-family:'Cinzel',serif;font-size:11px;background:#2e1e2e;color:#e9ebf0;
@@ -66,16 +75,23 @@ function injectNav() {
   if (!slot) return;
   ensureStyles();
   const here = currentFile();
+  const title = PAGE_TITLES[here] || 'Cosmere · Roshar';
+  
+  let navContent = `<nav class="cr-nav">`;
+  navContent += `<span class="cr-nav-brand">${title}</span>`;
+  
+  // En todas las páginas: mostrar los links normales
   const links = ITEMS.map(it => {
+    // En encuentros, saltar el link "Inicio"
+    if (here === 'encuentros_roshar.html' && it.href === 'index.html') return '';
     const active = it.match.some(m => m === here) ? ' active' : '';
     return `<a class="${active.trim()}" href="${it.href}">` +
       `<span class="ic">${it.icon}</span><span class="lbl">${it.label}</span></a>`;
   }).join('');
-  slot.outerHTML = `<nav class="cr-nav">` +
-    `<span class="cr-nav-brand">Cosmere · Roshar</span>` +
-    links +
-    `<span id="cr-nav-slot" class="cr-nav-slot"></span>` +
-    `</nav>`;
+  navContent += links;
+  
+  navContent += `<span id="cr-nav-slot" class="cr-nav-slot"></span></nav>`;
+  slot.outerHTML = navContent;
 }
 
 injectNav();

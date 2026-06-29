@@ -6,16 +6,10 @@
 //   <script type="module" src="js/shared/nav.js"></script>
 
 const ITEMS = [
-  { href: 'index.html',                       label: 'Inicio',      icon: '🏠', match: ['index.html', ''] },
-  { href: 'hoja_personaje_roshar.html',    label: 'Hoja',        icon: '📜', match: ['hoja_personaje_roshar.html'] },
+  { href: 'index.html',                       label: 'Buscador',    icon: '🔍', match: ['index.html', ''] },
+  { href: 'hoja_personaje_roshar.html',       label: 'Hoja',        icon: '📜', match: ['hoja_personaje_roshar.html'] },
   { href: 'encuentros_roshar.html',           label: 'Encuentros',  icon: '⚔',  match: ['encuentros_roshar.html'] }
 ];
-
-const PAGE_TITLES = {
-  'index.html': 'Cosmere · Roshar',
-  'hoja_personaje_roshar.html': 'Cosmere · Roshar',
-  'encuentros_roshar.html': 'COSMERE RPG · STORMLIGHT'
-};
 
 const STYLES = `
 .cr-nav{position:sticky;top:0;z-index:50;background:#1a1418;border-bottom:1px solid #3a2a30;
@@ -75,15 +69,13 @@ function injectNav() {
   if (!slot) return;
   ensureStyles();
   const here = currentFile();
-  const title = PAGE_TITLES[here] || 'Cosmere · Roshar';
+  const title = 'COSMERE RPG · STORMLIGHT';
   
   let navContent = `<nav class="cr-nav">`;
   navContent += `<span class="cr-nav-brand">${title}</span>`;
   
   // En todas las páginas: mostrar los links normales
   const links = ITEMS.map(it => {
-    // En encuentros, saltar el link "Inicio"
-    if (here === 'encuentros_roshar.html' && it.href === 'index.html') return '';
     const active = it.match.some(m => m === here) ? ' active' : '';
     return `<a class="${active.trim()}" href="${it.href}">` +
       `<span class="ic">${it.icon}</span><span class="lbl">${it.label}</span></a>`;

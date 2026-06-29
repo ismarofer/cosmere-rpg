@@ -394,7 +394,8 @@ function renderTalentos(){ var el=document.getElementById('talentosSel');
     :'<span class="chip-vacio">Sin talentos seleccionados</span>'; }
 
 function renderPotencias(){ var el=document.getElementById('potenciasSel');
-  el.innerHTML=S.potencias.length?S.potencias.map(function(k){ var p=POWERS.filter(function(x){ return x.key===k; })[0]; if(!p) return ''; return chipPot(p); }).join('')
+  el.innerHTML=S.potencias.length?S.potencias.map(function(k){ var p=POWERS.filter(function(x){ return x.key===k; })[0]; if(!p) return '';
+    return '<div class="pot-wrap"><button class="pot-wrap-rem no-print" data-rem="potencias:'+attrEsc(k)+'" title="Quitar potencia">×</button>'+fullCardPot(p,false)+'</div>'; }).join('')
     :'<span class="chip-vacio">Sin potencias seleccionadas</span>'; }
 
 /* ===== Descanso ===== */

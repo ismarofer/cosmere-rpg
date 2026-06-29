@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "skills.schema.json",
+  "title": "Habilidades base agrupadas por categoría (fis/cog/esp) y atributos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["attrs", "attrAbbr", "categories"],
+  "properties": {
+    "attrs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Lista ordenada de los seis atributos."
+    },
+    "attrAbbr": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "description": "Abreviaturas de los atributos."
+    },
+    "categories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fis", "cog", "esp"],
+      "properties": {
+        "fis": { "$ref": "#/$defs/skillList" },
+        "cog": { "$ref": "#/$defs/skillList" },
+        "esp": { "$ref": "#/$defs/skillList" }
+      }
+    }
+  },
+  "$defs": {
+    "skillList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "nom", "attr"],
+        "properties": {
+          "id":   { "type": "string", "minLength": 1 },
+          "nom":  { "type": "string", "minLength": 1 },
+          "attr": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoja de Personaje — JDR Cosmere · El Archivo de las Tormentas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--tinta:#23262e;--tinta-suave:#4a4f5c;--linea:#9aa0ad;--linea-fina:#c3c7d0;--papel:#f4f1e9;--casilla:#fbfaf6;
+    --acento:#185FA5;--acento-2:#445588;--verde:#0F6E56;--marron:#5A4A2A;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Crimson Text',Georgia,serif;color:var(--tinta);
+    background:#5b5f6b;background-image:radial-gradient(circle at 50% -10%, #6c7180, #4a4e59 60%);
+    font-size:15px;line-height:1.25;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  h1,h2,h3,.cinzel{font-family:'Cinzel',serif;}
+
+  /* ── Toolbar ── */
+  .toolbar{position:sticky;top:42px;left:0;right:0;width:100%;z-index:49;display:flex;align-items:center;gap:10px;
+    padding:6px 14px;background:#1a1418;color:#eef0f4;box-shadow:0 1px 6px rgba(0,0,0,.4);
+    border-bottom:1px solid #3a2a30;}
+  .toolbar .marca{font-family:'Cinzel',serif;font-weight:600;letter-spacing:.06em;font-size:13px;flex:1;display:none;}
+  .estado-guardado{font-size:11px;color:#8a7a8a;font-style:italic;white-space:nowrap;}
+  .btn{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.03em;background:#2a1e24;color:#e9ebf0;
+    border:1px solid #4a3040;padding:8px 12px;border-radius:6px;transition:.15s;}
+  .btn:hover{background:#3c3040;border-color:#7d6a80;}
+  .btn.primario{background:var(--acento);border-color:#2f7fce;}
+  .btn.peligro:hover{background:#5a1414;border-color:#a14040;}
+  /* Hamburguesa */
+  .hbg-btn{width:34px;height:34px;background:none;border:1px solid #4a3040;border-radius:7px;
+    cursor:pointer;color:#c0a8c0;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .hbg-btn:hover{background:#2e1e2e;border-color:#7a5a80;color:#fff;}
+  .hbg-menu{position:absolute;top:calc(100% + 6px);right:10px;background:#1e1420;border:1px solid #4a3040;
+    border-radius:10px;min-width:210px;padding:5px 0;box-shadow:0 8px 28px rgba(0,0,0,.6);z-index:200;display:none;}
+  .hbg-menu.open{display:block;}
+  .hbg-item{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;
+    color:#c8bac8;font-family:'Crimson Text',serif;font-size:15px;padding:10px 16px;cursor:pointer;text-align:left;white-space:nowrap;}
+  .hbg-item:hover{background:#2e1e2e;color:#fff;}
+  .hbg-ic{font-size:15px;width:18px;text-align:center;flex-shrink:0;opacity:.8;}
+  .hbg-sep{height:1px;background:#2a3248;margin:4px 0;}
+  .hbg-item.danger{color:#d07070;}
+  .hbg-item.danger:hover{background:#3a1a1a;color:#ff9090;}
+  /* Nav select — siempre visible */
+  .nav-sel{font-family:'Cinzel',serif;font-size:12px;background:#2e1e2e;color:#e9ebf0;
+    border:1px solid #4a3040;padding:7px 10px;border-radius:7px;cursor:pointer;max-width:190px;
+    appearance:auto;-webkit-appearance:auto;}
+  .nav-sel:focus{outline:2px solid var(--acento);}
+  .nav-sel option{background:#fff;color:#23262e;}
+
+  .hoja{width:210mm;margin:6px auto 18px;background:var(--papel);
+    background-image:linear-gradient(180deg,#f6f3ec,#efeadd);padding:11mm 10mm 9mm;box-shadow:0 10px 30px rgba(0,0,0,.4);}
+
+  input[type=text],input[type=number]{font-family:'Crimson Text',serif;font-size:15px;color:var(--tinta);background:transparent;border:none;width:100%;padding:2px 4px;}
+  input:focus,textarea:focus,select:focus{outline:none;background:#fffef9;}
+  textarea{font-family:'Crimson Text',serif;font-size:14.5px;line-height:1.35;color:var(--tinta);background:transparent;border:none;width:100%;resize:vertical;padding:4px 6px;}
+  select{font-family:'Crimson Text',serif;font-size:15px;color:var(--tinta);background:transparent;border:none;width:100%;padding:2px 2px;}
+
+  /* ===== Secciones plegables ===== */
+  .sec-h{display:flex;align-items:center;gap:8px;padding:5px 9px;background:#fff;border-bottom:1px solid var(--linea-fina);}
+  .sec-h .ttl{font-family:'Cinzel',serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acento-2);}
+
+  .cabecera{display:grid;grid-template-columns:62mm 1fr;gap:8px;margin-bottom:8px;}
+  .escudo{border:2px solid var(--tinta);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;justify-content:center;gap:6px;background:linear-gradient(135deg,#f7f4ec,#e9e3d4);}
+  .escudo .titulo-juego{font-family:'Cinzel',serif;font-size:18px;font-weight:700;letter-spacing:.04em;line-height:1;}
+  .escudo .subtitulo-juego{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;color:var(--acento-2);text-transform:uppercase;}
+  .escudo .logo-row{display:flex;align-items:center;gap:9px;}
+  .campo-jugador label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.08em;color:var(--tinta-suave);text-transform:uppercase;}
+  .campo-jugador input{border-bottom:1px solid var(--linea);}
+  .cab-datos{display:grid;grid-template-rows:1fr 1fr;gap:6px;}
+  .cab-fila{display:grid;grid-template-columns:1fr 40mm;gap:6px;}
+  .cab-celda{border:1.4px solid var(--tinta);border-radius:6px;padding:2px 6px 4px;display:flex;flex-direction:column;justify-content:flex-end;}
+  .cab-celda label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.07em;color:var(--tinta-suave);text-transform:uppercase;}
+  .cab-celda input{font-size:16px;}
+  .nivel-celda{display:grid;grid-template-columns:1fr auto;align-items:end;gap:4px;}
+  .rango-badge{font-family:'Cinzel',serif;font-size:9px;color:#fff;background:var(--acento-2);border-radius:4px;padding:2px 6px;white-space:nowrap;}
+  .cont-wrap{margin-left:auto;}
+  .cont-badge{font-family:'Cinzel',serif;font-size:10px;font-weight:600;border:1.2px solid;border-radius:10px;padding:2px 8px;background:#fff;white-space:nowrap;}
+  /* Tabla de progreso */
+  .prog-tabla{width:100%;border-collapse:collapse;font-size:12px;}
+  .prog-tabla th{font-family:'Cinzel',serif;font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--acento-2);text-align:left;padding:5px 6px;border-bottom:1.5px solid var(--linea-fina);}
+  .prog-tabla td{padding:4px 6px;border-bottom:1px solid var(--linea-fina);}
+  .prog-tabla .prog-lv{font-weight:700;font-family:'Cinzel',serif;}
+  .prog-tabla .prog-rg{font-size:10px;color:var(--tinta-suave);}
+  .prog-tabla .prog-c{text-align:center;font-weight:600;}
+  .prog-tabla .prog-act{background:#eef4fc;}
+  .prog-tabla .prog-act td{border-color:var(--acento);font-weight:600;}
+  .prog-nota{font-size:11px;color:var(--tinta-suave);margin-top:8px;line-height:1.5;}
+  .x-cerrar{cursor:pointer;font-size:24px;font-weight:700;color:var(--tinta-suave);line-height:1;}
+  .x-cerrar:hover{color:#a14040;}
+
+  .sel-box{border:1.4px solid var(--tinta);border-radius:7px;background:var(--casilla);margin-bottom:8px;overflow:hidden;}
+  .sel-box>.sec-b{padding:6px 8px 7px;}
+  .lab-sub{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave);margin-top:3px;}
+  .chips-sel{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 2px;min-height:22px;}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 9px;border-radius:14px;border:1.4px solid var(--linea);background:#fff;color:var(--tinta);cursor:pointer;}
+  .chip.col{color:#fff;border:none;}
+  .chip .x{cursor:pointer;font-weight:700;opacity:.85;font-size:14px;line-height:1;}
+  .chip .x:hover{opacity:1;}
+  .chip-vacio{font-style:italic;color:#9aa0ad;font-size:12.5px;}
+  .toolrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px;}
+  .mini-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.03em;background:#fff;border:1px solid var(--linea);color:var(--tinta-suave);border-radius:6px;padding:7px 11px;cursor:pointer;}
+  .mini-btn:hover{background:#eef3fb;border-color:var(--acento);color:var(--acento);}
+
+  .triada{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:0;}
+  .grupo-atr{border:1.4px solid var(--tinta);border-radius:8px;padding:5px 8px 8px;background:var(--casilla);}
+  .grupo-atr>.gtit{text-align:center;font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-2);margin:1px 0 5px;}
+  .atr-row{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:end;}
+  .atr-box{display:flex;flex-direction:column;align-items:center;}
+  .atr-box label{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:2px;text-align:center;}
+  .atr-val{width:48px;height:44px;border:1.6px solid var(--tinta);border-radius:7px;background:#fff;text-align:center;font-size:24px;font-weight:600;font-family:'Cinzel',serif;}
+  .def-box{display:flex;flex-direction:column;align-items:center;}
+  .def-box label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:2px;}
+  .def-escudo{width:50px;height:54px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 18%, #eef3fb, #dde6f4 70%);position:relative;clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%);}
+  .def-escudo::before{content:"";position:absolute;inset:2px;border:1.6px solid var(--acento-2);clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%);}
+  .def-total{font-size:22px;font-weight:700;font-family:'Cinzel',serif;color:var(--acento-2);position:relative;}
+  .def-bonif input{width:36px;text-align:center;font-size:11px;border-bottom:1px solid var(--linea-fina);padding:0;}
+  .mini-lbl{font-size:7.5px;color:var(--tinta-suave);letter-spacing:.03em;text-transform:uppercase;font-family:'Cinzel',serif;}
+  .recursos{margin-top:8px;}
+  .recurso{border:1.4px solid var(--tinta);border-radius:6px;padding:3px 6px 5px;display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:end;}
+  .recurso .rtit{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave);grid-column:1/-1;margin-bottom:-2px;}
+  .recurso .rmax,.recurso .ract{display:flex;flex-direction:column;align-items:center;}
+  .recurso .rmax span,.recurso .ract span,.bonif-mini span{font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-suave);font-family:'Cinzel',serif;}
+  .num-grande{width:48px;height:32px;text-align:center;font-size:18px;font-family:'Cinzel',serif;font-weight:600;border:1.3px solid var(--linea);border-radius:5px;background:#fff;}
+  .num-grande.auto{background:#eef3fb;border-color:#b9c8e0;}
+  .stepper{display:flex;align-items:center;gap:3px;}
+  .stepper button{width:22px;height:30px;border:1px solid var(--linea);background:#fff;border-radius:5px;cursor:pointer;font-size:16px;line-height:1;color:var(--tinta-suave);}
+  .stepper button:hover{background:var(--acento);color:#fff;border-color:var(--acento);}
+  .bonif-mini{display:flex;flex-direction:column;align-items:center;}
+  .bonif-mini input{width:36px;text-align:center;font-size:12px;border:1px solid var(--linea-fina);border-radius:4px;}
+  .desvio-box{margin-top:5px;border:1.4px solid var(--tinta);border-radius:6px;padding:3px 8px 5px;display:flex;justify-content:space-between;align-items:center;gap:6px;}
+  .desvio-box label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave);}
+  .desvio-total{width:46px;height:30px;text-align:center;font-size:18px;font-family:'Cinzel',serif;font-weight:700;border:1.3px solid #b9c8e0;border-radius:5px;background:#eef3fb;display:flex;align-items:center;justify-content:center;}
+  .desvio-bonif{display:flex;flex-direction:column;align-items:center;}
+  .desvio-bonif span{font-size:7px;text-transform:uppercase;color:var(--tinta-suave);font-family:'Cinzel',serif;}
+  .desvio-bonif input{width:34px;text-align:center;font-size:12px;border:1px solid var(--linea-fina);border-radius:4px;}
+
+  .leyenda{font-size:11.5px;font-style:italic;color:var(--tinta-suave);}
+  .habilidades{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:2px 0 0;}
+  .col-hab{display:flex;flex-direction:column;gap:3px;}
+  .hab-row{display:grid;grid-template-columns:36px 1fr auto;gap:6px;align-items:center;padding:3px 4px;border-radius:5px;}
+  .hab-row:hover{background:#fffef6;}
+  .hab-nom{font-size:13px;display:flex;align-items:baseline;gap:4px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .hab-nom .attr{font-size:9px;color:var(--tinta-suave);text-transform:uppercase;letter-spacing:.03em;font-family:'Cinzel',serif;}
+  .hab-nom input{font-size:13px;border-bottom:1px solid var(--linea-fina);width:78px;}
+  .hab-nom select{font-family:'Cinzel',serif;font-size:8.5px;border:1px solid var(--linea-fina);border-radius:3px;background:#fff;color:var(--tinta-suave);width:auto;}
+  .dots{display:flex;gap:3px;}
+  .dot{width:12px;height:12px;border:1.3px solid var(--tinta-suave);border-radius:50%;cursor:pointer;background:#fff;flex-shrink:0;}
+  .dot.on{background:var(--acento);border-color:var(--acento);}
+  .dot.locked{opacity:.22;cursor:not-allowed;border-style:dashed;}
+  .mod-box{font-family:'Cinzel',serif;font-weight:700;font-size:14px;text-align:center;color:var(--tinta);background:#fff;border:1.5px solid var(--acento-2);border-radius:5px;padding:4px 0;min-width:34px;}
+
+  .derivadas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 0;}
+  .deriv{border:1.4px solid var(--tinta);border-radius:6px;padding:4px 8px 6px;text-align:center;background:#eef3fb;}
+  .deriv .dtit{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--tinta-suave);}
+  .deriv .dval{font-size:17px;font-family:'Cinzel',serif;font-weight:600;color:var(--tinta);margin-top:2px;}
+  .deriv .dsub{font-size:11px;color:var(--acento);}
+
+  .bloques-2{display:grid;grid-template-columns:1fr 1.2fr;gap:8px;margin-bottom:8px;}
+  .bloque{border:1.4px solid var(--tinta);border-radius:7px;background:var(--casilla);display:flex;flex-direction:column;margin-bottom:8px;overflow:hidden;}
+  .bloques-2 .bloque,.p2-col .bloque{margin-bottom:0;}
+  .bloque>.sec-b{flex:1;}
+  .bloque textarea{flex:1;}
+  .cuerpo-sel{padding:5px 7px 7px;display:flex;flex-direction:column;gap:5px;}
+
+  .arma-row{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:start;border:1px solid var(--linea-fina);border-radius:6px;padding:5px 7px;background:#fff;cursor:pointer;}
+  .arma-row:hover{border-color:var(--acento);}
+  .arma-row .anombre{font-weight:600;font-size:13.5px;}
+  .arma-row .ameta{font-size:11.5px;color:var(--tinta-suave);}
+  .arma-row .acalc{font-family:'Cinzel',serif;font-size:12.5px;color:var(--acento-2);margin-top:1px;}
+  .arma-row .acalc b{color:var(--tinta);}
+  .arma-row .x{cursor:pointer;font-weight:700;color:#a14040;font-size:16px;}
+
+  .obj-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;border:1px solid var(--linea-fina);border-radius:6px;padding:3px 7px;background:#fff;}
+  .obj-row .obj-nom{font-size:13.5px;cursor:pointer;}
+  .obj-row .obj-nom:hover{color:var(--acento);}
+  .qty{display:flex;align-items:center;gap:5px;}
+  .qty button{width:24px;height:26px;border:1px solid var(--linea);background:#fff;border-radius:5px;cursor:pointer;font-size:15px;color:var(--tinta-suave);}
+  .qty button:hover{background:var(--acento);color:#fff;border-color:var(--acento);}
+  .qty b{min-width:18px;text-align:center;font-family:'Cinzel',serif;}
+  .obj-row .x{cursor:pointer;font-weight:700;color:#a14040;font-size:16px;}
+
+  #accionesSel,#accionesRadSel{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+  #accionesSel .lab-sub,#accionesRadSel .lab-sub{grid-column:1/-1;margin-top:4px;}
+  .acc-row{border:1px solid var(--linea-fina);border-radius:6px;padding:5px 7px;background:#fff;}
+  .acc-head{display:flex;align-items:baseline;gap:6px;}
+  .acc-head .act{font-family:'Cinzel',serif;color:var(--acento);font-weight:700;min-width:30px;}
+  .acc-head .anom{font-weight:600;font-size:13.5px;flex:1;}
+  .acc-head .acost{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--tinta-suave);font-family:'Cinzel',serif;}
+  .acc-flavor{font-size:11px;font-style:italic;color:var(--tinta-suave);margin-top:1px;}
+  .acc-mec{font-size:11.5px;color:#333;margin-top:2px;}
+
+  .est-chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 9px;border-radius:14px;color:#fff;cursor:pointer;}
+  .est-chip.buff{background:var(--verde);} .est-chip.deb{background:var(--marron);}
+  .est-chip .x{cursor:pointer;font-weight:700;font-size:14px;}
+
+  .divisor{display:flex;align-items:center;gap:10px;margin:14px 0 8px;}
+  .divisor::before,.divisor::after{content:"";flex:1;height:1.5px;background:var(--acento-2);opacity:.5;}
+  .divisor h2{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--acento-2);margin:0;white-space:nowrap;}
+
+  .p2-grid{display:grid;grid-template-columns:1.1fr .95fr .95fr;gap:8px;}
+  .p2-col{display:flex;flex-direction:column;gap:8px;}
+  .metas-lista{display:flex;flex-direction:column;gap:3px;padding:4px 6px 6px;}
+  .meta-row{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;}
+  .meta-row input{border-bottom:1px solid var(--linea-fina);font-size:13.5px;}
+  .dots3{display:flex;gap:4px;}
+  .marcos-box{border-top:1px solid var(--linea-fina);padding:4px 6px;}
+  .marcos-box label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave);}
+  .marcos-box input{border-bottom:1px solid var(--linea-fina);}
+
+  /* ── Chip resumido de talento/potencia en ficha ── */
+  .tal-chip{border:1.5px solid #bbb;border-radius:7px;background:#fff;overflow:hidden;
+    display:flex;align-items:stretch;cursor:pointer;transition:.12s;}
+  .tal-chip:hover{box-shadow:0 2px 6px rgba(0,0,0,.1);}
+  .tal-chip-stripe{width:4px;flex-shrink:0;}
+  .tal-chip-body{flex:1;padding:5px 8px;display:flex;flex-direction:column;gap:2px;}
+  .tal-chip-head{display:flex;align-items:baseline;gap:6px;}
+  .tal-chip-sym{font-size:14px;font-weight:700;flex-shrink:0;}
+  .tal-chip-name{font-weight:600;font-size:12.5px;font-family:'Cinzel',serif;flex:1;min-width:0;}
+  .tal-chip-badges{display:flex;gap:4px;flex-wrap:wrap;}
+  .tal-chip-mec{font-size:11px;line-height:1.4;color:#444;width:100%;margin-top:1px;padding-left:1px;}
+  .tal-chip-rem{cursor:pointer;font-weight:700;color:#a14040;font-size:16px;padding:0 2px;flex-shrink:0;align-self:flex-start;}
+  .badge-inv{font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;border:1px solid #d4900a;background:#fff8e7;color:#6b3d00;}
+  .badge-con{font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px;border:1px solid #d08080;background:#fef0f0;color:#6b1515;}
+  /* Colores por camino (stripe + sym) */
+  .tc-agente .tal-chip-stripe{background:#8B5A2B;}.tc-agente .tal-chip-sym{color:#6B3A15;}
+  .tc-cazador .tal-chip-stripe{background:#3D6B35;}.tc-cazador .tal-chip-sym{color:#2A5225;}
+  .tc-enviado .tal-chip-stripe{background:#7A5299;}.tc-enviado .tal-chip-sym{color:#5A3579;}
+  .tc-erudito .tal-chip-stripe{background:#336699;}.tc-erudito .tal-chip-sym{color:#1a4a77;}
+  .tc-guerrero .tal-chip-stripe{background:#8B2222;}.tc-guerrero .tal-chip-sym{color:#6B1111;}
+  .tc-lider .tal-chip-stripe{background:#996633;}.tc-lider .tal-chip-sym{color:#6B4515;}
+  .tc-corredor .tal-chip-stripe{background:#185FA5;}.tc-corredor .tal-chip-sym{color:#0C447C;}
+  .tc-custodio .tal-chip-stripe{background:#5A4A2A;}.tc-custodio .tal-chip-sym{color:#3A2A0A;}
+  .tc-danzante .tal-chip-stripe{background:#0F6E56;}.tc-danzante .tal-chip-sym{color:#085041;}
+  .tc-escultor .tal-chip-stripe{background:#9933AA;}.tc-escultor .tal-chip-sym{color:#6B1A7A;}
+  .tc-nominador .tal-chip-stripe{background:#336655;}.tc-nominador .tal-chip-sym{color:#1A4435;}
+  .tc-portador .tal-chip-stripe{background:#884422;}.tc-portador .tal-chip-sym{color:#5A2A0A;}
+  .tc-rompedor .tal-chip-stripe{background:#225588;}.tc-rompedor .tal-chip-sym{color:#0A3360;}
+  .tc-tejedor .tal-chip-stripe{background:#AA6622;}.tc-tejedor .tal-chip-sym{color:#7A3A0A;}
+  .tc-vigilante .tal-chip-stripe{background:#445588;}.tc-vigilante .tal-chip-sym{color:#223366;}
+  .tc-cantor .tal-chip-stripe{background:#6B5B73;}.tc-cantor .tal-chip-sym{color:#3d3343;}
+  .pot-chip .tal-chip-stripe{background:#7a3d9a;}.pot-chip .tal-chip-sym{color:#5a1a7a;}
+  .pot-chip{border-color:#9933AA;}
+  /* ── Carta completa (modal + info) — fiel a cardHTML original ── */
+  .full-card{border:1.5px solid #aaa;border-radius:8px;background:#fff;overflow:hidden;}
+  .full-card .fc-ch{padding:9px 10px 7px;border-bottom:1px solid rgba(0,0,0,.08);}
+  .full-card .fc-cn{font-size:13px;font-weight:600;line-height:1.2;font-family:'Cinzel',serif;color:#111;margin-bottom:6px;display:flex;align-items:baseline;gap:5px;}
+  .full-card .fc-asym{font-size:14px;font-weight:700;flex-shrink:0;line-height:1;}
+  .full-card .fc-badges{display:flex;gap:5px;flex-wrap:wrap;min-height:4px;}
+  .b-inv{display:flex;align-items:center;gap:2px;font-size:9.5px;font-family:Georgia,serif;font-weight:600;padding:2px 5px;border-radius:4px;border:1px solid #d4900a;background:#fff8e7;color:#6b3d00;}
+  .b-con{display:flex;align-items:center;gap:2px;font-size:9.5px;font-family:Georgia,serif;font-weight:600;padding:2px 5px;border-radius:4px;border:1px solid #d08080;background:#fef0f0;color:#6b1515;}
+  .full-card .fc-cb{padding:7px 10px;flex:1;}
+  .full-card .fc-cm{font-size:11px;line-height:1.48;color:#222;padding:5px 7px;border-left:2px solid;}
+  .full-card .fc-cf{padding:5px 10px 6px;border-top:0.5px solid rgba(0,0,0,.07);display:flex;align-items:flex-start;gap:5px;}
+  .full-card .fc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+  .full-card .fc-cf-tree{font-size:8.5px;font-family:Georgia,serif;font-weight:600;letter-spacing:.05em;text-transform:uppercase;}
+  .full-card .fc-cf-req{font-size:8.5px;font-family:Georgia,serif;font-style:italic;color:#888;}
+  /* colores por camino en full-card */
+  .fc-agente{border-color:#8B5A2B;}.fc-agente .fc-asym{color:#6B3A15;}.fc-agente .fc-cm{border-color:#8B5A2B;background:#fdf5ee;}.fc-agente .fc-dot{background:#8B5A2B;}.fc-agente .fc-cf-tree{color:#6B3A15;}
+  .fc-cazador{border-color:#3D6B35;}.fc-cazador .fc-asym{color:#2A5225;}.fc-cazador .fc-cm{border-color:#3D6B35;background:#eef5ec;}.fc-cazador .fc-dot{background:#3D6B35;}.fc-cazador .fc-cf-tree{color:#2A5225;}
+  .fc-enviado{border-color:#7A5299;}.fc-enviado .fc-asym{color:#5A3579;}.fc-enviado .fc-cm{border-color:#7A5299;background:#f5eefb;}.fc-enviado .fc-dot{background:#7A5299;}.fc-enviado .fc-cf-tree{color:#5A3579;}
+  .fc-erudito{border-color:#336699;}.fc-erudito .fc-asym{color:#1a4a77;}.fc-erudito .fc-cm{border-color:#336699;background:#edf3fb;}.fc-erudito .fc-dot{background:#336699;}.fc-erudito .fc-cf-tree{color:#1a4a77;}
+  .fc-guerrero{border-color:#8B2222;}.fc-guerrero .fc-asym{color:#6B1111;}.fc-guerrero .fc-cm{border-color:#8B2222;background:#fdeeed;}.fc-guerrero .fc-dot{background:#8B2222;}.fc-guerrero .fc-cf-tree{color:#6B1111;}
+  .fc-lider{border-color:#996633;}.fc-lider .fc-asym{color:#6B4515;}.fc-lider .fc-cm{border-color:#996633;background:#fdf6eb;}.fc-lider .fc-dot{background:#996633;}.fc-lider .fc-cf-tree{color:#6B4515;}
+  .fc-corredor{border-color:#185FA5;}.fc-corredor .fc-asym{color:#0C447C;}.fc-corredor .fc-cm{border-color:#185FA5;background:#eef4fc;}.fc-corredor .fc-dot{background:#185FA5;}.fc-corredor .fc-cf-tree{color:#0C447C;}
+  .fc-custodio{border-color:#5A4A2A;}.fc-custodio .fc-asym{color:#3A2A0A;}.fc-custodio .fc-cm{border-color:#5A4A2A;background:#f7f3ea;}.fc-custodio .fc-dot{background:#5A4A2A;}.fc-custodio .fc-cf-tree{color:#3A2A0A;}
+  .fc-danzante{border-color:#0F6E56;}.fc-danzante .fc-asym{color:#085041;}.fc-danzante .fc-cm{border-color:#0F6E56;background:#edf9f5;}.fc-danzante .fc-dot{background:#0F6E56;}.fc-danzante .fc-cf-tree{color:#085041;}
+  .fc-escultor{border-color:#9933AA;}.fc-escultor .fc-asym{color:#6B1A7A;}.fc-escultor .fc-cm{border-color:#9933AA;background:#f8eefa;}.fc-escultor .fc-dot{background:#9933AA;}.fc-escultor .fc-cf-tree{color:#6B1A7A;}
+  .fc-nominador{border-color:#336655;}.fc-nominador .fc-asym{color:#1A4435;}.fc-nominador .fc-cm{border-color:#336655;background:#eef5f0;}.fc-nominador .fc-dot{background:#336655;}.fc-nominador .fc-cf-tree{color:#1A4435;}
+  .fc-portador{border-color:#884422;}.fc-portador .fc-asym{color:#5A2A0A;}.fc-portador .fc-cm{border-color:#884422;background:#faf0ea;}.fc-portador .fc-dot{background:#884422;}.fc-portador .fc-cf-tree{color:#5A2A0A;}
+  .fc-rompedor{border-color:#225588;}.fc-rompedor .fc-asym{color:#0A3360;}.fc-rompedor .fc-cm{border-color:#225588;background:#eef1fa;}.fc-rompedor .fc-dot{background:#225588;}.fc-rompedor .fc-cf-tree{color:#0A3360;}
+  .fc-tejedor{border-color:#AA6622;}.fc-tejedor .fc-asym{color:#7A3A0A;}.fc-tejedor .fc-cm{border-color:#AA6622;background:#fdf3e8;}.fc-tejedor .fc-dot{background:#AA6622;}.fc-tejedor .fc-cf-tree{color:#7A3A0A;}
+  .fc-vigilante{border-color:#445588;}.fc-vigilante .fc-asym{color:#223366;}.fc-vigilante .fc-cm{border-color:#445588;background:#eef0fa;}.fc-vigilante .fc-dot{background:#445588;}.fc-vigilante .fc-cf-tree{color:#223366;}
+  .fc-cantor{border-color:#6B5B73;}.fc-cantor .fc-asym{color:#3d3343;}.fc-cantor .fc-cm{border-color:#6B5B73;background:#f0edf3;}.fc-cantor .fc-dot{background:#6B5B73;}.fc-cantor .fc-cf-tree{color:#3d3343;}
+  .fc-potencia{border-color:#9933AA;}.fc-potencia .fc-ch{background:linear-gradient(135deg,#f8eefa,#f0e6f8);}
+  .fc-potencia .fc-asym{color:#6B1A7A;}.fc-potencia .fc-cm{border-color:#9933AA;background:#f8eefa;}
+  .fc-potencia .fc-dot{background:#9933AA;}.fc-potencia .fc-cf-tree{color:#6B1A7A;}
+  .pot-act-sub{border-top:1px solid rgba(106,61,154,.15);padding:5px 10px 7px;}
+  .pot-act-row{background:#f0e8f8;border-radius:5px;padding:4px 7px;margin-bottom:4px;}
+  .pot-act-head{display:flex;gap:5px;align-items:baseline;flex-wrap:wrap;}
+  .pot-act-sym{font-family:'Cinzel',serif;font-weight:700;color:#6a3d9a;font-size:12px;}
+  .pot-act-nom{font-weight:600;font-size:12px;}
+  .pot-act-cond{font-size:9px;font-style:italic;color:#6a3d9a;font-family:Georgia,serif;}
+  .pot-act-mec{font-size:11px;color:#333;margin-top:2px;line-height:1.4;}
+  /* Cartas de item (armas/armaduras/objetos) */
+  .fc-item-cat{font-size:8.5px;font-family:'Cinzel',serif;letter-spacing:.06em;text-transform:uppercase;margin-top:1px;}
+  .fc-item-sub{font-size:8.5px;font-family:'Cinzel',serif;letter-spacing:.04em;text-transform:uppercase;margin-top:1px;}
+  .fc-item-stats{width:100%;border-collapse:collapse;margin-bottom:4px;}
+  .fc-item-key{color:var(--tinta-suave);font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;font-family:'Cinzel',serif;padding:1px 6px 1px 0;white-space:nowrap;vertical-align:top;}
+  .fc-item-val{font-size:11.5px;padding:1px 0;vertical-align:top;}
+  .fc-item-mej{font-size:10.5px;margin-top:3px;padding:3px 6px;border-left:2px solid #3D6B35;background:#eef5ec;color:#2A5225;line-height:1.4;}
+  .fc-item-inc{font-size:10.5px;margin-top:3px;padding:3px 6px;border-left:2px solid #8B2222;background:#fdeeed;color:#6B1111;line-height:1.4;}
+  .fc-item-exp{font-size:10.5px;margin-top:3px;padding:3px 6px;border-left:2px solid #9a6a30;background:#f7f0e3;color:#5a3d12;line-height:1.4;}
+  .fc-item-calc{font-size:10.5px;font-family:'Cinzel',serif;color:var(--acento-2);margin-top:4px;padding:2px 0;}
+  .fc-item-on{box-shadow:0 0 0 2.5px var(--acento);}
+  /* Grid de cartas en modal */
+  .modal-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin-bottom:8px;}
+  .modal-card-wrap{position:relative;cursor:pointer;}
+  .modal-card-wrap .full-card.on{box-shadow:0 0 0 2.5px var(--acento);}
+  .fc-added{position:absolute;top:6px;right:8px;font-family:'Cinzel',serif;font-size:9px;color:var(--acento);font-weight:600;background:rgba(255,255,255,.92);padding:1px 5px;border-radius:3px;}
+  /* colores por camino - cabecera */
+  .tal-agente{border-color:#8B5A2B;}.tal-agente .tal-asym{color:#6B3A15;}.tal-agente .tal-cm{border-color:#8B5A2B;background:#fdf5ee;}.tal-agente .tal-dot{background:#8B5A2B;}.tal-agente .tal-cf-tree{color:#6B3A15;}
+  .tal-cazador{border-color:#3D6B35;}.tal-cazador .tal-asym{color:#2A5225;}.tal-cazador .tal-cm{border-color:#3D6B35;background:#eef5ec;}.tal-cazador .tal-dot{background:#3D6B35;}.tal-cazador .tal-cf-tree{color:#2A5225;}
+  .tal-enviado{border-color:#7A5299;}.tal-enviado .tal-asym{color:#5A3579;}.tal-enviado .tal-cm{border-color:#7A5299;background:#f5eefb;}.tal-enviado .tal-dot{background:#7A5299;}.tal-enviado .tal-cf-tree{color:#5A3579;}
+  .tal-erudito{border-color:#336699;}.tal-erudito .tal-asym{color:#1a4a77;}.tal-erudito .tal-cm{border-color:#336699;background:#edf3fb;}.tal-erudito .tal-dot{background:#336699;}.tal-erudito .tal-cf-tree{color:#1a4a77;}
+  .tal-guerrero{border-color:#8B2222;}.tal-guerrero .tal-asym{color:#6B1111;}.tal-guerrero .tal-cm{border-color:#8B2222;background:#fdeeed;}.tal-guerrero .tal-dot{background:#8B2222;}.tal-guerrero .tal-cf-tree{color:#6B1111;}
+  .tal-lider{border-color:#996633;}.tal-lider .tal-asym{color:#6B4515;}.tal-lider .tal-cm{border-color:#996633;background:#fdf6eb;}.tal-lider .tal-dot{background:#996633;}.tal-lider .tal-cf-tree{color:#6B4515;}
+  .tal-corredor{border-color:#185FA5;}.tal-corredor .tal-asym{color:#0C447C;}.tal-corredor .tal-cm{border-color:#185FA5;background:#eef4fc;}.tal-corredor .tal-dot{background:#185FA5;}.tal-corredor .tal-cf-tree{color:#0C447C;}
+  .tal-custodio{border-color:#5A4A2A;}.tal-custodio .tal-asym{color:#3A2A0A;}.tal-custodio .tal-cm{border-color:#5A4A2A;background:#f7f3ea;}.tal-custodio .tal-dot{background:#5A4A2A;}.tal-custodio .tal-cf-tree{color:#3A2A0A;}
+  .tal-danzante{border-color:#0F6E56;}.tal-danzante .tal-asym{color:#085041;}.tal-danzante .tal-cm{border-color:#0F6E56;background:#edf9f5;}.tal-danzante .tal-dot{background:#0F6E56;}.tal-danzante .tal-cf-tree{color:#085041;}
+  .tal-escultor{border-color:#9933AA;}.tal-escultor .tal-asym{color:#6B1A7A;}.tal-escultor .tal-cm{border-color:#9933AA;background:#f8eefa;}.tal-escultor .tal-dot{background:#9933AA;}.tal-escultor .tal-cf-tree{color:#6B1A7A;}
+  .tal-nominador{border-color:#336655;}.tal-nominador .tal-asym{color:#1A4435;}.tal-nominador .tal-cm{border-color:#336655;background:#eef5f0;}.tal-nominador .tal-dot{background:#336655;}.tal-nominador .tal-cf-tree{color:#1A4435;}
+  .tal-portador{border-color:#884422;}.tal-portador .tal-asym{color:#5A2A0A;}.tal-portador .tal-cm{border-color:#884422;background:#faf0ea;}.tal-portador .tal-dot{background:#884422;}.tal-portador .tal-cf-tree{color:#5A2A0A;}
+  .tal-rompedor{border-color:#225588;}.tal-rompedor .tal-asym{color:#0A3360;}.tal-rompedor .tal-cm{border-color:#225588;background:#eef1fa;}.tal-rompedor .tal-dot{background:#225588;}.tal-rompedor .tal-cf-tree{color:#0A3360;}
+  .tal-tejedor{border-color:#AA6622;}.tal-tejedor .tal-asym{color:#7A3A0A;}.tal-tejedor .tal-cm{border-color:#AA6622;background:#fdf3e8;}.tal-tejedor .tal-dot{background:#AA6622;}.tal-tejedor .tal-cf-tree{color:#7A3A0A;}
+  .tal-vigilante{border-color:#445588;}.tal-vigilante .tal-asym{color:#223366;}.tal-vigilante .tal-cm{border-color:#445588;background:#eef0fa;}.tal-vigilante .tal-dot{background:#445588;}.tal-vigilante .tal-cf-tree{color:#223366;}
+  .tal-cantor{border-color:#6B5B73;}.tal-cantor .tal-asym{color:#3d3343;}.tal-cantor .tal-cm{border-color:#6B5B73;background:#f0edf3;}.tal-cantor .tal-dot{background:#6B5B73;}.tal-cantor .tal-cf-tree{color:#3d3343;}
+  /* grid de cartas */
+  .cartas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
+
+  /* ===== Potencias ===== */
+  .pot-card{border:1.5px solid #6a3d9a;border-radius:8px;background:#fff;overflow:hidden;cursor:pointer;transition:.12s;}
+  .pot-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.12);}
+  .pot-ch{padding:8px 10px 6px;background:linear-gradient(135deg,#f8eefa,#f0e6f8);border-bottom:1px solid rgba(106,61,154,.15);}
+  .pot-cn{font-size:13px;font-weight:600;font-family:'Cinzel',serif;color:#4a1a5a;margin-bottom:4px;display:flex;align-items:baseline;gap:5px;}
+  .pot-asym{font-size:15px;font-weight:700;color:#6a3d9a;flex-shrink:0;}
+  .pot-attr{font-size:9px;font-family:'Cinzel',serif;letter-spacing:.05em;text-transform:uppercase;color:#6a3d9a;opacity:.8;}
+  .pot-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
+  .pot-cb{padding:6px 10px;}
+  .pot-desc{font-style:italic;font-size:11.5px;color:#555;margin-bottom:4px;}
+  .pot-cm{font-size:11px;line-height:1.48;color:#222;padding:5px 7px;border-left:2px solid #9933AA;background:#f8eefa;}
+  .pot-cf{padding:5px 10px 6px;border-top:0.5px solid rgba(0,0,0,.07);font-size:8.5px;font-style:italic;color:#888;font-family:Georgia,serif;}
+  .pot-x{float:right;font-weight:700;color:#a14040;font-size:16px;cursor:pointer;margin-left:6px;line-height:1;}
+  /* acciones de una potencia anidadas */
+  .pot-actions{border-top:1px solid rgba(106,61,154,.15);padding:5px 10px 7px;display:flex;flex-direction:column;gap:4px;}
+  .pot-act-row{background:#f0e8f8;border-radius:5px;padding:4px 7px;font-size:10.5px;line-height:1.4;}
+  .pot-act-head{display:flex;gap:5px;align-items:baseline;margin-bottom:2px;}
+  .pot-act-sym{font-family:'Cinzel',serif;font-weight:700;color:#6a3d9a;font-size:11px;}
+  .pot-act-nom{font-weight:600;font-size:11px;}
+  .pot-act-mec{color:#333;font-size:10.5px;}
+
+  .pie{text-align:center;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.08em;color:var(--tinta-suave);margin-top:6px;text-transform:uppercase;}
+  .nota-uso{max-width:210mm;margin:0 auto 8px;color:#cfd5e2;font-size:12.5px;text-align:center;padding:0 12px;}
+
+  /* ====== MODAL ====== */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(18,20,26,.58);display:none;z-index:100;align-items:center;justify-content:center;padding:18px;}
+  .modal-backdrop.open{display:flex;}
+  .modal{background:var(--papel);border-radius:12px;width:min(700px,100%);max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden;}
+  .modal-head{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--linea-fina);background:#fff;}
+  .modal-head h3{font-family:'Cinzel',serif;font-size:15px;color:var(--acento-2);margin:0;flex:1;letter-spacing:.03em;}
+  .modal-close{width:34px;height:34px;border:1px solid var(--linea);background:#fff;border-radius:8px;font-size:22px;line-height:1;color:var(--tinta-suave);cursor:pointer;}
+  .modal-close:hover{background:#f3e6e6;border-color:#a14040;color:#a14040;}
+  .modal-tools{padding:9px 16px;border-bottom:1px solid var(--linea-fina);background:#faf8f2;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .modal-tools input.busca{flex:1;min-width:140px;border:1px solid var(--linea-fina);border-radius:8px;padding:9px 12px;font-size:15px;background:#fff;}
+  .modal-tools select.talsel{border:1px solid var(--linea-fina);border-radius:8px;padding:9px 10px;font-size:14px;background:#fff;width:auto;}
+  .modal-body{padding:10px 16px;overflow:auto;flex:1;}
+  .modal-foot{padding:10px 16px;border-top:1px solid var(--linea-fina);display:flex;gap:10px;justify-content:space-between;align-items:center;background:#fff;}
+  .modal-foot .cont{font-size:12px;color:var(--tinta-suave);font-style:italic;}
+  .pk-grupo{margin-bottom:4px;}
+  .pk-gtit{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--acento-2);margin:8px 0 4px;border-bottom:1px solid var(--linea-fina);padding-bottom:2px;}
+  .pk-stit{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:#8a8f99;margin:5px 0 2px;font-family:'Cinzel',serif;}
+  .pk-card{border:1.4px solid var(--linea-fina);border-radius:9px;padding:8px 11px;margin-bottom:7px;cursor:pointer;background:#fff;transition:.12s;position:relative;}
+  .pk-card:hover{border-color:var(--acento);}
+  .pk-card.on{border-color:var(--acento);background:#eef4fc;box-shadow:inset 0 0 0 1.5px var(--acento);}
+  .pk-card.on::after{content:"✓ añadido";position:absolute;top:7px;right:10px;font-family:'Cinzel',serif;font-size:9px;color:var(--acento);font-weight:600;}
+  .pk-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:60px;}
+  .pk-act{font-family:'Cinzel',serif;color:var(--acento);font-weight:700;}
+  .pk-name{font-weight:600;font-size:15px;}
+  .pk-tag{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--tinta-suave);font-family:'Cinzel',serif;}
+  .pk-tag.buff{color:#fff;background:var(--verde);padding:1px 6px;border-radius:8px;}
+  .pk-tag.deb{color:#fff;background:var(--marron);padding:1px 6px;border-radius:8px;}
+  .pk-flavor{font-style:italic;color:#6a707c;font-size:12.5px;margin-top:3px;}
+  .pk-mec{font-size:13px;color:#2a2d34;margin-top:3px;line-height:1.4;}
+  .pk-req{font-size:11.5px;color:var(--tinta-suave);margin-top:3px;font-style:italic;}
+  .pk-swatch{width:14px;height:14px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:2px;}
+  .info-card{border:1.6px solid var(--acento-2);border-radius:10px;padding:12px 14px;background:#fff;}
+  .empty-msg{color:#8a8f99;font-style:italic;padding:14px 4px;text-align:center;}
+
+  @media (max-width:820px){
+    body{font-size:16px;}
+    .nota-uso{font-size:13px;}
+    .hoja{width:100%;margin:6px 0 8px;padding:10px 9px 16px;border-radius:0;}
+    .cabecera,.habilidades,.bloques-2,.p2-grid{grid-template-columns:1fr;}
+    .derivadas{grid-template-columns:1fr 1fr;}
+    #accionesSel{grid-template-columns:1fr;}
+    .cartas-grid{grid-template-columns:1fr 1fr;}
+    input[type=text],input[type=number],select,textarea{font-size:16px;}
+    .cab-celda input{font-size:18px;}
+    .sec-h{padding:10px 11px;}
+    .dot{width:18px;height:18px;}
+    .hab-row{grid-template-columns:42px 1fr auto;padding:6px 4px;}
+    .mod-box{min-width:42px;font-size:16px;padding:6px 0;}
+    .chip,.est-chip{font-size:14px;padding:7px 12px;}
+    .chip .x,.est-chip .x,.arma-row .x,.tal-head .x,.obj-row .x{font-size:20px;padding:0 2px;}
+    .mini-btn{font-size:12px;padding:10px 14px;}
+    .qty button{width:34px;height:34px;font-size:18px;}
+    .toolbar{padding:8px 10px;gap:8px;}
+    .toolbar .marca{display:none;}
+    .estado-guardado{display:none;}
+    .modal-backdrop{padding:0;align-items:stretch;justify-content:stretch;}
+    .modal{width:100%;max-height:100vh;height:100vh;border-radius:0;}
+    .pk-card{padding:11px 13px;}
+    .pk-name{font-size:16px;}
+    .modal-tools input.busca{font-size:16px;padding:11px 12px;}
+    /* Físico / Cognitivo / Espiritual en una sola fila */
+    .triada{grid-template-columns:1fr 1fr 1fr;gap:4px;}
+    .grupo-atr{padding:4px 3px 6px;}
+    .grupo-atr>.gtit{font-size:9px;letter-spacing:.01em;margin-bottom:3px;}
+    .atr-row{gap:2px;}
+    .atr-box label,.def-box label{font-size:6.5px;line-height:1.05;text-align:center;}
+    .atr-val{width:100%;max-width:46px;height:42px;font-size:19px;}
+    .def-escudo{width:36px;height:42px;}
+    .def-total{font-size:15px;}
+    .def-bonif input{width:28px;font-size:10px;}
+    .mini-lbl{font-size:6.5px;}
+    .recursos{margin-top:6px;}
+    .recurso{grid-template-columns:1fr;justify-items:center;gap:3px;padding:3px;}
+    .recurso .rtit{text-align:center;font-size:8.5px;margin-bottom:0;}
+    .num-grande{width:48px;height:32px;font-size:17px;}
+    .stepper button{width:26px;height:30px;font-size:17px;}
+    .bonif-mini input{width:30px;}
+    .desvio-box{flex-wrap:wrap;justify-content:center;gap:4px;padding:3px;}
+    .desvio-total{width:42px;height:28px;font-size:16px;}
+  }
+
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
+    body{background:#fff !important;background-image:none !important;font-size:15px;}
+    .toolbar,.nota-uso,.no-print,.modal-backdrop{display:none !important;}
+    .hoja{margin:0 !important;box-shadow:none;width:210mm;padding:8mm 8mm 6mm;background:#f4f1e9 !important;background-image:linear-gradient(180deg,#f6f3ec,#efeadd) !important;}
+    @page{size:A4;margin:0;}
+    .sec-h{cursor:default;} .sec-h .chev{display:none !important;}
+    .grupo-atr,.bloque,.deriv,.recurso,.sel-box,.cabecera,.meta-row,.hab-row,.arma-row,.tal-row,.obj-row,.acc-row{page-break-inside:avoid;break-inside:avoid;}
+    .divisor{page-break-before:always;}
+    /* Forzar layout de escritorio aunque el viewport sea pequeño */
+    .cabecera{grid-template-columns:62mm 1fr !important;}
+    .habilidades{grid-template-columns:1fr 1fr 1fr !important;}
+    .bloques-2{grid-template-columns:1fr 1.2fr !important;}
+    .p2-grid{grid-template-columns:1.1fr .95fr .95fr !important;}
+    .triada{grid-template-columns:1fr 1fr 1fr !important;gap:8px !important;}
+    .derivadas{grid-template-columns:repeat(4,1fr) !important;}
+    #accionesSel,#accionesRadSel{grid-template-columns:1fr 1fr !important;}
+    .cartas-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr)) !important;}
+    .recurso{grid-template-columns:1fr auto auto !important;justify-items:start !important;}
+    .atr-val{width:48px !important;height:44px !important;font-size:24px !important;}
+    .def-escudo{width:50px !important;height:54px !important;}
+    .def-total{font-size:22px !important;}
+    .def-bonif input{width:36px !important;font-size:11px !important;}
+    .mini-lbl{font-size:7.5px !important;}
+    .grupo-atr>.gtit{font-size:12px !important;letter-spacing:.1em !important;}
+    .atr-row{gap:6px !important;}
+    .atr-box label,.def-box label{font-size:8.5px !important;}
+    input[type=text],input[type=number],select,textarea{font-size:15px !important;}
+    .dot{width:12px !important;height:12px !important;}
+    .hab-row{grid-template-columns:36px 1fr auto !important;padding:3px 4px !important;}
+    .mod-box{min-width:34px !important;font-size:14px !important;padding:4px 0 !important;}
+    .chip,.est-chip{font-size:12.5px !important;padding:4px 9px !important;}
+    .mini-btn{font-size:10px !important;padding:7px 11px !important;}
+    .stepper button{display:none !important;}
+    .desvio-box{flex-wrap:nowrap !important;justify-content:space-between !important;}
+    .toolbar,.hbg-menu{display:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="topnav"></div>
+<script type="module" src="js/shared/nav.js"></script>
+
+<div class="toolbar" style="display:none">
+  <select class="nav-sel no-print" id="navSel" onchange="irASeccionSel(this)" aria-label="Ir a sección">
+    <option value="">— Ir a sección —</option>
+  </select>
+  <span class="estado-guardado no-print" id="estadoGuardado">Sin cambios</span>
+  <button class="hbg-btn no-print" type="button" id="hbgBtn" onclick="toggleHbg()" aria-label="Menú">☰</button>
+  <div class="hbg-menu no-print" id="hbgMenu">
+    <button class="hbg-item" type="button" onclick="abrirTablaNivel();cerrarHbg()"><span class="hbg-ic">📊</span>Tabla de progreso</button>
+    <div class="hbg-sep"></div>
+    <button class="hbg-item" type="button" onclick="compartirPorURL();cerrarHbg()"><span class="hbg-ic">🔗</span>Compartir por URL</button>
+    <button class="hbg-item" type="button" onclick="window.print();cerrarHbg()"><span class="hbg-ic">🖨</span>Imprimir / PDF</button>
+    <div class="hbg-sep"></div>
+    <button class="hbg-item danger" type="button" onclick="limpiarTodo();cerrarHbg()"><span class="hbg-ic">✕</span>Nueva hoja</button>
+  </div>
+</div>
+
+
+<div class="hoja" id="hoja">
+
+  <div class="cabecera">
+    <div class="escudo">
+      <div class="logo-row">
+        <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="none" stroke="#23262e" stroke-width="4"/>
+          <polygon points="50,20 76,35 76,65 50,80 24,65 24,35" fill="none" stroke="#185FA5" stroke-width="3"/>
+          <circle cx="50" cy="50" r="9" fill="none" stroke="#23262e" stroke-width="3"/>
+          <line x1="50" y1="28" x2="50" y2="72" stroke="#23262e" stroke-width="2"/>
+          <line x1="31" y1="50" x2="69" y2="50" stroke="#23262e" stroke-width="2"/>
+        </svg>
+        <div><div class="titulo-juego">COSMERE</div><div class="subtitulo-juego">El Archivo de las Tormentas</div></div>
+      </div>
+      <div class="campo-jugador"><label>Nombre del jugador</label><input type="text" data-field="jugador"></div>
+    </div>
+    <div class="cab-datos">
+      <div class="cab-fila">
+        <div class="cab-celda"><label>Nombre del personaje</label><input type="text" data-field="personaje"></div>
+        <div class="cab-celda nivel-celda">
+          <div><label>Nivel</label><select data-field="nivel" id="selNivel"></select></div>
+          <span class="rango-badge" id="rangoBadge">Rango 1</span>
+        </div>
+      </div>
+      <div class="cab-fila">
+        <div class="cab-celda"><label>Ascendencia</label>
+          <select data-field="ascendencia"><option value="">—</option><option value="Humana">Humana</option><option value="Cantora">Cantora</option></select></div>
+        <div class="cab-celda"><label>Cultura / etnia</label><input type="text" data-field="cultura"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sel-box" data-sec="caminos">
+    <div class="sec-h"><span class="ttl">Caminos</span></div>
+    <div class="sec-b">
+      <div class="chips-sel" id="caminosSel"></div>
+      <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('caminos')">＋ Elegir camino</button></div>
+    </div>
+  </div>
+
+  <div class="sec bloque" data-sec="atributos">
+    <div class="sec-h"><span class="ttl">Atributos, defensas y recursos</span><span class="cont-wrap" id="contAtributos"></span></div>
+    <div class="sec-b" style="padding:8px 9px">
+      <div class="triada">
+        <div class="grupo-atr">
+          <div class="gtit">Físico</div>
+          <div class="atr-row">
+            <div class="atr-box"><label>Fuerza</label><input class="atr-val" type="number" min="0" max="12" data-attr="fuerza"></div>
+            <div class="def-box"><label>Defensa</label><div class="def-escudo"><span class="def-total" id="defFisica">10</span></div>
+              <div class="def-bonif"><input type="number" data-field="bonifDefFis" title="Bonif. Defensa física"></div><div class="mini-lbl">bonif.</div></div>
+            <div class="atr-box"><label>Velocidad</label><input class="atr-val" type="number" min="0" max="12" data-attr="velocidad"></div>
+          </div>
+          <div class="recursos"><div class="recurso"><div class="rtit">Salud</div>
+            <div class="rmax"><span>máxima</span><input class="num-grande auto" type="text" id="saludMax" readonly></div>
+            <div class="bonif-mini"><span>bonif.</span><input type="number" data-field="bonifSalud"></div>
+            <div class="ract"><span>actual</span><div class="stepper"><button type="button" onclick="paso('saludAct',-1)">−</button>
+              <input class="num-grande" type="number" data-field="saludAct"><button type="button" onclick="paso('saludAct',1)">+</button></div></div></div></div>
+          <div class="desvio-box"><label>Desvío</label>
+            <div class="desvio-bonif"><span>armadura</span><span id="desvioArmadura" style="font-family:Cinzel,serif;font-weight:600">0</span></div>
+            <div class="desvio-bonif"><span>bonif.</span><input type="number" data-field="bonifDesvio"></div>
+            <div class="desvio-total" id="desvioTotal">0</div></div>
+        </div>
+
+        <div class="grupo-atr">
+          <div class="gtit">Cognitivo</div>
+          <div class="atr-row">
+            <div class="atr-box"><label>Intelecto</label><input class="atr-val" type="number" min="0" max="12" data-attr="intelecto"></div>
+            <div class="def-box"><label>Defensa</label><div class="def-escudo"><span class="def-total" id="defCognitiva">10</span></div>
+              <div class="def-bonif"><input type="number" data-field="bonifDefCog" title="Bonif. Defensa cognitiva"></div><div class="mini-lbl">bonif.</div></div>
+            <div class="atr-box"><label>Voluntad</label><input class="atr-val" type="number" min="0" max="12" data-attr="voluntad"></div>
+          </div>
+          <div class="recursos"><div class="recurso"><div class="rtit">Concentración</div>
+            <div class="rmax"><span>máxima</span><input class="num-grande auto" type="text" id="concMax" readonly></div>
+            <div class="bonif-mini"><span>bonif.</span><input type="number" data-field="bonifConc"></div>
+            <div class="ract"><span>actual</span><div class="stepper"><button type="button" onclick="paso('concAct',-1)">−</button>
+              <input class="num-grande" type="number" data-field="concAct"><button type="button" onclick="paso('concAct',1)">+</button></div></div></div></div>
+          <div class="desvio-box" style="visibility:hidden"><label>·</label><input type="number" disabled></div>
+        </div>
+
+        <div class="grupo-atr">
+          <div class="gtit">Espiritual</div>
+          <div class="atr-row">
+            <div class="atr-box"><label>Discernimiento</label><input class="atr-val" type="number" min="0" max="12" data-attr="discernimiento"></div>
+            <div class="def-box"><label>Defensa</label><div class="def-escudo"><span class="def-total" id="defEspiritual">10</span></div>
+              <div class="def-bonif"><input type="number" data-field="bonifDefEsp" title="Bonif. Defensa espiritual"></div><div class="mini-lbl">bonif.</div></div>
+            <div class="atr-box"><label>Presencia</label><input class="atr-val" type="number" min="0" max="12" data-attr="presencia"></div>
+          </div>
+          <div class="recursos"><div class="recurso"><div class="rtit">Investidura</div>
+            <div class="rmax"><span>máxima</span><input class="num-grande" type="number" data-field="investMax"></div>
+            <div class="bonif-mini"><span style="font-size:6.5px">Investido</span><button class="mini-btn" style="padding:5px 7px" type="button" onclick="sugerirInvestidura()">↺</button></div>
+            <div class="ract"><span>actual</span><div class="stepper"><button type="button" onclick="paso('investAct',-1)">−</button>
+              <input class="num-grande" type="number" data-field="investAct"><button type="button" onclick="paso('investAct',1)">+</button></div></div></div></div>
+          <div class="desvio-box" style="visibility:hidden"><label>·</label><input type="number" disabled></div>
+        </div>
+      </div>
+      <div class="derivadas">
+        <div class="deriv"><div class="dtit">Cap. de levantamiento</div><div class="dval" id="capLevant">45 kg</div></div>
+        <div class="deriv"><div class="dtit">Movimiento</div><div class="dval" id="movMetros">6 m</div><div class="dsub" id="movCasillas">4 casillas</div></div>
+        <div class="deriv"><div class="dtit">Dado de recuperación</div><div class="dval" id="dadoRecup">1d4</div></div>
+        <div class="deriv"><div class="dtit">Alcance de los sentidos</div><div class="dval" id="alcanceSent">1,5 m</div><div class="dsub" id="alcanceSentCas">1 casilla</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec bloque" data-sec="habilidades">
+    <div class="sec-h"><span class="ttl">Habilidades</span><span class="cont-wrap" id="contGrados"></span></div>
+    <div class="sec-b" style="padding:8px 9px">
+      <p class="leyenda" style="margin:2px 0 6px">El recuadro de la derecha es tu modificador (grados + atributo): el número que sumas a la tirada de d20.</p>
+      <div class="habilidades">
+        <div class="col-hab" id="colFis"></div><div class="col-hab" id="colCog"></div><div class="col-hab" id="colEsp"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloques-2">
+    <div class="sec bloque" data-sec="estados">
+      <div class="sec-h"><span class="ttl">Estados y lesiones</span></div>
+      <div class="cuerpo-sel sec-b">
+        <div class="chips-sel" id="estadosSel"></div>
+        <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('estados')">＋ Aplicar estado</button></div>
+        <textarea data-field="lesiones" rows="3" placeholder="Lesiones y notas…"></textarea>
+      </div></div>
+    <div class="sec bloque" data-sec="pericias">
+      <div class="sec-h"><span class="ttl">Pericias</span><span class="cont-wrap" id="contPericias"></span></div>
+      <div class="cuerpo-sel sec-b">
+        <div class="chips-sel" id="periciasSel"></div>
+        <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('pericias')">＋ Elegir pericias</button></div>
+      </div></div>
+  </div>
+
+  <div class="sec bloque" data-sec="armas">
+    <div class="sec-h"><span class="ttl">Armas</span></div>
+    <div class="cuerpo-sel sec-b">
+      <div id="armasSel" style="display:flex;flex-direction:column;gap:5px"></div>
+      <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('armas')">＋ Elegir arma</button></div>
+      <textarea data-field="armasNotas" rows="2" placeholder="Armas propias / notas…"></textarea>
+    </div></div>
+
+  <div class="sec bloque" data-sec="talentos">
+    <div class="sec-h"><span class="ttl">Talentos</span><span class="cont-wrap" id="contTalentos"></span></div>
+    <div class="cuerpo-sel sec-b">
+      <div id="talentosSel" class="cartas-grid"></div>
+      <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('talentos')">＋ Elegir talento</button></div>
+    </div></div>
+
+  <div class="sec bloque" data-sec="potencias">
+    <div class="sec-h"><span class="ttl">Potencias</span></div>
+    <div class="cuerpo-sel sec-b">
+      <div id="potenciasSel" class="cartas-grid"></div>
+      <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('potencias')">＋ Elegir potencia</button></div>
+    </div></div>
+
+  <div class="sec bloque" data-sec="acciones">
+    <div class="sec-h"><span class="ttl">Acciones de combate</span></div>
+    <div class="sec-b" style="padding:7px 9px">
+      <div id="accionesSel"></div>
+    </div></div>
+
+  <div class="sec bloque" data-sec="accionesRad" id="secAccionesRad" style="display:none">
+    <div class="sec-h"><span class="ttl">Acciones radiantes <span style="font-weight:400;font-family:'Crimson Text',serif;font-size:11px;opacity:.7">— solo Radiantes con el Primer Ideal</span></span></div>
+    <div class="sec-b" style="padding:7px 9px">
+      <div id="accionesRadSel"></div>
+    </div></div>
+
+
+  <div class="p2-grid">
+    <div class="p2-col">
+      <div class="sec bloque" data-sec="equipo" style="flex:1">
+        <div class="sec-h"><span class="ttl">Armadura y equipo</span></div>
+        <div class="sec-b">
+          <div class="cuerpo-sel">
+            <div class="lab-sub">Armadura</div>
+            <div class="chips-sel" id="armadurasSel"></div>
+            <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('armaduras')">＋ Elegir armadura</button></div>
+            <div class="lab-sub">Objetos</div>
+            <div id="objetosSel" style="display:flex;flex-direction:column;gap:4px"></div>
+            <div class="toolrow no-print"><button class="mini-btn" type="button" onclick="abrirSelector('objetos')">＋ Añadir objetos</button></div>
+            <textarea data-field="equipo" rows="4" placeholder="Otro equipo / notas…"></textarea>
+          </div>
+          <div class="marcos-box"><label>Marcos</label><input type="text" data-field="marcos"></div>
+        </div></div>
+    </div>
+    <div class="p2-col">
+      <div class="sec bloque" data-sec="proposito"><div class="sec-h"><span class="ttl">Propósito</span></div><div class="sec-b"><textarea data-field="proposito" rows="3"></textarea></div></div>
+      <div class="sec bloque" data-sec="obstaculo"><div class="sec-h"><span class="ttl">Obstáculo</span></div><div class="sec-b"><textarea data-field="obstaculo" rows="3"></textarea></div></div>
+      <div class="sec bloque" data-sec="metas" style="flex:1"><div class="sec-h"><span class="ttl">Metas</span></div><div class="sec-b"><div class="metas-lista" id="metasLista"></div></div></div>
+    </div>
+    <div class="p2-col">
+      <div class="sec bloque" data-sec="notas" style="flex:1"><div class="sec-h"><span class="ttl">Notas</span></div><div class="sec-b"><textarea data-field="notas" rows="9"></textarea></div></div>
+      <div class="sec bloque" data-sec="conexiones" style="flex:1"><div class="sec-h"><span class="ttl">Conexiones</span></div><div class="sec-b"><textarea data-field="conexiones" rows="8"></textarea></div></div>
+    </div>
+  </div>
+
+  <div class="pie">Hoja de personaje JDR Cosmere · El Archivo de las Tormentas</div>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head"><h3 id="modalTitulo">Seleccionar</h3><button class="modal-close" type="button" onclick="cerrarModal()">×</button></div>
+    <div class="modal-tools" id="modalTools">
+      <input type="text" class="busca" id="modalBusca" placeholder="Buscar…" oninput="onBusca()">
+      <select class="talsel" id="modalTalSelect" style="display:none" onchange="onTalPath()"></select>
+      <select class="talsel" id="modalSubcat" style="display:none" onchange="onSubcat()"></select>
+      <span id="modalAddWrap" style="display:none">
+        <input type="text" id="modalAddInput" placeholder="Añadir propio…" style="border:1px solid var(--linea-fina);border-radius:8px;padding:9px 11px;font-size:15px;width:150px">
+        <button class="mini-btn" type="button" onclick="anadirDesdeModal()">Añadir</button>
+      </span>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot"><span class="cont" id="modalCont"></span><button class="btn primario" type="button" onclick="cerrarModal()">Hecho</button></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="tablaBackdrop" onclick="if(event.target===this)cerrarTablaNivel()">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-head"><span class="modal-titulo">Progreso de los personajes</span>
+      <span class="x-cerrar" onclick="cerrarTablaNivel()">×</span></div>
+    <div class="modal-body" id="tablaBody"></div>
+    <div class="modal-foot"><span class="cont"></span><button class="btn primario" type="button" onclick="cerrarTablaNivel()">Hecho</button></div>
+  </div>
+</div>
+
+<script src="js/pages/character-sheet.js"></script>
+<script type="module" src="js/pages/character-sheet-bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+{
+  "combate": [
+    {
+      "act": "1",
+      "name": "Acometida",
+      "flavor": "Atacas a un objetivo con un arma o sin armas.",
+      "mec": "Ataque contra la Defensa física de un objetivo, con un arma que empuñas o sin armas. Puedes Acometer más de una vez por turno, pero cada ataque usa una mano distinta; con la mano secundaria, gasta 2 concentración."
+    },
+    {
+      "act": "R",
+      "name": "Acometida reactiva",
+      "flavor": "Aprovechas la ventana cuando un enemigo se retira.",
+      "mec": "Cuando un enemigo abandona voluntariamente tu cercanía, gasta 1 concentración para un ataque cuerpo a cuerpo o sin armas contra su Física. No vale contra quien se transporta o se mueve instantáneamente."
+    },
+    {
+      "act": "2",
+      "name": "Agarrar",
+      "flavor": "Sujetas a tu oponente para inmovilizarlo.",
+      "mec": "Prueba de Atletismo contra la Defensa física del objetivo. Si la superas, queda Retenido."
+    },
+    {
+      "act": "R",
+      "name": "Ayudar",
+      "flavor": "Intervienes para echar una mano a un aliado.",
+      "mec": "Antes de la prueba de un aliado, gasta 1 concentración para darle ventaja. Debes estar en posición de ayudarle de forma realista (al alcance, en su cercanía o pudiendo coordinaros)."
+    },
+    {
+      "act": "0",
+      "name": "Charlar",
+      "flavor": "Dices unas pocas palabras en el fragor del combate.",
+      "mec": "Intercambias frases breves. No requiere acción más allá de la gratuita."
+    },
+    {
+      "act": "1",
+      "name": "Destrabarse",
+      "flavor": "Te alejas con cuidado sin exponerte.",
+      "mec": "Te mueves 1,5 m sin activar Acometidas reactivas."
+    },
+    {
+      "act": "2",
+      "name": "Empujar",
+      "flavor": "Apartas a un oponente por la fuerza.",
+      "mec": "Prueba de Atletismo contra la Defensa física del objetivo para desplazarlo."
+    },
+    {
+      "act": "R",
+      "name": "Esquivar",
+      "flavor": "Te apartas del golpe en el último instante.",
+      "mec": "Antes de que un enemigo te elija como objetivo de un ataque, gasta 1 concentración para añadir desventaja a su prueba. No vale contra ataques de zona o de varios objetivos."
+    },
+    {
+      "act": "R",
+      "name": "Evitar peligro",
+      "flavor": "Te quitas de en medio ante una amenaza ambiental.",
+      "mec": "Prueba de Agilidad para ponerte a salvo (CD = resultado del ataque/efecto que lo provoca, o 15). Con éxito, evitas el peligro en la medida que decida la DJ."
+    },
+    {
+      "act": "1",
+      "name": "Interactuar",
+      "flavor": "Manipulas rápidamente algo a tu alcance.",
+      "mec": "Abrir/cerrar una puerta, recoger o pasar un objeto, desenvainar, sacar algo de la mochila, ponerte una prenda sencilla… Sin prueba. Puedes usarla más de una vez por turno."
+    },
+    {
+      "act": "1",
+      "name": "Moverse",
+      "flavor": "Te desplazas por el campo de batalla.",
+      "mec": "Te mueves una distancia igual o menor a tu valor de movimiento."
+    },
+    {
+      "act": "1",
+      "name": "Obtener ventaja",
+      "flavor": "Buscas o creas una ventaja táctica.",
+      "mec": "Maniobras para obtener ventaja en una prueba posterior (apuntar, fintar, estudiar al rival, posicionarte…), normalmente con una prueba de habilidad apropiada."
+    },
+    {
+      "act": "1",
+      "name": "Prepararse",
+      "flavor": "Esperas el momento idóneo para actuar.",
+      "mec": "Gasta 1 acción más el coste de la acción que preparas. Defines un detonante; cuando ocurre, ejecutas la acción preparada."
+    },
+    {
+      "act": "1",
+      "name": "Prevenirse",
+      "flavor": "Te cubres tras tu escudo o defensa.",
+      "mec": "Añade desventaja a los ataques contra ti. Con un arma Defensiva (escudo), creas cobertura móvil que debes mantener entre tú y los atacantes."
+    },
+    {
+      "act": "2",
+      "name": "Recuperarse",
+      "flavor": "Respiras hondo y haces acopio de fuerzas.",
+      "mec": "Recuperas concentración (haz acopio de fuerzas según las reglas de recuperación)."
+    },
+    {
+      "act": "0",
+      "name": "Soltar",
+      "flavor": "Dejas caer algo que sostienes.",
+      "mec": "Sueltas un objeto que tienes en la mano. No requiere acción más allá de la gratuita."
+    },
+    {
+      "act": "1",
+      "name": "Usar una habilidad",
+      "flavor": "Aplicas una habilidad a una tarea difícil.",
+      "mec": "Haces una prueba de habilidad para una tarea en el campo de batalla: Percepción para buscar, Sigilo para esconderte, Medicina para tratar a un aliado, etc. Abarca muchas acciones creativas."
+    }
+  ],
+  "luz": [
+    {
+      "act": "2",
+      "name": "Absorber luz tormentosa",
+      "flavor": "Atraes la luz de las esferas hacia tu interior.",
+      "mec": "Recuperas Investidura hasta tu máximo, drenando esferas infusas a ≤1,5 m (con suficientes marcos infusos disponibles). Puedes usarla incluso Inconsciente o si no puedes hacer otras acciones."
+    },
+    {
+      "act": "0",
+      "name": "Aumentar",
+      "flavor": "La luz tormentosa potencia tu cuerpo más allá de lo normal.",
+      "mec": "Gasta Investidura para quedar Empoderado (consulta la carta de Empoderado). Tras el Segundo Ideal, muchos Radiantes pueden usar Aumentar como acción gratuita sin gastar Investidura."
+    },
+    {
+      "act": "0",
+      "name": "Revitalizar",
+      "flavor": "La luz tormentosa sana tus heridas al instante.",
+      "mec": "Gasta Investidura para recuperar salud. Puedes usarla incluso Inconsciente o si no puedes hacer otras acciones. Con el talento Regeneración de heridas, también puedes curar lesiones (2 Inv. temporal, 3 Inv. permanente)."
+    },
+    {
+      "act": "*",
+      "name": "Empoderado",
+      "flavor": "Encarnas el poder de un Caballero Radiante.",
+      "mec": "Estado obtenido al pronunciar un Ideal (hasta el final de la escena) o mediante Aumentar. Mientras estás Empoderado, la luz tormentosa potencia tus capacidades físicas (fuerza, velocidad y resistencia mejoradas). Consulta tu camino Radiante para los detalles concretos."
+    }
+  ]
+}

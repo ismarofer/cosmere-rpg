@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conditions.schema.json",
+  "title": "Estados (beneficiosos y perjudiciales) y tablas de lesiones.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["estados"],
+  "properties": {
+    "estados": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "buff", "mec"],
+        "properties": {
+          "name":   { "type": "string", "minLength": 1 },
+          "buff":   { "type": "boolean" },
+          "tag":    { "type": ["string", "null"] },
+          "flavor": { "type": ["string", "null"] },
+          "mec":    { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "lesiones": {
+      "type": "array",
+      "description": "Tabla de duración de lesiones por margen de la prueba.",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": { "type": "string" }
+      }
+    },
+    "lesionesEsquirla": {
+      "type": "array",
+      "description": "Tabla de lesiones causadas por daño espiritual / hojas esquirladas.",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": { "type": "string" }
+      }
+    },
+    "efectosLesion": {
+      "type": "array",
+      "description": "Tabla d8 de efectos de lesión.",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": { "type": "string" }
+      }
+    }
+  }
+}

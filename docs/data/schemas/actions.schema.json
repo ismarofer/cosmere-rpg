@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "actions.schema.json",
+  "title": "Acciones de combate y de luz tormentosa (radiantes).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["combate", "luz"],
+  "properties": {
+    "combate": { "$ref": "#/$defs/actionList" },
+    "luz":     { "$ref": "#/$defs/actionList" }
+  },
+  "$defs": {
+    "actionList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["act", "name", "mec"],
+        "properties": {
+          "act":    { "type": ["string", "number"] },
+          "name":   { "type": "string", "minLength": 1 },
+          "flavor": { "type": ["string", "null"] },
+          "mec":    { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

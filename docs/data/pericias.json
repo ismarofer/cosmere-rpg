@@ -1,0 +1,152 @@
+[
+  {
+    "key": "cultural",
+    "nom": "Pericias culturales",
+    "desc": "Conocimiento regional, social y lingüístico de una nación, cultura o grupo: tradiciones, costumbres, historia y política. Te permiten comunicarte en su idioma (hablado, de signos o escrito).",
+    "nota": "Conocimientos supuestos: no necesitas tirar para saber lo básico. Idioma: te permite comunicarte con esa cultura. Usos creativos: proponlos a la DJ.",
+    "grupos": [
+      {
+        "sub": "Naciones y pueblos",
+        "items": [
+          "Alezi",
+          "Azishiana",
+          "Herdaziana",
+          "Iriali",
+          "Kharbranthiana",
+          "Natana",
+          "Oyente",
+          "Peregrina",
+          "Reshi",
+          "Shin",
+          "Thayleña",
+          "Unkalaki",
+          "Veden"
+        ]
+      },
+      {
+        "sub": "Subculturas",
+        "items": [
+          "Alta sociedad",
+          "Vida militar",
+          "Bajos fondos",
+          "Grupos delictivos",
+          "Moda",
+          "Escándalos"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "utilidad",
+    "nom": "Pericias de utilidad",
+    "desc": "Herramientas, oficios, conocimientos técnicos y áreas de estudio. Eres experto en técnicas, equipos y jerga de tu especialidad. Permite pruebas imposibles para otros (p. ej. solo con Manufactura de fabriales puedes entender un fabrial enemigo).",
+    "nota": "Conocimientos supuestos: no tiras para lo básico. Pensamiento avanzado: da acceso a pruebas imposibles sin ella. Cuanto más específica, mayor impacto narrativo.",
+    "grupos": [
+      {
+        "sub": "Oficios y fabricación",
+        "items": [
+          "Fabricar armas",
+          "Fabricar armaduras",
+          "Fabricar equipo",
+          "Manufactura de fabriales",
+          "Ingeniería",
+          "Cuidado de animales",
+          "Montar a caballo"
+        ]
+      },
+      {
+        "sub": "Saber y disciplinas",
+        "items": [
+          "Historia",
+          "Religión",
+          "Estrategia militar",
+          "Logística militar",
+          "Códigos legales",
+          "Discurso motivador",
+          "Diagnóstico",
+          "Meteorología"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "arma",
+    "nom": "Pericias en arma",
+    "desc": "Mantenimiento y manejo de un tipo de arma. Te permiten usar sus rasgos de experto en combate (y limpiarla, cuidarla o fabricarla).",
+    "nota": "Dan acceso a los rasgos de experto de esa arma (ver capítulo 7).",
+    "grupos": [
+      {
+        "sub": "Armas ligeras",
+        "items": [
+          "Arco corto",
+          "Bastón",
+          "Cuchillo",
+          "Espada lateral",
+          "Espada ropera",
+          "Honda",
+          "Jabalina",
+          "Lanza corta",
+          "Maza"
+        ]
+      },
+      {
+        "sub": "Armas pesadas",
+        "items": [
+          "Alabarda",
+          "Arco largo",
+          "Ballesta",
+          "Escudo",
+          "Espada larga",
+          "Hacha",
+          "Lanza larga",
+          "Mandoble",
+          "Martillo"
+        ]
+      },
+      {
+        "sub": "Otras",
+        "items": [
+          "Armas improvisadas",
+          "Ataques sin armas"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "armadura",
+    "nom": "Pericias en armadura",
+    "desc": "Mantenimiento y uso de un tipo de armadura no infusa. Dan sus rasgos de experto; algunas eliminan un rasgo perjudicial en vez de añadir uno (p. ej. Malla pierde Voluminosa con pericia).",
+    "nota": "Dan acceso a los rasgos de experto de esa armadura (ver capítulo 7).",
+    "grupos": [
+      {
+        "sub": "Tipos",
+        "items": [
+          "Uniforme",
+          "Armadura de cuero",
+          "Malla",
+          "Coraza",
+          "Placas y malla",
+          "Armadura completa"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "especial",
+    "nom": "Pericias especializadas",
+    "desc": "Para armas y armaduras poco habituales. No se eligen al crear o subir de nivel: solo mediante talentos, recompensas o entrenamiento durante el reposo.",
+    "nota": "Solo por talento, recompensa o entrenamiento. Dan los rasgos de experto de esas armas/armaduras.",
+    "grupos": [
+      {
+        "sub": "Solo por talento / recompensa / entrenamiento",
+        "items": [
+          "Gran arco",
+          "Semiesquirla",
+          "Hoja esquirlada",
+          "Armadura esquirlada",
+          "Martillo de guerra"
+        ]
+      }
+    ]
+  }
+]

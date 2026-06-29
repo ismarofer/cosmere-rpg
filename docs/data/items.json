@@ -1,0 +1,2095 @@
+[
+  {
+    "cat": "al",
+    "name": "Arco corto",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "A distancia [24/96]"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Preparación rápida"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 80 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Bastón",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Discreta, A dos manos"
+      ],
+      [
+        "Experto",
+        "Defensiva"
+      ],
+      [
+        "Peso/Precio",
+        "2 kg · 1 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Cuchillo",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d4 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Discreta"
+      ],
+      [
+        "Experto",
+        "Mano secundaria, Arrojadiza [6/18]"
+      ],
+      [
+        "Peso/Precio",
+        "0,5 kg · 8 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Espada lateral",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Preparación rápida"
+      ],
+      [
+        "Experto",
+        "Mano secundaria"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 40 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Espada ropera",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Preparación rápida"
+      ],
+      [
+        "Experto",
+        "Defensiva"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 100 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Honda",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d4 golpe"
+      ],
+      [
+        "Alcance",
+        "A distancia [9/36]"
+      ],
+      [
+        "Rasgos",
+        "Discreta"
+      ],
+      [
+        "Experto",
+        "Indirecta"
+      ],
+      [
+        "Peso/Precio",
+        "0,5 kg · 2 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Jabalina",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Arrojadiza [10/40]"
+      ],
+      [
+        "Experto",
+        "Indirecta"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 20 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Lanza corta",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d8 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Única: pierde A dos manos"
+      ],
+      [
+        "Peso/Precio",
+        "1,5 kg · 10 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "al",
+    "name": "Maza",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. ligero"
+      ],
+      [
+        "Daño",
+        "1d6 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "—"
+      ],
+      [
+        "Experto",
+        "Inercia"
+      ],
+      [
+        "Peso/Precio",
+        "1,5 kg · 20 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Alabarda",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d10 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Única: alcance +1,5 m"
+      ],
+      [
+        "Peso/Precio",
+        "2,5 kg · 40 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Arco largo",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "A distancia [45/180]"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Indirecta"
+      ],
+      [
+        "Peso/Precio",
+        "1,5 kg · 100 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Ballesta",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d8 laceración"
+      ],
+      [
+        "Alcance",
+        "A distancia [30/120]"
+      ],
+      [
+        "Rasgos",
+        "Cargada [1], A dos manos"
+      ],
+      [
+        "Experto",
+        "Mortífera"
+      ],
+      [
+        "Peso/Precio",
+        "3,5 kg · 200 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Escudo",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d4 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Defensiva"
+      ],
+      [
+        "Experto",
+        "Mano secundaria"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 10 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Espada larga",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d8 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Preparación rápida, A dos manos"
+      ],
+      [
+        "Experto",
+        "Única: pierde A dos manos"
+      ],
+      [
+        "Peso/Precio",
+        "1,5 kg · 60 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Hacha",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d6 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Arrojadiza [6/18]"
+      ],
+      [
+        "Experto",
+        "Mano secundaria"
+      ],
+      [
+        "Peso/Precio",
+        "1 kg · 20 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Lanza larga",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d8 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo [+1,5]"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Defensiva"
+      ],
+      [
+        "Peso/Precio",
+        "4,5 kg · 15 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Mandoble",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d10 laceración"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Mortífera"
+      ],
+      [
+        "Peso/Precio",
+        "3,5 kg · 200 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ap",
+    "name": "Martillo",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "1d10 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "A dos manos"
+      ],
+      [
+        "Experto",
+        "Inercia"
+      ],
+      [
+        "Peso/Precio",
+        "4 kg · 40 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Ataque sin armas",
+    "stats": [
+      [
+        "Habilidad",
+        "Atletismo"
+      ],
+      [
+        "Daño",
+        "Única"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Única"
+      ],
+      [
+        "Experto",
+        "Inercia, Mano secundaria"
+      ],
+      [
+        "Peso/Precio",
+        "No pesa · —"
+      ]
+    ],
+    "mec": "Rasguño: 1 de daño por golpe. Impacto: 1 + mod. Fuerza. Pericia: puedes elegir Ataque sin armas como pericia en arma.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Arma improvisada",
+    "stats": [
+      [
+        "Habilidad",
+        "Como arma similar"
+      ],
+      [
+        "Daño",
+        "Como arma similar"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Frágil"
+      ],
+      [
+        "Experto",
+        "Como arma similar (si tienes pericia)"
+      ],
+      [
+        "Peso/Precio",
+        "— · —"
+      ]
+    ],
+    "mec": "La DJ decide a qué arma es más similar. Puedes elegir Armas improvisadas como pericia para acceder a los rasgos de experto del arma similar.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Gran arco",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "2d6 laceración"
+      ],
+      [
+        "Alcance",
+        "A distancia [60/240]"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [5], A dos manos"
+      ],
+      [
+        "Experto",
+        "Perforante"
+      ],
+      [
+        "Peso/Precio",
+        "10 kg · 1.000 mc"
+      ]
+    ],
+    "mec": "Pericia especializada: solo se puede obtener mediante talentos, recompensas o entrenamiento.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Hoja esquirlada",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "2d8 espiritual"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Peligrosa, Mortífera, Única"
+      ],
+      [
+        "Experto",
+        "Única: pierde Peligrosa"
+      ],
+      [
+        "Peso/Precio",
+        "2 kg · Solo recompensa"
+      ]
+    ],
+    "mec": "Peligrosa: la DJ puede gastar C sufrida mientras la empuñas para lesionar a un aliado a 1,5 m (2d6 golpe). Los Radiantes que la usen sin ser su espren escuchan gritos y quedan Desorientados.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Hoja esquirlada Radiante",
+    "stats": [
+      [
+        "Habilidad",
+        "—"
+      ],
+      [
+        "Daño",
+        "2d* espiritual"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Mortífera, Única"
+      ],
+      [
+        "Experto",
+        "—"
+      ],
+      [
+        "Peso/Precio",
+        "No pesa · Solo talento"
+      ]
+    ],
+    "mec": "El daño y la habilidad dependen de la orden Radiante. No tiene el rasgo Peligrosa. Puede invocarse y descartarse como acción de Interactuar.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Martillo de guerra",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "2d10 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [5], A dos manos"
+      ],
+      [
+        "Experto",
+        "Única: Peso aplastante"
+      ],
+      [
+        "Peso/Precio",
+        "75 kg · 400 mc"
+      ]
+    ],
+    "mec": "Peso aplastante (experto): al golpear a un personaje de tu tamaño o menor, empújalo hasta 3 m. Gasta O para empujar también a otros en tu cercanía en la misma dirección.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ae",
+    "name": "Semiesquirla",
+    "stats": [
+      [
+        "Habilidad",
+        "Arm. pesado"
+      ],
+      [
+        "Daño",
+        "2d4 golpe"
+      ],
+      [
+        "Alcance",
+        "Cuerpo a cuerpo"
+      ],
+      [
+        "Rasgos",
+        "Defensiva, A dos manos, Única"
+      ],
+      [
+        "Experto",
+        "Inercia"
+      ],
+      [
+        "Peso/Precio",
+        "5 kg · 2.000 mc"
+      ]
+    ],
+    "mec": "Cargas (1): antes de sufrir daño mientras la empuñas, gasta 1 carga para aumentar tu desvío en 10 contra ese ataque. Pericia especializada: solo mediante talentos, recompensas o entrenamiento.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Uniforme",
+    "stats": [
+      [
+        "Desvío",
+        "0"
+      ],
+      [
+        "Rasgos",
+        "Presentable"
+      ],
+      [
+        "Experto",
+        "—"
+      ],
+      [
+        "Peso/Precio",
+        "2,5 kg · 40 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Armadura de cuero",
+    "stats": [
+      [
+        "Desvío",
+        "1"
+      ],
+      [
+        "Rasgos",
+        "—"
+      ],
+      [
+        "Experto",
+        "Presentable"
+      ],
+      [
+        "Peso/Precio",
+        "5 kg · 60 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Malla",
+    "stats": [
+      [
+        "Desvío",
+        "2"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [3]"
+      ],
+      [
+        "Experto",
+        "Única: pierde Voluminosa"
+      ],
+      [
+        "Peso/Precio",
+        "12,5 kg · 80 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Coraza",
+    "stats": [
+      [
+        "Desvío",
+        "2"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [3]"
+      ],
+      [
+        "Experto",
+        "Presentable"
+      ],
+      [
+        "Peso/Precio",
+        "15 kg · 120 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Placas y malla",
+    "stats": [
+      [
+        "Desvío",
+        "3"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [4]"
+      ],
+      [
+        "Experto",
+        "Única: Voluminosa [3]"
+      ],
+      [
+        "Peso/Precio",
+        "20 kg · 400 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Armadura completa",
+    "stats": [
+      [
+        "Desvío",
+        "4"
+      ],
+      [
+        "Rasgos",
+        "Voluminosa [5]"
+      ],
+      [
+        "Experto",
+        "—"
+      ],
+      [
+        "Peso/Precio",
+        "27,5 kg · 1.600 mc"
+      ]
+    ],
+    "mec": null,
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Armadura esquirlada",
+    "stats": [
+      [
+        "Desvío",
+        "5"
+      ],
+      [
+        "Rasgos",
+        "Peligrosa, Única"
+      ],
+      [
+        "Experto",
+        "Única: pierde Peligrosa"
+      ],
+      [
+        "Peso/Precio",
+        "700 kg · Solo recompensa"
+      ]
+    ],
+    "mec": "Cargas (4): antes de sufrir daño, gasta 1 carga para +10 desvío. Sin cargas: obtiene Voluminosa [6], pierde Atributos mejorados y Protección de capacidad Investida. Rompible: golpes afortunados pueden gastar cargas.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "ar",
+    "name": "Armadura esquirlada Radiante",
+    "stats": [
+      [
+        "Desvío",
+        "5"
+      ],
+      [
+        "Rasgos",
+        "Única"
+      ],
+      [
+        "Experto",
+        "—"
+      ],
+      [
+        "Peso/Precio",
+        "No pesa · Solo talento"
+      ]
+    ],
+    "mec": "Sin rasgo Peligrosa. Recupera cargas tras descanso largo. Puede invocarse alrededor de un aliado (queda Retenido). Se puede descartar con acción.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Alertador",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Peso",
+        "500 g – 5 kg"
+      ],
+      [
+        "Precio",
+        "500 mc"
+      ]
+    ],
+    "mec": "Detecta personas u objetos en un radio definido al fabricarlo y parpadea cuando están dentro. Gasta 1 carga por día activo.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Atractor",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Peso",
+        "4 kg"
+      ],
+      [
+        "Precio",
+        "750 mc"
+      ]
+    ],
+    "mec": "Sintonizado con una Esencia o material. Atrae ese material a 0,3 m/ronda dentro de su radio. No afecta a objetos que lleva puesto o transporta alguien. Gasta 1 carga/hora.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Brazalete emocional",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "200 mc"
+      ]
+    ],
+    "mec": "Parpadea o cambia de color en presencia de emociones concretas (definidas al fabricarlo). Gasta 1 carga/hora activo.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Calorial",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Peso",
+        "500 g – 5 kg"
+      ],
+      [
+        "Precio",
+        "50–500 mc"
+      ]
+    ],
+    "mec": "Emite o absorbe calor. Puede servir como fuente de calor, cocinar alimentos o enfriar un área. Gasta 1 carga/hora activo.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Dolorial (aumentador)",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "750 mc"
+      ]
+    ],
+    "mec": "Arma cuerpo a cuerpo (Arm. ligero), 1d6 daño vital. Con un impacto, gasta 1 carga para añadir tu modificador de habilidad al daño otra vez.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Dolorial (reductor)",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "750 mc"
+      ]
+    ],
+    "mec": "Antes de sufrir daño, usa R y gasta 1 carga para reducir el daño en 1d4.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Drenador",
+    "stats": [
+      [
+        "Cargas",
+        "2"
+      ],
+      [
+        "Peso",
+        "250 g"
+      ],
+      [
+        "Precio",
+        "1.000 mc"
+      ]
+    ],
+    "mec": "Toca un objeto/personaje Investido: si no está lleno, el objetivo pierde 1 Investidura o carga y el fabrial obtiene 1 carga. Se vacía con diapasón, Radiante, o en 5 días.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Moldeador de almas",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Peso",
+        "2,5 kg"
+      ],
+      [
+        "Precio",
+        "Solo recompensa"
+      ]
+    ],
+    "mec": "Transforma un material en una Esencia única (definida al crear el fabrial). Sin grados en Transformación: tamaño máx. Pequeño. Prueba con Transformación o Voluntad.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Reloj fabrial",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Peso",
+        "1 kg"
+      ],
+      [
+        "Precio",
+        "200 mc"
+      ]
+    ],
+    "mec": "Mide y muestra la hora con precisión. Gasta 1 carga por día activo.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Repulsor",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Peso",
+        "4 kg"
+      ],
+      [
+        "Precio",
+        "1.500 mc"
+      ]
+    ],
+    "mec": "Sintonizado con una Esencia. Repele ese material dentro de su radio. No afecta a objetos que lleva puesto alguien. Gasta 1 carga/hora activo.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Sillalibre",
+    "stats": [
+      [
+        "Cargas",
+        "—"
+      ],
+      [
+        "Peso",
+        "6 kg"
+      ],
+      [
+        "Precio",
+        "Gratis u 800 mc"
+      ]
+    ],
+    "mec": "Silla de ruedas motorizada por fabrial. Quien la opera tiene el mismo movimiento que otros personajes. Activarla no requiere acción ni cargas.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Supresor",
+    "stats": [
+      [
+        "Cargas",
+        "2"
+      ],
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "Solo recompensa"
+      ]
+    ],
+    "mec": "Suprime el uso de potencias en radio de 9 m. Con luz tormentosa: detiene usuarios de luz del vacío. Con luz del vacío: detiene usuarios de luz tormentosa. También bloquea hojas y armaduras esquirladas Radiantes.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fc",
+    "name": "Vinculacañas (par)",
+    "stats": [
+      [
+        "Cargas",
+        "3 c/u"
+      ],
+      [
+        "Peso",
+        "500 g c/u"
+      ],
+      [
+        "Precio",
+        "100 mc el par"
+      ]
+    ],
+    "mec": "Las vinculacañas permiten comunicación a distancia: el sonido cerca de una se escucha en la otra. Gasta 1 carga por hora de uso.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "fu",
+    "name": "Acelerador",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "◉ Gasta 1 carga: muévete hasta tu valor de movimiento en línea recta.",
+    "mej": "No estás obligado a moverte en línea recta.",
+    "inc": "Prueba de Agilidad CD 15 cada vez que lo usas. Si fallas, quedas Tumbado al final del movimiento.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Alterador",
+    "sub": "Fabrial único · Rango 3",
+    "stats": [
+      [
+        "Cargas",
+        "4"
+      ],
+      [
+        "Coste",
+        "400 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Gasta 1 carga: toca un objeto Pequeño no supervisado para destruirlo. Si alguien lo sostiene: prueba de Agilidad contra su Física.",
+    "mej": "▶ Gasta 2 cargas: ataque de Disciplina contra Espiritual de un objetivo en tu cercanía. 2d6 daño espiritual.",
+    "inc": "Solo puedes elegir objetos no supervisados (sin mejora).",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Ascensor",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Coste",
+        "200 mc + 1.000 mc extra"
+      ]
+    ],
+    "mec": "◉ Gasta 1 carga: vuelo de 9 m hasta el final de tu siguiente turno. Si quedan cargas al acabar, puedes flotar o descender con ◉ sin gastar cargas.",
+    "mej": "▶ Prueba de Agilidad contra Física de objetivo en tu cercanía. Con impacto, gasta 1 carga: empújalo hasta 9 m en línea recta.",
+    "inc": "Los contrapesos deben restablecerse una vez al día de uso.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Aumentador de armadura",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "2"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Gasta 1 carga: +2 al desvío de la armadura a la que está adherido hasta el final de la escena.",
+    "mej": "Gasta 1 carga adicional para también aumentar Defensa física en 1 hasta el final de la escena.",
+    "inc": "La armadura obtiene Voluminosa [3] mientras el fabrial está activo.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Compresor",
+    "sub": "Fabrial único · Rango 1",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "100 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Prueba de Agilidad contra Física de objetivo en tu cercanía. Si superas, gasta 1+ cargas: el objetivo queda Ralentizado y con desventaja en todas las pruebas físicas durante esa cantidad de rondas.",
+    "mej": "El objetivo queda Inmovilizado en lugar de Ralentizado.",
+    "inc": "La Defensa física del objetivo aumenta en 2 mientras está Ralentizado así.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Cremrial",
+    "sub": "Fabrial único · Rango 1",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Coste",
+        "100 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Gasta 1 carga: zona Mediana de piedra en tu cercanía se vuelve arcilla blanda. Al final de tu turno vuelve a endurecerse. Enemigos en ella: Evitar peligro (Atletismo CD 15) o quedan Inmovilizados.",
+    "mej": "Afecta una zona Grande (3 m) en lugar de Mediana.",
+    "inc": "Al sufrir C a ≤1,5 m de la zona, la DJ puede gastarlo para que tú también quedes Inmovilizado.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Cultivador",
+    "sub": "Fabrial único · Rango 1",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "100 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Gasta 1 carga: toca una planta para hacerla crecer hasta tamaño Mediano (1,5 m). Sirve como cobertura, barrera o punto de escalada.",
+    "mej": "Las plantas pueden crecer hasta tamaño Grande (3 m).",
+    "inc": "Al sacar C a ≤1,5 m de una planta afectada, la DJ puede gastarla para que la planta te rodee: Retenido hasta Atletismo CD 12.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Dolorial único (aumentador/reductor)",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "Arma (Arm. ligero), 1d6 daño vital. Con impacto, gasta 1 carga para añadir tu modificador al daño otra vez. ↺ Antes de sufrir daño (si no está lleno), gasta 1 carga para reducir el daño en 1d6 y recuperar 1 carga.",
+    "mej": "↺ Antes de sufrir daño, gasta 1 carga para reducir 1d6 y recuperar 1 carga.",
+    "inc": "La DJ puede gastar C para que el fabrial pierda 1 carga y te inflija 1d6 daño vital.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Drenador único",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Toca un objeto/personaje Investido. Si no está lleno: el objetivo pierde 1 Investidura o carga, el fabrial obtiene 1. Contra personaje reticente: prueba de Agilidad contra su Física.",
+    "mej": "Drena 2 Investidura/cargas en lugar de 1.",
+    "inc": "Cuando sufres C en una prueba con otro objeto/personaje Investido, la DJ puede gastar C para drenar 1 Investidura de ese objetivo.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Fabrial de potencia",
+    "sub": "Fabrial único · Rango 4",
+    "stats": [
+      [
+        "Cargas",
+        "4"
+      ],
+      [
+        "Coste",
+        "800 mc en materiales"
+      ]
+    ],
+    "mec": "Al fabricarlo, elige una potencia Radiante. Puedes activarla gastando cargas en lugar de Investidura. Sin grados en la potencia: actúas como si tuvieras 1 grado. Prueba: usa tu habilidad de potencia o tu Voluntad.",
+    "mej": "Con práctica, puedes elegir talentos del árbol de esa potencia al subir de nivel (requiere el fabrial para usarlos).",
+    "inc": "Solo tú puedes usar este fabrial.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Lumirial",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Prueba de Engaño contra Cognitiva de objetivo a ≤9 m. Éxito: gasta 1 carga → objetivo pierde 3 concentración. Fallo: gasta 1 carga → pierde 1 concentración. Si llega a 0: queda Desorientado.",
+    "mej": "Gasta O para infligir también 1d6 de daño vital al objetivo.",
+    "inc": "La DJ puede gastar C para que tú quedes Desorientado hasta el final de tu siguiente turno.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Proyectil",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "Gasta 1 carga: úsalo como arma a distancia [9/36] con Arm. ligero, rasgo Mano secundaria, 1d10 daño por golpe.",
+    "mej": "Gasta 1 carga adicional para atacar a dos objetivos en lugar de uno.",
+    "inc": "Tiene el rasgo Cargada [1].",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Vidarial",
+    "sub": "Fabrial único · Rango 2",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "200 mc en materiales"
+      ]
+    ],
+    "mec": "▶ Gasta 1 carga: tú o un objetivo en tu cercanía recupera 1d6 de salud.",
+    "mej": "Gasta 1 carga adicional para eliminar una lesión del objetivo en lugar de (o además de) la sanación.",
+    "inc": "Usar este fabrial te cuesta ▶▶ en lugar de ▶.",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Vínculorial (uno mismo)",
+    "sub": "Fabrial único · Rango 1",
+    "stats": [
+      [
+        "Cargas",
+        "5"
+      ],
+      [
+        "Coste",
+        "100 mc en materiales"
+      ]
+    ],
+    "mec": "◉ Gasta 1 carga: puedes trepar por cualquier superficie durante 1 ronda sin quedar Ralentizado. Puedes quedarte en el mismo sitio sin gastar cargas. Sin cargas: caes.",
+    "mej": "▶ Prueba de Agilidad contra Física de objetivo en tu cercanía. Con impacto, gasta 1 carga para Inmovilizarlo 1 ronda.",
+    "inc": "Al trepar así quedas Ralentizado (sin mejora).",
+    "note": null
+  },
+  {
+    "cat": "fu",
+    "name": "Vínculorial (zona)",
+    "sub": "Fabrial único · Rango 1",
+    "stats": [
+      [
+        "Cargas",
+        "3"
+      ],
+      [
+        "Coste",
+        "100 mc en materiales"
+      ]
+    ],
+    "mec": "◉ Gasta 1 carga: activa una zona de adherencia en una superficie que tocas. Los personajes que entran en contacto con ella quedan Enlazados (Inmovilizados) hasta que se liberan (Atletismo CD 15).",
+    "mej": "La zona de adherencia dura 2 rondas en lugar de 1.",
+    "inc": "Si fallas la prueba de activación, gastas la carga igualmente.",
+    "note": null
+  },
+  {
+    "cat": "co",
+    "name": "Antiséptico débil",
+    "stats": [
+      [
+        "Dosis",
+        "5"
+      ],
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "25 mc"
+      ]
+    ],
+    "mec": "Tras un descanso corto, aplica una dosis a un personaje: recupera 1d6 de salud.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Antiséptico potente",
+    "stats": [
+      [
+        "Dosis",
+        "5"
+      ],
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "50 mc"
+      ]
+    ],
+    "mec": "Tras un descanso corto, aplica una dosis a un personaje: recupera 2d6 de salud.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Anestésico",
+    "stats": [
+      [
+        "Dosis",
+        "5"
+      ],
+      [
+        "Peso",
+        "750 g"
+      ],
+      [
+        "Precio",
+        "75 mc"
+      ]
+    ],
+    "mec": "Aplica una dosis a una lesión tras un descanso corto o largo: reduce su tiempo de recuperación en 1d4 días. Solo una vez por día por lesión.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Tratamiento médico",
+    "stats": [
+      [
+        "Dosis",
+        "1"
+      ],
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "10 mc"
+      ]
+    ],
+    "mec": "Durante un descanso corto, úsalo sobre un personaje para curar uno de estos estados (si no es de lesión permanente): Desorientado, Aturdido, o reduce Agotado en 1.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Veneno débil",
+    "stats": [
+      [
+        "Dosis",
+        "1"
+      ],
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "▶ Aplica a comida, líquido o arma. Al ingerir o al recibir impacto: Atletismo CD 12 o sufre 1d6 daño vital.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Veneno efectivo",
+    "stats": [
+      [
+        "Dosis",
+        "1"
+      ],
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "50 mc"
+      ]
+    ],
+    "mec": "▶ Aplica a comida, líquido o arma. Al ingerir o al recibir impacto: Atletismo CD 14 o sufre 2d8 daño vital + queda Aturdido durante 1 hora.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Veneno potente",
+    "stats": [
+      [
+        "Dosis",
+        "1"
+      ],
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "120 mc"
+      ]
+    ],
+    "mec": "▶ Aplica a comida, líquido o arma. Al ingerir o al recibir impacto: Atletismo CD 16 o sufre 3d10 daño vital + queda Aturdido 1 hora. Mientras Aturdido: también queda Inmovilizado.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "co",
+    "name": "Aceite (frasco)",
+    "stats": [
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "1 mc"
+      ]
+    ],
+    "mec": "Inflamable. Úsalo como arma improvisada (honda). Al impactar o hacer rasguño, el objetivo queda cubierto de aceite. El frasco se rompe tras el ataque.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Catalejo",
+    "stats": [
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "500 mc"
+      ]
+    ],
+    "mec": "Los objetos vistos a través del catalejo se perciben como si estuvieran a la mitad de distancia.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Cerradura y llave",
+    "stats": [
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "50 mc"
+      ]
+    ],
+    "mec": "Se abre con la llave incluida o con Hurto CD 20. La DJ puede ofrecer versiones más caras con CD más alta.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Cadena fina (0,3 m)",
+    "stats": [
+      [
+        "Peso",
+        "250 g"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "Se rompe con Atletismo CD 20 o infligiéndole 5 puntos de daño.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Cadena gruesa (3 m)",
+    "stats": [
+      [
+        "Peso",
+        "5 kg"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "Se rompe con Atletismo CD 30 o infligiéndole 15 puntos de daño.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Cuerda (15 m)",
+    "stats": [
+      [
+        "Peso",
+        "2,5 kg"
+      ],
+      [
+        "Precio",
+        "30 mc"
+      ]
+    ],
+    "mec": "Se corta al infligirle 2 puntos de daño, o se desgarra con Atletismo CD 20.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Diapasón",
+    "stats": [
+      [
+        "Peso",
+        "250 g"
+      ],
+      [
+        "Precio",
+        "50 mc"
+      ]
+    ],
+    "mec": "Transfiere luz tormentosa entre esferas o gemas. Permite usar esferas para recargar fabriales, armaduras y semiesquirlas como si fueran gemas sin recubrimiento.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Gema sin recubrimiento (infusa)",
+    "stats": [
+      [
+        "Peso",
+        "5 g"
+      ],
+      [
+        "Precio",
+        "2 mc"
+      ]
+    ],
+    "mec": "Recarga 1 carga de un fabrial, armadura esquirlada o semiesquirla al infundirla en el objeto. Retiene la Investidura aproximadamente 5 días antes de que escape.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Grilletes",
+    "stats": [
+      [
+        "Peso",
+        "3 kg"
+      ],
+      [
+        "Precio",
+        "10 mc"
+      ]
+    ],
+    "mec": "Al sujetar a alguien con grilletes: queda Retenido y no puede usar libremente las manos. Para liberarse: Hurto o Atletismo (CD a discreción de la DJ).",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Linterna de aceite",
+    "stats": [
+      [
+        "Peso",
+        "1 kg"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "Emite luz en radio de 9 m y luz tenue a 18 m. Usa aceite como combustible.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Linterna de esfera",
+    "stats": [
+      [
+        "Peso",
+        "1 kg"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "Emite luz en radio de 9 m y luz tenue a 18 m. Usa esferas infusas como fuente de luz.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Lupa",
+    "stats": [
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "5 mc"
+      ]
+    ],
+    "mec": "Aumenta objetos para inspección detallada. A discreción de la DJ: ventaja en pruebas que requieran ver detalles pequeños.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Red de caza",
+    "stats": [
+      [
+        "Peso",
+        "2,5 kg"
+      ],
+      [
+        "Precio",
+        "4 mc"
+      ]
+    ],
+    "mec": "▶ Prueba de Atletismo contra Física de objetivo Grande o menor a ≤4,5 m. Con impacto: queda Inmovilizado y Tumbado. Para liberarse: Atletismo CD 15 (acción Interactuar de cualquiera en su cercanía).",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Sistema de poleas",
+    "stats": [
+      [
+        "Peso",
+        "6 kg"
+      ],
+      [
+        "Precio",
+        "100 mc"
+      ]
+    ],
+    "mec": "Cuando montas el sistema antes de levantar un objeto, trata ese objeto como si pesara una cuarta parte de su peso total.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Suministros quirúrgicos",
+    "stats": [
+      [
+        "Usos",
+        "10"
+      ],
+      [
+        "Peso",
+        "1,5 kg"
+      ],
+      [
+        "Precio",
+        "20 mc"
+      ]
+    ],
+    "mec": "Gasta 1 uso al realizar una prueba de Medicina para tratar a un herido: obtienes ventaja en la prueba.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Trompetilla",
+    "stats": [
+      [
+        "Peso",
+        "500 g"
+      ],
+      [
+        "Precio",
+        "50 mc"
+      ]
+    ],
+    "mec": "Los sonidos distantes escuchados a través de ella se perciben como si estuvieran a la mitad de distancia.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  },
+  {
+    "cat": "eq",
+    "name": "Vela",
+    "stats": [
+      [
+        "Peso",
+        "100 g"
+      ],
+      [
+        "Precio",
+        "0,2 mc"
+      ]
+    ],
+    "mec": "Encendida: luz en radio de 4,5 m. Arde hasta 6 horas.",
+    "note": null,
+    "mej": null,
+    "inc": null
+  }
+]

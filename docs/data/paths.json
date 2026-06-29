@@ -1,0 +1,129 @@
+{
+  "categories": {
+    "Caminos heroicos": [
+      {
+        "id": "agente",
+        "nom": "Agente",
+        "c": "#8B5A2B"
+      },
+      {
+        "id": "cazador",
+        "nom": "Cazador",
+        "c": "#3D6B35"
+      },
+      {
+        "id": "enviado",
+        "nom": "Enviado",
+        "c": "#7A5299"
+      },
+      {
+        "id": "erudito",
+        "nom": "Erudito",
+        "c": "#336699"
+      },
+      {
+        "id": "guerrero",
+        "nom": "Guerrero",
+        "c": "#8B2222"
+      },
+      {
+        "id": "lider",
+        "nom": "Líder",
+        "c": "#996633"
+      }
+    ],
+    "Órdenes radiantes": [
+      {
+        "id": "corredor",
+        "nom": "Corredor del Viento",
+        "c": "#185FA5"
+      },
+      {
+        "id": "custodio",
+        "nom": "Custodio de la Piedra",
+        "c": "#5A4A2A"
+      },
+      {
+        "id": "danzante",
+        "nom": "Danzante del Filo",
+        "c": "#0F6E56"
+      },
+      {
+        "id": "escultor",
+        "nom": "Escultor de Voluntad",
+        "c": "#9933AA"
+      },
+      {
+        "id": "nominador",
+        "nom": "Nominador de lo Otro",
+        "c": "#336655"
+      },
+      {
+        "id": "portador",
+        "nom": "Portador del Polvo",
+        "c": "#884422"
+      },
+      {
+        "id": "rompedor",
+        "nom": "Rompedor del Cielo",
+        "c": "#225588"
+      },
+      {
+        "id": "tejedor",
+        "nom": "Tejedor de Luz",
+        "c": "#AA6622"
+      },
+      {
+        "id": "vigilante",
+        "nom": "Vigilante de la Verdad",
+        "c": "#445588"
+      }
+    ]
+  },
+  "order": [
+    "agente",
+    "cazador",
+    "enviado",
+    "erudito",
+    "guerrero",
+    "lider",
+    "corredor",
+    "custodio",
+    "danzante",
+    "escultor",
+    "nominador",
+    "portador",
+    "rompedor",
+    "tejedor",
+    "vigilante",
+    "cantor"
+  ],
+  "radiantIds": [
+    "corredor",
+    "custodio",
+    "danzante",
+    "escultor",
+    "nominador",
+    "portador",
+    "rompedor",
+    "tejedor",
+    "vigilante"
+  ],
+  "names": {
+    "agente": "Agente",
+    "cazador": "Cazador",
+    "enviado": "Enviado",
+    "erudito": "Erudito",
+    "guerrero": "Guerrero",
+    "lider": "Líder",
+    "corredor": "Corredor del Viento",
+    "custodio": "Custodio de la Piedra",
+    "danzante": "Danzante del Filo",
+    "escultor": "Escultor de Voluntad",
+    "nominador": "Nominador de lo Otro",
+    "portador": "Portador del Polvo",
+    "rompedor": "Rompedor del Cielo",
+    "tejedor": "Tejedor de Luz",
+    "vigilante": "Vigilante de la Verdad"
+  }
+}

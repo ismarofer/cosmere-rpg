@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paths.schema.json",
+  "title": "Caminos (heroicos y órdenes radiantes) con id, nombre y color.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["categories", "order", "radiantIds", "names"],
+  "properties": {
+    "categories": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "nom", "c"],
+          "properties": {
+            "id":  { "type": "string", "minLength": 1 },
+            "nom": { "type": "string", "minLength": 1 },
+            "c":   { "type": "string", "pattern": "^#[0-9A-Fa-f]{3,8}$" }
+          }
+        }
+      },
+      "description": "Mapa categoría → lista de caminos."
+    },
+    "order": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Orden canónico para iterar caminos."
+    },
+    "radiantIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "names": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Mapa id → nombre, derivable pero precalculado."
+    }
+  }
+}

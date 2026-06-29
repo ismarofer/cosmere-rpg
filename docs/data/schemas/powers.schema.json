@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "powers.schema.json",
+  "title": "Potencias radiantes (surges): definición, acciones y paleta de colores.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["powers", "actions", "names", "colors"],
+  "properties": {
+    "powers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "attr", "act", "desc", "mec", "orders"],
+        "properties": {
+          "key":    { "type": "string", "minLength": 1 },
+          "attr":   { "type": "string", "minLength": 1 },
+          "act":    { "type": ["string", "number"] },
+          "inv":    { "type": ["string", "number", "null"] },
+          "desc":   { "type": "string", "minLength": 1 },
+          "mec":    { "type": "string", "minLength": 1 },
+          "orders": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["power", "name", "act", "mec"],
+        "properties": {
+          "power": { "type": "string", "minLength": 1 },
+          "name":  { "type": "string", "minLength": 1 },
+          "act":   { "type": ["string", "number"] },
+          "inv":   { "type": ["string", "number", "null"] },
+          "con":   { "type": ["string", "number", "null"] },
+          "cond":  { "type": ["string", "null"] },
+          "mec":   { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "names": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "colors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["main", "tint", "dark"],
+      "properties": {
+        "main": { "type": "object", "additionalProperties": { "type": "string", "pattern": "^#[0-9A-Fa-f]{3,8}$" } },
+        "tint": { "type": "object", "additionalProperties": { "type": "string", "pattern": "^#[0-9A-Fa-f]{3,8}$" } },
+        "dark": { "type": "object", "additionalProperties": { "type": "string", "pattern": "^#[0-9A-Fa-f]{3,8}$" } }
+      }
+    }
+  }
+}

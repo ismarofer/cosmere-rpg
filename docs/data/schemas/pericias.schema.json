@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pericias.schema.json",
+  "title": "Pericias agrupadas por categoría (culturales, utilidad, arma, armadura, especiales).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["key", "nom", "desc", "grupos"],
+    "properties": {
+      "key":   { "type": "string", "minLength": 1 },
+      "nom":   { "type": "string", "minLength": 1 },
+      "desc":  { "type": "string", "minLength": 1 },
+      "nota":  { "type": ["string", "null"] },
+      "grupos": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sub", "items"],
+          "properties": {
+            "sub":   { "type": "string", "minLength": 1 },
+            "items": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

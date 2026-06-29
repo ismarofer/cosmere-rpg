@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "items.schema.json",
+  "title": "Objetos (armas, armaduras, fabriales, consumibles, equipo)",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["cat", "name", "stats"],
+    "properties": {
+      "cat": {
+        "type": "string",
+        "enum": ["al", "ap", "ae", "ar", "fc", "fu", "co", "eq"],
+        "description": "Categoría: al=Arm. ligero, ap=Arm. pesado, ae=Arma especial, ar=Armadura, fc=Fabrial común, fu=Fabrial único, co=Consumible, eq=Equipo con reglas."
+      },
+      "name": { "type": "string", "minLength": 1 },
+      "sub":  { "type": ["string", "null"], "description": "Subtítulo opcional (p.ej. 'Fabrial único · Rango 2')." },
+      "stats": {
+        "type": "array",
+        "description": "Lista ordenada de pares [etiqueta, valor].",
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "string" }
+        }
+      },
+      "mec":  { "type": ["string", "null"] },
+      "mej":  { "type": ["string", "null"] },
+      "inc":  { "type": ["string", "null"] },
+      "note": { "type": ["string", "null"] }
+    }
+  }
+}

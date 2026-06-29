@@ -1,0 +1,272 @@
+{
+  "powers": [
+    {
+      "key": "abrasion",
+      "attr": "Velocidad",
+      "act": "1",
+      "inv": "1+/ronda",
+      "desc": "Altera la fuerza de fricción en la superficie de un objeto, eliminándola casi por completo.",
+      "mec": "Con una mano libre, toca un objeto o superficie en tu cercanía para quitarle casi toda la fricción (1 Inv./ronda). El objetivo no supera la magnitud por tus grados. No funciona en personajes, objetos Investidos ni infusos. También puedes infundirte a ti mismo. Para infundir un objeto que sostiene un reticente, o la superficie que lo sostiene: prueba de Abrasión contra su Defensa física. Quien pise o se aferre a una superficie resbaladiza tuya: prueba de Agilidad contra tu Abrasión o cae Tumbado / suelta el objeto.",
+      "orders": "Danzantes del Filo · Portadores del Polvo"
+    },
+    {
+      "key": "adhesion",
+      "attr": "Presencia",
+      "act": "1",
+      "inv": "1+/ronda",
+      "desc": "Une dos objetos físicos mediante un Enlace completo.",
+      "mec": "Infunde dos objetos no fijados a ≤1,5 m entre sí (mano libre, tocándolos): quedan pegados. Uno puede ser una superficie de cualquier tamaño. No funciona en personajes ni objetos Investidos. Romperlo: prueba de Atletismo contra tu Adhesión.",
+      "orders": "Corredores del Viento · Forjadores de Vínculos"
+    },
+    {
+      "key": "cohesion",
+      "attr": "Voluntad",
+      "act": "1",
+      "inv": "1+/ronda",
+      "desc": "Vuelve la piedra blanda y moldeable como arcilla.",
+      "mec": "Infunde un objeto/superficie de piedra que tocas (mano libre): se vuelve moldeable. Puedes darle forma básica al activarla; moldear elaborado lleva más tiempo. No supera tu magnitud. No funciona en objetos Investidos. Al terminar, se solidifica con su nueva forma.",
+      "orders": "Custodios de la Piedra · Escultores de Voluntad"
+    },
+    {
+      "key": "division",
+      "attr": "Intelecto",
+      "act": "2",
+      "inv": "1+",
+      "desc": "Destruye y descompone: atrofia, desmorona o hace pedazos.",
+      "mec": "Desintegra a un personaje, objeto o zona que tocas (mano libre). Contra personaje: ataque de División contra Espiritual, 3d4 espiritual (a 0 salud, muere). Contra objeto/zona: gasta Inv. según tamaño; en combate requiere prueba según material (ver tabla).",
+      "orders": "Portadores del Polvo · Rompedores del Cielo"
+    },
+    {
+      "key": "gravitacion",
+      "attr": "Discernimiento",
+      "act": "1",
+      "inv": "1+/ronda",
+      "desc": "Cambia la dirección de la gravedad: el Enlace básico.",
+      "mec": "Infunde a un personaje u objeto que tocas (mano libre): su gravedad cambia de dirección con tu valor de gravitación (empieza en 7,5 m). A un personaje dispuesto (o a ti) le da vuelo; a un objeto, dirección de caída. No funciona en objetos Investidos.",
+      "orders": "Corredores del Viento · Rompedores del Cielo"
+    },
+    {
+      "key": "iluminacion",
+      "attr": "Presencia",
+      "act": "1",
+      "inv": "1+",
+      "desc": "Crea ilusiones de luz y sonido convincentes (tejer luz).",
+      "mec": "Infunde el aire dentro del alcance de tu vínculo para crear una ilusión animada con sonido. Simple/sin sonido: 1 Inv./10 min. Compleja: 1 Inv./ronda. También puedes crear un disfraz ilusorio sobre ti sin gastar Inv. (si tienes 1+).",
+      "orders": "Tejedores de Luz · Vigilantes de la Verdad"
+    },
+    {
+      "key": "progresion",
+      "attr": "Discernimiento",
+      "act": "2",
+      "inv": "1+",
+      "desc": "Controla el crecimiento y la curación de los seres vivos.",
+      "mec": "Con una mano libre, infundes vida en un ser vivo que no eres tú y que tocas. Al activarla, eliges uno de sus dos efectos: Crecimiento de plantas (haces crecer una planta hasta el tamaño que elijas, sin superar tu magnitud ni los límites de su especie) o Regeneración de personajes (el objetivo recupera 1d4 + tu mod. de Progresión al inicio de cada turno suyo; el dado escala con grados). No supera la magnitud por tus grados.",
+      "orders": "Danzantes del Filo · Vigilantes de la Verdad"
+    },
+    {
+      "key": "tension",
+      "attr": "Fuerza",
+      "act": "1",
+      "inv": "1+/ronda",
+      "desc": "Altera la rigidez: vuelve lo blando firme como el acero.",
+      "mec": "Infunde un objeto blando que tocas (mano libre): se vuelve rígido. Puedes darle forma básica al activarla. No supera tu magnitud. No funciona en personajes ni objetos Investidos. Defensa endurecida: si infundes algo que alguien viste, +2 a su Defensa física.",
+      "orders": "Custodios de la Piedra · Forjadores de Vínculos"
+    },
+    {
+      "key": "transformacion",
+      "attr": "Voluntad",
+      "act": "2",
+      "inv": "var",
+      "desc": "Transforma un material en otro (moldeado de almas).",
+      "mec": "Elige un objeto no vivo o superficie que tocas (mano libre) y haz prueba de Transformación (CD según categorías: sólido/orgánico/líquido/vapor/aire). No supera tu magnitud. No funciona en materia viva (sin talentos) ni en objetos Investidos.",
+      "orders": "Nominadores de lo Otro · Tejedores de Luz"
+    },
+    {
+      "key": "transportacion",
+      "attr": "Intelecto",
+      "act": "1",
+      "inv": "1+",
+      "desc": "Te asoma al Reino Cognitivo (Shadesmar).",
+      "mec": "Te asomas a Shadesmar en tu ubicación actual. Por cada Inv. gastada, un efecto dentro del alcance de tu vínculo: averiguar emociones/motivaciones, localizar personajes por sus llamas, o sentir Investidura (Fusionados, Radiantes, hojas, fabriales).",
+      "orders": "Escultores de Voluntad · Nominadores de lo Otro"
+    }
+  ],
+  "actions": [
+    {
+      "power": "abrasion",
+      "name": "Patinar",
+      "act": "0",
+      "inv": null,
+      "con": "2",
+      "cond": "Mientras estés infuso con Abrasión",
+      "mec": "Patinas sobre el suelo como si fuera hielo. Gasta 2 concentración para moverte (como ◉) en línea recta. Sin práctica puedes hacerlo, pero la gracia requiere experiencia."
+    },
+    {
+      "power": "abrasion",
+      "name": "Deslizarse",
+      "act": "8",
+      "inv": null,
+      "con": null,
+      "cond": "Mientras estés infuso con Abrasión",
+      "mec": "Eliminas la fricción de partes de tu cuerpo para escurrirte. Cuentas como un tamaño menor al colarte por espacios y obtienes ventaja para escapar de ataduras que te sujetan por fricción o presión."
+    },
+    {
+      "power": "progresion",
+      "name": "Crecimiento de plantas",
+      "act": "2",
+      "inv": "1",
+      "con": null,
+      "cond": "Efecto de Progresión al activarla",
+      "mec": "Haces crecer rápidamente una planta viva (o su semilla) hasta el tamaño que elijas, sin superar la magnitud por tus grados ni los límites naturales de su especie."
+    },
+    {
+      "power": "progresion",
+      "name": "Regeneración de personajes",
+      "act": "2",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Efecto de Progresión al activarla",
+      "mec": "Infundes 1+ Inv. en un personaje vivo. Al inicio de cada turno suyo recupera 1d4 + tu mod. de Progresión de salud. El dado escala con grados (2 grados → 1d6, etc.)."
+    },
+    {
+      "power": "division",
+      "name": "Apuntar a un personaje",
+      "act": "2",
+      "inv": "1",
+      "con": null,
+      "cond": "Efecto de División al activarla",
+      "mec": "Ataque de División cuerpo a cuerpo contra Espiritual, 3d4 de daño espiritual (escala con grados). Si reduce la salud del objetivo a 0, se desmorona y muere. Con un fallo, gasta 1 concentración para hacer un rasguño."
+    },
+    {
+      "power": "division",
+      "name": "Apuntar a objeto o zona",
+      "act": "2",
+      "inv": "var",
+      "con": null,
+      "cond": "Efecto de División al activarla",
+      "mec": "Gasta Inv. según el tamaño (1 Pequeño, 2 Mediano…). En combate, supera una prueba según el material: aire 0, vapores 5, líquidos 10, orgánicos 15, sólidos 20. El objetivo se desintegra como elijas (polvo, hueco, cortina de humo…)."
+    },
+    {
+      "power": "gravitacion",
+      "name": "Apuntar a un personaje",
+      "act": "1",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Efecto de Gravitación al activarla",
+      "mec": "A un personaje dispuesto (o a ti) le otorgas un valor de vuelo igual a tu valor de gravitación (7,5 m base). A un reticente: prueba contra Física; si superas, lo mueves hasta tu valor de gravitación y queda Inmovilizado."
+    },
+    {
+      "power": "gravitacion",
+      "name": "Apuntar a un objeto",
+      "act": "1",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Efecto de Gravitación al activarla",
+      "mec": "Declaras una nueva dirección de gravedad para un objeto. Al inicio de cada turno, tras gastar 1 Inv., el objeto se mueve en línea recta hasta tu valor de gravitación. No funciona en objetos Investidos."
+    },
+    {
+      "power": "adhesion",
+      "name": "Enlace completo",
+      "act": "1",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Uso principal de Adhesión",
+      "mec": "Pega dos objetos no fijados (o uno a una superficie). Para infundir un objeto que sostiene un reticente: prueba contra Física. Usos creativos: enlazar la bota al suelo (Inmovilizado), un brazal a la ropa (desventaja en ese brazo), etc."
+    },
+    {
+      "power": "cohesion",
+      "name": "Moldear la piedra",
+      "act": "1",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Uso principal de Cohesión",
+      "mec": "Tocas piedra infundida y la moldeas a tu gusto; al terminar la infusión, se solidifica con la nueva forma. Forma básica al activar; moldeado elaborado requiere acciones y tiempo adicionales."
+    },
+    {
+      "power": "tension",
+      "name": "Defensa endurecida",
+      "act": "1",
+      "inv": "1+/ronda",
+      "con": null,
+      "cond": "Uso especial de Tensión",
+      "mec": "Al infundir un material blando que tú o un aliado dispuesto vestís, +2 a la Defensa física del portador. Alternativamente, envuelve el material alrededor de un personaje al infundirlo. No se acumula con otra Tensión."
+    },
+    {
+      "power": "iluminacion",
+      "name": "Ocultarte",
+      "act": "0",
+      "inv": null,
+      "con": null,
+      "cond": "Con 1+ Investidura",
+      "mec": "Creas un engaño ilusorio sobre ti mismo sin gastar Investidura. Dura hasta que le pones fin (◉) o te quedas sin Investidura. Engañas automáticamente a quienes no tengan motivo para sospechar."
+    },
+    {
+      "power": "transformacion",
+      "name": "Moldear material",
+      "act": "2",
+      "inv": "var",
+      "con": null,
+      "cond": "Uso principal de Transformación",
+      "mec": "Prueba según la distancia entre categorías (sólido→orgánico CD 10, sólido→aire CD 25, etc.). Si la superas, el material se transforma en el que elijas. Si fallas, no puedes reintentar ese objeto esta escena (sin talentos)."
+    },
+    {
+      "power": "transportacion",
+      "name": "Asomarse a Shadesmar",
+      "act": "1",
+      "inv": "1+",
+      "con": null,
+      "cond": "Uso principal de Transportación",
+      "mec": "Por cada Inv. gastada, un efecto: leer emociones por los spren cercanos (ventaja social o conocer motivación), localizar personas por su llama, o detectar Investidura (Fusionados, Radiantes, hojas, fabriales)."
+    }
+  ],
+  "names": {
+    "abrasion": "Abrasión",
+    "adhesion": "Adhesión",
+    "cohesion": "Cohesión",
+    "division": "División",
+    "gravitacion": "Gravitación",
+    "iluminacion": "Iluminación",
+    "progresion": "Progresión",
+    "tension": "Tensión",
+    "transformacion": "Transformación",
+    "transportacion": "Transportación"
+  },
+  "colors": {
+    "main": {
+      "abrasion": "#185FA5",
+      "adhesion": "#7A5299",
+      "cohesion": "#5A4A2A",
+      "division": "#8B2222",
+      "gravitacion": "#336699",
+      "iluminacion": "#AA6622",
+      "progresion": "#0F6E56",
+      "tension": "#884422",
+      "transformacion": "#9933AA",
+      "transportacion": "#336655"
+    },
+    "tint": {
+      "abrasion": "#eef4fc",
+      "adhesion": "#f5eefb",
+      "cohesion": "#f7f3ea",
+      "division": "#fdeeed",
+      "gravitacion": "#edf3fb",
+      "iluminacion": "#fdf3e8",
+      "progresion": "#edf9f5",
+      "tension": "#faf0ea",
+      "transformacion": "#f8eefa",
+      "transportacion": "#eef5f0"
+    },
+    "dark": {
+      "abrasion": "#0C447C",
+      "adhesion": "#5A3579",
+      "cohesion": "#3A2A0A",
+      "division": "#6B1111",
+      "gravitacion": "#1a4a77",
+      "iluminacion": "#7A3A0A",
+      "progresion": "#085041",
+      "tension": "#5A2A0A",
+      "transformacion": "#6B1A7A",
+      "transportacion": "#1A4435"
+    }
+  }
+}

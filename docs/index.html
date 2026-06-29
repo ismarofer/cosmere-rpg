@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JDR Cosmere — Buscador del Archivo de las Tormentas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Crimson Text',Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}
+.wrap{max-width:1400px;margin:0 auto;padding:14px}
+
+/* ===== Hero / quick links ===== */
+.hero{text-align:center;padding:18px 12px 6px}
+.hero h1{font-family:'Cinzel',serif;font-size:24px;font-weight:600;color:#5a1414;letter-spacing:0.05em;margin-bottom:4px}
+.hero .sub{font-size:13px;color:#888;font-style:italic}
+.quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin:14px 0 8px}
+.quick a{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff;border:1px solid #ddd;border-radius:8px;
+  text-decoration:none;color:#1a1a1a;font-family:Georgia,serif;font-size:13px;font-weight:600;transition:all .15s}
+.quick a:hover{border-color:var(--c,#7a1f1f);box-shadow:0 2px 6px rgba(0,0,0,0.08);transform:translateY(-1px)}
+.quick a .qi{font-size:18px;width:28px;text-align:center;color:var(--c,#7a1f1f)}
+.quick a .qcount{margin-left:auto;font-size:11px;color:#999;font-weight:400}
+
+/* ===== Barra de filtros sticky ===== */
+.bar{position:sticky;top:42px;z-index:9;background:#fff;border:1px solid #ddd;border-radius:10px;
+  padding:10px 12px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+@media (max-width:560px){.bar{top:48px}}
+.bar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar-row+.bar-row{margin-top:6px}
+.search{flex:1;min-width:200px;font-size:14px;padding:8px 14px;border-radius:18px;border:1px solid #ccc;font-family:Georgia,serif;outline:none}
+.search:focus{border-color:#7a1f1f}
+.count{font-size:11px;color:#999;font-family:Georgia,serif;white-space:nowrap}
+.flabel{font-size:10px;font-family:Georgia,serif;color:#999;text-transform:uppercase;letter-spacing:0.05em;margin-right:3px}
+.fb{font-size:11px;padding:5px 11px;border-radius:13px;border:1px solid #ccc;background:#fff;color:#555;cursor:pointer;font-family:Georgia,serif;font-weight:600;transition:all .12s}
+.fb:hover{background:#f3f3f3}
+.fb.on{color:#fff;border-color:transparent}
+.fb .fbn{font-weight:400;opacity:0.75;font-size:10px;margin-left:4px}
+.clear-btn{font-size:11px;color:#888;background:none;border:none;cursor:pointer;font-family:Georgia,serif;text-decoration:underline}
+
+/* ===== Rejilla de resultados ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,62mm);gap:4mm;justify-content:start;margin-bottom:30px}
+.cw{cursor:pointer;display:contents}
+.cw > *{transition:transform .12s,filter .12s}
+.cw:hover > *{transform:translateY(-2px);filter:drop-shadow(0 4px 10px rgba(0,0,0,0.18))}
+
+.empty{padding:60px 20px;text-align:center;color:#999;font-style:italic;grid-column:1/-1}
+.section-divider{grid-column:1/-1;font-family:'Cinzel',serif;font-size:12px;font-weight:600;
+  color:#fff;padding:6px 14px;border-radius:6px;margin-top:8px;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--c,#7a1f1f);display:flex;justify-content:space-between;align-items:center}
+.section-divider .scount{font-family:Georgia,serif;font-weight:400;font-size:11px;opacity:0.85;letter-spacing:0.04em;text-transform:none}
+
+/* ===== Modal ===== */
+.modal-bd{position:fixed;inset:0;background:rgba(20,10,10,0.6);z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:14px;opacity:0;pointer-events:none;transition:opacity .15s}
+.modal-bd.on{opacity:1;pointer-events:auto}
+.modal-box{background:#f5f4f0;border-radius:10px;padding:14px;max-width:min(640px,calc(100vw - 28px));max-height:92vh;
+  overflow:auto;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;flex-direction:column;gap:10px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.btn{font-size:12px;padding:7px 14px;border-radius:14px;border:1px solid #888;background:#fff;color:#444;cursor:pointer;
+  font-family:Georgia,serif;font-weight:600}
+.btn:hover{background:#f3f3f3}
+.btn.primary{border-color:#7a1f1f;background:#7a1f1f;color:#fff}
+.btn.primary:hover{background:#5a1414}
+
+/* ===== Toast ===== */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#3a2a26;color:#fff;padding:10px 18px;
+  border-radius:20px;font-size:13px;font-family:Georgia,serif;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:200;
+  opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+
+/* ===== Footer ===== */
+footer{margin:40px 0 20px;text-align:center;font-size:11px;color:#aaa}
+footer a{color:#7a1f1f;text-decoration:none;margin:0 6px}
+footer a:hover{text-decoration:underline}
+
+/* ===== Estilos de tarjetas reutilizados en el modal ===== */
+/* Inyectados desde browser.js para no duplicar CSS aquí. */
+</style>
+</head>
+<body>
+
+<div id="topnav"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>El Archivo de las Tormentas — Cosmere RPG</h1>
+    <div class="sub">Buscador unificado de talentos, potencias, objetos, acciones, estados y pericias.</div>
+  </header>
+
+  <div class="quick" id="quickLinks"></div>
+
+  <div class="bar">
+    <div class="bar-row">
+      <input type="text" class="search" id="search" placeholder="Buscar en todo el material…" oninput="onSearch()">
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bar-row">
+      <span class="flabel">Tipo</span>
+      <div id="typeFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+    <div class="bar-row" id="subFiltersRow" style="display:none">
+      <span class="flabel" id="subFiltersLabel">Filtro</span>
+      <div id="subFilters" style="display:flex;gap:6px;flex-wrap:wrap;flex:1"></div>
+      <button class="clear-btn" onclick="clearSub()">Limpiar</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    Material no oficial basado en el JDR Cosmere de Brotherwise Games · <a href="index_old.html">Vista clásica</a>
+  </footer>
+</div>
+
+<!-- Modal con la ficha completa -->
+<div class="modal-bd" id="modalBd" onclick="closeModalIfBackdrop(event)">
+  <div class="modal-box">
+    <div id="modalBody"></div>
+    <div class="modal-actions">
+      <button class="btn primary" onclick="shareCurrent()" title="Copia la URL de esta tarjeta">🔗 Compartir URL</button>
+      <button class="btn" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/shared/nav.js"></script>
+<script type="module" src="js/pages/browser.js"></script>
+</body>
+</html>

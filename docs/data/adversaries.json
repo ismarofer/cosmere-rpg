@@ -1,0 +1,4424 @@
+[
+  {
+    "name": "Anguila aérea",
+    "role": "Secuaz de rango 1 · Animal Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "11"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "12 (9–15)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "3 m · volar 9 m · nadar 12 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +4, Sigilo +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +4"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Sentidos mejorados",
+        "Ventaja en pruebas basadas en la vista que no son ataques."
+      ],
+      [
+        "Secuaz",
+        "Derrotada de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Resbaladiza",
+        "No provoca Acometidas reactivas mientras nada."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Mordisco",
+        null,
+        "Ataque +4, cercanía 1,5 m, un objetivo. Rasguño 2 (1d4) laceración. Impacto 6 (1d4+4) laceración; si el objetivo es Mediano o menor, gasta 1 concentración para envolverlo: queda Retenido y la anguila se aferra (no puede Morder a otro hasta soltarlo). Como 1 acción, el Retenido o alguien a ≤1,5 m la obliga a soltar con Atletismo CD 12."
+      ],
+      [
+        "2",
+        "Bomba en picado",
+        null,
+        "Vuela hasta 18 m hacia un objetivo en tierra que pueda sentir y usa Mordisco con ventaja. Después no puede volar hasta el final de la escena."
+      ]
+    ],
+    "tactics": "Permanece en vuelo y oculta hasta elegir objetivo. Entonces usa Bomba en picado para morder y sujetar a su presa.",
+    "oyc": null
+  },
+  {
+    "name": "Anguila aérea mayor",
+    "role": "Rival de rango 1 · Animal Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "11"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "24 (19–29)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "3 m · volar 9 m · nadar 12 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Atletismo +3, Sigilo +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +4"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Sentidos aumentados",
+        "Ventaja en pruebas basadas en la vista que no son ataques."
+      ],
+      [
+        "Resbaladiza",
+        "No provoca Acometidas reactivas mientras nada."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Mordisco",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 9 (1d8+5) laceración; si el objetivo es Mediano o menor, gasta 1 concentración para envolverlo: queda Retenido. Como 1 acción, el Retenido o alguien a ≤1,5 m la obliga a soltar con Atletismo CD 14."
+      ],
+      [
+        "2",
+        "Bomba en picado",
+        null,
+        "Vuela hasta 18 m hacia un objetivo en tierra sin activar Acometidas reactivas y usa Mordisco con ventaja. Después no puede volar hasta el final de la escena."
+      ],
+      [
+        "3",
+        "Constreñir",
+        null,
+        "Estruja a un enemigo al que tiene Retenido, infligiendo 15 (3d6+5) de golpe."
+      ]
+    ],
+    "tactics": "En el raro caso de atacar a un objetivo grande, usa Bomba en picado y luego Constreñir contra su presa Retenida.",
+    "oyc": null
+  },
+  {
+    "name": "Arquero",
+    "role": "Secuaz de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "12 (9–15)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "1 (cuero)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +3, Armamento ligero +3, Armamento pesado +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4, Supervivencia +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Cuchillo",
+        null,
+        "Ataque +3, cercanía 1,5 m, un objetivo. Rasguño 2 (1d4) laceración. Impacto 5 (1d4+3) laceración."
+      ],
+      [
+        "1",
+        "Acometida: Arco largo",
+        null,
+        "Ataque +4, alcance 45/180 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 7 (1d6+4) laceración."
+      ],
+      [
+        "0",
+        "Apuntar",
+        null,
+        "En su primer turno de cada escena, si no está Sorprendido, usa Obtener ventaja como acción gratuita."
+      ],
+      [
+        "R",
+        "Disparo paralizante",
+        "1 concentración",
+        "Si un enemigo que pueda sentir se mueve a menos de 45 m, sufre un ataque de Arco largo. Si impacta, queda Inmovilizado hasta el final del siguiente turno del arquero."
+      ]
+    ],
+    "tactics": "Combate a distancia: usa Disparo paralizante para conseguir superioridad y luego sigue con el Arco largo.",
+    "oyc": null
+  },
+  {
+    "name": "Axies, el Coleccionista",
+    "role": "Rival de rango 3 · Humanoide Mediano",
+    "rango": "3",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "17"
+        ],
+        [
+          "vel",
+          "4"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "6"
+        ],
+        [
+          "def",
+          "20"
+        ],
+        [
+          "vol",
+          "4"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "6"
+        ],
+        [
+          "def",
+          "19"
+        ],
+        [
+          "pre",
+          "3"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "60 (40–72)"
+      ],
+      [
+        "Concentración",
+        "6"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Inmunidades",
+        "Afligido, Agotado, Aturdido, Inconsciente"
+      ],
+      [
+        "Sentidos",
+        "15 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +6, Hurto +8, Sigilo +8"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +8, Disciplina +5, Saber +10"
+      ],
+      [
+        "Hab. espirituales",
+        "Engaño +5, Percepción +10, Perspicacia +10"
+      ],
+      [
+        "Idiomas",
+        "todos"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Inmortal",
+        "No puede morir por envejecimiento, causas naturales ni lesiones físicas. Si su salud llega a 0, no sufre lesiones y recupera 20 (5d8) al inicio de su siguiente turno."
+      ],
+      [
+        "Maldición de la amabilidad",
+        "Debe subir la apuesta en pruebas arriesgadas o difíciles, y sufre desventaja en todas las tiradas del dado de trama."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Sin armas",
+        null,
+        "Ataque +3, cercanía 1,5 m, un objetivo. Rasguño 2 (1d4) golpe. Impacto 5 (1d4+3) golpe."
+      ],
+      [
+        "1",
+        "Dato curioso",
+        "1 concentración",
+        "Elige un aliado a ≤6 m, prueba de Saber CD 15 subiendo la apuesta. Si la supera, el aliado gana 2 concentración. Con O, su siguiente prueba tiene ventaja; con C, desventaja."
+      ],
+      [
+        "2",
+        "Cambiar de forma",
+        "1 concentración",
+        "Cambia sus rasgos para ocultar su identidad. Las pruebas para ver a través del disfraz sufren desventaja. Termina cuando él lo decide o su concentración llega a 0."
+      ]
+    ],
+    "tactics": "Erudito que evita el conflicto físico. Aporta su Dato curioso para compartir saber arcano, aunque su Maldición puede distraer a sus aliados.",
+    "oyc": null
+  },
+  {
+    "name": "Bandido",
+    "role": "Secuaz de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "11"
+        ],
+        [
+          "vol",
+          "0"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "11 (8–14)"
+      ],
+      [
+        "Concentración",
+        "2"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "1 (cuero)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +3, Armamento ligero +2, Atletismo +3"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +1, Intimidación +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +3, Supervivencia +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Inercia",
+        "Si se mueve ≥3 m en línea recta hacia un objetivo y le ataca con la Maza ese turno, obtiene ventaja."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Maza",
+        null,
+        "Ataque +2, cercanía 1,5 m, un objetivo. Rasguño 3 (1d6) golpe. Impacto 5 (1d6+2) golpe."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +2, alcance 24/96 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 5 (1d6+2) laceración."
+      ],
+      [
+        "1",
+        "Derribar",
+        "1 concentración",
+        "Prueba de Atletismo contra un objetivo a ≤1,5 m (enfrentada a Atletismo o Agilidad, a elección del objetivo). Si la supera, queda Tumbado."
+      ]
+    ],
+    "tactics": "Usa el Arco corto desde lejos mientras se acerca; al llegar, carga para obtener Inercia y golpea con la Maza.",
+    "oyc": null
+  },
+  {
+    "name": "Bersérker de la Emoción",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "22 (18–26)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (coraza)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +4, Armamento ligero +3, Armamento pesado +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Intimidación +5"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +3, Percepción +4"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Emoción infecciosa",
+        "Cuando un enemigo saca C en un ataque contra él, gana +3 a esa tirada; haya impacto o fallo, si hay otros personajes a ≤1,5 m del bersérker, el ataque hace un rasguño a uno de ellos (sin gastar concentración)."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada larga",
+        null,
+        "Ataque +4, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) laceración. Impacto 8 (1d8+4); si el objetivo está Tumbado, +4 (1d8) de daño."
+      ],
+      [
+        "1",
+        "Acometida: Daga",
+        null,
+        "Ataque +3, alcance 6/18 m, un objetivo. Rasguño 2 (1d4) laceración. Impacto 5 (1d4+3) laceración."
+      ],
+      [
+        "1",
+        "Golpe con escudo",
+        "1 concentración",
+        "Prueba de Atletismo contra Física de un personaje Grande o menor a ≤1,5 m; si la supera, queda Tumbado."
+      ],
+      [
+        "0",
+        "Furia bersérker",
+        "2 concentración",
+        "Su siguiente Acometida afecta a todos a ≤1,5 m e inflige +3 (1d6) con un impacto."
+      ],
+      [
+        "R",
+        "Arremeter",
+        "1 concentración",
+        "Tras ser atacado por un enemigo a ≤1,5 m, inflige 4 (1d8) laceración al atacante."
+      ]
+    ],
+    "tactics": "Se lanza a la batalla sin inmutarse, usando Furia bersérker y Golpe con escudo para abrirse paso sin importar amigos o enemigos.",
+    "oyc": null
+  },
+  {
+    "name": "Cantor en forma de guerra",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "24 (20–28)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +5, Armamento ligero +3, Armamento pesado +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +5, Intimidación +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +4, Percepción +4"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Caparazón externo",
+        "Puede usar su caparazón como escudo, lo que le permite usar Prevenirse."
+      ],
+      [
+        "Experiencia marcial",
+        "Puede usar Acometida dos veces en su turno."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Hacha",
+        null,
+        "Ataque +4, cercanía 1,5 m, un objetivo. Puede saltar hasta 3 m antes o después. Rasguño 3 (1d6) laceración. Impacto 7 (1d6+4) laceración."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +3, alcance 24/96 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 6 (1d6+3) laceración."
+      ],
+      [
+        "R",
+        "Coordinación en pareja de guerra",
+        "1 concentración",
+        "Tras otro cantor en forma de guerra a ≤1,5 m hace Moverse, este se desplaza hasta su movimiento, terminando a ≤1,5 m del primero."
+      ]
+    ],
+    "tactics": "Combatiente brutal junto a su pareja de guerra: se lanzan con Coordinación y Experiencia marcial, varios ataques de Hacha a un solo enemigo.",
+    "oyc": null
+  },
+  {
+    "name": "Cantor en forma diestra",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "20 (15–25)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Armamento ligero +5, Sigilo +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +5, Manufactura +4, Saber +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +5"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Velocidad letal",
+        "Al inicio de cada escena, si no está Sorprendido, juega un turno rápido antes que cualquier otro (no cuenta como su turno)."
+      ],
+      [
+        "Sentidos agudos",
+        "Puede gastar 1 concentración para obtener ventaja en una prueba de Percepción (no requiere acción)."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Maza",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 3 (1d6) golpe. Impacto 8 (1d6+5) golpe."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +5, alcance 24/96 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 8 (1d6+5) laceración."
+      ],
+      [
+        "2",
+        "Objetivo marcado",
+        "2 concentración",
+        "Elige un enemigo a ≤36 m. Durante 1 hora, al impactarlo con arma inflige +3 (1d6) y obtiene ventaja para rastrearlo."
+      ]
+    ],
+    "tactics": "Rara vez lucha; experto en rastrear y reconocer terreno, explota debilidades con Objetivo marcado.",
+    "oyc": null
+  },
+  {
+    "name": "Caparácaro",
+    "role": "Secuaz de rango 1 · Animal Pequeño",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "11"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "9 (7–11)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Sigilo +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Camuflaje agreste",
+        "Sin detectar, obtiene ventaja en ataques. Inmóvil parece una roca: identificarlo requiere Supervivencia CD 14 (desventaja si está a cubierto u ofuscado)."
+      ]
+    ],
+    "acciones": [
+      [
+        "2",
+        "Acometida: Pinzas",
+        null,
+        "Ataque +2, cercanía 1,5 m, un objetivo. Rasguño 2 (1d4) laceración. Impacto 4 (1d4+2) laceración."
+      ],
+      [
+        "2",
+        "Frenesí voraz",
+        "2 concentración",
+        "Se enfurece contra un enemigo a ≤1,5 m. Todos los caparácaros a ≤1,5 m del objetivo usan ↺ para unirse: el objetivo sufre 2 (1d4) laceración por cada caparácaro enfurecido."
+      ]
+    ],
+    "tactics": "Usa Camuflaje agreste para esconderse entre rocas; ataca con ventaja y abruma con Frenesí voraz en grupo.",
+    "oyc": null
+  },
+  {
+    "name": "Chull",
+    "role": "Rival de rango 1 · Animal Grande o Enorme",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "4"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "0"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "11"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "30 (23–37)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "3 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +6"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Bestia de carga",
+        "Capacidad de carga de 750 kg."
+      ],
+      [
+        "Avance lento",
+        "Solo puede usar una acción de Moverse por turno."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Pinza",
+        null,
+        "Ataque +4, cercanía 3 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 9 (1d6+6) laceración."
+      ],
+      [
+        "2",
+        "Retraerse",
+        null,
+        "Se defiende hasta el inicio de su siguiente turno: desvío sube a 6 y usa Prevenirse como a cubierto. Puede gastar 1 concentración al inicio de sus turnos para mantenerlo."
+      ]
+    ],
+    "tactics": "Dócil: casi siempre se refugia con Retraerse. Si lo empujan al límite, defiende con sus garras.",
+    "oyc": null
+  },
+  {
+    "name": "Espinablanca joven",
+    "role": "Rival de rango 1 · Animal Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "23 (19–27)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "1 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "12 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (olfato)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +6, Atletismo +5, Sigilo +6"
+      ],
+      [
+        "Hab. cognitivas",
+        "Intimidación +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +5"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Sentidos mejorados",
+        "Ventaja en pruebas basadas en el olfato que no son ataques."
+      ],
+      [
+        "Caparazón espinoso",
+        "Si un enemigo a ≤1,5 m le hace un rasguño con arma, sufre 3 (1d6) laceración."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Garras",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 8 (1d6+5); gasta 1 concentración para dejarlo Afligido [1d4 vital] hasta que recupere 1 de salud."
+      ],
+      [
+        "1",
+        "Colmillos empalantes",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) golpe. Impacto 9 (1d8+5); si impacta tras moverse ≥4,5 m, +4 (1d8) golpe y el objetivo supera Atletismo CD 12 o queda Tumbado."
+      ],
+      [
+        "2",
+        "Liberar feromonas",
+        "1 concentración",
+        "Todos los no-espinablancas a ≤3 m superan Disciplina CD 13 o quedan Aturdidos hasta el final del siguiente turno del espinablanca."
+      ]
+    ],
+    "tactics": "Carga contra los oponentes débiles y distantes con Colmillos empalantes y los abre con Garras. Usa Liberar feromonas para escapar o abrumar.",
+    "oyc": null
+  },
+  {
+    "name": "Experto",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "18 (15–21)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +2, Armamento ligero +2, Atletismo +2"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +2, Manufactura +2"
+      ],
+      [
+        "Hab. espirituales",
+        "Engaño +2, Percepción +4, Perspicacia +4, Persuasión +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Competencia",
+        "Tiene experiencia en una profesión y obtiene ventaja en pruebas relacionadas con ella."
+      ],
+      [
+        "Rostro severo",
+        "Tras gastar concentración para resistir la influencia de un personaje, este pierde 1 concentración."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Arma improvisada",
+        null,
+        "Ataque +2, cercanía 1,5 m, un objetivo. Con una Complicación se rompe. Rasguño 2 (1d4) golpe. Impacto 3 (1d4+2) golpe."
+      ],
+      [
+        "1",
+        "Contraargumento",
+        null,
+        "En conversación, prueba de Persuasión contra Espiritual de un personaje. Si la supera, el objetivo pierde 3 concentración."
+      ]
+    ],
+    "tactics": "Lucha con cautela, pero puede ir al peligro por una causa. En conversación se mantiene firme y usa Contraargumento y Rostro severo.",
+    "oyc": null
+  },
+  {
+    "name": "Fanático",
+    "role": "Secuaz de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "12 (9–14)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +3, Armamento pesado +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Intimidación +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +3, Supervivencia +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Exaltación",
+        "Las pruebas de Intimidación y Persuasión contra él sufren desventaja."
+      ],
+      [
+        "Enajenación",
+        "Con la mitad de salud o menos: no puede usar Prevenirse, pero +3 m de movimiento y ventaja en sus tiradas de daño."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada larga",
+        null,
+        "Ataque +4, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) laceración. Impacto 8 (1d8+4) laceración."
+      ],
+      [
+        "1",
+        "Prevenirse",
+        null,
+        "Alza el escudo: los ataques contra él sufren desventaja hasta el inicio de su siguiente turno."
+      ],
+      [
+        "1",
+        "Inspirar fanatismo",
+        "1 concentración",
+        "Inspira a un aliado a ≤6 m: puede usar Acometida como ↺ inmediatamente."
+      ]
+    ],
+    "tactics": "Lucha con exaltación, apiñándose con sus compañeros y atacando imprudentemente. Usa Inspirar fanatismo conforme se enfurecen.",
+    "oyc": null
+  },
+  {
+    "name": "Fanático en forma sombría",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "4"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "22 (17–27)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "4"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista); 12 m en la oscuridad"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Armamento ligero +6, Sigilo +7"
+      ],
+      [
+        "Hab. cognitivas",
+        "Intimidación +5"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4, Supervivencia +4"
+      ],
+      [
+        "Idiomas",
+        "canto del alba, iriali"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Incorporal",
+        "Los ataques contra su Defensa física sufren desventaja. Ignora terreno difícil y atraviesa huecos de ≥15 cm."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Garras sombrías",
+        null,
+        "Solo en zona oscura o tras Manifestarse este turno. Ataque +6, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) espiritual. Impacto 10 (1d8+6) espiritual."
+      ],
+      [
+        "1",
+        "Arrastre por las sombras",
+        "1 Investidura",
+        "Se transporta a una zona oscura a ≤9 m sin activar Acometidas reactivas. Puede llevar a un personaje a ≤1,5 m (si es reticente, Agilidad contra su Física)."
+      ],
+      [
+        "1",
+        "Canto de duelo",
+        "1 Investidura",
+        "Prueba de Intimidación contra Espiritual de un objetivo a ≤9 m. Si la supera, queda Agotado [−1]."
+      ],
+      [
+        "0",
+        "Manifestarse",
+        null,
+        "Se fusiona en forma sólida hasta el inicio de su siguiente turno: pierde Incorporal pero puede Acometer en zonas iluminadas."
+      ]
+    ],
+    "tactics": "Mueve a sus oponentes a sombras con Arrastre por las sombras y los ataca con Garras sombrías. Desgasta amenazas con Canto de duelo.",
+    "oyc": null
+  },
+  {
+    "name": "Guardia",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "1"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "24 (19–29)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (cota de malla)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Armamento pesado +5, Atletismo +5"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4, Intimidación +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Perspicacia +4"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "¡A las armas!",
+        "Tras detectar a un enemigo (o que falle Sigilo) a ≤18 m, este guardia y los guardias aliados que lo sientan quedan Concentrados hasta el final de la escena."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Lanza larga",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) laceración. Impacto 9 (1d8+5); gasta 1 concentración para dejarlo Tumbado."
+      ],
+      [
+        "2",
+        "Debilitar",
+        "2 concentración",
+        "Ataque +5, cercanía 1,5 m, un objetivo Tumbado. Rasguño 9 (2d8) golpe. Impacto 14 (2d8+5) golpe."
+      ],
+      [
+        "0",
+        "Coordinación",
+        "1 concentración",
+        "Tras impactar, elige un aliado al que pueda influir: puede Destrabarse inmediatamente (no requiere acción)."
+      ]
+    ],
+    "tactics": "Derriba con la Lanza larga y usa Debilitar para gran daño. Con aliados, usa Coordinación para someter rápido.",
+    "oyc": null
+  },
+  {
+    "name": "Kaiana",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "pre",
+          "3"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "34 (28–40)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "5"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Armamento ligero +5"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4, Medicina +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +4, Perspicacia +5, Percepción +5"
+      ],
+      [
+        "Potencias",
+        "Iluminación +4 (1 grado), Progresión +5 (2 grados)"
+      ],
+      [
+        "Idiomas",
+        "alezi, reshi"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Aliada apasionada",
+        "(1 concentración) Tras usar Obtener ventaja con éxito, un aliado a ≤18 m gana ventaja en su siguiente prueba contra el objetivo de Kaiana."
+      ],
+      [
+        "Huida rápida",
+        "Una vez por escena, usa Destello desorientador como 0 y obtiene 2▶ solo para Interactuar, Destrabarse y Moverse."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Cuchillo",
+        null,
+        "Ataque +5, cercanía 1,5 m o alcance 6/18 m. Rasguño 1 (1d4) laceración. Impacto 7 (1d4+5); gasta 1 concentración para dejarlo Ralentizado."
+      ],
+      [
+        "1",
+        "Ilusión distractiva",
+        "1 Investidura",
+        "Crea un duplicado ilusorio de sí misma o un aliado a ≤9 m: los ataques contra él sufren desventaja y no pueden rasguñar. Termina si un ataque falla o al final de la escena."
+      ],
+      [
+        "2",
+        "Destello desorientador",
+        "1 Investidura",
+        "Prueba de Iluminación contra Cognitiva de los personajes a ≤1,5 m: los superados quedan Desorientados hasta el final de su siguiente turno."
+      ],
+      [
+        "2",
+        "Regeneración",
+        "1 Investidura",
+        "Restablece 8 (1d6+5) de salud a sí misma o a alguien que toque."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 4 (1d6+1) de salud, incluso Inconsciente."
+      ],
+      [
+        "R",
+        "Crecimiento espontáneo",
+        "1 Investidura",
+        "Antes de que ella o un aliado a ≤6 m sufra un impacto cuerpo a cuerpo, Progresión contra Física del atacante: si la supera, este queda Inmovilizado y sin Acometidas reactivas hasta el final de su siguiente turno."
+      ]
+    ],
+    "tactics": "Apoya con la Progresión: Crecimiento espontáneo disuade atacantes y Regeneración cura. Ilusión distractiva protege a los heridos.",
+    "oyc": null
+  },
+  {
+    "name": "Khornak",
+    "role": "Rival de rango 1 · Animal Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "26 (20–32)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m · nadar 9 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +5, Sigilo +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +3, Supervivencia +4"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Emboscada aterradora",
+        "Al inicio de cada escena, los enemigos que lo sientan superan Disciplina CD 14 o no pueden jugar turno rápido esa ronda salvo que gasten 2 concentración."
+      ],
+      [
+        "Depredador implacable",
+        "Al impactar a un enemigo que aún no ha actuado esta ronda, +1d8 de daño."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Mandíbula aplastante",
+        null,
+        "Ataque +5, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) golpe. Impacto 9 (1d8+5) y el objetivo queda Retenido. Gasta 1 concentración para dejarlo Afligido [1d4 vital]. Con 2▶, escapa con Agilidad/Atletismo CD 16. Si el khornak sufre ≥20 de daño en un turno, el objetivo escapa."
+      ],
+      [
+        "1",
+        "Coletazo",
+        null,
+        "Ataque +5, cercanía 1,5 m. Gasta hasta 2 concentración para afectar a ese número de objetivos extra. Rasguño 3 (1d6) golpe. Impacto 8 (1d6+5) y supera Atletismo CD 15 o queda Tumbado."
+      ],
+      [
+        "1",
+        "Arrastrar",
+        null,
+        "Se mueve hasta 4,5 m arrastrando a un enemigo que tiene Retenido."
+      ]
+    ],
+    "tactics": "Atrapa a su presa con Mandíbula aplastante (reforzada por Emboscada aterradora), repele con Coletazo y la Arrastra al agua.",
+    "oyc": null
+  },
+  {
+    "name": "Ladrón",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "20 (16–24)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "1 (cuero)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Armamento ligero +5, Hurto +5, Sigilo +5"
+      ],
+      [
+        "Hab. espirituales",
+        "Engaño +3, Percepción +4, Persuasión +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Manos rápidas",
+        "Cuando un personaje provoca su Acometida reactiva, puede usar Hurtar como ↺ en su lugar (sin gastar concentración)."
+      ],
+      [
+        "Desaparecer",
+        "Al final de su turno, a cubierto u ofuscado, prueba de Sigilo con ventaja contra Espiritual de los enemigos: los superados pierden su rastro hasta que ataque o se exponga."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Daga",
+        null,
+        "Ataque +5, cercanía 1,5 m o alcance 6/18 m. Rasguño 2 (1d4) laceración. Impacto 7 (1d4+5); si el objetivo está Desorientado, +2 (1d4) laceración."
+      ],
+      [
+        "1",
+        "Desorientar",
+        "1 concentración",
+        "Arroja arena o harina: los enemigos a ≤3 m superan Agilidad CD 13 o quedan Desorientados hasta el final de su siguiente turno."
+      ],
+      [
+        "2",
+        "Hurtar",
+        "2 concentración",
+        "Hurto enfrentado a la Percepción de un humanoide a ≤1,5 m (desventaja si está Desorientado). Si la supera, roba hasta 50 marcos o un objeto que no esté empuñando/vistiendo."
+      ],
+      [
+        "R",
+        "Resbaladizo",
+        null,
+        "Tras un enemigo Moverse a ≤1,5 m, usa Destrabarse como ↺. Si termina a cubierto u ofuscado, esos enemigos sufren desventaja contra él hasta el final de su siguiente turno."
+      ]
+    ],
+    "tactics": "Inicia con Desorientar y sigue con Hurtar o con la Daga (más letal contra Desorientados). Si le acorralan, huye con Resbaladizo.",
+    "oyc": null
+  },
+  {
+    "name": "Maestro lancero",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "38 (30–46)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "1 (cuero)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Atletismo +4, Armamento ligero +4, Armamento pesado +6"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4, Intimidación +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +3"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Floritura defensiva",
+        "Puede blandir su lanza larga a la defensiva y usar Prevenirse como si tuviera escudo."
+      ],
+      [
+        "Sin piedad",
+        "Obtiene una ventaja adicional en los ataques contra objetivos Tumbados."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Lanza larga",
+        null,
+        "Ataque +6, cercanía 3 m, un objetivo. Rasguño 4 (1d8) laceración. Impacto 10 (1d8+6); gasta 1 concentración para dejarlo Tumbado."
+      ],
+      [
+        "1",
+        "Patada",
+        null,
+        "Ataque +4, cercanía 1,5 m, un objetivo. Rasguño 2 (1d4) golpe. Impacto 6 (1d4+4); si es Mediano o menor, gasta 1 concentración para empujarlo 1,5 m."
+      ],
+      [
+        "2",
+        "Atravesar",
+        "1 concentración",
+        "Ataque +6, cercanía 3 m, hasta dos objetivos a ≤1,5 m entre sí. Rasguño 4 (1d8) laceración. Impacto 10 (1d8+6) laceración."
+      ]
+    ],
+    "tactics": "Juega turnos lentos para múltiples ataques. Deja Tumbados con la Lanza larga y aprovecha Sin piedad. Aleja con Patada y prepara Atravesar.",
+    "oyc": null
+  },
+  {
+    "name": "Lancero",
+    "role": "Secuaz de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "14 (11–17)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ],
+      [
+        "Desvío",
+        "2 (malla)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +4, Armamento ligero +3, Armamento pesado +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +2, Intimidación +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Adiestramiento marcial",
+        "Al inicio de la escena, con escudo y sin estar Sorprendido, obtiene Prevenirse hasta su primer turno."
+      ],
+      [
+        "Tácticas militares",
+        "Una vez por ronda, gasta 1 concentración extra para usar Ayudar o Acometida reactiva sin usar su ↺."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Lanza corta",
+        null,
+        "Ataque +3, cercanía 1,5 m, un objetivo. Rasguño 4 (1d8) laceración. Impacto 7 (1d8+3); si está Tumbado, +4 (1d8) laceración."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +3, alcance 24/96 m, un objetivo. Rasguño 3 (1d6) laceración. Impacto 6 (1d6+3) laceración."
+      ],
+      [
+        "1",
+        "Golpe con escudo",
+        null,
+        "Prueba de Atletismo contra Física del objetivo; si la supera, queda Tumbado."
+      ]
+    ],
+    "tactics": "Derriba con Golpe con escudo y ataca con la Lanza corta. Usa Tácticas militares para frenar a quien huye o reforzar a sus compañeros.",
+    "oyc": null
+  },
+  {
+    "name": "Lilinum, la Devastadora",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "vel",
+          "4"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "6"
+        ],
+        [
+          "def",
+          "19"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "4"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "41 (34–48)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "6"
+      ],
+      [
+        "Desvío",
+        "2 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +7, Atletismo +5, Armamento ligero +7"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +7, Intimidación +7"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +6, Supervivencia +6"
+      ],
+      [
+        "Potencias",
+        "División +9 (3 grados)"
+      ],
+      [
+        "Idiomas",
+        "alezi, canto del alba, iriali"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Agresión instintiva",
+        "No gasta concentración para usar Acometidas reactivas."
+      ],
+      [
+        "Mortaja de polvo",
+        "Los ataques o pruebas a distancia (≥7,5 m) basados en vista u olfato contra ella sufren desventaja."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Garras",
+        null,
+        "Ataque +7, cercanía 1,5 m. Rasguño 2 (1d4) laceración. Impacto 9 (1d4+7) laceración y 3 (1d6) espiritual."
+      ],
+      [
+        "1",
+        "Acometida: Hoja esquirlada",
+        null,
+        "Ataque +7, cercanía 1,5 m. Rasguño 8 (2d8) espiritual. Impacto 15 (2d8+7) espiritual."
+      ],
+      [
+        "2",
+        "Toque devastador",
+        null,
+        "Ataque +9, cercanía 1,5 m. Rasguño 10 (3d6) espiritual. Impacto 19 (3d6+9) espiritual."
+      ],
+      [
+        "2",
+        "Potencia de División",
+        "2 Investidura",
+        "Destruye un objeto Grande (3 m) a ≤9 m que nadie sostenga. Efectos variados (polvo, brecha, desprendimiento, explosión). Los afectados superan Agilidad/Atletismo CD 15 o sufren 13 (3d8) o un efecto apropiado."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 5 (1d6+2) de salud, incluso Inconsciente."
+      ],
+      [
+        "R",
+        "Descomponer arma",
+        null,
+        "Tras un impacto o rasguño de un arma no Investida, la convierte en polvo."
+      ]
+    ],
+    "tactics": "Lucha con temeridad juguetona. Usa la Hoja esquirlada y luego Toque devastador o Garras. Derrumba construcciones con Potencia de División.",
+    "oyc": [
+      [
+        "Oportunidad",
+        "Desactivar Mortaja de polvo e impedir Potencia de División y Revitalizar hasta el final de su siguiente turno."
+      ],
+      [
+        "Complicación",
+        "La DJ gasta C para que Lilinum use Garras o Hoja esquirlada como ↺, con ventaja en esa prueba."
+      ]
+    ]
+  },
+  {
+    "name": "Agente de los Ojos de Pala",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "25 (20–30)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Armamento ligero +4, Atletismo +4, Sigilo +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Perspicacia +5"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada lateral",
+        null,
+        "Ataque +4, cercanía 1,5 m. Rasguño 3 (1d6) laceración. Impacto 7 (1d6+4); si está Tumbado, pierde 1 concentración."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +4, alcance 24/96 m. Rasguño 3 (1d6) laceración. Impacto 7 (1d6+4); gasta 1 concentración para dejarlo Tumbado."
+      ],
+      [
+        "0",
+        "Defensa perspicaz",
+        null,
+        "Perspicacia contra Espiritual de un personaje a ≤18 m. Si la supera, no puede obtener ventajas en ataques contra el agente durante 1 minuto o hasta usarla en otro."
+      ],
+      [
+        "R",
+        "Aprovechar la brecha",
+        null,
+        "Tras un enemigo a ≤1,5 m rasguñarle, hace una Acometida reactiva contra él (no requiere acción)."
+      ],
+      [
+        "R",
+        "Huida rápida",
+        null,
+        "Tras un aliado a ≤1,5 m impactar a un objetivo cuerpo a cuerpo, se mueve hasta la mitad de su movimiento sin activar Acometidas reactivas."
+      ]
+    ],
+    "tactics": "Usa su intuición: identifica la mayor amenaza y usa Defensa perspicaz. Los agentes de arco y de espada se coordinan para derribar y reducir concentración.",
+    "oyc": null
+  },
+  {
+    "name": "Vigía de los Ojos de Pala",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "4"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "42 (34–50)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (oído)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +4, Armamento ligero +5, Armamento pesado +4, Sigilo +6"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +6, Intimidación +5"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +7, Perspicacia +7"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada larga",
+        null,
+        "Ataque +5, cercanía 1,5 m. Rasguño 4 (1d8) laceración. Impacto 11 (1d8+7) y el objetivo queda Ralentizado hasta el final del siguiente turno del vigía."
+      ],
+      [
+        "2",
+        "Abanico de hojas",
+        "2 concentración",
+        "Ataque +5, cercanía 1,5 m, uno o más objetivos. Rasguño 4 (1d8) laceración. Impacto 9 (1d8+5) y queda Afligido [1d8 vital] hasta recuperar 1 de salud."
+      ],
+      [
+        "0",
+        "Defensa perspicaz",
+        null,
+        "Perspicacia contra Espiritual de un personaje a ≤18 m. Si la supera, no puede obtener ventajas en ataques contra el vigía durante 1 minuto o hasta usarla en otro."
+      ],
+      [
+        "R",
+        "Huida oportunista",
+        null,
+        "Tras un enemigo a ≤1,5 m rasguñarle, hace una Acometida contra él y se mueve hasta la mitad de su movimiento sin activar Acometidas reactivas."
+      ]
+    ],
+    "tactics": "Usa Defensa perspicaz para obtener ventaja, luego Huida oportunista para retirarse tras un paso en falso y golpear a varios con Abanico de hojas.",
+    "oyc": null
+  },
+  {
+    "name": "Plebeyo",
+    "role": "Secuaz de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "4"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "10 (8–12)"
+      ],
+      [
+        "Concentración",
+        "2"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Atletismo +1"
+      ],
+      [
+        "Hab. cognitivas",
+        "Manufactura +2"
+      ],
+      [
+        "Hab. espirituales",
+        "Perspicacia +2, Percepción +2"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ],
+      [
+        "Competencia",
+        "Tiene experiencia en una profesión y obtiene ventaja en pruebas relacionadas con ella."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Arma improvisada",
+        null,
+        "Ataque +1, cercanía 1,5 m. Con una Complicación se rompe. Rasguño 2 (1d4) golpe. Impacto 3 (1d4+1) golpe."
+      ],
+      [
+        "R",
+        "Distraer",
+        "1 concentración",
+        "Cuando un aliado hace una prueba contra un enemigo en su cercanía, el plebeyo le da ventaja."
+      ]
+    ],
+    "tactics": "Generalmente huye y busca seguridad salvo que sus seres queridos peligren. Si lucha, recurre a un Arma improvisada o Distraer.",
+    "oyc": null
+  },
+  {
+    "name": "Portador de esquirlada duelista",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "17"
+        ],
+        [
+          "vel",
+          "4"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "pre",
+          "4"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "40 (31–49)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +6, Armamento ligero +7, Armamento pesado +6"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4, Intimidación +5"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +6, Perspicacia +4, Persuasión +6"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Liderazgo inspirador",
+        "Tras usar Obtener ventaja con éxito, un aliado al que pueda influir gana ventaja en su siguiente prueba contra el objetivo del duelista."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Hoja esquirlada",
+        null,
+        "Ataque +6, cercanía 1,5 m. Rasguño 9 (2d8) espiritual. Impacto 22 (2d8+6) espiritual."
+      ],
+      [
+        "1",
+        "Cambio de posición",
+        "1 concentración",
+        "Adopta Posición de fuego (1 enemigo cerca, ningún aliado: 0 para obtener 1▶ de ataque/Obtener ventaja) o de viento (2+ enemigos cerca: 0 para 1▶ de Destrabarse/ataque)."
+      ],
+      [
+        "1",
+        "Finta",
+        "1 concentración",
+        "Armamento pesado contra Cognitiva de un objetivo a ≤1,5 m. Si la supera, pierde ↺ y 1d4 concentración (si falla, 1). Con O, usa Cambio de posición como 0."
+      ],
+      [
+        "1",
+        "Perspicacia brutal",
+        null,
+        "Perspicacia enfrentada a Disciplina del objetivo. Si la supera, pierde 1▶ al inicio de su siguiente turno (o desventaja en su siguiente contribución)."
+      ],
+      [
+        "R",
+        "Reposicionarse",
+        "1 concentración",
+        "Antes de ser desplazado contra su voluntad, ignora ese efecto y usa Destrabarse como 0."
+      ]
+    ],
+    "tactics": "Interrumpe con Finta y usa su movilidad para adoptar posición de fuego o viento. Su Perspicacia brutal amenaza los planes del oponente.",
+    "oyc": null
+  },
+  {
+    "name": "Portador del Polvo (2º Ideal)",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "40 (30–50)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "5"
+      ],
+      [
+        "Desvío",
+        "2 (malla)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "12 m (9 m con Investidura 0)"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +6, Armamento ligero +6, Sigilo +6"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +4, Intimidación +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +3, Percepción +5"
+      ],
+      [
+        "Potencias",
+        "Abrasión +5 (2 grados), División +6 (3 grados)"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada",
+        null,
+        "Ataque +6, cercanía 1,5 m. Rasguño 3 (1d6) laceración. Impacto 9 (1d6+6); gasta 1 concentración para usar Destrabarse como 0."
+      ],
+      [
+        "1",
+        "Acometida: Arco corto",
+        null,
+        "Ataque +6, alcance 24/96 m. Rasguño 3 (1d6) laceración. Impacto 9 (1d6+6) laceración."
+      ],
+      [
+        "1",
+        "Putridez ineludible",
+        "1 Investidura",
+        "Ataque +6 contra espiritual, cercanía 1,5 m. Rasguño 13 (3d8) espiritual. Impacto 19 (3d8+6) y el objetivo supera Agilidad CD 14 o su armadura pierde 1 de desvío permanente (reparable en reposo)."
+      ],
+      [
+        "3",
+        "Explosión ardiente",
+        "2 Investidura",
+        "4 (1d8) energía a todos a ≤3 m y prende objetos. Puede gastar 1+ concentración para que los enemigos a ≤9 m superen Agilidad CD 14 o pierdan 1▶ su siguiente turno."
+      ],
+      [
+        "1",
+        "Fuga erosionada",
+        "1 Investidura",
+        "A sí mismo o un aliado en su cercanía: elimina Inmovilizado, Retenido o una desventaja física."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 5 (1d6+2) de salud, incluso Inconsciente."
+      ],
+      [
+        "0",
+        "Patinar",
+        "2 concentración",
+        "Se mueve en línea recta hasta su valor de movimiento."
+      ]
+    ],
+    "tactics": "Se abre paso destructivo en cuerpo a cuerpo: Patinar para acercarse, Espada y destrabarse. Explosión ardiente contra grupos, Putridez contra los corpulentos.",
+    "oyc": null
+  },
+  {
+    "name": "Profundo",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "3"
+        ],
+        [
+          "def",
+          "18"
+        ],
+        [
+          "vel",
+          "5"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "17"
+        ],
+        [
+          "vol",
+          "6"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "4"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "45 (39–51)"
+      ],
+      [
+        "Concentración",
+        "8"
+      ],
+      [
+        "Investidura",
+        "6"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "12 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista; oído sumergido)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +7, Armamento ligero +8, Sigilo +7"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +9"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +7, Perspicacia +6, Supervivencia +6"
+      ],
+      [
+        "Potencias",
+        "Cohesión +9 (3 grados)"
+      ],
+      [
+        "Idiomas",
+        "canto del alba"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Tonos puros",
+        "Ignora Desorientado mientras está sobre piedra sólida o sumergido en ella."
+      ],
+      [
+        "Nadar por la piedra",
+        "Se mueve por superficies sólidas como por el suelo, ignorando terreno difícil. Sumergido, gasta 1 concentración por cada acción que no sea Moverse o Revitalizar. No funciona en madera."
+      ],
+      [
+        "Forma fundida",
+        "(1 concentración) Antes de sufrir daño por golpe o laceración no de madera, sube su desvío a 6 contra ese daño."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Uñas de caparazón",
+        null,
+        "Ataque +8, cercanía 1,5 m. Rasguño 7 (2d6) laceración. Impacto 15 (2d6+8) laceración."
+      ],
+      [
+        "1",
+        "Acometida: Derribo",
+        null,
+        "Ataque +8, cercanía 1,5 m. Rasguño 3 (1d6) golpe. Impacto 11 (1d6+8) y deja Tumbado al objetivo."
+      ],
+      [
+        "2",
+        "Aferrar",
+        null,
+        "Estrangula a un objetivo a ≤1,5 m: supera Agilidad CD 17 o queda Retenido. Si además está Tumbado, se asfixia: Afligido [2d10 vital]. Escapa con Agilidad CD 17 (2▶) o si el Profundo sufre ≥20 de daño en un turno."
+      ],
+      [
+        "1",
+        "Potencia de Cohesión",
+        "1 Investidura",
+        "Moldea un objeto/zona de piedra o tierra Grande (3 m) a ≤9 m. Efectos: cobertura, terreno difícil o Retenido. Se evita con Agilidad/Atletismo CD 15."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 5 (1d6+2) de salud, incluso Inconsciente."
+      ],
+      [
+        "R",
+        "Atrapar",
+        null,
+        "Cuando un enemigo provoca su Acometida reactiva estando sumergido, usa Aferrar como ↺."
+      ]
+    ],
+    "tactics": "Se mueve por superficies sólidas y golpea protegido. Remodela el campo con Cohesión, obstaculiza con Atrapar y asfixia con Aferrar (mejor si ya lo tumbó con Derribo).",
+    "oyc": [
+      [
+        "Oportunidad",
+        "Impedir Potencia de Cohesión y Revitalizar hasta el final de su siguiente turno; si está sumergido, emerge."
+      ],
+      [
+        "Complicación",
+        "La DJ gasta C para que, hasta su próximo turno, esté Concentrado y no necesite gastar Investidura en sus rasgos/acciones."
+      ]
+    ]
+  },
+  {
+    "name": "Regio en forma funesta",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "5"
+        ],
+        [
+          "def",
+          "18"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "42 (33–51)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "5"
+      ],
+      [
+        "Desvío",
+        "4 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +5, Armamento ligero +6, Armamento pesado +8, Atletismo +8"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +6, Intimidación +6"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Experiencia marcial",
+        "Puede usar Acometida dos veces en su turno."
+      ],
+      [
+        "Vigilancia marcial",
+        "Le cuesta 1 concentración menos resistir la influencia de un enemigo."
+      ],
+      [
+        "Caparazón con púas",
+        "Puede usar Prevenirse. Mientras se beneficia, la primera vez por turno que sufre impacto/rasguño cuerpo a cuerpo o un Agarrar/Empujar exitoso, ese enemigo sufre 3 (1d6) laceración."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Martillo",
+        null,
+        "Ataque +8, cercanía 1,5 m. Ventaja si se movió ≥3 m en línea recta hacia el objetivo. Rasguño 5 (1d10) golpe. Impacto 13 (1d10+8) golpe."
+      ],
+      [
+        "1",
+        "Acometida: Arco largo",
+        null,
+        "Ataque +8, alcance 45/180 m. Rasguño 3 (1d6) laceración. Impacto 11 (1d6+8) laceración."
+      ],
+      [
+        "1",
+        "Mejora investida",
+        "1 Investidura",
+        "Mejorado [Fuerza +1] y [Velocidad +1] hasta el final de su siguiente turno (+1 a habilidades físicas, ataques y daño). Puede gastar 1 Investidura al final de sus turnos para mantenerlo."
+      ],
+      [
+        "R",
+        "Firmeza",
+        "1 concentración",
+        "Si alguien intenta desplazarlo o dejarlo Tumbado, lo ignora."
+      ],
+      [
+        "R",
+        "Placaje",
+        null,
+        "Cuando un enemigo provoca su Acometida reactiva, puede Agarrarlo como ↺ (gastando concentración igual). Si tiene éxito, el enemigo sufre 3 (1d6) laceración de las púas."
+      ]
+    ],
+    "tactics": "Acribilla con el Arco largo hasta que se acercan; entonces usa Mejora investida y golpea con el Martillo, aprovechando Prevenirse. Impide huidas con Placaje.",
+    "oyc": null
+  },
+  {
+    "name": "Regio en forma tormenta",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "vel",
+          "4"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "vol",
+          "4"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "1"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "pre",
+          "3"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "40 (30–50)"
+      ],
+      [
+        "Concentración",
+        "6"
+      ],
+      [
+        "Investidura",
+        "5"
+      ],
+      [
+        "Desvío",
+        "1 (caparazón)"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +7, Armamento ligero +6, Atletismo +5"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +6, Intimidación +7"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Debilidad ante el agua",
+        "Mientras está empapado, no puede usar Lanzar relámpago ni Carga eléctrica."
+      ],
+      [
+        "Caparazón punzante",
+        "Mientras está Retenido (Agarrar o similar), quien lo limita queda Afligido [1d8 laceración]."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Lanza corta",
+        null,
+        "Ataque +6, cercanía 1,5 m. Rasguño 4 (1d8) laceración. Impacto 10 (1d8+6) laceración."
+      ],
+      [
+        "2",
+        "Lanzar relámpago",
+        "1 Investidura",
+        "Ataque +7, alcance 18 m. Desventaja salvo que gaste 1 concentración para ignorarla. Rasguño 8 (2d8) energía. Impacto 15 (2d8+7) energía."
+      ],
+      [
+        "1",
+        "Salto de tormenta",
+        "1 Investidura",
+        "Salta hasta 18 m. Si aterriza a ≤1,5 m de un enemigo, usa Obtener ventaja como 0."
+      ],
+      [
+        "0",
+        "Carga eléctrica",
+        null,
+        "Tras Moverse, se carga hasta el inicio de su siguiente turno: inmune al daño por energía y, cuando le impacta un enemigo a ≤1,5 m, este sufre 4 (1d8) de energía."
+      ]
+    ],
+    "tactics": "Acorta distancias y se defiende. Usa Salto de tormenta sobre un enemigo débil para incitarlo a sufrir Carga eléctrica, y alterna Lanza corta y Lanzar relámpago.",
+    "oyc": null
+  },
+  {
+    "name": "Rompedor del Cielo (2º Ideal)",
+    "role": "Rival de rango 2 · Humanoide Mediano",
+    "rango": "2",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "4"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "40 (30–50)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "6"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +6, Armamento ligero +6, Armamento pesado +5"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +5, Disciplina +6, Intimidación +6, Saber +4"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +6, Perspicacia +7"
+      ],
+      [
+        "Potencias",
+        "Gravitación +6 (2 grados)"
+      ],
+      [
+        "Idiomas",
+        "según la cultura"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Búsqueda de la verdad",
+        "Ventaja en pruebas de Deducción y Perspicacia para determinar la verdad."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada",
+        null,
+        "Ataque +6, cercanía 1,5 m. Rasguño 3 (1d6) laceración. Impacto 9 (1d6+6) laceración."
+      ],
+      [
+        "1",
+        "Disparo con Enlace",
+        "1 Investidura",
+        "Ataque +6, alcance 9 m. Lanza un objeto desatendido Mediano o menor. Rasguño 9 (2d8) golpe/laceración. Impacto 15 (2d8+6)."
+      ],
+      [
+        "1",
+        "Gravitación ofensiva",
+        "1 Investidura",
+        "Gravitación contra Física de un objetivo en su cercanía. Si la supera, lo desplaza hasta 7,5 m y lo deja Retenido. Si golpea algo, 9 (2d8) golpe."
+      ],
+      [
+        "1",
+        "Soporte gravitacional",
+        "1 Investidura",
+        "Obtiene vuelo 7,5 m hasta su siguiente turno (mantenible con 1 Investidura), o se lo da a un aliado."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 5 (1d6+2) de salud, incluso Inconsciente."
+      ],
+      [
+        "R",
+        "Amenaza",
+        null,
+        "Tras sufrir un ataque, Intimidación contra Cognitiva del atacante. Si la supera, pierde 1 concentración."
+      ]
+    ],
+    "tactics": "Combatiente aéreo: inicia con Soporte gravitacional, luego Gravitación ofensiva y Disparo con Enlace. Prioriza a quienes considera delincuentes.",
+    "oyc": null
+  },
+  {
+    "name": "Sabueso-hacha",
+    "role": "Secuaz de rango 1 · Animal Pequeño",
+    "rango": "1",
+    "rol": "Secuaz",
+    "tipo": "Animal",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "0"
+        ],
+        [
+          "def",
+          "10"
+        ],
+        [
+          "vol",
+          "0"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "0"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "12 (9–15)"
+      ],
+      [
+        "Concentración",
+        "2"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "12 m"
+      ],
+      [
+        "Sentidos",
+        "12 m (olfato)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +4, Atletismo +4, Sigilo +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Supervivencia +4"
+      ],
+      [
+        "Idiomas",
+        "ninguno"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Sentidos mejorados",
+        "Ventaja en pruebas basadas en el olfato que no son ataques."
+      ],
+      [
+        "Secuaz",
+        "Derrotado de inmediato al sufrir una lesión; sus ataques no provocan impactos críticos."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Mordisco",
+        null,
+        "Ataque +4, cercanía 1,5 m. Rasguño 2 (1d4) laceración. Impacto 6 (1d4+4); si es Mediano o menor, gasta 1 concentración para dejarlo Tumbado y arrastrarlo hasta 3 m."
+      ],
+      [
+        "0",
+        "Instintos de manada",
+        null,
+        "Mientras está a ≤1,5 m de un aliado, usa Obtener ventaja como 0."
+      ],
+      [
+        "R",
+        "A la caza",
+        null,
+        "Tras un enemigo a ≤9 m caer Tumbado, se mueve hasta 4,5 m hacia él."
+      ]
+    ],
+    "tactics": "Caza en manada: derriba a la presa con el Mordisco (con Instintos de manada) para que otros la rematen con A la caza.",
+    "oyc": null
+  },
+  {
+    "name": "Taszo-hijo-Clutio",
+    "role": "Rival de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Rival",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "0"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "vol",
+          "2"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "2"
+        ],
+        [
+          "def",
+          "13"
+        ],
+        [
+          "pre",
+          "1"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "17 (14–20)"
+      ],
+      [
+        "Concentración",
+        "4"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "3 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Agilidad +3, Armamento ligero +3"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +2, Disciplina +4, Saber +2"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +4, Perspicacia +4, Persuasión +3"
+      ],
+      [
+        "Idiomas",
+        "alezi, shin"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Determinado",
+        "Tras gastar concentración para resistir la influencia de un personaje, este pierde 1 concentración."
+      ],
+      [
+        "Brazo roto",
+        "Solo puede usar una mano."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada lateral",
+        null,
+        "Ataque +3, cercanía 1,5 m. Rasguño 3 (1d6) laceración. Impacto 8 (1d6+3) laceración."
+      ],
+      [
+        "R",
+        "Amistad en apuros",
+        "1 concentración",
+        "Cuando un aliado a ≤1,5 m falla una prueba, Taszo añade una Oportunidad al resultado."
+      ]
+    ],
+    "tactics": "Trata de ayudar pese a su brazo roto. Asiste a quien se ve más amenazado, gastando concentración en Amistad en apuros.",
+    "oyc": null
+  },
+  {
+    "name": "Veth",
+    "role": "Jefe de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Jefe",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "14"
+        ],
+        [
+          "vel",
+          "2"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "1"
+        ],
+        [
+          "def",
+          "12"
+        ],
+        [
+          "vol",
+          "1"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "pre",
+          "2"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "40 (32–48)"
+      ],
+      [
+        "Concentración",
+        "3"
+      ],
+      [
+        "Investidura",
+        "0"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "7,5 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Armamento ligero +3, Atletismo +3, Sigilo +4"
+      ],
+      [
+        "Hab. cognitivas",
+        "Disciplina +3"
+      ],
+      [
+        "Hab. espirituales",
+        "Percepción +5, Perspicacia +5"
+      ],
+      [
+        "Idiomas",
+        "alezi, iriali"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Jefe",
+        "Juega un turno rápido y uno lento por ronda. Tras un enemigo acabar su turno, gasta 1 concentración para usar 1▶ o 0 adicional. En su turno, gasta 1 concentración para eliminar un estado."
+      ],
+      [
+        "Acometidas dirigidas",
+        "Con ventaja al atacar, ignora el desvío al infligir daño."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Espada lateral",
+        null,
+        "Ataque +3, cercanía 1,5 m. Rasguño 3 (1d6) laceración. Impacto 6 (1d6+3) laceración."
+      ],
+      [
+        "1",
+        "Aprovechar ventaja",
+        null,
+        "Se mueve hasta su movimiento. Si recorre ≥3 m y termina a ≤1,5 m de un enemigo no atacado esta ronda, sin activar Acometidas reactivas, Percepción contra Espiritual: si la supera, ventaja en su próximo ataque contra él."
+      ],
+      [
+        "0",
+        "Defensa perspicaz",
+        null,
+        "Perspicacia contra Espiritual de un personaje a ≤18 m. Si la supera, no puede obtener ventajas en ataques contra Veth durante 1 minuto o hasta usarla en otro."
+      ],
+      [
+        "R",
+        "Redirección intuitiva",
+        "1 concentración",
+        "Antes de que un ataque falle contra Veth, lo redirige a un objetivo a ≤1,5 m (no el atacante)."
+      ]
+    ],
+    "tactics": "Usa Defensa perspicaz contra la amenaza marcial más obvia. Gasta concentración para turnos extra y prioriza objetivos contra los que tiene ventaja (Acometidas dirigidas).",
+    "oyc": null
+  },
+  {
+    "name": "Ylt",
+    "role": "Jefe de rango 1 · Humanoide Mediano",
+    "rango": "1",
+    "rol": "Jefe",
+    "tipo": "Humanoide",
+    "attrs": {
+      "fis": [
+        [
+          "fue",
+          "2"
+        ],
+        [
+          "def",
+          "15"
+        ],
+        [
+          "vel",
+          "3"
+        ]
+      ],
+      "cog": [
+        [
+          "int",
+          "3"
+        ],
+        [
+          "def",
+          "16"
+        ],
+        [
+          "vol",
+          "3"
+        ]
+      ],
+      "esp": [
+        [
+          "dis",
+          "3"
+        ],
+        [
+          "def",
+          "17"
+        ],
+        [
+          "pre",
+          "4"
+        ]
+      ]
+    },
+    "vitals": [
+      [
+        "Salud",
+        "80 (66–94)"
+      ],
+      [
+        "Concentración",
+        "5"
+      ],
+      [
+        "Investidura",
+        "6"
+      ]
+    ],
+    "lines": [
+      [
+        "Movimiento",
+        "9 m"
+      ],
+      [
+        "Sentidos",
+        "6 m (vista)"
+      ],
+      [
+        "Hab. físicas",
+        "Armamento ligero +5"
+      ],
+      [
+        "Hab. cognitivas",
+        "Deducción +6, Disciplina +6"
+      ],
+      [
+        "Hab. espirituales",
+        "Liderazgo +6, Percepción +5, Perspicacia +5"
+      ],
+      [
+        "Potencias",
+        "Cohesión +6 (3), Iluminación +6 (2), Progresión +5 (2), Tensión +5 (3)"
+      ],
+      [
+        "Idiomas",
+        "alezi, iriali"
+      ]
+    ],
+    "rasgos": [
+      [
+        "Jefe",
+        "Juega un turno rápido y uno lento por ronda. Tras un enemigo acabar su turno, gasta 1 concentración para usar 1▶ o 0 adicional. En su turno, gasta 1 concentración para eliminar un estado."
+      ],
+      [
+        "Tierra fluida",
+        "Tras usar Cohesión, usa Piedra de salto sobre sí mismo de inmediato (sin acción ni Investidura), pero sin la ventaja al ataque."
+      ],
+      [
+        "Hoja de Honor de Taln",
+        "Si pierde el arma, la invoca como 1▶ y reaparece a su siguiente turno rápido. Sin ella no puede usar Cohesión ni Tensión."
+      ]
+    ],
+    "acciones": [
+      [
+        "1",
+        "Acometida: Hoja de Honor",
+        null,
+        "Ataque +5, cercanía 1,5 m. Rasguño 11 (2d10) espiritual. Impacto 16 (2d10+5) espiritual."
+      ],
+      [
+        "2",
+        "Lanza de piedra",
+        "1 Investidura",
+        "Ataque de Cohesión +6, alcance 18 m. Rasguño 9 (2d8) golpe. Impacto 15 (2d8+6); con O, deja Tumbado."
+      ],
+      [
+        "1",
+        "Floritura ilusoria",
+        "1 Investidura",
+        "A un enemigo impactado cuerpo a cuerpo desde su último turno: Iluminación contra Espiritual. Si la supera, queda Desorientado hasta el final de su siguiente turno."
+      ],
+      [
+        "1",
+        "Visión repulsiva",
+        "1 Investidura",
+        "Se rodea de luz dorada y recupera 1d4 concentración."
+      ],
+      [
+        "1",
+        "Piedra de salto",
+        "1 Investidura",
+        "Crea un pilar que lo impulsa a él o a un aliado a ≤4,5 m: aterriza a ≤4,5 m sin Acometidas reactivas; si su siguiente acción es un ataque cuerpo a cuerpo, obtiene ventaja."
+      ],
+      [
+        "2",
+        "Regeneración",
+        "1 Investidura",
+        "Restablece 1d6+5 de salud a sí mismo o a alguien que toque."
+      ],
+      [
+        "0",
+        "Revitalizar",
+        "1 Investidura",
+        "Recupera 4 (1d6+1) de salud, incluso Inconsciente."
+      ],
+      [
+        "R",
+        "Parada de tensión",
+        "1 Investidura",
+        "Antes de sufrir un impacto/rasguño contra su Física, infunde Tensión: +2 a Física hasta su siguiente turno (puede convertir el impacto en fallo)."
+      ],
+      [
+        "1",
+        "Acometida con mano secundaria (3er Ideal)",
+        "1 Investidura",
+        "Tras jurar el Tercer Ideal (cap. 7): ataque +5, cercanía 1,5 m. Rasguño 11 (2d10) espiritual. Impacto 16 (2d10+5) espiritual. Empoderado: ventaja en todo y recarga Investidura al máximo."
+      ]
+    ],
+    "tactics": "Usa Floritura ilusoria, Piedra de salto y Parada de Tensión para mantenerse a salvo. Ataca con la Hoja de Honor y se cura con Regeneración (pero no a sus aliados).",
+    "oyc": [
+      [
+        "Oportunidad",
+        "Gastar O para que Ylt consuma luz tormentosa demasiado rápido: hasta su siguiente turno, dobla el coste de Investidura de Tensión y Cohesión."
+      ],
+      [
+        "Complicación",
+        "La DJ gasta C para destruir, con la Hoja de Honor, un arma no especial que le ataque cuerpo a cuerpo."
+      ]
+    ]
+  }
+]

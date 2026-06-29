@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "talents.schema.json",
+  "title": "Talentos (cartas de talento de los caminos heroicos y radiantes)",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["path", "spec", "name", "act", "mec"],
+    "properties": {
+      "path":   { "type": "string", "minLength": 1, "description": "ID del camino, p.ej. 'agente', 'corredor'." },
+      "spec":   { "type": "string", "minLength": 1, "description": "Especialización o subcamino." },
+      "name":   { "type": "string", "minLength": 1 },
+      "act":    { "type": ["string", "number", "null"], "description": "Coste de acción: 1, 2, 3, 0, R, *, 8 o null." },
+      "inv":    { "type": ["string", "number", "null"], "description": "Coste de Investidura." },
+      "con":    { "type": ["string", "number", "null"], "description": "Coste de concentración." },
+      "flavor": { "type": ["string", "null"] },
+      "mec":    { "type": "string", "minLength": 1 },
+      "req":    { "type": ["string", "null"] }
+    }
+  }
+}

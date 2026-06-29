@@ -1,0 +1,116 @@
+{
+  "attrs": [
+    "fuerza",
+    "velocidad",
+    "intelecto",
+    "voluntad",
+    "discernimiento",
+    "presencia"
+  ],
+  "attrAbbr": {
+    "fuerza": "FUE",
+    "velocidad": "VEL",
+    "intelecto": "INT",
+    "voluntad": "VOL",
+    "discernimiento": "DIS",
+    "presencia": "PRE"
+  },
+  "categories": {
+    "fis": [
+      {
+        "id": "agilidad",
+        "nom": "Agilidad",
+        "attr": "velocidad"
+      },
+      {
+        "id": "armaLigero",
+        "nom": "Armamento ligero",
+        "attr": "velocidad"
+      },
+      {
+        "id": "armaPesado",
+        "nom": "Armamento pesado",
+        "attr": "fuerza"
+      },
+      {
+        "id": "atletismo",
+        "nom": "Atletismo",
+        "attr": "fuerza"
+      },
+      {
+        "id": "hurto",
+        "nom": "Hurto",
+        "attr": "velocidad"
+      },
+      {
+        "id": "sigilo",
+        "nom": "Sigilo",
+        "attr": "velocidad"
+      }
+    ],
+    "cog": [
+      {
+        "id": "deduccion",
+        "nom": "Deducción",
+        "attr": "intelecto"
+      },
+      {
+        "id": "disciplina",
+        "nom": "Disciplina",
+        "attr": "voluntad"
+      },
+      {
+        "id": "intimidacion",
+        "nom": "Intimidación",
+        "attr": "voluntad"
+      },
+      {
+        "id": "manufactura",
+        "nom": "Manufactura",
+        "attr": "intelecto"
+      },
+      {
+        "id": "medicina",
+        "nom": "Medicina",
+        "attr": "intelecto"
+      },
+      {
+        "id": "saber",
+        "nom": "Saber",
+        "attr": "intelecto"
+      }
+    ],
+    "esp": [
+      {
+        "id": "engano",
+        "nom": "Engaño",
+        "attr": "presencia"
+      },
+      {
+        "id": "liderazgo",
+        "nom": "Liderazgo",
+        "attr": "presencia"
+      },
+      {
+        "id": "percepcion",
+        "nom": "Percepción",
+        "attr": "discernimiento"
+      },
+      {
+        "id": "perspicacia",
+        "nom": "Perspicacia",
+        "attr": "discernimiento"
+      },
+      {
+        "id": "persuasion",
+        "nom": "Persuasión",
+        "attr": "presencia"
+      },
+      {
+        "id": "supervivencia",
+        "nom": "Supervivencia",
+        "attr": "discernimiento"
+      }
+    ]
+  }
+}

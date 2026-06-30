@@ -67,6 +67,8 @@ function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ group, encounter }));
   } catch {}
+  // La URL refleja siempre el encuentro, así que es compartible sin botón.
+  try { window.history.replaceState(null, '', '?' + encodeURLParams()); } catch {}
 }
 
 function loadStateFromStorage() {
@@ -442,30 +444,6 @@ window.closeModal = closeModal;
 window.closeModalIfBackdrop = closeModalIfBackdrop;
 window.addFromModal = addFromModal;
 
-window.shareEncounter = async function shareEncounter() {
-  const qs = encodeURLParams();
-  // Construye la URL absoluta sin depender de window.location.origin
-  // (que vale 'null' en file://). new URL siempre devuelve una URL válida.
-  let url;
-  try {
-    const u = new URL(window.location.href);
-    u.search = qs;
-    u.hash = '';
-    url = u.toString();
-  } catch {
-    url = window.location.pathname + '?' + qs;
-  }
-  // Refleja la URL en el navegador para que sea inmediatamente compartible.
-  try { window.history.replaceState(null, '', '?' + qs); } catch {}
-  try {
-    await navigator.clipboard.writeText(url);
-    showToast('Enlace copiado al portapapeles');
-  } catch {
-    // Fallback: muestra el enlace en un prompt para que el usuario lo copie.
-    window.prompt('Copia este enlace:', url);
-  }
-};
-
 // Cierra el modal con Esc.
 window.addEventListener('keydown', (ev) => {
   if (ev.key === 'Escape') closeModal();
@@ -476,7 +454,7 @@ window.addEventListener('keydown', (ev) => {
 // guardado y se persiste el nuevo estado.
 const fromURL = tryLoadFromURL();
 if (!fromURL) loadStateFromStorage();
-else saveState();
+saveState(); // persiste y deja la URL reflejando ya el estado cargado
 
 document.getElementById('nPJs').value = group.nPJs;
 document.getElementById('grupoRango').value = group.rango;

@@ -29,13 +29,3 @@ if (typeof window.bootstrapCharacterSheet !== 'function') {
   throw new Error('character-sheet.js no se cargó antes que el bootstrap');
 }
 window.bootstrapCharacterSheet();
-
-// Mover los controles del toolbar al slot del nav compartido.
-// nav.js (módulo previo) ya habrá creado #cr-nav-slot cuando lleguemos aquí.
-const _slot = document.getElementById('cr-nav-slot');
-const _toolbar = document.querySelector('.toolbar');
-if (_slot && _toolbar) {
-  _toolbar.style.display = '';  // quitar el display:none inicial
-  while (_toolbar.firstChild) _slot.appendChild(_toolbar.firstChild);
-  _toolbar.style.display = 'none';
-}

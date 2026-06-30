@@ -389,6 +389,11 @@ function chipPot(p){
 function tienePrimerIdeal(){
   return S.talentos.some(function(id){ return /primer ideal/i.test(id); });
 }
+// Acciones radiantes: visibles solo al tener el talento del Primer Ideal.
+function actualizarVisibilidadRadiante(){
+  var secRad=document.getElementById('secAccionesRad');
+  if(secRad) secRad.style.display=tienePrimerIdeal()?'':'none';
+}
 function renderTalentos(){ var el=document.getElementById('talentosSel');
   el.innerHTML=S.talentos.length?S.talentos.map(function(k){ var t=talByKey(k); if(!t) return ''; return chipTal(t,k); }).join('')
     :'<span class="chip-vacio">Sin talentos seleccionados</span>'; }
@@ -420,19 +425,26 @@ var SECCIONES=[['caminos','Caminos'],['atributos','Atributos y recursos'],['habi
   ['potencias','Potencias'],['acciones','Acciones de combate'],['accionesRad','Acciones radiantes'],
   ['equipo','Armadura y equipo'],['proposito','Propósito'],['obstaculo','Obstáculo'],
   ['metas','Metas'],['notas','Notas'],['conexiones','Conexiones']];
-function llenarNavSel(){ var sel=document.getElementById('navSel'); if (!sel) return;
-  SECCIONES.forEach(function(s){ var o=document.createElement('option'); o.value=s[0]; o.textContent=s[1]; sel.appendChild(o); }); }
-function toggleHbg(){ var m=document.getElementById('hbgMenu'); if(m) m.classList.toggle('open'); }
-function cerrarHbg(){ var m=document.getElementById('hbgMenu'); if(m) m.classList.remove('open'); }
-function irASeccionSel(sel){ var id=sel.value; sel.value=''; if (!id) return; irASeccion(id); }
+// Registra en el bocadillo común (crNav) el estado de guardado, el combo de
+// secciones y las acciones de la hoja. Se llama desde bootstrapCharacterSheet().
+function setupNav(){
+  if(!window.crNav) return;
+  var est=document.createElement('span'); est.className='estado-guardado'; est.id='estadoGuardado'; est.textContent='Sin cambios';
+  crNav.addStatus(est);
+  crNav.addSectionNav(SECCIONES, irASeccion);
+  crNav.addSeparator();
+  crNav.addMenuItem({ label:'Tabla de progreso', icon:'📊', onClick:abrirTablaNivel });
+  crNav.addMenuItem({ label:'Nueva hoja', icon:'✕', danger:true, onClick:limpiarTodo });
+}
 function irASeccion(id){ var el=document.querySelector('[data-sec="'+id+'"]'); if (!el) return;
   if (el.classList.contains('collapsed')){ el.classList.remove('collapsed'); S.collapsed[id]=false; guardarDebounced(); }
-  var tb=document.querySelector('.toolbar'), off=(tb?tb.offsetHeight:0)+10;
+  var tb=document.querySelector('.cr-nav'), off=(tb?tb.offsetHeight:0)+10;
   var y=el.getBoundingClientRect().top+window.pageYOffset-off;
   window.scrollTo({top:y<0?0:y,behavior:'smooth'}); }
 
 /* ===== Selección genérica ===== */
 function toggleSel(tipo,id){
+  var teniaIdeal=tienePrimerIdeal();
   if (tipo==='caminos'){ var cm=caminoById(id); if (!cm) return; if (caminoSelNom(cm.nom)) S.caminos=S.caminos.filter(function(x){ return x.nom!==cm.nom; }); else S.caminos.push({id:cm.id,nom:cm.nom,c:cm.c}); renderCaminos(); renderTalentos(); }
   else if (tipo==='pericias'){ if (S.pericias.indexOf(id)>=0) S.pericias=S.pericias.filter(function(x){ return x!==id; }); else S.pericias.push(id); renderPericias(); }
   else if (tipo==='estados'){ if (S.estados.indexOf(id)>=0) S.estados=S.estados.filter(function(x){ return x!==id; }); else S.estados.push(id); renderEstados(); }
@@ -445,9 +457,14 @@ function toggleSel(tipo,id){
   if (modalAbierto && modalTipo===tipo && modalModo==='pick') renderModalBody();
   actualizarContadores();
   actualizarContadores();
-  var secRad=document.getElementById('secAccionesRad'); if(secRad) secRad.style.display=tienePrimerIdeal()?'':'none';
+  // Al jurar el Primer Ideal quedas Investido (se fija la Investidura máx.);
+  // al perderlo dejas de estarlo (se pierde la Investidura).
+  if (!teniaIdeal && tienePrimerIdeal()) sugerirInvestidura();
+  else if (teniaIdeal && !tienePrimerIdeal()) limpiarInvestidura();
+  actualizarVisibilidadRadiante();
 }
 function quitarSel(tipo,id){
+  var teniaIdeal=tienePrimerIdeal();
   if (tipo==='caminos'){ S.caminos=S.caminos.filter(function(x){ return x.nom!==id; }); renderCaminos(); renderTalentos(); }
   else if (tipo==='pericias'){ S.pericias=S.pericias.filter(function(x){ return x!==id; }); renderPericias(); }
   else if (tipo==='estados'){ S.estados=S.estados.filter(function(x){ return x!==id; }); renderEstados(); }
@@ -457,6 +474,9 @@ function quitarSel(tipo,id){
   else if (tipo==='potencias'){ S.potencias=S.potencias.filter(function(x){ return x!==id; }); renderPotencias(); }
   else if (tipo==='objetos'){ var ix=objIdx(id); if (ix>=0) S.objetos.splice(ix,1); renderObjetos(); }
   guardarDebounced();
+  actualizarContadores();
+  if (teniaIdeal && !tienePrimerIdeal()) limpiarInvestidura();
+  actualizarVisibilidadRadiante();
 }
 function objAdjust(nom,delta){ var ix=objIdx(nom); if (ix<0) return; S.objetos[ix].q+=delta; if (S.objetos[ix].q<=0) S.objetos.splice(ix,1); renderObjetos(); guardarDebounced(); }
 
@@ -666,13 +686,36 @@ function pintarEstado(){
   actualizarContadores();
   recalc();
   actualizarContadores();
+  actualizarVisibilidadRadiante();
 }
 
 /* ===== Guardado ===== */
 var guardadoTimer=null;
 function guardar(){ try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(S));
+  actualizarURL();
   var e=document.getElementById('estadoGuardado'); if (e){ var d=new Date(); e.textContent='Guardado · '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
   }catch(err){ var e2=document.getElementById('estadoGuardado'); if (e2) e2.textContent='No se pudo guardar (usa Exportar)'; } }
+// Devuelve solo lo que difiere del estado vacío. fusionarEstado() reconstruye
+// el estado completo a partir de este objeto parcial, así la URL queda corta.
+function estadoDiff(){
+  var base=estadoVacio(), d={};
+  var f={}; for(var k in S.fields){ var v=S.fields[k]; if(v!==base.fields[k] && v!=='' && v!=null) f[k]=v; }
+  if(Object.keys(f).length) d.fields=f;
+  var a={}; for(var at in S.attrs){ if(n(S.attrs[at])!==0) a[at]=S.attrs[at]; }
+  if(Object.keys(a).length) d.attrs=a;
+  var sk={}; for(var s in S.skills){ if((S.skills[s].g||0)>0) sk[s]={g:S.skills[s].g}; }
+  if(Object.keys(sk).length) d.skills=sk;
+  var cu={}; for(var c in S.custom){ var x=S.custom[c]; if((x.nombre||'')!=='' || (x.attr||'')!=='' || (x.g||0)>0) cu[c]={nombre:x.nombre||'',attr:x.attr||'',g:x.g||0}; }
+  if(Object.keys(cu).length) d.custom=cu;
+  if(S.metas.some(function(m){ return (m.txt||'')!=='' || (m.p||0)>0; })) d.metas=S.metas;
+  ['caminos','pericias','estados','armas','armaduras','talentos','objetos','potencias'].forEach(function(key){
+    if(S[key] && S[key].length) d[key]=S[key];
+  });
+  return d;
+}
+// La URL refleja siempre el contenido de la hoja (solo la diferencia con el
+// estado vacío), así que es compartible sin botón.
+function actualizarURL(){ try{ var b64=stateToBase64(estadoDiff()); if(b64) history.replaceState(null,'','?hoja='+b64); }catch(e){} }
 function guardarDebounced(){ var e=document.getElementById('estadoGuardado'); if (e) e.textContent='Guardando…'; clearTimeout(guardadoTimer); guardadoTimer=setTimeout(guardar,500); }
 function fusionarEstado(base,obj){
   if (!obj) return base;
@@ -731,15 +774,20 @@ function wireEventos(){
     else if (t.hasAttribute && t.hasAttribute('data-customattr')){ S.custom[t.getAttribute('data-customattr')].attr=t.value; recalc(); guardarDebounced(); }
     else if (t.hasAttribute && t.hasAttribute('data-meta')){ S.metas[parseInt(t.getAttribute('data-meta'),10)].txt=t.value; guardarDebounced(); } });
 
-  document.addEventListener('keydown',function(e){ if (e.key==='Escape'){ if (modalAbierto) cerrarModal(); cerrarHbg(); cerrarTablaNivel(); } });
-  document.addEventListener('click',function(e){ var btn=document.getElementById('hbgBtn'),menu=document.getElementById('hbgMenu');
-    if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn) cerrarHbg(); });
+  document.addEventListener('keydown',function(e){ if (e.key==='Escape'){ if (modalAbierto) cerrarModal(); cerrarTablaNivel(); } });
   var addInp=document.getElementById('modalAddInput');
   addInp.addEventListener('keydown',function(e){ if (e.key==='Enter'){ e.preventDefault(); anadirDesdeModal(); } });
 }
 function actualizarDots(cont,valor){ cont.querySelectorAll('.dot').forEach(function(d){ d.classList.toggle('on',parseInt(d.getAttribute('data-n'),10)<=valor); }); }
 function paso(field,delta){ var inp=document.querySelector('[data-field="'+field+'"]'); if (!inp) return; var v=n(inp.value)+delta; inp.value=v; S.fields[field]=String(v); guardarDebounced(); }
 function sugerirInvestidura(){ var base=2+Math.max(n(S.attrs.discernimiento),n(S.attrs.presencia)); var inp=document.querySelector('[data-field="investMax"]'); if (inp){ inp.value=base; S.fields.investMax=String(base); recalc(); guardarDebounced(); } }
+// Al perder el Primer Ideal dejas de estar Investido: se pierde la Investidura.
+function limpiarInvestidura(){
+  S.fields.investMax=''; S.fields.investAct='';
+  var im=document.querySelector('[data-field="investMax"]'); if (im) im.value='';
+  var ia=document.querySelector('[data-field="investAct"]'); if (ia) ia.value='';
+  recalc(); guardarDebounced();
+}
 
 /* ===== Export / Import / Limpiar ===== */
 function exportarJSON(){ var nombre=(S.fields.personaje||'personaje').trim().replace(/[^\wáéíóúñÁÉÍÓÚÑ -]/g,'').replace(/\s+/g,'_')||'personaje';
@@ -766,18 +814,6 @@ function base64ToState(b64){
     return JSON.parse(decodeURIComponent(escape(atob(b64std+padding))));
   }catch(e){ return null; }
 }
-function compartirPorURL(){
-  var b64=stateToBase64(S);
-  if (!b64){ alert('No se pudo codificar la hoja.'); return; }
-  var u=new URL(window.location.href);
-  u.searchParams.set('hoja',b64);
-  var url=u.toString();
-  if (navigator.clipboard){
-    navigator.clipboard.writeText(url).then(function(){
-      mostrarToast('🔗 URL copiada al portapapeles');
-    }).catch(function(){ prompt('Copia este enlace:',url); });
-  } else { prompt('Copia este enlace:',url); }
-}
 function cargarDesdeURL(){
   try{
     var params=new URLSearchParams(window.location.search);
@@ -786,20 +822,8 @@ function cargarDesdeURL(){
     var obj=base64ToState(b64);
     if (!obj) return false;
     S=fusionarEstado(estadoVacio(),obj);
-    // Limpiar el param de la URL sin recargar
-    var u=new URL(window.location.href);
-    u.searchParams.delete('hoja');
-    history.replaceState(null,'',u.pathname+(u.search?u.search:''));
     return true;
   }catch(e){ return false; }
-}
-function mostrarToast(msg){
-  var t=document.getElementById('sheetToast');
-  if (!t){ t=document.createElement('div'); t.id='sheetToast';
-    t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#3a2a26;color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-family:Georgia,serif;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:300;opacity:0;pointer-events:none;transition:opacity .2s';
-    document.body.appendChild(t); }
-  t.textContent=msg; t.style.opacity='1';
-  clearTimeout(t._t); t._t=setTimeout(function(){ t.style.opacity='0'; },2000);
 }
 
 /* ===== Init ===== */
@@ -817,8 +841,9 @@ function bootstrapCharacterSheet(){
     return {n:i.name,des:parseInt(itemStat(i,'Desvío')||'0',10),ras:itemStat(i,'Rasgos')||'—'}; });
   OBJETOS={};
   ['fc','fu','co','eq'].forEach(function(c){ OBJETOS[CAT_LABELS[c]]=ITEMS.filter(function(i){ return i.cat===c; }).map(function(i){ return i.name; }); });
-  llenarNivel(); llenarTalSelect(); llenarNavSel();
+  llenarNivel(); llenarTalSelect(); setupNav();
   if (!cargarDesdeURL()) cargar();
   wireEventos(); pintarEstado();
+  actualizarURL(); // dejar la URL reflejando ya el estado cargado
 }
 window.bootstrapCharacterSheet = bootstrapCharacterSheet;

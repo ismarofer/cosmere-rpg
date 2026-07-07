@@ -2,19 +2,6 @@
 
 Punto de partida: acaba de terminar el combate en el Broma de la tormenta.
 
-## Orden de escenas
-
-1. Consecuencias tormenta (corta)
-2. Templo de las Pasiones / encargo Mraize (núcleo)
-3. Viaje a Hexi (elipsis + 1 tirada)
-4. Relleno en Hexi (empeño desarrollado)
-5. Visiones del Valle
-6. Combate Ylt/Kaiana (tal cual manual)
-
-Si falta tiempo: en la 3, salta la tabla de incidentes y quédate solo con el resultado de la tirada; en la 5, resume Ni y Muro en una frase cada una y no leas las Oportunidades/Complicaciones del empeño.
-
----
-
 ## 1. Consecuencias de la tormenta
 
 **Evaluar los daños** — un PJ inspecciona el Broma de la tormenta: Deducción o Manufactura CD 13.
@@ -39,18 +26,24 @@ Sin guardiana ni conversación de entrada: la tormenta ha dejado el acceso al de
 
 **Gancho**: Mraize contacta al PJ afín a Sangre Espectral. Quiere: el kit alomántico + el abalorio de cromo. No explica por qué.
 
-**Laberinto = empeño, 6 éxitos antes de 4 fallos.** Pruebas CD 14-16, cualquier enfoque ingenioso vale.
+**Laberinto = empeño, 6 éxitos antes de 4 fallos.** Tras cada éxito, tira 1d12 (repite si sale un número ya salido) para ver qué puerta aparece. Para abrirla hay que invocar de verdad ese spren — cualquier enfoque ingenioso vale, CD 14-16 a tu criterio.
 
-| Puerta/spren | Prueba ejemplo | Fallo (sin combate) |
-|---|---|---|
-| Furiaspren | Persuasión/Voluntad CD 15 | Cae a cámara inferior, pierden tiempo |
-| Miedospren | Deducción/Voluntad CD 14 | Vapor alucinógeno → Desorientado hasta siguiente puerta |
-| Vergüenzaspren | Percepción CD 14 + confesión | PJ pierde 1 punto de concentración |
-| Dolorspren | Perspicacia CD 15 | Alarma/lamento → desventaja próxima prueba de Percepción |
-| Glorispren | Persuasión/Liderazgo CD 14 | Atletismo CD 10 o pierden 1 éxito ya conseguido |
-| Sorpresaspren | Percepción CD 15 | Siguiente PJ en actuar, desventaja |
+| # | Spren | Emoción | Qué se ve |
+|---|---|---|---|
+| 1 | Furiaspren | Ira | Charcos de sangre hirviendo alrededor de los pies |
+| 2 | Miedospren | Miedo | Pegotes de sustancia viscosa púrpura que brotan alrededor |
+| 3 | Vergüenzaspren | Vergüenza | Pétalos rojos y blancos que caen lentamente al suelo |
+| 4 | Dolorspren | Dolor | Manos anaranjadas que se aferran a la herida |
+| 5 | Glorispren | Triunfo | Globos dorados translúcidos |
+| 6 | Sorpresaspren | Sorpresa | Triángulos amarillo pálido que se resquebrajan como cristal |
+| 7 | Alegrespren | Alegría | Hojas azules que brotan alrededor |
+| 8 | Bellezaspren | Fascinación/belleza | Destellos dorados que brillan cerca de algo o alguien cautivador |
+| 9 | Expectaspren | Anticipación | Gallardetes rojos que emergen del suelo |
+| 10 | Asombrospren | Asombro | Anillos de humo azul que revolotean sobre la cabeza |
+| 11 | Ansiaspren* | Anhelo | Hilillos plateados que flotan y tiran suavemente hacia lo anhelado |
+| 12 | Confundispren* | Confusión | Motas de humo gris que giran en espiral sin parar alrededor de la cabeza |
 
-(usar 4-5 puertas si va justo de tiempo)
+*Sin descripción oficial en el manual — visual sugerido, cámbialo si quieres.
 
 **Fallo total (4 fallos) — consecuencia duradera: la Marca de las Pasiones.**
 El spren de la última puerta fallada se queda ligado sueltamente al PJ que causó el 4º fallo. A partir de ahora, ese spren menor aparece cerca de él cada vez que siente esa emoción con intensidad, visible para cualquiera que pueda ver spren — incluso cuando preferiría ocultarlo. Efecto permanente hasta que lo resolváis en un arco futuro:
@@ -59,10 +52,16 @@ El spren de la última puerta fallada se queda ligado sueltamente al PJ que caus
 
 **Centro del laberinto:**
 - Kit alomántico incompleto: vial vacío, alcohol, lima para raspar metal
-- Abalorio de cromo + acertijo en pedestal → Saber/Erudición CD 15 para traducir:
-  - Quemarlo = robar reservas de metal ajenas con un roce (alomancia, "sanguijuela")
-  - Guardarlo = almacenar suerte y liberarla después (feruquimia)
-  - Nadie en la escena sabe interpretarlo del todo — pista para más adelante (ver visión del nacidoble, escena 5)
+- Abalorio de cromo sobre un pedestal con una inscripción en iriali antiguo. Saber/Erudición CD 15 para traducirla:
+
+> *Quien lo prende y toca a otro le arrebata lo que guarda sin saberlo;*
+> *un pozo ajeno queda seco de repente, un cuerpo lleno se despierta vacío.*
+> *Quien lo guarda no pierde nada al ofrecerlo: la fortuna se acumula como agua en la piedra,*
+> *y se vierte entera el día que el destino aprieta.*
+> *No es metal que arde en la sangre como los otros: es el ladrón silencioso y el guardián paciente,*
+> *la misma mano que quita y que reserva.*
+
+- Nota solo para ti (no leer): describe, sin nombrarlos, los dos usos reales del cromo en Scadrial — **alomancia**: quemarlo y tocar a alguien vacía de golpe sus reservas de metal guardadas ("sanguijuela"); **feruquimia**: guardarlo permite acumular buena suerte y liberarla después en el momento que haga falta. Nadie en la escena lo sabe interpretar del todo — pista para más adelante (ver visión del nacidoble, escena 5).
 
 ---
 
@@ -85,6 +84,8 @@ Incidentes de sabor (opcional, elige uno o tira 1d4, no afecta mecánica):
 ---
 
 ## 4. Relleno en Hexi — "Acampar antes de que caiga la noche"
+
+**Por qué existe esta escena**: han desembarcado en la costa helada del Gran Hexi, lejos de cualquier refugio, bajo lluvia gélida, y todavía les queda tramo hasta el valle. Si no consiguen resguardo antes de que anochezca del todo, el frío y el cansancio pasan factura justo antes de entrar al valle. Es la única razón mecánica para tirar: sin esta escena, entrarían al valle ya de por sí agotados.
 
 Se salta la emboscada de la retaguardia y el rescate de Axoq (Talani lo sustituirá después, al huir del valle — no prep ahora).
 
@@ -109,7 +110,7 @@ Se salta la emboscada de la retaguardia y el rescate de Axoq (Talani lo sustitui
 | C | El nacidoble de cromo pasa mala noche — frío "que no es del clima", hormigueo raro: desventaja en su próxima prueba de Vigor/Resistencia (semilla de su arco, no explicar por qué) |
 | C | Falsa alarma en la oscuridad: alguien pierde su turno de descanso vigilando de más |
 
-**Resolución:**
+**Resolución (esto es lo que se juegan):**
 - Éxito (3 antes de 2): noche tranquila. Cada PJ gana 1 punto de concentración extra al empezar la escena 5, o ventaja en su primera prueba en el valle (a elegir)
 - Fracaso (2 fallos antes de 3 éxitos): mala noche. Elige uno — alguien empieza el valle Fatigado [-1]; pierden parte de las provisiones; o desventaja en la primera prueba social importante con Kaiana más adelante
 
@@ -128,43 +129,51 @@ Al terminar cada visión: Disciplina CD 12 o gasta 1 concentración / Desorienta
 | Byrle | El peón de Odium (Ylt) |
 | Ni | Sombras perdidas (cantores forma sombría) |
 | Muro | El poder de la Regeneración (Kaiana) |
-| Kvthen | Custom — promesa a Taszo |
-| Nacidoble de cromo | Custom — despertar de su poder |
+| Kvthen | Custom — el camino que no acaba |
+| Nacidoble de cromo | Custom — lo que el metal recuerda |
 
 **Byrle — El peón de Odium**
-- Decisión 1: seguir la luz entre raíces o ignorarla. Ignorar → la visión se apaga pronto, sin tirada, salta a la niebla final.
+*Una luz se cuela entre raíces y enredaderas, avanzando hacia el oeste.*
+- Decisión 1: seguir la luz o ignorarla. Ignorar → la visión se apaga pronto, sin tirada, salta a la niebla final.
 - Si sigue: encuentra a Ylt, piel dorada, determinación férrea.
 - Decisión 2: tocarlo/atacarlo o mantener la distancia.
   - Observa sin tocar → Percepción CD 14: detalle útil (reconoce el cetro/el símbolo, pista sobre la naturaleza de Ylt como "peón")
   - Toca/ataca → Ylt se revela como ser infinito (humano: anciano túnica dorada y cetro) → Voluntad/Disciplina CD 15: éxito, la visión termina limpia; fallo, empieza el combate posterior con 1 punto de concentración menos
 
 **Ni — Sombras perdidas**
+*Figuras de sombra con forma de cantor acechan tras cada rama, suplicando en el Ritmo de la Súplica.*
 - Decisión 1: acercarse a las sombras que la llaman o quedarse quieta. Se evaporan como humo al acercarse.
-- Percepción CD 14 (si no es cantora) para notar los caparazones de cantor; si es cantora lo nota sola y reconoce el Ritmo de la Súplica.
+- Percepción CD 14 (si no es cantora) para notar los caparazones de cantor; si es cantora lo nota sola.
 - Decisión 2: una sombra le tiende algo invisible y dice "¡Tómalo!". ¿Acepta?
   - Acepta → Voluntad/Disciplina CD 14: éxito, se lleva una intuición útil (pista a definir sobre las formas de poder o sobre Roil); fallo, la sombra la agarra sin cuerpo, pierde 1 punto de concentración
   - Rechaza → sin tirada, pero se queda con una culpa persistente (roleo)
 
 **Muro — El poder de la Regeneración**
+*El follaje se cierra tras él; el suelo ya no es fiable bajo sus pies.*
 - Decisión/tirada 1: Agilidad CD 14. Falla → cae, gravemente herido, Kaiana ofrece curarlo. Supera → encuentra a Kaiana ya herida ("sabía que estaba equivocada... lo sabía").
 - Decisión 2: aceptar la ayuda/el momento con Kaiana o rechazarlo.
   - Acepta → Voluntad o Perspicacia CD 12: éxito, capta algo genuino en su remordimiento (pista útil: sabrá cómo convencerla en el combate); fallo, el momento se siente forzado, sin pista extra
   - Rechaza → sin tirada, pierde la pista
 
-**Kvthen — Custom (Taszo)**
-- Vuelve a la noche de la muerte de Taszo. Taszo pregunta: ¿han encontrado a Liss? ¿han llevado la hoja a Shinovar, o siguen persiguiendo sombras?
-- Decisión: responder con sinceridad, con evasivas, o a la defensiva.
-- Tirada: Disciplina o Voluntad CD 13 para mantener la compostura.
-  - Éxito → además, Saber/Perspicacia CD 14 opcional: capta un detalle nuevo (un nombre, un lugar, algo de Liss que no sabían)
-  - Fallo → sin detalle extra; la piedra de Po'ahu tarda un poco más de lo normal en enfriarse al terminar (detalle ambiguo, no lo expliques)
+**Kvthen — Custom: "El camino que no acaba"**
+*Un sendero de piedra se extiende hacia la niebla; Taszo camina delante, de espaldas, silbando una tonada de chamán, sin prisa.*
+- Decisión 1: llamarlo/perseguirlo o dejarlo ir.
+  - Dejarlo ir → sin tirada; el camino se cierra tras él y la piedra de Po'ahu se enfría y se aligera en su bolsillo (sensación ambigua, no la expliques)
+  - Perseguirlo → Atletismo o Voluntad CD 13: el camino se alarga bajo sus pies mientras corre
+- Si lo alcanza, Taszo se gira, tranquilo, y pregunta si han encontrado a Liss, si la hoja va camino de Shinovar, o si siguen persiguiendo sombras por el mundo.
+- Decisión 2: responder con sinceridad, con evasivas, o a la defensiva.
+- Tirada: Disciplina o Voluntad CD 13 para mantener la compostura mientras responde.
+  - Éxito → además, Saber/Perspicacia CD 14 opcional: capta un detalle nuevo sobre Liss o el paradero de la hoja
+  - Fallo → sin detalle extra
 
-**Nacidoble de cromo — Custom**
-- Niebla que no es de Roshar; una figura con su propia cara, más mayor, ropa no rosharana, corazón visible latiendo. Le dice: "ya se lo has quitado a alguien sin tocarlo, y algún día te lo quitarán a ti igual".
+**Nacidoble de cromo — Custom: "Lo que el metal recuerda"**
+*Una niebla que no es de Roshar se enrosca en los tobillos; delante, alguien con su misma cara, más mayor, con el corazón visible latiendo bajo la piel.*
 - Decisión: dejar que le toque o intentar evitarlo.
   - Evitar → Agilidad o Voluntad CD 14: éxito, esquiva el contacto, la visión se corta antes de la náusea; fallo, le toca igualmente
 - Si le toca: Vigor/Resistencia CD 13 para amortiguar el efecto.
   - Éxito → náusea leve y pasajera, nada más
   - Fallo → náusea persistente: empieza el combate posterior con desventaja en su primera prueba física, sin saber por qué
+- La figura, con su misma voz, dice algo así (adáptalo a tu gusto): *"No has tocado a nadie, y aun así les has robado algo — un poco de su suerte, un poco de su fuerza. Se despiertan más débiles y no saben por qué. Tú tampoco lo sabías. Cuando aprendas a hacerlo a propósito, recuerda esto: lo que se roba, también se puede robar de vuelta."*
 - Pistas repetibles en próximas sesiones (no explicar): esferas cerca de él se agotan más rápido; spren emocionales lo evitan; náusea "metálica" tras esfuerzo intenso (paralelismo Héroe de las Eras)
 - Conecta con el abalorio de cromo de la escena 2 — no revelar del todo esta sesión
 

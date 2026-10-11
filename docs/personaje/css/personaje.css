@@ -1,4 +1,4 @@
-/* Herramienta de personajes. Reutiliza variables y componentes de ../css/styles.css; todo va acotado a body.pj. */
+﻿/* Herramienta de personajes. Reutiliza variables y componentes de ../css/styles.css; todo va acotado a body.pj. */
 body.pj .btn.small { margin-left: 0; }
 body.pj .btn.primario { background: var(--accent); color: #fff; border-color: var(--accent); }
 body.pj .btn.primario:disabled { opacity: .5; cursor: default; }
@@ -262,3 +262,7 @@ body.pj .filtros-hoja { margin: .2rem 0 .6rem; }
   body.pj .meta input, body.pj .conex input { border: 0; padding: 0; background: none; }
   body.pj .pt { color: #000; }
 }
+
+
+
+

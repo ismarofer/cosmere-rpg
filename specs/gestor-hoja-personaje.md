@@ -1,4 +1,4 @@
----
+﻿---
 description: Spec de una herramienta estática para gestionar la hoja de personaje del Cosmere RPG (Mistborn) —hoja básica + módulos por camino de nacido del metal— y crearlo paso a paso, también desde niveles superiores
 status: implementado (v1)
 ---
@@ -7,7 +7,7 @@ status: implementado (v1)
 
 ## 1. Objetivo
 
-Herramienta estática (HTML + JS, sin backend, funciona con doble clic desde `file://`, como `buscador/` y `proyector/`) con dos partes que comparten el mismo modelo de datos:
+Herramienta estática (HTML + JS, sin backend, funciona con doble clic desde `file://`, como `docs/` y `docs/proyector/`) con dos partes que comparten el mismo modelo de datos:
 
 1. **Hoja de personaje viva**: rellenar, calcular y actualizar durante la campaña la hoja básica (*Mistborn Character Sheet*) más el **módulo de nacido del metal** que corresponda al camino (brumoso, nacido de la bruma, feruquimista, ferrin, nacidoble) y, si se obtiene un clavo, el de hemalurgista.
 2. **Asistente de creación paso a paso**, siguiendo los 8 pasos del Manual y permitiendo **empezar en un nivel superior** (reglas del cap. 13, «Cómo empezar en niveles superiores»).
@@ -33,8 +33,8 @@ El punto delicado es que **solo 71 de 366 talentos tienen efectos extraídos** a
 
 Decisiones clave:
 
-1. **Carpeta nueva e independiente: `personaje/`**, igual que `buscador/` y `proyector/`. El buscador seguiría sin guardar hojas (su spec lo excluye); la herramienta nueva solo lee sus datos.
-2. **Datos reutilizados, no duplicados.** *(Implementado así: la herramienta vive en `buscador/personaje/`, lee `buscador/data/base.js` y las tablas de reglas están escritas a mano en `js/rules.js`; no hay script de generación.)* La carga de datos es por `<script>` (no `fetch`) para que funcione desde `file://`.
+1. **Carpeta nueva e independiente: `personaje/`**, igual que `docs/` y `docs/proyector/`. El buscador seguiría sin guardar hojas (su spec lo excluye); la herramienta nueva solo lee sus datos.
+2. **Datos reutilizados, no duplicados.** *(Implementado así: la herramienta vive en `docs/personaje/`, lee `docs/data/base.js` y las tablas de reglas están escritas a mano en `js/rules.js`; no hay script de generación.)* La carga de datos es por `<script>` (no `fetch`) para que funcione desde `file://`.
 3. **Motor de cálculo puro y testeable** (`js/engine.js`): función `derivar(personaje, reglas) → valores`. Sin DOM. Se prueba con Node (`tools/test-personaje.mjs`), como el buscador.
 4. **El personaje guarda decisiones, no resultados.** Se almacenan atributos, grados, talentos elegidos, historial de niveles, etc.; las defensas, la salud máxima, el movimiento y demás se **calculan siempre**. Así subir de nivel o cambiar un atributo no deja valores obsoletos y el asistente puede reconstruir el personaje nivel a nivel.
 5. **Hoja modular.** La hoja básica es siempre la misma; el módulo de camino se activa según el talento principal elegido (ver §5.3). Cada módulo es una sección independiente con su propio esquema, y el módulo se carga según el camino, igual que el jugador usa una hoja suplementaria u otra.
@@ -156,7 +156,7 @@ Cada módulo extiende la hoja con su bloque propio:
 
 ### 4.7 Enlaces con el buscador (P1)
 
-- Cada talento, arma, armadura, estado y regla enlaza a su entrada del buscador (`../buscador/index.html#/talento/<id>`).
+- Cada talento, arma, armadura, estado y regla enlaza a su entrada del buscador (`../index.html#/talento/<id>`).
 - En el asistente, el texto de ayuda de cada paso enlaza a la guía de creación del buscador («Valores y cálculos»).
 - (P2) Selector de talentos reutilizando el componente de árbol del buscador.
 
@@ -290,7 +290,7 @@ Reglas de aplicación:
 
 ## 6. Reglas de cálculo
 
-> Todas estas tablas y fórmulas se codifican en `buscador/personaje/js/rules.js` y se prueban con casos de borde en `tools/test-personaje.mjs`.
+> Todas estas tablas y fórmulas se codifican en `docs/personaje/js/rules.js` y se prueban con casos de borde en `tools/test-personaje.mjs`.
 
 ### 6.1 Progreso por nivel (cap. 1)
 
@@ -353,7 +353,7 @@ Reglas de aplicación:
 
 ### 6.5 Efectos sobre el personaje
 
-El motor aplica `entrada.x.efectos` y `DATA_ARBOLES[*].efectos` del buscador (esquema en `buscador/README.md`):
+El motor aplica `entrada.x.efectos` y `DATA_ARBOLES[*].efectos` del buscador (esquema en `docs/README.md`):
 
 - `permanente: true` → se suma al valor base derivado.
 - `permanente: false` → se **muestra** como efecto condicional pero **no** entra en el valor base ni en los prerrequisitos.
@@ -364,10 +364,10 @@ El motor aplica `entrada.x.efectos` y `DATA_ARBOLES[*].efectos` del buscador (es
 
 ## 7. Estructura en el repo
 
-> **Implementado** dentro del buscador, no como carpeta independiente (decisión del usuario): `buscador/personaje/`. Reutiliza `buscador/data/base.js` y `buscador/css/styles.css` directamente; no hay `data/reglas.js` generado ni build propio. Las tablas de reglas están escritas a mano en `js/rules.js` y los kits de equipo, metales y árboles se leen de los datos del buscador (los metales por era, de forma dirigida por datos; el aluminio es un caso especial sin árbol).
+> **Implementado** dentro del buscador, no como carpeta independiente (decisión del usuario): `docs/personaje/`. Reutiliza `docs/data/base.js` y `docs/css/styles.css` directamente; no hay `data/reglas.js` generado ni build propio. Las tablas de reglas están escritas a mano en `js/rules.js` y los kits de equipo, metales y árboles se leen de los datos del buscador (los metales por era, de forma dirigida por datos; el aluminio es un caso especial sin árbol).
 
 ```
-buscador/personaje/
+docs/personaje/
   index.html
   css/personaje.css       ← todo acotado a body.pj; incluye @media print
   js/rules.js             ← reglas escritas a mano: progreso por nivel, ascendencias, caminos, kits, recompensas
@@ -418,6 +418,7 @@ Estado de la v1 (`[x]` verificado en navegador o con pruebas; `[ ]` pendiente o 
 6. **Hemalurgia:** el libro la trata como recompensa. ¿La modelamos desde el principio o la dejamos como nota? Propuesta: P1, con las 3 ranuras de la hoja oficial.
 7. **Compañeros y patrocinadores:** ¿se gestionan en la hoja del jugador o solo se mencionan? Propuesta: solo mencionarlos como recompensa en la v1.
 8. **Casos límite de progreso:** reasignación al subir de nivel, deshacer niveles, ascendencias con reglas especiales (kandra, sangre koloss) y su talento de ascendencia (no funciona como el humano).
-9. **Copyright:** la herramienta usa `buscador/data/base.js`, que contiene texto de los libros. Igual que el buscador, solo para uso local o privado; no publicar.
+9. **Copyright:** la herramienta usa `docs/data/base.js`, que contiene texto de los libros. Igual que el buscador, solo para uso local o privado; no publicar.
 10. **Sincronización entre dispositivos:** fuera de alcance (solo exportar/importar JSON). Si se necesitara compartir hojas con la DJ, se evaluaría después.
-11. **Mantenimiento de las tablas de reglas:** si el libro tiene fe de erratas, hay que actualizar `buscador/personaje/js/rules.js` y ejecutar `node tools/test-personaje.mjs`.
+11. **Mantenimiento de las tablas de reglas:** si el libro tiene fe de erratas, hay que actualizar `docs/personaje/js/rules.js` y ejecutar `node tools/test-personaje.mjs`.
+

@@ -1,4 +1,4 @@
----
+﻿---
 description: Spec de una página estática para consultar reglas, acciones, talentos, adversarios, etc. del Cosmere RPG (Mistborn) sin LLM
 status: borrador
 ---
@@ -187,7 +187,7 @@ tools/rules-queries.test.json         ← consulta → entradas esperadas (regre
   data/curated/                       ← topics.json, synonyms.json, overrides/
 ```
 
-Ubicación de la web: **carpeta nueva independiente** (p. ej. `buscador/`), sin reutilizar código ni datos de `docs/`.
+Ubicación de la web: **carpeta nueva independiente** (`docs/`).
 
 ## 8. Fases
 
@@ -325,7 +325,7 @@ El modo DJ no tiene interruptor ni indicador en la interfaz: se activa solo por 
 
 ## 12. Estado de la v1 (revisada)
 
-Implementada en [buscador/](../buscador/README.md). Cambios respecto al planteamiento inicial, por decisión del usuario:
+Implementada en [buscador/](../docs/README.md). Cambios respecto al planteamiento inicial, por decisión del usuario:
 
 - **Sin "Temas" ni accesos rápidos**: la portada es el buscador y, debajo, todas las categorías como menú (Personaje · Caminos · Equipo · Reglas · Dirección), que además está arriba en desplegables.
 - **Centrada en Cosmere RPG**, no en Mistborn. Cada entrada lleva un **ámbito** jerárquico: *Mistborn* (general), *Mistborn Era 1*, *Mistborn Era 2* (y en el futuro *Stormlight*…). El selector global muestra lo general más lo de la era elegida.
@@ -335,3 +335,4 @@ Implementada en [buscador/](../buscador/README.md). Cambios respecto al planteam
 - Modo DJ por `?dj=1` (adversarios, módulos y Legado), como antes.
 
 Pendiente: enlaces internos automáticos entre fichas, offline (service worker), agrupar talentos por especialidad (no fiable con el PDF actual), tablas curadas a mano de oportunidades/amenaza, catálogos de Legado, calculadora de amenaza, lore de la Guía del Mundo (v2) y Notas de Campaña (v3).
+

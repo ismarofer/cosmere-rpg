@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
-"""Genera los datos del buscador (buscador/data/*.js) a partir de resources/*.md.
+﻿#!/usr/bin/env python3
+"""Genera los datos del buscador (docs/data/*.js) a partir de resources/*.md.
 
 Uso: python tools/build-buscador.py [--report]
 
 Salida:
-  buscador/data/base.js   -> window.DATA_BASE  (público)
-  buscador/data/dj.js     -> window.DATA_DJ    (Modo DJ: adversarios, módulos, Legado)
+  docs/data/base.js   -> window.DATA_BASE  (público)
+  docs/data/dj.js     -> window.DATA_DJ    (Modo DJ: adversarios, módulos, Legado)
 
 Qué hace:
   - Parte cada .md en entradas por encabezado (texto buscable).
@@ -26,7 +26,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "resources"
-OUT = ROOT / "buscador" / "data"
+OUT = ROOT / "docs" / "data"
 
 MANUAL = RES / "Mistborn Manual"
 GUIA = RES / "Mistborn Guia del Mundo"
@@ -1034,3 +1034,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

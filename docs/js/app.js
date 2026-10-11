@@ -350,7 +350,7 @@
         <p class="muted">Consulta de reglas: busca o explora por categorías</p>
         <div class="escpick" role="group" aria-label="Ambientación"><b>Ambientación:</b>${C.ambientaciones.map((a) => `<button type="button" class="sp${a.id === ambientacion ? ' on' : ''}" data-esc="${esc(a.id)}">${a.ic ? ic(a.ic, 'sm') : ''}${esc(a.label)}</button>`).join('')}</div>
         <div id="heroslot" class="heroslot"></div>
-        <p class="muted"><a class="btn" href="personaje/index.html">Crear o abrir una hoja de personaje</a></p>
+        <p class="muted"><a class="btn" href="personaje/index.html">Crear o abrir una hoja de personaje</a>${DJ ? ' <a class="btn" href="proyector/index.html">Proyector de la mesa</a>' : ''}</p>
         <p class="hint">Prueba: <a href="#/buscar?q=ballesta">ballesta</a> · <a href="#/buscar?q=curar">curar</a> · <a href="#/buscar?q=nivel de amenaza">nivel de amenaza</a> · <a href="#/buscar?q=ayudar">ayudar</a> · <code>talento: medicina</code> · <code>"frase exacta"</code> · <code>-excluir</code></p>
       </section>
       <section class="menugrid">${groups}</section>`;

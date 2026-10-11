@@ -1,11 +1,11 @@
-// Pruebas de regresión del buscador: cada consulta debe devolver la entrada esperada en el top N.
+﻿// Pruebas de regresión del buscador: cada consulta debe devolver la entrada esperada en el top N.
 // Uso: node tools/test-buscador.mjs
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'buscador');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
 const ctx = { window: {}, console };
 ctx.window = ctx;
 vm.createContext(ctx);
@@ -130,3 +130,4 @@ for (let i = 0; i < 20; i++) engine.search('oportunidades complicaciones combate
 console.log(`\n${entries.length} entradas, índice con ${engine.terms.length} términos; 20 búsquedas en ${Date.now() - t0} ms`);
 console.log(fail ? `${fail} consultas fallan` : 'Todas las consultas pasan');
 process.exit(fail ? 1 : 0);
+

@@ -1,4 +1,4 @@
----
+﻿---
 description: Spec de una aplicación local para proyectar mapas e imágenes en partida en vivo, con niebla de guerra gradual controlada desde el portátil del DJ y efectos ambientales
 status: borrador
 ---
@@ -7,7 +7,7 @@ status: borrador
 
 ## 1. Objetivo
 
-Una aplicación local, **independiente del buscador** (`proyector/`), con dos pantallas:
+Una aplicación local, **independiente del buscador** (`docs/proyector/`), con dos pantallas:
 
 - **Consola del DJ** (portátil): biblioteca de escenas, vista completa del mapa, herramientas de niebla, efectos y control de lo que se ve fuera.
 - **Salida de proyector** (segunda pantalla): muestra *solo* lo que el DJ ha decidido enseñar, a pantalla completa, sin ninguna interfaz.
@@ -22,7 +22,7 @@ Lo más importante, en orden:
 
 ## 2. Decisiones de planteamiento (a validar)
 
-1. **Página estática pura, sin backend ni servidor**: se abre con doble clic en `proyector/index.html` (como el buscador) o se aloja en cualquier hosting estático. Sin instalar nada.
+1. **Página estática pura, sin backend ni servidor**: se abre con doble clic en `docs/proyector/index.html` (como el buscador) o se aloja en cualquier hosting estático. Sin instalar nada.
 2. **Dos ventanas conectadas con `window.open` + `postMessage`.** La consola abre la salida con `window.open("salida.html")` (desde un clic, para que no la bloquee el navegador) y se comunica por la referencia a esa ventana. Esto funciona también en `file://`, donde `BroadcastChannel` y el almacenamiento compartido entre pestañas no son fiables. La ventana de salida se arrastra al proyector y se pone en pantalla completa (F11, o la API de Window Management si está disponible). Si la salida se cierra, un botón la reabre; si se recarga la consola, se reabre y se reconecta. *Ampliación (fase 4):* WebSocket/WebRTC para proyectar desde otro dispositivo; la capa de mensajes queda desacoplada.
 3. **El estado vive en la consola; el proyector es un renderizador "tonto".** Recibe mensajes (escena, trazos de niebla, efectos, vista) y dibuja. Si se reconecta, la consola le envía una *instantánea* y queda igual. Nada que el DJ no quiera enseñar sale de la consola.
 4. **Persistencia en el navegador, sin servidor:**
@@ -203,7 +203,7 @@ Coordenadas **normalizadas (0-1)** respecto a la imagen: el estado no depende de
 
 ```
 specs/mapas-proyector.md        ← este documento
-proyector/
+docs/proyector/
   index.html                    ← consola del DJ
   salida.html                   ← salida de proyector
   css/
@@ -255,3 +255,4 @@ Sin carpeta de biblioteca ni scripts en `tools/`: la app es autocontenida. Si ha
 6. **Niebla manual vs. visión dinámica con muros:** se propone manual primero (más rápida de preparar y de controlar en una partida narrativa); los muros (§4.8) solo si los mapas se vuelven muy tácticos.
 7. **Tamaño de máscara:** 2048 px de lado largo da bordes suaves incluso en mapas grandes; si se nota en 4K, se sube o se interpola con suavizado.
 8. **Encaje con el buscador:** no comparten código; se podría añadir en el futuro un enlace "proyectar" desde una nota o ficha. Fuera de alcance de este spec.
+

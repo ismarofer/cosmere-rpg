@@ -1,11 +1,11 @@
-// Pruebas de regresión del motor de la hoja de personaje (buscador/personaje).
+﻿// Pruebas de regresión del motor de la hoja de personaje (docs/personaje).
 // Uso: node tools/test-personaje.mjs
 import fs from 'fs';
 import vm from 'vm';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const raiz = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'buscador');
+const raiz = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
 const ctx = {}; ctx.window = ctx; vm.createContext(ctx);
 for (const f of ['data/base.js', 'personaje/js/rules.js', 'personaje/js/engine.js', 'personaje/js/store.js']) {
   vm.runInContext(fs.readFileSync(path.join(raiz, f), 'utf8'), ctx, { filename: f });
@@ -108,3 +108,4 @@ if (PJ.store) {
 
 console.log(`\n${ok} comprobaciones correctas, ${fallos} fallos.`);
 process.exit(fallos ? 1 : 0);
+

@@ -1,10 +1,10 @@
-# Cosmere RPG · Consulta de reglas
+﻿# Cosmere RPG · Consulta de reglas
 
 Página estática para consultar las reglas del Cosmere RPG **sin LLM**. Hoy contiene Mistborn (Manual, y en Modo DJ la Guía del Mundo y Legado); está pensada para sumar más ambientaciones (Stormlight…) etiquetándolas con su ámbito. Spec: [specs/buscador-reglas-mistborn.md](../specs/buscador-reglas-mistborn.md).
 
 ## Uso
 
-Abre `buscador/index.html` en el navegador (funciona con doble clic, sin servidor) o sírvela desde cualquier hosting estático.
+Abre `docs/index.html` en el navegador (funciona con doble clic, sin servidor) o sírvela desde cualquier hosting estático.
 
 - **Portada**: el buscador es lo principal; debajo, todas las categorías agrupadas (Personaje · Caminos · Equipo · Reglas · Dirección). El mismo menú está arriba en desplegables.
 - **Buscar**: tolera tildes, plurales, erratas y sinónimos. Admite `"frase exacta"`, `-excluir` y `talento: medicina` (limita a una categoría).
@@ -18,7 +18,7 @@ Abre `buscador/index.html` en el navegador (funciona con doble clic, sin servido
 ## Estructura
 
 ```
-buscador/
+docs/
   index.html
   css/styles.css
   js/app.js        ← vistas y router (hash)
@@ -35,7 +35,7 @@ tools/test-buscador.mjs   ← consultas de regresión (node tools/test-buscador.
 
 ## Gestor de hojas de personaje (`personaje/`)
 
-Abre `buscador/personaje/index.html` (o el botón «Personajes» del buscador). Funciona también con doble clic y reutiliza `data/base.js` y los estilos del buscador. Spec: [specs/gestor-hoja-personaje.md](../specs/gestor-hoja-personaje.md).
+Abre `docs/personaje/index.html` (o el botón «Personajes» del buscador). Funciona también con doble clic y reutiliza `data/base.js` y los estilos del buscador. Spec: [specs/gestor-hoja-personaje.md](../specs/gestor-hoja-personaje.md).
 
 - **Asistente de creación** paso a paso (datos, camino, atributos, habilidades, talentos, pericias, poderes, equipo, recompensas si se empieza por encima del nivel 1, historia, resumen) y **asistente de subida de nivel**.
 - **Hoja** con pestañas (Ficha, Acciones, Talentos, Poderes, Equipo, Historia, Ajustes). «Acciones» lista lo que el personaje puede hacer (generales, de talentos, de alomancia/feruquimia desbloqueadas, vial y hemalurgia). Las tarjetas de acciones y talentos muestran su descripción corta y, al pulsarlas, abren un panel lateral con la descripción completa (igual que las habilidades de la Ficha, salvo Alomancia y Feruquimia, que no tienen ficha propia en el libro). La Ficha reproduce la hoja en papel: tres columnas (física, cognitiva, espiritual) con atributos, escudo de defensa, recurso y habilidades, más derivados y pericias. Los módulos de brumoso, nacido de la bruma, feruquimista, ferrin, nacidoble y hemalurgia aparecen según el camino. Se imprime desde el navegador.
@@ -111,3 +111,4 @@ Cada efecto: `{ tipo, objetivo, operacion, valor?, por?, detalle?, condicion?, p
 - La Guía del Mundo (lore), el glosario y las Notas de Campaña no están todavía.
 - Modo DJ es ocultación, no seguridad: quien conozca la ruta de `data/dj.js` puede leerlo si la web está publicada.
 - `data/*.js` contiene el texto de los libros (con copyright): úsalo en local o en un entorno privado.
+

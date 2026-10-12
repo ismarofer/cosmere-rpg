@@ -28,6 +28,7 @@ docs/
   data/base.js     ← GENERADO (público)
   data/dj.js       ← GENERADO (solo Modo DJ)
   personaje/       ← gestor de hojas de personaje (ver abajo)
+  nombres/         ← generador de nombres por cultura (#/nombres, en Dirección): del libro o inventados (Márkov sobre los del Manual)
 tools/build-buscador.py   ← genera data/*.js desde resources/**/*.md
 tools/buscador_extras.py  ← mini-reglas, guía de creación, grafo de talentos y ámbitos
 tools/test-buscador.mjs   ← consultas de regresión (node tools/test-buscador.mjs)

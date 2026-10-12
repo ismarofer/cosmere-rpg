@@ -963,6 +963,7 @@
     else if ((m = path.match(/^\/talento\/(.+)$/))) viewTalent(el, decodeURIComponent(m[1]));
     else if ((m = path.match(/^\/p\/(.+)$/))) viewPage(el, decodeURIComponent(m[1]));
     else if (path === '/combates') window.CB.montar(el);
+    else if (path === '/nombres') window.NOM.montar(el);
     else if (path === '/personajes' || path.startsWith('/personajes/')) window.PJ.montar(el, path.slice('/personajes'.length));
     else el.innerHTML = '<p class="empty">Página no encontrada. <a href="#/">Ir al inicio</a></p>';
     if (home) placeSearch(true);

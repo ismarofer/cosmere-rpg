@@ -1,0 +1,22 @@
+/* Generador de nombres (integrado en el buscador). Todo acotado a .nm; usa las variables del buscador. */
+.nm h2 { margin: 0 0 .3rem; }
+.nm h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.nm-nota { color: var(--muted); font-size: .85rem; margin: .2rem 0 .8rem; }
+.nm-col { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: .8rem 1rem; margin-bottom: .8rem; min-width: 0; }
+.nm-fila { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: .25rem 0 .55rem; }
+.nm-et { font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); min-width: 7.5rem; }
+.nm-chip { font: inherit; font-size: .85rem; padding: .2rem .65rem; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: inherit; cursor: pointer; }
+.nm-chip small { color: var(--muted); font-size: .7rem; }
+.nm-chip.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.nm-link { border: 0; background: none; color: var(--accent); cursor: pointer; font: inherit; font-size: .8rem; text-decoration: underline; padding: 0 .2rem; }
+.nm-chk { font-size: .85rem; display: inline-flex; gap: .3rem; align-items: center; margin-left: .4rem; }
+.nm-num { width: 4.5rem; font: inherit; padding: .2rem .4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: inherit; }
+.nm-res { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .1rem 1rem; }
+.nm-res li { display: flex; align-items: baseline; gap: .5rem; padding: .25rem 0; border-bottom: 1px solid var(--border); min-width: 0; }
+.nm-nom { border: 0; background: none; font: inherit; font-weight: 600; font-size: 1.05rem; color: inherit; cursor: copy; padding: 0; text-align: left; }
+.nm-nom:hover { color: var(--accent); }
+.nm-nom.nm-ok { color: var(--accent); }
+.nm-nom.nm-ok::after { content: ' ✓'; font-size: .8rem; }
+.nm-cult { color: var(--muted); font-size: .78rem; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nm-x { border: 0; background: none; color: var(--muted); cursor: pointer; font: inherit; font-size: 1.05rem; padding: 0 .2rem; }
+.nm-x:hover { color: var(--accent); }

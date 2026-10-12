@@ -47,6 +47,7 @@
         tools: [
           { label: 'Proyector de la mesa', href: '#/proyector', ic: 'mountain', sub: 'Mapas, niebla de guerra y efectos' },
           { label: 'Combates', href: '#/combates', ic: 'swords', sub: 'Amenaza, salud, concentración, Investidura y acciones' },
+          { label: 'Generador de nombres', href: '#/nombres', ic: 'tag', sub: 'Nombres por cultura, del libro o inventados' },
         ] },
     ],
 

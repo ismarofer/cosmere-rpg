@@ -19,9 +19,10 @@ import json, re, sys, unicodedata
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from buscador_efectos import aplicar as aplicar_efectos, OBJ_NOMBRE
+from buscador_guia import glosario, limpia_guia
 from buscador_personaje import redirige_modificadores, reorganizar
 from buscador_reglas import build_reglas
-from buscador_extras import build_mini, build_creacion, apply_ambientacion, aplicar_eras, es_basura, link_talents, split_ascendencias
+from buscador_extras import build_mini, build_creacion, build_habilidades_investidas, apply_ambientacion, aplicar_eras, es_basura, link_talents, split_ascendencias
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -736,97 +737,288 @@ def process_adversarios():
                             "path": ["Guía del Mundo · Cap. 8 Adversarios", ftitle], "pages": pages,
                             "body": body, "f": {"familia": ftitle.replace("Módulos de Adversario - ", "")}}, gated=True)
             continue
-        lines = txt.splitlines()
-        stats = [i for i, l in enumerate(lines) if STAT.match(l.strip())]
-        if not stats:
-            print("  [!] sin stat block:", f.name)
-            continue
-        # encabezado de nombre anterior a cada stat line
-        def name_idx(si):
-            for j in range(si - 1, -1, -1):
-                if re.match(r"^#{1,2}\s+\S", lines[j]) and not is_junk_line(lines[j]):
-                    return j
-            return 0
-        starts = [name_idx(si) for si in stats]
-        for k, si in enumerate(stats):
-            role, rank, size = STAT.match(lines[si].strip()).groups()
-            nm = re.match(r"^#{1,2}\s+(.*)$", lines[starts[k]])
-            name = clean_title(nm.group(1)) if nm else ftitle
-            end = starts[k + 1] if k + 1 < len(stats) else len(lines)
-            region = lines[si + 1:end]
-            # cabecera hasta el primer ###
-            head = []
-            sections = {}
-            sec = None
-            for l in region:
-                if is_junk_line(l):
-                    continue
-                hm = re.match(r"^###\s+(.*)$", l)
-                if hm and re.match(r"^(Rasgos|Acciones|Tácticas)", hm.group(1), re.I):
-                    sec = hm.group(1).split(":")[0].split()[0].lower()
-                    sections.setdefault(sec, [])
-                    continue
-                if hm and sec is not None and not re.match(r"^(Rasgos|Acciones|Tácticas)", hm.group(1), re.I):
-                    # otro encabezado: corta la sección salvo que sea corto
-                    sec = "otro"
-                    sections.setdefault(sec, [])
-                    continue
-                if re.match(r"^#{1,2}\s", l):
-                    sec = "otro"
-                    sections.setdefault(sec, [])
-                    continue
-                if sec is None:
-                    head.append(l)
-                else:
-                    sections[sec].append(l)
-            htxt = " ".join(" ".join(head).split())
-            f_ = {"rol": role, "rango": int(rank), "tamano": size.strip()}
-            mn = re.search(r"fue def vel int def vol dis def pre\s+(-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+)", htxt)
-            if mn:
-                v = [int(x) for x in mn.groups()]
-                f_.update({"fue": v[0], "def_fis": v[1], "vel": v[2], "int": v[3], "def_cog": v[4],
-                           "vol": v[5], "dis": v[6], "def_esp": v[7], "pre": v[8]})
-            ms = re.search(r"Salud:\s*(\d+)\s*\((\d+) a (\d+)\)", htxt)
-            if ms:
-                f_.update({"salud": int(ms.group(1)), "salud_min": int(ms.group(2)), "salud_max": int(ms.group(3))})
-            for key, rx in (("concentracion", r"Concentración:\s*(\d+)"), ("investidura", r"Investidura:\s*(\d+)")):
-                mm = re.search(rx, htxt)
-                if mm:
-                    f_[key] = int(mm.group(1))
-            mm = re.search(r"Desvío:\s*(\d+)(?:\s*\(([^)]*)\))?", htxt)
-            f_["desvio"] = int(mm.group(1)) if mm else 0
-            mm = re.search(r"Movimiento:\s*(.*?)\s+Sentidos:", htxt)
+        n_blocks += stat_blocks(f, ftitle, pages, txt, ["Guía del Mundo · Cap. 8 Adversarios"], ERA_OVERRIDE)
+    return n_blocks
+
+def stat_blocks(f, ftitle, pages, txt, path, override, fuente=None):
+    """Extrae los bloques de estadísticas de un .md de adversarios y los añade (gated) como cat «adversario»."""
+    n_blocks = 0
+    if fuente:  # glifos de coste del PDF del Legado: «1», «2», «r» y «▶» (1 acción), seguidos de un espacio en (U+2002)
+        txt = re.sub(r"[ - ]\s*", " ", txt)
+        txt = re.sub(r"(?m)^▶\s*", "1 ", txt)
+        txt = re.sub(r"(?m)^([0-3r] .*?)\s+Era\s+([12])\b", r"\1 ERA \2", txt)
+    lines = txt.splitlines()
+    stats = [i for i, l in enumerate(lines) if STAT.match(l.strip())]
+    if not stats:
+        print("  [!] sin stat block:", f.name)
+        return 0
+    # encabezado de nombre anterior a cada stat line
+    def name_idx(si):
+        for j in range(si - 1, -1, -1):
+            if re.match(r"^#{1,2}\s+\S", lines[j]) and not is_junk_line(lines[j]):
+                return j
+        return 0
+    starts = [name_idx(si) for si in stats]
+    for k, si in enumerate(stats):
+        role, rank, size = STAT.match(lines[si].strip()).groups()
+        nm = re.match(r"^#{1,2}\s+(.*)$", lines[starts[k]])
+        name = clean_title(nm.group(1)) if nm else ftitle
+        end = starts[k + 1] if k + 1 < len(stats) else len(lines)
+        region = lines[si + 1:end]
+        # cabecera hasta el primer ###
+        head = []
+        sections = {}
+        sec = None
+        for l in region:
+            if is_junk_line(l) or l.startswith(FILE_MARK) or re.match(r"^(#+\s*)?Apéndice A: Adversarios\b", l.strip()):
+                continue
+            if fuente and sec in ("tácticas", "otro") and re.match(r"^Salud:", l.strip()):
+                sec = None  # la cabecera de la ficha puede quedar tras las tácticas al maquetar a dos columnas
+            hm = re.match(r"^###\s+(.*)$", l)
+            if fuente and hm and re.search(r"Tácticas de", hm.group(1)):  # «### “cita” Tácticas de X»
+                sec = "tácticas"
+                sections.setdefault(sec, [])
+                continue
+            if hm and re.match(r"^(Rasgos|Acciones|Tácticas)", hm.group(1), re.I):
+                sec = hm.group(1).split(":")[0].split()[0].lower()
+                sections.setdefault(sec, [])
+                continue
+            if hm and sec is not None and not re.match(r"^(Rasgos|Acciones|Tácticas)", hm.group(1), re.I):
+                # otro encabezado: corta la sección salvo que sea corto
+                sec = "otro"
+                sections.setdefault(sec, [])
+                continue
+            if re.match(r"^#{1,2}\s", l):
+                sec = "otro"
+                sections.setdefault(sec, [])
+                continue
+            if sec is None:
+                head.append(l)
+            else:
+                sections[sec].append(l)
+        htxt = " ".join(" ".join(head).split())
+        f_ = {"rol": role, "rango": int(rank), "tamano": size.strip()}
+        mn = re.search(r"fue def vel int def vol dis def pre\s+(-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+) (-?\d+)", htxt)
+        if mn:
+            v = [int(x) for x in mn.groups()]
+            f_.update({"fue": v[0], "def_fis": v[1], "vel": v[2], "int": v[3], "def_cog": v[4],
+                       "vol": v[5], "dis": v[6], "def_esp": v[7], "pre": v[8]})
+        ms = re.search(r"Salud:\s*(\d+)\s*\((\d+) a (\d+)\)", htxt)
+        if ms:
+            f_.update({"salud": int(ms.group(1)), "salud_min": int(ms.group(2)), "salud_max": int(ms.group(3))})
+        for key, rx in (("concentracion", r"Concentración:\s*(\d+)"), ("investidura", r"Investidura:\s*(\d+)")):
+            mm = re.search(rx, htxt)
             if mm:
-                f_["movimiento"] = mm.group(1)
-            mm = re.search(r"Sentidos:\s*(.*?)\s*Habilidades", htxt)
+                f_[key] = int(mm.group(1))
+        mm = re.search(r"Desvío:\s*(\d+)(?:\s*\(([^)]*)\))?", htxt)
+        f_["desvio"] = int(mm.group(1)) if mm else 0
+        mm = re.search(r"Movimiento:\s*(.*?)\s+Sentidos:", htxt)
+        if mm:
+            f_["movimiento"] = mm.group(1)
+        mm = re.search(r"Sentidos:\s*(.*?)\s*Habilidades", htxt)
+        if mm:
+            f_["sentidos"] = mm.group(1)
+        for key, rx in (("hab_fis", r"Habilidades físicas:\s*(.*?)\s*(?:Habilidades cognitivas:|Habilidades espirituales:|$)"),
+                        ("hab_cog", r"Habilidades cognitivas:\s*(.*?)\s*(?:Habilidades espirituales:|$)"),
+                        ("hab_esp", r"Habilidades espirituales:\s*(.*)$")):
+            mm = re.search(rx, htxt)
             if mm:
-                f_["sentidos"] = mm.group(1)
-            for key, rx in (("hab_fis", r"Habilidades físicas:\s*(.*?)\s*(?:Habilidades cognitivas:|Habilidades espirituales:|$)"),
-                            ("hab_cog", r"Habilidades cognitivas:\s*(.*?)\s*(?:Habilidades espirituales:|$)"),
-                            ("hab_esp", r"Habilidades espirituales:\s*(.*)$")):
-                mm = re.search(rx, htxt)
-                if mm:
-                    f_[key] = mm.group(1).strip()
-            rasgos = parse_items(body_text(sections.get("rasgos", [])), "rasgos")
-            acciones = parse_items(body_text(sections.get("acciones", [])), "acciones")
-            tact = body_text(sections.get("tácticas", []))
-            era = ERA_OVERRIDE.get(name) or find_era(f.stem, name)
-            f_["era"] = era
-            f_["rasgos"] = [r["n"] for r in rasgos]
-            f_["acciones"] = [a["n"] for a in acciones]
-            parts = [f"{name}. {role} de rango {rank}. {size}."]
-            parts += [f"{r['n']}. {r['t']}" for r in rasgos]
-            parts += [f"{a['c']} {a['t']}" for a in acciones]
-            if tact:
-                parts.append(tact)
-            add({"cat": "adversario", "title": name, "path": ["Guía del Mundo · Cap. 8 Adversarios"],
-                 "pages": pages, "era": era, "body": "\n\n".join(parts), "f": f_,
-                 "x": {"rasgos": rasgos, "acciones": acciones, "tacticas": tact, "raw": htxt if not mn else ""}},
-                gated=True)
-            n_blocks += 1
+                f_[key] = mm.group(1).strip()
+        rasgos = parse_items(body_text(sections.get("rasgos", [])), "rasgos")
+        acciones = parse_items(body_text(sections.get("acciones", [])), "acciones")
+        tact = body_text(sections.get("tácticas", []))
+        if fuente:  # los bloques cruzan ficheros: página y era salen del encabezado «# Nombre  Era N» y del fichero de origen
+            hs = [j for j in range(si, -1, -1) if re.match(r"^#\s+\S", lines[j]) and not is_junk_line(lines[j])]
+            era = find_era(lines[hs[0]] if hs else "", lines[starts[k]])
+            mk = next((lines[j][len(FILE_MARK):].split("|") for j in range(si, -1, -1) if lines[j].startswith(FILE_MARK)), None)
+            if mk:
+                pages = mk[1]
+                if find_era(mk[0]) != "Ambas" and squash(name) in squash(mk[0]):
+                    era = find_era(mk[0])
+        else:
+            era = override.get(name) or find_era(f.stem, name)
+        f_["era"] = era
+        f_["rasgos"] = [r["n"] for r in rasgos]
+        f_["acciones"] = [a["n"] for a in acciones]
+        parts = [f"{name}. {role} de rango {rank}. {size}."]
+        parts += [f"{r['n']}. {r['t']}" for r in rasgos]
+        parts += [f"{a['c']} {a['t']}" for a in acciones]
+        if tact:
+            parts.append(tact)
+        if fuente:
+            f_["fuente"] = fuente
+            if any(e["cat"] == "adversario" and norm(e["title"]) == norm(name) for e in DJ_ENTRIES):
+                name = f"{name} ({fuente})"
+        add({"cat": "adversario", "title": name, "path": list(path),
+             "pages": pages, "era": era, "body": "\n\n".join(parts), "f": f_,
+             "x": {"rasgos": rasgos, "acciones": acciones, "tacticas": tact, "raw": htxt if not mn else ""}},
+            gated=True)
+        n_blocks += 1
     return n_blocks
 
 # --------------------------------------------------------------------------- Legado (DJ)
+
+FILE_MARK = "@@FICHERO@@"
+
+def process_adversarios_legado():
+    """Apéndice A del Legado: mismos bloques de estadísticas que la Guía del Mundo, marcados con f.fuente = «Legado»."""
+    advdir = next(LEGADO.glob("11 - *"))
+    # El PDF parte fichas entre páginas (y por tanto entre .md): se procesa el apéndice como un único texto.
+    files = sorted(advdir.glob("*.md"))
+    txt = "\n\n".join(f"{FILE_MARK}{f.stem}|{read_md(f)[0].get('pages', '')}\n\n{read_md(f)[1]}" for f in files)
+    return stat_blocks(advdir / "Apéndice A.md", "Apéndice A Adversarios", "", txt,
+                       ["Legado", "Apéndice A Adversarios"], {}, fuente="Legado")
+
+# --------------------------------------------------------------------------- Guía del Mundo (ambientación; solo Modo DJ)
+GUIA_ORGANIZACIONES = {
+    "Casa Cett Ashweather y Allrianne", "Casa Venture Straff y Zane", "Kelsier y Su Banda", "Los Kandra", "Ministerio de Acero",
+    "El Grupo", "Los Malwish", "Policía de Elendel", "Los Sangre Espectral",
+}
+# capítulo -> {nº de fichero: (catálogo, tipo)}; "*" es el valor por defecto del capítulo
+GUIA_CLASE = {
+    "01": {"02": ("cosmologia", "Cosmología")},
+    "02": {"01": ("historia", "Historia"), "02": ("lugar", "Pueblos"), "03": ("cosmologia", "Artes metálicas"),
+           "04": ("historia", "Historia"), "05": ("historia", "El mundo en cada era"), "06": ("historia", "El mundo en cada era"),
+           "07": ("historia", "El mundo en cada era")},
+    "03": {"01": ("lugar", "Pueblos"), "*": ("lugar", "Región")},
+    "04": {"01": ("cosmologia", "Cosmología"), "02": ("cosmologia", "Cosmología"), "03": ("cosmologia", "Cosmología"),
+           "04": ("cosmologia", "Cosmología"), "*": ("cosmologia", "Religión")},
+    "05": {"*": ("historia", "Historia")},
+    "07": {"*": ("lugar", "Lugar de interés")},
+    "08": {"*": ("lugar", "Lugar de interés")},
+}
+GUIA_CAP = {"01": "Introducción", "02": "Cap. 1 El Mundo", "03": "Cap. 2 Regiones y Culturas", "04": "Cap. 3 Cosmología y Religión",
+            "05": "Cap. 4 Historia", "06": "Cap. 5 Aliados y Organizaciones", "07": "Cap. 6 Lugares de interés (Era 1)",
+            "08": "Cap. 7 Lugares de interés (Era 2)", "10": "Apéndice A Glosario"}
+ERA_CAPITULO = {"07": "Era 1", "08": "Era 2"}
+
+
+def _etiquetas_mapa(body):
+    """Los mapas del PDF salen como rótulos con las letras separadas («er e l»): no son texto."""
+    toks = body.split()
+    return len(toks) > 5 and sum(len(t) for t in toks) / len(toks) < 3.2
+
+
+def _glosario_guia(pages):
+    """Una entrada por término del Apéndice A (nombre, pronunciación, traducción), ordenadas alfabéticamente."""
+    d = next(d for d in sorted(GUIA.iterdir()) if d.name.startswith("10 - "))
+    f = next(d.glob("*.md"))
+    _, txt = read_md(f)
+    filas, _ = glosario(txt)
+    out = {}
+    for nombre, pron, trad in filas:
+        trad = re.split(r"\s+a siguiente tabla\b", trad)[0].strip() or nombre  # el párrafo introductorio cae en la última fila
+        if nombre.endswith(" wuhn"):  # «Wan ShaiLu wuhn SHEYE-loo»: «wuhn» es la primera sílaba
+            nombre, pron = nombre[:-5], "wuhn " + pron
+        out[nombre] = (nombre, pron, trad)
+    # fila partida por el PDF (pronunciación en tres tramos)
+    out["Sanvith Prasanva Maahik va Sila"] = ("Sanvith Prasanva Maahik va Sila", "SAHN-vith prah-SAHNvah ma-AH-hik va SEE-lah", "Sanvith Prasanva Maahik va Sila")
+    out.pop("SAHN-vith", None)
+    entradas = []
+    for nombre, pron, trad in sorted(out.values(), key=lambda r: norm(r[0])):
+        entradas.append({"cat": "glosario", "title": nombre, "path": ["Guía del Mundo · Apéndice A", "Glosario"], "pages": pages,
+                         "body": f"Pronunciación: {pron}.\n\nTraducción: {trad}.", "era": "Ambas",
+                         "f": {"pronunciacion": pron, "traduccion": trad}})
+    return entradas
+
+
+def _partes_guia(chunks, titulo, h1c):
+    """Texto limpio de cada trozo de un fichero de la Guía, como lista de [(título, cuerpo)] (los vacíos y las portadillas se quitan)."""
+    out = []
+    for c in chunks:
+        body = body_text(c["lines"])
+        titc = re.sub(r"^.*?™\s*", "", strip_era(clean_title(c["title"] or "")))  # «e la bruma™ Feruquimia»
+        if not body or (_etiquetas_mapa(body) and c is not h1c):
+            continue
+        if re.match(r"(?:Capítulo \d|Apéndice)", titc) or titc.lower() == "tabla de metale":
+            continue
+        body = limpia_guia(body, titc)
+        if body:
+            out.append(("" if (c is h1c or not titc or norm(titc) == norm(titulo)) else titc, body))
+    return out
+
+
+def _texto_partes(partes):
+    return "\n\n".join(f"#### {t}\n{b}" if t else b for t, b in partes).strip()
+
+
+# Cuando el PDF intercala la barra lateral de un apartado en la página del siguiente, esos trozos se devuelven a su apartado
+GUIA_DEVOLVER = re.compile(r"Ashweather|Allrianne|Lord Cett podr", re.I)
+# entrada -> (primer y último trozo que pertenecen al apartado anterior)
+GUIA_DEVOLVER_RANGO = {"Quellion": ("Noorden", "Indultos de obligadores"),
+                       "Marasi Colms": ("Beneficio de patrocinador: los malwish", "Frecuencia de vuelo de aeronave")}
+
+
+def process_guia():
+    n = 0
+    for chdir in sorted(GUIA.iterdir()):
+        num = chdir.name[:2]
+        if num not in GUIA_CAP:
+            continue
+        previo = None  # entrada del fichero anterior del mismo capítulo (a ella vuelve lo que el PDF dejó en la página siguiente)
+        descartar_pre = False
+        salida = []
+        for f in sorted(chdir.glob("*.md")):
+            fnum = f.stem[:2]
+            if (num in ("06", "07", "08") and fnum == "01") or (num == "01" and fnum != "02"):
+                previo, descartar_pre = None, True  # «Cómo usar este capítulo/libro»: instrucciones del libro; su desborde se descarta
+                continue
+            meta, txt = read_md(f)
+            if num == "10":
+                for e in _glosario_guia(meta.get("pages", "")):
+                    add(e, gated=True)
+                    n += 1
+                continue
+            chunks = split_chunks(txt)
+            if not chunks:
+                continue
+            # el encabezado del apartado (los de «Capítulo N» y los vacíos son portadillas del PDF)
+            h1c = next((c for c in chunks if c["title"] and c["level"] == 1 and not re.match(r"Capítulo \d|Apéndice", c["title"])
+                        and body_text(c["lines"])), None)
+            h1 = clean_title(h1c["title"]) if h1c else ""
+            i0 = chunks.index(h1c) if h1c else 0
+            tit = clean_title(meta.get("title", f.stem))
+            # algunos títulos del PDF quedaron en inglés o con el h1 equivocado: se usa el del encabezado
+            if re.search(r"\b(?:Of|The|After)\b", tit) and h1:
+                tit = h1
+            era = ERA_CAPITULO.get(num) or find_era(f.stem, meta.get("title", ""), h1)
+            titulo = re.sub(r"^Apéndice [A-C]:\s*", "", strip_era(tit)).strip() or h1
+            pre = _partes_guia(chunks[:i0], titulo, h1c)
+            partes = _partes_guia(chunks[i0:], titulo, h1c)
+            if previo is not None:
+                # el final del apartado anterior quedó en la página donde empieza éste
+                previo["partes"] += pre
+                if num == "06" and previo["title"].startswith("Casa Cett"):
+                    devueltas = [p for p in partes if GUIA_DEVOLVER.search(p[0]) or GUIA_DEVOLVER.search(p[1][:150])]
+                    partes = [p for p in partes if p not in devueltas]
+                    previo["partes"] += devueltas
+                if titulo in GUIA_DEVOLVER_RANGO:
+                    t0, t1 = GUIA_DEVOLVER_RANGO[titulo]
+                    ts = [p[0] for p in partes]
+                    if t0 in ts and t1 in ts:
+                        i, j = ts.index(t0), ts.index(t1)
+                        previo["partes"] += partes[i:j + 1]
+                        partes = partes[:i] + partes[j + 1:]
+            elif not descartar_pre:
+                partes = pre + partes  # primer apartado del capítulo: lo anterior es su portadilla
+            if num == "06":
+                cat = "pnj"
+                tipo = "Organización" if titulo.replace(":", "").strip() in GUIA_ORGANIZACIONES else "Personaje"
+            else:
+                clase = GUIA_CLASE.get(num, {})
+                cat, tipo = clase.get(fnum) or clase.get("*") or ("cosmologia", "Cosmología")
+            entrada = {"cat": cat, "title": titulo, "path": ["Guía del Mundo · " + GUIA_CAP[num], tipo], "pages": meta.get("pages", ""),
+                       "era": era, "f": {"tipo": tipo}, "partes": partes}
+            salida.append(entrada)
+            previo = entrada
+        for e in salida:
+            e["body"] = _texto_partes(e.pop("partes"))
+            if len(e["body"]) < 150:
+                continue
+            add(e, gated=True)
+            n += 1
+    return n
+
 
 def process_legado():
     for chdir in sorted(LEGADO.iterdir()):
@@ -850,8 +1042,20 @@ def process_legado():
 
 # --------------------------------------------------------------------------- salida
 
+def libro_de(e):
+    """Libro de origen, con el nombre de la ambientación: «Manual X», «Guía X» (Mistborn → Scadrial) o «Campaña Y»."""
+    p0 = (e.get("path") or [""])[0]
+    if p0.startswith("Guía"):
+        return "Guía Scadrial"
+    if p0 == "Legado":
+        return "Campaña Legado"
+    return "Manual Mistborn"
+
 def dump(entries, var, path, extra=None):
     path.parent.mkdir(parents=True, exist_ok=True)
+    for e in entries:  # la página del libro no se publica: sí el libro (o campaña) de donde viene
+        e.pop("pages", None)
+        e["libro"] = libro_de(e)
     data = json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
     out = f"window.{var}={data};\n"
     for k, v in (extra or {}).items():
@@ -1001,7 +1205,9 @@ def main():
     process_manual()
     n_equipo = process_objects()
     n_adv = process_adversarios()
+    n_adv += process_adversarios_legado()
     process_legado()
+    n_guia = process_guia()
     base = dedupe(ENTRIES)
     fix_aluminio(base)
     fix_juventud(base)
@@ -1011,7 +1217,10 @@ def main():
             if e["f"].pop("clave"):
                 e["f"]["activacion"] = "Especial"
     mini, used = build_mini(base)
-    base = [e for e in base if id(e) not in used] + mini + [build_creacion()]
+    base = [e for e in base if id(e) not in used] + mini + [build_creacion()] + build_habilidades_investidas()
+    for e in base:
+        if e["cat"] == "habilidad":
+            e["f"].setdefault("tipo", "Básica")
     base = finalize(base)
     limpiar_reglas(base)
     dj = finalize(dedupe(DJ_ENTRIES))

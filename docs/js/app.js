@@ -75,7 +75,7 @@
   }
   function computeAllow() { allow = new Set(); ALL.forEach((e, i) => { if (visible(e)) allow.add(i); }); }
 
-  const bookOf = (e) => (e.path[0] || '').startsWith('Guía') ? 'Guía del Mundo' : (e.path[0] === 'Legado' ? 'Nacidos de la Bruma: Legado' : 'Manual del JdR');
+  const bookOf = (e) => e.libro || 'Manual Mistborn';
   // todo enlace a una entrada abre el panel lateral; el título del panel lleva a la página propia
   const hrefOf = (e) => (e.cat === 'modificador' ? (e.x.fuente_id ? '#/e/' + e.x.fuente_id : '#/arbol/' + e.x.arbol) : e.cat === 'accion' && e.f.talento ? '#/e/' + e.f.talento : '#/e/' + e.id);
   const pageHref = (e) => (e.cat === 'talento' ? '#/talento/' + e.id : e.cat === 'accion' && e.f.talento ? '#/talento/' + e.f.talento : '#/p/' + e.id);
@@ -112,7 +112,7 @@
     switch (k) {
       case 'title': return e.title;
       case 'ambientacion': return e.ambientacion;
-      case 'pages': return e.pages;
+      case 'libro': return e.libro;
       case 'sec': return e.path[e.path.length - 1];
       case 'cap': return e.path[0];
       case 'ext': return ext(e);
@@ -386,15 +386,24 @@
     if (!q) { viewHome(el); return 'home'; }
     const res = engine.search(q, { cats: CATS, allow });
     const plain = res.parsed.plain;
+    const libParam = params.get('lib') || '';
+    const libros = [...new Set(res.hits.map((h) => h.e.libro))].filter(Boolean);
+    if (libParam) res.hits = res.hits.filter((h) => h.e.libro === libParam);
     const byCat = new Map();
     for (const h of res.hits) { if (!byCat.has(h.e.cat)) byCat.set(h.e.cat, []); byCat.get(h.e.cat).push(h); }
     const order = [...byCat.keys()].sort((a, b) => byCat.get(b)[0].score - byCat.get(a)[0].score);
     if (!res.hits.length) {
-      el.innerHTML = `<p class="empty">Sin resultados para «${esc(q)}». Prueba con menos palabras u otra forma de decirlo, o explora el menú.</p>`;
+      el.innerHTML = `<p class="empty">Sin resultados para «${esc(q)}»${libParam ? ` en ${esc(libParam)}` : ''}. Prueba con menos palabras u otra forma de decirlo, o explora el menú.</p>` +
+        (libParam ? `<p><a class="btn" href="${hashFor('/buscar', { q })}">Quitar el filtro de fuente</a></p>` : '');
       return;
     }
-    let html = '<div class="facets">' + [`<a class="chip link${!catParam ? ' on' : ''}" href="${hashFor('/buscar', { q })}">Todo <b>${res.hits.length}</b></a>`]
-      .concat(order.map((c) => `<a class="chip link${catParam === c ? ' on' : ''}" href="${hashFor('/buscar', { q, cat: c })}">${ic(catIcon(c), 'sm')}${esc(catLabel(c))} <b>${byCat.get(c).length}</b></a>`)).join(' ') + '</div>';
+    let html = '';
+    if (libros.length > 1 || libParam) {   // fuente: el libro o campaña de donde viene (decisions/interfaz)
+      html += '<div class="facets"><b>Fuente:</b> ' + [`<a class="chip link${!libParam ? ' on' : ''}" href="${hashFor('/buscar', { q, cat: catParam })}">${ic('book', 'sm')}Todas</a>`]
+        .concat(libros.sort().map((l) => `<a class="chip link${libParam === l ? ' on' : ''}" href="${hashFor('/buscar', { q, cat: catParam, lib: l })}">${ic('book', 'sm')}${esc(l)}</a>`)).join(' ') + '</div>';
+    }
+    html += '<div class="facets">' + [`<a class="chip link${!catParam ? ' on' : ''}" href="${hashFor('/buscar', { q, lib: libParam })}">Todo <b>${res.hits.length}</b></a>`]
+      .concat(order.map((c) => `<a class="chip link${catParam === c ? ' on' : ''}" href="${hashFor('/buscar', { q, cat: c, lib: libParam })}">${ic(catIcon(c), 'sm')}${esc(catLabel(c))} <b>${byCat.get(c).length}</b></a>`)).join(' ') + '</div>';
     if (res.partial) html += '<p class="muted">No hay entradas con todas las palabras; se muestran coincidencias parciales.</p>';
     for (const c of (catParam ? [catParam] : order)) {
       const hits = byCat.get(c) || [];
@@ -402,7 +411,7 @@
       html += `<section class="results"><h2>${ic(catIcon(c))}${esc(catLabel(c))} <span class="count">${hits.length}</span>` +
         (catById[c] ? ` <a class="more" href="${hashFor('/c/' + c, { q })}">Abrir en el catálogo →</a>` : '') + '</h2>' +
         hits.slice(0, lim).map((h) => hitHtml(h.e, plain)).join('');
-      if (hits.length > lim) html += `<a class="more" href="${hashFor('/buscar', { q, cat: c })}">Ver los ${hits.length} resultados →</a>`;
+      if (hits.length > lim) html += `<a class="more" href="${hashFor('/buscar', { q, cat: c, lib: libParam })}">Ver los ${hits.length} resultados →</a>`;
       html += '</section>';
     }
     el.innerHTML = html;
@@ -843,7 +852,7 @@
       <p class="crumbs"><a href="#/caminos">Caminos</a>${t ? ` › <a href="#/caminos/${t.section.id}">${esc(t.section.short)}</a> › <a href="#/arbol/${t.slug}">${esc(t.name)}</a>` : ''}</p>
       <article class="tpage">
         <header><h1>${U.act(f.activacion)}${esc(e.title)}</h1>
-          <p class="path">${esc(e.path.join(' › '))} · ${esc(bookOf(e))} · págs. ${esc(e.pages)} ${ambientacionBadge(e)}</p></header>
+          <p class="path">${esc(e.path.join(' › '))} · ${esc(bookOf(e))} ${ambientacionBadge(e)}</p></header>
         ${b.html}
         <div class="actions">${t ? `<a class="btn" href="${hashFor('/arbol/' + t.slug, { hl: e.id })}">${ic('tree', 'sm')}Ver en el árbol</a>` : ''}<button type="button" class="btn" id="copylink">${ic('link', 'sm')}Copiar enlace</button></div>
       </article>`;
@@ -883,7 +892,7 @@
     const facts = [];
     if (cat && e.cat !== 'adversario') {
       for (const c of cat.cols) {
-        if (['title', 'ext', 'sec', 'cap', 'pages', 'ambientacion'].includes(c.k)) continue;
+        if (['title', 'ext', 'sec', 'cap', 'libro', 'ambientacion'].includes(c.k)) continue;
         const v = getVal(e, c.k);
         if (v == null || v === '' || v === '—' || (Array.isArray(v) && !v.length)) continue;
         let val;
@@ -903,7 +912,7 @@
     const lead = e.cat === 'talento' ? U.act(e.f.activacion) : '';
     return `${page ? '' : `<div class="dhead"><span class="chip">${ic(catIcon(e.cat), 'sm')}${esc(catLabel(e.cat))}</span>${ambientacionBadge(e)}<a class="btn small openpage" href="${esc(pageHref(e))}" title="Abrir la página completa">${ic('expand', 'sm')}Abrir página</a><button type="button" class="close" id="dclose" aria-label="Cerrar">${ic('x', 'sm')}</button></div>`}
       <h2>${page ? ic(catIcon(e.cat), 'lg') : lead}${page ? esc(e.title) : `<a class="tlink" href="${esc(pageHref(e))}" title="Abrir la página completa">${esc(e.title)}</a>`}</h2>
-      <p class="path">${esc(e.path.join(' › '))}<br><span class="src">${esc('Cosmere RPG · ' + e.ambientacion.replace(/ Era/, ' · Era'))} — ${esc(bookOf(e))}${e.pages ? ` · págs. ${esc(e.pages)}` : ''}</span></p>
+      <p class="path">${esc(e.path.join(' › '))}<br><span class="src">${esc('Cosmere RPG · ' + e.ambientacion.replace(/ Era/, ' · Era'))} — ${esc(bookOf(e))}</span></p>
       ${tb ? tb.html : (facts.length ? `<dl class="facts">${facts.join('')}</dl>` : '') + ((e.x && e.x.efectos) ? efectosHtml(e.x.efectos) : '') + body}
       <div class="actions">${more}</div>`;
   }

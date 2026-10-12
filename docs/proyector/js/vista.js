@@ -67,6 +67,7 @@
       <div class="fila"><button id="mPrev" title="Anterior">⏮</button><button id="mPlay" title="Reproducir / pausa">⏯</button><button id="mNext" title="Siguiente">⏭</button><button id="mStop" title="Parar con fundido">⏹</button></div>
       <label>Volumen <input type="range" id="mVol" min="0" max="100" value="80"></label>
       <label>Fundido (s) <input type="number" id="mFade" min="0.5" max="15" step="0.5" value="3"></label>
+      <label>Velocidad pista (%) <input type="range" id="mVel" min="50" max="150" step="1" value="100"> <output id="mVelN">100</output></label>
       <div class="mut">Pistas de esta escena (marca las que suenan):</div>
       <ul id="pistas"></ul>
       <label><input type="checkbox" id="mAleat"> Orden aleatorio</label>

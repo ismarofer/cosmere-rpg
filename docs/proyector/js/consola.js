@@ -94,6 +94,19 @@
   const guardarAj = () => localStorage.setItem('proy.aj', JSON.stringify(aj));
   const mus = e => e.musica || (e.musica = { ids: [], aleatorio: false });
   const nombrePista = id => (pistas.find(p => p.id === id) || {}).nombre || '?';
+  Musica.velocidad = id => (pistas.find(p => p.id === id) || {}).vel || 100;
+  // El deslizador de velocidad actúa sobre la pista que suena y se guarda en la propia pista.
+  let velId = null;
+  function pintarVel(id) {
+    const p = pistas.find(q => q.id === id);
+    $('#mVel').disabled = !p; $('#mVel').value = p ? p.vel || 100 : 100; $('#mVelN').textContent = $('#mVel').value;
+  }
+  $('#mVel').addEventListener('input', ev => {
+    const p = pistas.find(q => q.id === velId); if (!p) return;
+    p.vel = +ev.target.value; $('#mVelN').textContent = p.vel;
+    Musica.refrescarVel(); Alm.poner('pistas', p.id, p);
+  });
+  $('#mVel').addEventListener('dblclick', ev => { ev.target.value = 100; ev.target.dispatchEvent(new Event('input')); });
 
   async function subirAudio(files) {
     for (const f of files) {
@@ -139,6 +152,7 @@
     const st = Musica.estado();
     $('#mActual').textContent = st.id ? (st.pausado ? '⏸ ' : '♪ ') + nombrePista(st.id) : 'Nada sonando';
     $('#mBar').value = st.dur ? st.pos / st.dur : 0;
+    if (st.id !== velId) { velId = st.id; pintarVel(st.id); }
     const prevSuena = document.querySelector('#pistas li.suena'), i = pistas.findIndex(p => p.id === st.id);
     const li = i >= 0 ? $('#pistas').children[i] : null;
     if (prevSuena !== li && $('#pistas').children.length === pistas.length) {

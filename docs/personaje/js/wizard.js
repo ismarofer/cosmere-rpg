@@ -51,7 +51,7 @@
     h('button', { type: 'button', class: 'btn small' + (on ? ' peligro' : ''), disabled, onclick }, on ? 'Quitar' : (texto || 'Elegir'));
 
   const panelBendicion = (key, B) => {
-    const origen = D().byId['origen-bendiciones-kandra'];
+    const origen = D().byId['origen-ascendencia-kandra'];
     const m = origen && origen.body.match(new RegExp(B.n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\.(?:\\*\\*)?\\s*([^\\n]*?)(?=\\s*(?:\\*\\*)?Bendici[oó]n de|\\n|$)'));
     return {
       etiqueta: 'Bendición', title: B.n, path: ['Ascendencia kandra'],
@@ -321,6 +321,23 @@
           : h('button', { type: 'button', class: 'btn small', disabled: lleno, onclick: () => cambiar(c => { c.pericias.push({ texto, cultural: true }); }) }, 'Añadir'),
       });
     };
+    // pericias del manual (Orígenes): en arma, en armadura y de utilidad; las especializadas no se eligen con puntos de Intelecto
+    const filaManual = e => {
+      const tiene = c.pericias.some(q => q.texto === e.f.pericia);
+      const rasgo = (e.body.match(/Rasgo de experto: (.*)/) || [])[1];
+      return fila({
+        ref: e.id, titulo: e.f.pericia, corta: rasgo ? 'Rasgo de experto: ' + rasgo : '', on: tiene,
+        accion: tiene ? h('span', { class: 'chip small' }, 'elegida')
+          : h('button', { type: 'button', class: 'btn small', disabled: lleno, onclick: () => cambiar(c => { c.pericias.push({ texto: e.f.pericia, cultural: false }); }) }, 'Añadir'),
+      });
+    };
+    const eraOk = e => { const m = /Era (\d)/.exec(e.ambientacion || ''); return !m || +m[1] === +c.era; };
+    const delManual = tipo => PJ.datos().base.filter(e => e.cat === 'pericia' && e.f.tipo === tipo && eraOk(e));
+    const grupoManual = tipo => {
+      const es = delManual(tipo);
+      return es.length ? h('details', { class: 'grupo-pericias' }, h('summary', null, tipo + ' (' + es.length + ')'),
+        h('ul', { class: 'lista talentos' }, es.map(filaManual))) : null;
+    };
     const propias = c.pericias.map((x, i) => {
       const cu = x.cultural && culturas.find(k => 'Cultura: ' + k.nombre === x.texto);
       const e = cu && PJ.datos().byId[cu.id];
@@ -336,6 +353,8 @@
       propias.length ? h('ul', { class: 'lista talentos' }, propias) : h('p', { class: 'muted' }, 'Aún no has elegido ninguna.'),
       h('h3', null, 'Elegir pericias'),
       h('ul', { class: 'lista talentos' }, otra, culturas.map(filaCultura)),
+      grupoManual('Pericia en arma'), grupoManual('Pericia en armadura'), grupoManual('Pericia de utilidad'),
+      h('p', { class: 'muted' }, 'Las pericias especializadas (hoja koloss, capa de bruma, Hemalurgo…) solo se obtienen con talentos, recompensas o permiso de la DJ: añádelas con «Otra pericia».'),
       h('p', null, h('a', { href: 'index.html#/c/pericia', target: '_blank', rel: 'noopener' }, 'Reglas de pericias en el buscador')));
   }
 

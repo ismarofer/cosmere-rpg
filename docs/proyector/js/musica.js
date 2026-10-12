@@ -6,6 +6,11 @@
   const aplicarVol = c => { c.a.volume = Math.min(1, c.g * c.g * M.vol); };
   M.refrescarVol = () => canales.forEach(aplicarVol);
 
+  // Velocidad por pista (%). preservesPitch = false: el tono sube/baja con la velocidad, como una cinta.
+  const velDe = id => Math.max(25, Math.min(200, (M.velocidad ? M.velocidad(id) : 100) || 100)) / 100;
+  const aplicarVel = c => { c.a.preservesPitch = false; c.a.playbackRate = velDe(c.id); };
+  M.refrescarVel = () => canales.forEach(aplicarVel);
+
   function quitar(c) {
     c.a.pause(); URL.revokeObjectURL(c.url);
     canales = canales.filter(x => x !== c);
@@ -27,7 +32,7 @@
       a.addEventListener('ended', () => { if (c === cur && !cambiando) M.avanzar(1); });
       if (cur) salir(cur);
       canales.push(c); cur = c; M.idx = i; pausado = false;
-      aplicarVol(c);
+      aplicarVol(c); aplicarVel(c);
       await a.play().catch(() => {});
     } finally { cambiando = false; }
   }
@@ -77,7 +82,7 @@
       aplicarVol(c);
       if (c.obj === 0 && c.g === 0) quitar(c);
     }
-    if (cur && !pausado && !cambiando && cur.a.duration > 0 && cur.a.duration - cur.a.currentTime <= cur.f) M.avanzar(1);
+    if (cur && !pausado && !cambiando && cur.a.duration > 0 && (cur.a.duration - cur.a.currentTime) / (cur.a.playbackRate || 1) <= cur.f) M.avanzar(1);
   }, 50);
 
   g.Musica = M;

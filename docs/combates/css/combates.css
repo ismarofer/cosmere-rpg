@@ -53,7 +53,8 @@
 .cb-tabla td { padding: .35rem .4rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
 .cb-fin { white-space: nowrap; text-align: right; }
 /* Anchos fijos: con el reparto automático, el contenido del detalle desplegado (colspan) reajustaba las columnas de la fila. */
-.cb-adv-tabla { table-layout: fixed; min-width: 42rem; }
+.cb-adv-tabla { table-layout: fixed; min-width: 54rem; } /* columnas fijas ≈ 41rem: el resto (≥13rem) es para el nombre */
+.cb-scroll { overflow-x: auto; max-width: 100%; }
 .cb-adv-tabla th:nth-child(1) { width: 2.2rem; }
 .cb-adv-tabla th:nth-child(3) { width: 6rem; }
 .cb-adv-tabla th:nth-child(4), .cb-adv-tabla th:nth-child(5), .cb-adv-tabla th:nth-child(6) { width: 8.5rem; }

@@ -7,7 +7,6 @@
     { k: 'sec', l: 'Sección', f: 'select', ic: 'book' },
     { k: 'ext', l: 'Extracto' },
     { k: 'cap', l: 'Capítulo', f: 'select', hide: true, ic: 'book' },
-    { k: 'pages', l: 'Págs.', hide: true },
     { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
   ];
   const txt = (extra) => TXT.concat(extra || []);
@@ -16,7 +15,7 @@
     brand: 'Cosmere RPG',
 
     // Multiplicadores de relevancia por categoría (las mini-reglas y acciones son la respuesta habitual)
-    boost: { calculo: 1.9, creacion: 1.6, accion: 1.2, estado: 1.2, habilidad: 1.1, modificador: 0.85 },
+    boost: { calculo: 1.9, creacion: 1.6, accion: 1.2, estado: 1.2, habilidad: 1.1, modificador: 0.85, glosario: 0.4 },
 
     // Iconos de los objetivos de los efectos sobre el personaje (claves de DATA_OBJETIVOS)
     efIcons: { salud_max: 'heart', concentracion_max: 'bulb', investidura_max: 'flame', investidura: 'flame', defensa_fisica: 'shield', defensa_cognitiva: 'shield', defensa_espiritual: 'shield',
@@ -36,12 +35,13 @@
 
     // Menú superior y portada (el menú "caminos" se completa con los árboles de talentos)
     menu: [
-      { id: 'personaje', label: 'Personaje', ic: 'user', desc: 'Orígenes, habilidades, valores y cálculos, estados e historia',
+      { id: 'personaje', label: 'Personaje', ic: 'user', desc: 'Orígenes, habilidades, valores y cálculos, estados',
         // Enlaces que van los primeros, antes de los catálogos del grupo
         lead: [{ label: 'Gestión de Personajes', href: '#/personajes', ic: 'users', sub: 'Crear y gestionar hojas de personaje' }] },
       { id: 'caminos', label: 'Caminos', ic: 'tree', desc: 'Árboles de talentos: heroicos, nacidos del metal, alomancia, feruquimia…', trees: true },
       { id: 'equipo', label: 'Equipo', ic: 'bag', desc: 'Armas, armaduras, objetos y metales' },
-      { id: 'reglas', label: 'Reglas', ic: 'book', desc: 'Todas las reglas del juego, una a una, y los modificadores del personaje' },
+      { id: 'reglas', label: 'Reglas', ic: 'book', desc: 'Todas las reglas del juego, una a una, las acciones y reacciones, y los modificadores del personaje' },
+      { id: 'mundo', label: 'Mundo', ic: 'globe', desc: 'Guía del Mundo de Scadrial: lugares, personajes y organizaciones, cosmología, historia y glosario. Contiene spoilers.', dj: true },
       { id: 'dj', label: 'Dirección', ic: 'crown', desc: 'Adversarios, módulos, aventura y herramientas de mesa', dj: true,
         // Herramientas de mesa: van tras una línea separadora (como en Caminos). `soon`: aún sin página
         tools: [
@@ -66,6 +66,12 @@
       'arma.familia': { 'De fuego (ligera)': 'flame', 'De fuego (pesada)': 'flame', 'De fuego (especial)': 'flame' },
       'accion.tipo': { 'Acción': 'pip', 'Reacción': 'rotate', 'Acción gratuita': 'pipo' },
       'talento.tipo_origen': { 'Camino heroico': 'user', 'Camino de nacido del metal': 'zap', 'Arte metálica': 'flame', 'Ascendencia/Cultura': 'globe' },
+      'origen.tipo': { Ascendencia: 'globe', Cultura: 'compass' },
+      'lugar.tipo': { Pueblos: 'users', Región: 'compass', 'Lugar de interés': 'mountain' },
+      'pnj.tipo': { Personaje: 'user', Organización: 'users' },
+      'cosmologia.tipo': { Cosmología: 'sparkle', Religión: 'sun', 'Artes metálicas': 'flame' },
+      'historia.tipo': { Historia: 'bookmark', 'El mundo en cada era': 'globe' },
+      'pericia.tipo': { 'Pericia cultural': 'globe', 'Pericia en arma': 'sword', 'Pericia en armadura': 'shield', 'Pericia de utilidad': 'hammer', 'Pericia especializada': 'star' },
       'rasgo.aplica': { 'Armas': 'sword', 'Armaduras': 'shield' },
       'adversario.rol': { Secuaz: 'user', Rival: 'swords', Jefe: 'crown' },
       'habilidad.defensa': { 'Física': 'activity', 'Cognitiva': 'bulb', 'Espiritual': 'sun' },
@@ -85,7 +91,6 @@
           { k: 'title', l: 'Valor', main: true },
           { k: 'formula', l: 'Cálculo', ic: 'sliders' },
           { k: 'depende', l: 'Depende de', f: 'chips', list: true, ic: 'activity' },
-          { k: 'pages', l: 'Págs.', hide: true },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
@@ -96,12 +101,13 @@
           { k: 'title', l: 'Habilidad', main: true },
           { k: 'atributo', l: 'Atributo', f: 'chips', ic: 'activity' },
           { k: 'defensa', l: 'Defensa', f: 'chips', ic: 'shield' },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'award' },
           { k: 'ext', l: 'Extracto' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
-        id: 'modificador', label: 'Modificadores del personaje', group: 'reglas', ord: 2, ic: 'modif',
+        id: 'modificador', label: 'Modificadores del personaje', group: 'reglas', ord: 3, ic: 'modif',
         desc: 'Todo lo que cambia algo del personaje (salud, defensas, pericias, poderes…): talentos, ascendencias, caminos y armaduras.',
         cols: [
           { k: 'title', l: 'Fuente → qué modifica', main: true },
@@ -114,8 +120,22 @@
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
-      { id: 'origen', label: 'Orígenes', group: 'personaje', ord: 2, ic: 'globe', desc: 'Lo que se elige al crear el personaje: ascendencias, Bendiciones kandra, culturas y pericias culturales.', cols: txt() },
-      { id: 'historia', label: 'Historia', group: 'personaje', ord: 9, ic: 'bookmark', desc: 'Orígenes, clase social, ocupación, identidad, amigos y facciones.', cols: txt() },
+      { id: 'origen', label: 'Orígenes', group: 'personaje', ord: 2, ic: 'globe', desc: 'Lo que se elige al crear el personaje: ascendencias (la kandra incluye sus Bendiciones) y culturas.', cols: [
+        { k: 'title', l: 'Título', main: true },
+        { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'globe' },
+        { k: 'ext', l: 'Extracto' },
+        { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+      ] },
+      {
+        id: 'pericia', label: 'Pericias', group: 'personaje', ord: 5, ic: 'award',
+        desc: 'Las pericias que nombra el manual: culturales, en arma, en armadura, de utilidad y especializadas. No hay lista cerrada: con permiso de la DJ puedes crear otras.',
+        cols: [
+          { k: 'title', l: 'Pericia', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'award' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ],
+      },
 
       // ------------------------------------------------------------------ Caminos
       {
@@ -131,7 +151,6 @@
           { k: 'modifica', l: 'Modifica al personaje', f: 'chips', list: true, ic: 'modif' },
           { k: 'prerrequisito', l: 'Prerrequisito', f: 'text', hide: true },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
-          { k: 'pages', l: 'Págs.', hide: true },
         ],
       },
       { id: 'camino', label: 'Textos de caminos', group: null /* fuera del menú: se ve en la página de cada camino */, ic: 'book', desc: 'Cómo crear cada camino, especialidades, talentos principales, historia, personajes icónicos y tablas de determinación al azar.', cols: txt() },
@@ -199,7 +218,7 @@
 
       // ------------------------------------------------------------------ Reglas
       {
-        id: 'accion', label: 'Acciones y reacciones', group: 'caminos', ic: 'pip',
+        id: 'accion', label: 'Acciones y reacciones', group: 'reglas', ord: 2, ic: 'pip',
         desc: 'Acciones (1-3), reacciones (r) y acciones gratuitas (0): las que tiene todo el mundo y las que dan las artes metálicas. Filtra por origen.',
         cols: [
           { k: 'title', l: 'Nombre', main: true },
@@ -224,7 +243,6 @@
           { k: 'tema', l: 'Tema', f: 'chips', ic: 'book' },
           { k: 'grupo', l: 'Asunto', f: 'chips', ic: 'tag' },
           { k: 'ext', l: 'Extracto' },
-          { k: 'pages', l: 'Págs.', hide: true },
         ],
       },
 
@@ -251,6 +269,43 @@
       },
       { id: 'modulo', label: 'Módulos de adversario', group: 'dj', dj: true, ic: 'layers', desc: 'Alomancia, feruquimia y clavos hemalúrgicos para adversarios.', cols: txt([{ k: 'familia', l: 'Familia', f: 'chips' }]) },
       { id: 'legado', label: 'Legado (aventura)', group: 'dj', dj: true, ic: 'bookmark', desc: 'Nacidos de la Bruma: Legado. Contiene spoilers.', cols: txt([{ k: 'capitulo', l: 'Parte', f: 'select' }]) },
+
+      // ------------------------------------------------------------------ Mundo (Guía del Mundo; solo Modo DJ: contiene spoilers)
+      { id: 'lugar', label: 'Lugares', group: 'mundo', dj: true, ord: 1, ic: 'mountain', desc: 'Regiones y culturas de Scadrial y lugares de interés de cada era.',
+        cols: [
+          { k: 'title', l: 'Lugar', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'compass' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ] },
+      { id: 'pnj', label: 'Personajes y organizaciones', group: 'mundo', dj: true, ord: 2, ic: 'users', desc: 'Aliados, rivales y organizaciones de Scadrial, con su papel en cada era.',
+        cols: [
+          { k: 'title', l: 'Nombre', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'user' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ] },
+      { id: 'cosmologia', label: 'Cosmología y religión', group: 'mundo', dj: true, ord: 3, ic: 'sparkle', desc: 'Adonalsium, las Esquirlas, las artes metálicas como magia del mundo, el Lord Legislador y las religiones de Scadrial.',
+        cols: [
+          { k: 'title', l: 'Título', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'sun' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ] },
+      { id: 'historia', label: 'Historia', group: 'mundo', dj: true, ord: 4, ic: 'bookmark', desc: 'Historia de Scadrial por eras y cómo es el mundo en cada una: sociedad, ciencia y tecnología.',
+        cols: [
+          { k: 'title', l: 'Título', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'bookmark' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ] },
+      { id: 'glosario', label: 'Glosario', group: 'mundo', dj: true, ord: 5, ic: 'book', desc: 'Términos de Scadrial con su pronunciación y su traducción al español.',
+        cols: [
+          { k: 'title', l: 'Término', main: true },
+          { k: 'pronunciacion', l: 'Pronunciación' },
+          { k: 'traduccion', l: 'Traducción' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+        ] },
     ],
 
     // Entradas especiales (una sola ficha) enlazadas desde el menú
@@ -324,4 +379,11 @@
       'dado de recuperación': 'descanso recuperar calcular',
     },
   };
+
+  // Fuente (libro o campaña de donde sale la entrada): filtro de todo catálogo que ya filtra por ambientación
+  // (decisions/interfaz/fuente-del-contenido-en-listas.md).
+  window.CURATED.catalogs.forEach((p) => {
+    const i = p.cols ? p.cols.findIndex((c) => c.k === 'ambientacion') : -1;
+    if (i >= 0 && !p.cols.some((c) => c.k === 'libro')) p.cols.splice(i + 1, 0, { k: 'libro', l: 'Fuente', f: 'chips', hide: true, ic: 'book' });
+  });
 })();

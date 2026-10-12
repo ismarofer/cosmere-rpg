@@ -198,7 +198,7 @@
       ${href ? `<a class="btn small openpage" href="${esc(href)}" target="_blank" rel="noopener" title="Abrir la página completa en el buscador">${U.ic('expand', 'sm')}Abrir página</a>` : ''}
       <button type="button" class="close" aria-label="Cerrar">${U.ic('x', 'sm')}</button></div>
       <h2>${lead}${esc(limpioTitulo(e.title))}</h2>
-      <p class="path">${esc((e.path || []).join(' › '))}${e.pages ? `<br><span class="src">págs. ${esc(e.pages)}</span>` : ''}</p>
+      <p class="path">${esc((e.path || []).join(' › '))}${e.libro ? `<br><span class="src">${esc(e.libro)}</span>` : ''}</p>
       ${facts ? `<dl class="facts">${facts}</dl>` : ''}${resto}`;
     panel.hidden = false; document.body.classList.add('drawer-open'); cuerpoPanel.scrollTop = 0;
   }

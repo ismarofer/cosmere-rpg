@@ -56,7 +56,7 @@
     const f = e.f || {};
     const b = bloques(e);
     return {
-      id: e.id, nombre: e.title, ambientacion: e.ambientacion || 'Mistborn',
+      id: e.id, nombre: e.title, ambientacion: e.ambientacion || 'Mistborn', libro: e.libro || '',
       rol: f.rol, rango: f.rango, tamano: f.tamano,
       salud: f.salud, saludMin: f.salud_min, saludMax: f.salud_max,
       concentracion: f.concentracion || 0, investidura: f.investidura || 0,

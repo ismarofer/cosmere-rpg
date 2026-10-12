@@ -31,13 +31,12 @@ POR_ID = {
     "progreso": """pasos-de-la-creacion-de-personajes antes-de-crear-personajes como-empezar-en-niveles-superiores
         progreso-de-los-personajes rangos-de-juego prerrequisitos como-elegir-recompensas niveles-y-metas aventuras-y-progreso""",
     "camino": "como-usar-los-caminos-y-los-talentos caminos-heroicos-y-de-nacido-del-metal",
-    "historia": """como-contar-una-historia-convincente cosas-a-tener-en-cuenta-sobre-la-historia ten-en-cuenta-tus-origenes
+    # textos de historia y trasfondo (Historia, clase social, ocupación…): no se publican
+    "descartar": """como-contar-una-historia-convincente cosas-a-tener-en-cuenta-sobre-la-historia ten-en-cuenta-tus-origenes
         ascendencia-y-cultura clase-social ocupacion identidad amigos-y-facciones""",
 }
 POR_ID = {cat: set(ids.split()) for cat, ids in POR_ID.items()}
 
-# duplicados de personaje que ya existen en origen (se conserva una sola copia, en Historia)
-DUPLICADOS = {"ten-en-cuenta-tus-origenes", "ascendencia-y-cultura", "clase-social", "ocupacion", "identidad"}
 
 
 def _nueva_cat(e):
@@ -47,7 +46,7 @@ def _nueva_cat(e):
         return None
     for cat, ids in POR_ID.items():
         if b in ids:
-            return cat
+            return None if cat == "descartar" else cat
     if pref == "origen":
         return "origen"
     if b == "bienvenidos-a-scadrial" or (len(e["path"]) > 1 and e["path"][1] in SECCIONES_BASICAS):
@@ -86,19 +85,29 @@ SIN_TEXTO = {"origen-talentos-kandra", "origen-talentos-de-sangre-koloss"}
 
 
 def enriquecer_origenes(base):
-    """El catálogo Orígenes solo lleva lo que se elige: ascendencias, culturas, pericias culturales y Bendiciones kandra. La
-    «Elección de ascendencia» se funde en su ascendencia y los nombres típicos, en su cultura. Los textos de reglas y trasfondo
+    """El catálogo Orígenes solo lleva lo que se elige: ascendencias y culturas; las pericias (culturales y las del manual) van a su
+    catálogo. La
+    «Elección de ascendencia» y las Bendiciones kandra se funden en su ascendencia y los nombres típicos, en su cultura. Los textos de reglas y trasfondo
     (cuerpos y contratos kandra, historia de los koloss, introducciones…) pasan a ser microrreglas (tools/reglas/origenes.json)."""
     by_id = {e["id"]: e for e in base}
     for e in base:
         if e["cat"] == "origen":
             e["body"] = limpia(e["body"])
     _recoloca_kandra(by_id)
+    formato = json.loads(FORMATO_ORIGENES.read_text(encoding="utf-8")) if FORMATO_ORIGENES.exists() else []
     quitar = {id(by_id[i]) for i in SIN_TEXTO if i in by_id}
+    # las Bendiciones se eligen con la ascendencia: van como sección de «Ascendencia kandra», tras la elección (se formatean antes)
+    ben = by_id.get("origen-bendiciones-kandra")
+    if ben:
+        ben["body"] = aplicar_formato(ben["title"], ben["body"], formato)
+        quitar.add(id(ben))
     for pid, eid, ruta, etiqueta in ASCENDENCIAS:
         p, el = by_id.get(pid), by_id.get(eid)
         if p and el:
-            p["body"] += "\n\n#### " + el["title"] + "\n" + el["body"].strip() + _bloque([], [(ruta, etiqueta)], "Ver también")
+            p["body"] += "\n\n#### " + el["title"] + "\n" + el["body"].strip()
+            if ben and pid == "origen-ascendencia-kandra":
+                p["body"] += "\n\n#### " + ben["title"] + "\n" + ben["body"].strip()
+            p["body"] += _bloque([], [(ruta, etiqueta)], "Ver también")
             quitar.add(id(el))
     culturas = {_clave(c["title"]): c for c in base if c["cat"] == "origen" and c["f"].get("seccion") == "Cultura"
                 and not c["id"].startswith(("origen-pericia", "origen-nombres"))}
@@ -118,11 +127,74 @@ def enriquecer_origenes(base):
         k = _clave(c["title"])
         m = [p for p in pericias if _clave(re.sub(r"^Pericias?\s+", "", p["title"])) == k]
         if m:
-            c["body"] += _bloque(m, [("origen", m[0]["title"])])
-    formato = json.loads(FORMATO_ORIGENES.read_text(encoding="utf-8")) if FORMATO_ORIGENES.exists() else []
+            c["body"] += _bloque(m, [("pericia", m[0]["title"])])
     for e in base:
         if e["cat"] == "origen":
             e["body"] = aplicar_formato(e["title"], e["body"], formato)
+            # el filtro de la lista es el tipo de origen; la sección del libro ya no se enseña
+            seccion = e["f"].pop("seccion", None)
+            tipo = "Pericia cultural" if e["id"].startswith("origen-pericia-") else seccion
+            if tipo:
+                e["f"]["tipo"] = tipo
+                e["path"] = [e["path"][0], tipo]
+                if tipo.startswith("Pericia"):
+                    e["cat"] = "pericia"  # las pericias tienen catálogo propio; los ids («origen-pericia-…») no cambian
+    _pericias_del_manual(base)
+
+
+# Pericias que el manual nombra (no hay lista cerrada: «Pericias», cap. 3). Las de arma y armadura salen de los catálogos de
+# Equipo; las especializadas son las que el cap. 7 y el cap. 8 dicen que solo se obtienen con talentos, recompensas o entrenamiento.
+ESPECIALIZADAS = {
+    "Ametralladora rotatoria", "Bastón de duelo", "Dinamita", "Hoja koloss", "Palo de ruido", "Capa de bruma", "Gabán de bruma",
+}
+UTILIDAD = [
+    "Cuidado de animales", "Cuidados en salud mental", "Diagnóstico", "Escándalos", "Estrategia militar", "Fabricar armaduras",
+    "Fabricar armamento", "Fabricar equipo", "Ingeniería", "Juegos de manos", "Literatura", "Logística militar",
+    "Mantenimiento de armas de fuego", "Mantenimiento de ballestas", "Mecánica de automóviles", "Montar a caballo", "Oratoria", "Religión",
+]
+DEF_PERICIA = {
+    "Pericia en arma": "Las pericias en arma tienen relación con el mantenimiento y manejo de un tipo específico de arma. Eres experto en su limpieza, cuidado y fabricación, y puedes usar sus rasgos de experto, porque sabes cómo empuñarla mejor en combate.",
+    "Pericia en armadura": "Las pericias en armadura se centran en el mantenimiento y el uso de cualquier tipo de armadura. Eres experto en su limpieza, cuidado e incluso fabricación, y puedes aprovechar sus rasgos de experto, porque sabes cómo vestirla y moverte con ella.",
+    "Pericia de utilidad": "Las pericias de utilidad tienen relación con herramientas, oficios, conocimientos técnicos y áreas de estudio similares. Dominas un campo técnico: conoces las técnicas específicas, el equipo especializado y la jerga de tu especialidad.",
+    "Pericia especializada": "Las pericias especializadas pertenecen a esferas restringidas de conocimiento. No puedes elegirlas con los puntos que te otorga el Intelecto: solo se obtienen mediante talentos, recompensas, entrenamiento o con el permiso explícito de la DJ.",
+}
+
+
+def _pericias_del_manual(base):
+    """Añade al catálogo Orígenes las pericias en arma, en armadura, de utilidad y especializadas que nombra el manual."""
+    def nueva(tipo, nombre, prefijo, cuerpo, pages, ambientacion, ident):
+        return {"cat": "pericia", "title": f"{prefijo} {nombre}", "path": ["Capítulo 3 · Características", tipo], "pages": pages,
+                "body": cuerpo, "id": "origen-" + ident, "ambientacion": ambientacion,
+                "f": {"tipo": tipo, "pericia": nombre, "modifica": ["Pericias"]}}
+
+    def slug(s):
+        return re.sub(r"[^a-z0-9]+", "-", norm(s)).strip("-")
+
+    out = []
+    for cat, cat_nombre in (("arma", "arma"), ("armadura", "armadura")):
+        for e in base:
+            if e["cat"] != cat:
+                continue
+            nombre = re.sub(r"\s*\(.*?\)", "", e["title"]).strip()
+            if cat == "armadura" and nombre == "Cuero":
+                nombre = "Armadura de cuero"  # así la nombra el manual
+            esp = nombre in ESPECIALIZADAS
+            tipo = "Pericia especializada" if esp else f"Pericia en {cat_nombre}"
+            exp = (e["f"].get("experto") or "").strip()
+            partes = [DEF_PERICIA[tipo]]
+            if exp and exp != "—":
+                partes.append(f"Rasgo de experto: {exp}.")
+            partes.append(f"Ver: [[{cat}|{e['title']}]]")
+            out.append(nueva(tipo, nombre, "Pericia especializada en" if esp else "Pericia en", "\n\n".join(partes),
+                             e["pages"], e["ambientacion"], f"pericia-{cat}-{slug(nombre)}"))
+    for nombre in UTILIDAD:
+        out.append(nueva("Pericia de utilidad", nombre, "Pericia en", DEF_PERICIA["Pericia de utilidad"], "60-62", "Mistborn",
+                         "pericia-utilidad-" + slug(nombre)))
+    out.append(nueva("Pericia especializada", "Hemalurgo", "Pericia especializada en",
+                     DEF_PERICIA["Pericia especializada"] + "\n\nLa pericia especializada Hemalurgo te permite implantarte clavos hemalúrgicos "
+                     "a ti mismo o a otros personajes dispuestos; se obtiene como recompensa junto a los clavos (consulta «Clavos hemalúrgicos» en el capítulo 8).",
+                     "60-62", "Mistborn", "pericia-especializada-hemalurgo"))
+    base.extend(out)
 
 
 def _recoloca_kandra(by_id):
@@ -151,9 +223,6 @@ def reorganizar(base, dj):
         nueva = _nueva_cat(e)
         if nueva is None:
             quitar.add(id(e))
-        elif antigua == "personaje" and base_id(e["id"].partition("-")[2]) in DUPLICADOS:
-            quitar.add(id(e))
-            mov[(antigua, norm(e["title"]))] = "historia"
         elif nueva != antigua:
             mov[(antigua, norm(e["title"]))] = nueva
             e["cat"] = nueva

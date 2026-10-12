@@ -162,7 +162,6 @@ CREACION = """La creación de personajes consta de ocho pasos. Seguirlos en orde
 Ascendencia y cultura: te dan talentos de ascendencia y pericias culturales (2 al crear el personaje).
 ◆ [[#/c/origen|Catálogo de orígenes (ascendencias y culturas)]]
 ◆ [[#/arbol/ascendencia|Talentos de ascendencia]]
-◆ [[personaje|Ten en cuenta tus orígenes]]
 
 ### Paso 2 · Elige tu camino inicial
 El camino inicial da su talento principal y un grado en habilidad extra.
@@ -194,8 +193,7 @@ En el nivel 1 tienes el talento principal del camino inicial más el talento (o 
 ◆ [[#/c/arma|Armas]] · [[#/c/armadura|Armaduras]] · [[#/c/equipo|Equipo]]
 
 ### Paso 7 · Cuenta tu historia
-◆ [[personaje|Cómo contar una historia convincente]]
-◆ [[personaje|Cosas a tener en cuenta sobre la historia]]
+Propósito, obstáculo, metas y conexiones de tu personaje.
 
 ### Paso 8 · Calcula tus características finales
 ◆ [[calculo|Salud máxima]]: 10 + Fuerza
@@ -219,6 +217,35 @@ En el nivel 1 tienes el talento principal del camino inicial más el talento (o 
 def build_creacion():
     return {"cat": "creacion", "title": "Creación de personaje", "path": ["Creación de personaje"],
             "pages": "20-37", "body": CREACION.strip(), "ambientacion": "Mistborn", "gen": 0, "f": {}}
+
+
+# --------------------------------------------------------------------------- habilidades Investidas
+# Alomancia y Feruquimia no tienen sección propia en el capítulo 3: las describe «Cómo usar las habilidades Investidas» (cap. 5)
+HABILIDADES_INVESTIDAS = [
+    ("Alomancia", "Voluntad", "alomancia", "Brumoso, Nacido de la bruma y Nacidoble",
+     "Alomancia mide tu capacidad para quemar metales y dirigir los poderes alománticos. Cada vez que lleves a cabo una prueba con un poder alomántico, haces una prueba de Alomancia, igual que harías una de Agilidad con cualquier otra habilidad."),
+    ("Feruquimia", "Intelecto", "feruquimia", "Feruquimista, Ferrin y Nacidoble",
+     "Feruquimia mide tu capacidad para almacenar y usar las propiedades de tus mentes de metal. La feruquimia rara vez exige pruebas de habilidad; si eres un ferrin, feruquimista o nacidoble, te conviene revisar tus poderes feruquímicos antes de decidir si inviertes puntos en el atributo Intelecto."),
+]
+
+
+def build_habilidades_investidas():
+    out = []
+    for nombre, attr, slug_, caminos, intro in HABILIDADES_INVESTIDAS:
+        body = "\n\n".join([
+            intro,
+            "Habilidad Investida. No puedes acceder a ella hasta que tu camino de nacido del metal (o alguna otra regla, como un clavo hemalúrgico) "
+            f"te lo permita. La obtienes con el talento principal de los caminos: {caminos}. Se rige por tu valor de {attr} y es una habilidad "
+            "cognitiva; su modificador combina tus grados con el valor de ese atributo. Puedes obtener grados adicionales de la misma forma que "
+            "con el resto de habilidades.",
+            f"Progresión. Tus grados en {nombre} aumentan el alcance, el límite y el dado de tus poderes (consulta "
+            "[[regla|Alcance de artes metálicas]] y [[regla|Límite de artes metálicas]]).",
+            "Consulta [[regla|Cómo usar las habilidades Investidas]].",
+        ])
+        out.append({"cat": "habilidad", "title": nombre, "path": ["Capítulo 5 · Caminos de nacidos del metal", "Habilidades Investidas"],
+                    "pages": "133-140", "body": body, "ambientacion": "Mistborn", "gen": 0,
+                    "f": {"atributo": attr, "defensa": "Cognitiva", "tipo": "Investida"}, "id": "habilidad-" + slug_})
+    return out
 
 
 # --------------------------------------------------------------------------- árboles de talentos

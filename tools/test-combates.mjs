@@ -55,7 +55,9 @@ eq('con 2 jugadores el mismo encuentro es extremo', CB.resumenAmenaza(enc).dific
 
 // --- Adversarios reales
 const advs = CB.adversarios.todos(ctx.DATA_DJ);
-eq('38 adversarios', advs.length, 38);
+const advLegado = ctx.DATA_DJ.filter(x => x.cat === 'adversario' && x.f.fuente === 'Legado').length;
+eq('38 adversarios de la Guía del Mundo', advs.length - advLegado, 38);
+eq('adversarios del Apéndice A del Legado', advLegado, 44);
 let sinBloques = 0;   // en perfiles con «— » las reacciones no figuran en f.acciones pero sí se leen, de ahí el «<»
 for (const a of advs) {
   const e = ctx.DATA_DJ.find(x => x.cat === 'adversario' && x.title === a.nombre);

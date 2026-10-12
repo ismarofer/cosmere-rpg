@@ -11,7 +11,7 @@
   const act = k => (g.UI && g.UI.act ? g.UI.act(k) : '');
 
   let bib, enc = null, root, advs = null, mods = [];
-  const ui = { q: '', rol: '', amb: '', abiertos: new Set(), dano: {}, desvio: true, perforante: false, aviso: '' };
+  const ui = { q: '', rol: '', amb: '', libro: '', abiertos: new Set(), dano: {}, desvio: true, perforante: false, aviso: '' };
 
   // ------------------------------------------------------------------ almacenamiento
   function cargar() {
@@ -74,7 +74,7 @@
   const encajaAmb = a => !ui.amb || a.ambientacion === 'Mistborn' || a.ambientacion === ui.amb;
   function vAdvs(r) {
     const q = norm(ui.q);
-    const lista = advs.filter(a => (!ui.rol || a.rol === ui.rol) && encajaAmb(a) && (!q || norm(a.nombre).includes(q)));
+    const lista = advs.filter(a => (!ui.rol || a.rol === ui.rol) && encajaAmb(a) && (!ui.libro || a.libro === ui.libro) && (!q || norm(a.nombre).includes(q)));
     if (!lista.length) return '<p class="muted">Ningún adversario coincide.</p>';
     return '<ul class="cb-lista cb-advs">' + lista.map(a => `<li><span><a href="#/e/${esc(a.id)}" title="Ver la ficha completa"><b>${esc(a.nombre)}</b></a> <span class="cb-rol rol-${esc(a.rol)}">${esc(a.rol)}</span>${a.ambientacion !== 'Mistborn' ? ` <span class="chip small soft">${esc(a.ambientacion.replace('Mistborn ', ''))}</span>` : ''}
         <span class="muted">r${a.rango} · ♥${a.salud} · amenaza ${num(CB.amenazaAdversario(a.rol, a.rango, r.rango))}</span></span>
@@ -148,7 +148,7 @@
         <td><button class="cb-x" data-a="quitar" data-id="${c.id}" title="Quitar del encuentro">✕</button></td></tr>
         ${abierto ? `<tr class="cb-detalle-fila">${vDetalle(c)}</tr>` : ''}`;
     }).join('');
-    return `<table class="cb-tabla cb-adv-tabla"><thead><tr><th></th><th>Adversario</th><th title="Valor de amenaza">Amenaza</th><th>Salud</th><th>Concentración</th><th>Investidura</th><th title="Valor de desvío">Desvío</th><th></th></tr></thead><tbody>${filas}</tbody></table>`;
+    return `<div class="cb-scroll"><table class="cb-tabla cb-adv-tabla"><thead><tr><th></th><th>Adversario</th><th title="Valor de amenaza">Amenaza</th><th>Salud</th><th>Concentración</th><th>Investidura</th><th title="Valor de desvío">Desvío</th><th></th></tr></thead><tbody>${filas}</tbody></table></div>`;
   }
 
   function vEncuentro() {
@@ -174,6 +174,7 @@
           <label class="cb-campo">Notas del encuentro <textarea data-a="notas-enc" rows="2">${esc(enc.notas)}</textarea></label></section>
         <section class="cb-col cb-picker"><h3>Adversarios</h3>
           <div class="cb-filtros"><span class="muted">Ambientación:</span>${AMBS.map(([k, l, i]) => `<button class="chip${ui.amb === k ? ' on' : ''}" data-a="amb" data-id="${esc(k)}">${g.UI && g.UI.ic ? g.UI.ic(i, 'sm') : ''}${l}</button>`).join('')}</div>
+          <div class="cb-filtros"><span class="muted">Fuente:</span>${['', ...new Set(advs.map(a => a.libro).filter(Boolean))].map(l => `<button class="chip${ui.libro === l ? ' on' : ''}" data-a="libro" data-id="${esc(l)}">${g.UI && g.UI.ic ? g.UI.ic('book', 'sm') : ''}${l ? esc(l) : 'Todas'}</button>`).join('')}</div>
           <div class="cb-filtros"><input id="cb-q" type="search" placeholder="Buscar adversario…" value="${esc(ui.q)}">
             ${['Secuaz', 'Rival', 'Jefe'].map(x => `<button class="chip${ui.rol === x ? ' on' : ''}" data-a="rol" data-id="${x}">${x}</button>`).join('')}</div>
           <div id="cb-advs">${vAdvs(r)}</div></section></div>`;
@@ -211,6 +212,7 @@
       case 'restaurar': cambiar('Restaurar valores', e => e.combatientes.forEach(CB.restaurar)); break;
       case 'rol': ui.rol = ui.rol === id ? '' : id; render(); break;
       case 'amb': ui.amb = id; render(); break;
+      case 'libro': ui.libro = id; render(); break;
       case 'añadir': {
         const ad = advs.find(x => x.nombre === id);
         const n = enc.combatientes.filter(x => x.fuente === id).length + 1;

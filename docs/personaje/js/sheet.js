@@ -14,11 +14,12 @@
     ['salud_max', 'Salud máxima'], ['concentracion_max', 'Concentración máxima'], ['investidura_max', 'Investidura máxima'],
     ['defensa_fisica', 'Defensa física'], ['defensa_cognitiva', 'Defensa cognitiva'], ['defensa_espiritual', 'Defensa espiritual'],
     ['desvio', 'Desvío'], ['movimiento', 'Movimiento (m)'], ['pericia', 'Número de pericias'],
-  ].concat(PJ.ATRIBUTOS.map(a => [a.k, a.n])).concat(Object.keys(PJ.HABILIDADES).map(n => ['hab:' + n, 'Habilidad: ' + n]));
+  ].concat(PJ.ATRIBUTOS.map(a => [a.k, a.n])).concat(Object.keys(PJ.HABILIDADES).concat(Object.values(PJ.POTENCIAS).map(p => p.n)).map(n => ['hab:' + n, 'Habilidad: ' + n]));
 
   PJ.renderHoja = function (raiz, c) {
     const d = PJ.derivar(c);
     const D = PJ.datos();
+    const stormlight = PJ.ambito(c) === 'Stormlight';
     const guardar = () => { if (!PJ.store.guardar(c)) aviso('No se pudo guardar en el navegador. Exporta el personaje a JSON.'); };
     const cambiar = fn => { const y = window.scrollY; fn(c); guardar(); PJ.renderHoja(raiz, c); window.scrollTo(0, y); };
     const silencioso = fn => { fn(c); guardar(); };
@@ -53,10 +54,9 @@
       return e;
     };
 
-    const habilidadesDe = ak => Object.entries(PJ.HABILIDADES).filter(([, k]) => k === ak).map(([n]) => {
-      const x = d.habilidades[n];
-      const e = D.base.find(o => o.cat === 'habilidad' && o.title === n);
-      return h('div', { class: 'fila' + (x.grados ? ' entrenada' : '') + (e ? ' clic' : ''), ...(e ? abre(e) : {}) }, h('span', { class: 'nom' }, n),
+    const habilidadesDe = ak => Object.entries(d.habilidades).filter(([, x]) => x.atributo === ak).map(([n, x]) => {
+      const e = x.potencia ? D.byId['habilidad-stormlight-' + PJ.POTENCIA_POR_NOMBRE[n]] : D.base.find(o => o.cat === 'habilidad' && o.title === n);
+      return h('div', { class: 'fila' + (x.grados ? ' entrenada' : '') + (x.bloqueada ? ' latente' : '') + (e ? ' clic' : ''), ...(e ? abre(e) : {}) }, h('span', { class: 'nom' }, n),
         h('span', { class: 'grados' }, Array.from({ length: Math.max(x.grados, x.max) }, (_, i) => h('span', { class: 'dot' + (i < x.grados ? ' on' : '') }))),
         h('span', { class: 'mod' }, signo(x.mod)));
     });
@@ -149,7 +149,7 @@
     const acciones = (() => {
       const poseidos = new Set(d.talentos.todos);
       const activos = new Set();
-      for (const arte of ['alomancia', 'feruquimia']) {
+      for (const arte of stormlight ? [] : ['alomancia', 'feruquimia']) {
         if (!d.artes[arte]) continue;
         for (const p of c.poderes) if (p.arte === arte && p.desbloqueado) activos.add(`${NOM_ARTE[arte]} de ${nombreMetal(arte, p.metal)}`);
       }
@@ -158,6 +158,7 @@
         ['Talentos', e => e.f.talento && poseidos.has(e.f.talento)],
         ['Alomancia', e => e.f.origen === 'Alomancia' && activos.has(e.f.contexto)],
         ['Feruquimia', e => e.f.origen === 'Feruquimia' && activos.has(e.f.contexto)],
+        ['Radiante', e => e.f.origen === 'Radiante' && !!d.radiante],
         ['Otras', e => e.id === 'accion-beber-vial' ? hayArte : e.f.origen === 'Hemalurgia' && c.hemalurgia.clavos.length > 0],
         ['Generales', e => e.f.origen === 'General'],
       ];
@@ -199,7 +200,44 @@
     })();
 
     // ---------------- Poderes
-    const poderes = (() => {
+    const radiante = () => {
+      const sec = h('section', { class: 'pnl', 'data-tab': 'poderes' });
+      const r = d.radiante;
+      if (!r) {
+        sec.appendChild(h('h3', null, 'Radiante'));
+        sec.appendChild(h('p', { class: 'muted' }, 'Este personaje aún no es Radiante. Desde el nivel 2 puede elegir el talento de Primer Ideal de una orden (Talentos del asistente de nivel) y empezar a atraer a un spren.'));
+        return sec;
+      }
+      const sinPotencias = r.ideales < 1;
+      sec.appendChild(h('div', { class: 'bloque-arte' }, h('h3', null, r.nombre),
+        h('div', { class: 'datos-arte' },
+          h('span', null, h('b', null, 'Spren '), (c.radiante && c.radiante.spren) || r.spren || '—'),
+          h('span', null, h('b', null, 'Ideales '), `${r.ideales} / ${r.maxPoseido}`),
+          h('span', null, h('b', null, 'Investidura '), d.investidura === null ? '—' : String(d.investidura))),
+        r.filosofia ? h('p', { class: 'nota' }, r.filosofia) : null,
+        h('a', { class: 'enl noprint', href: `index.html#/arbol/${r.orden}`, target: '_blank', rel: 'noopener' }, 'Árbol de la orden')));
+      sec.appendChild(h('div', { class: 'bloque-arte' }, h('h3', null, 'Ideales'),
+        h('ul', { class: 'lista poderes' }, Array.from({ length: Math.max(1, r.maxPoseido) }, (_, i) => i + 1).map(k => {
+          const tiene = k <= r.maxPoseido, dicho = r.ideales >= k, prev = k === 1 || r.ideales >= k - 1;
+          return h('li', { class: dicho ? '' : 'latente' }, h('b', null, `${PJ.IDEALES[k - 1]} Ideal`),
+            tiene ? PJ.ui.puntos((c.radiante.hitos || {})[k] || 0, { n: 3, etiqueta: `Hitos del ${PJ.IDEALES[k - 1]} Ideal`, dis: dicho, alCambiar: v => cambiar(c => { c.radiante.hitos[k] = v; }) }) : null,
+            tiene ? h('label', { class: 'chk noprint' }, h('input', { type: 'checkbox', checked: dicho, disabled: !dicho && !prev,
+              onchange: e => cambiar(c => { c.radiante.ideales = e.target.checked ? k : k - 1; if (e.target.checked) c.radiante.hitos[k] = 3; }) }), ' Pronunciado') : null,
+            dicho ? null : h('span', { class: 'chip small soft' }, tiene ? 'meta en curso' : 'sin talento'));
+        }))));
+      sec.appendChild(h('div', { class: 'bloque-arte' }, h('h3', null, 'Potencias'),
+        sinPotencias ? h('p', { class: 'muted' }, 'Se obtienen al pronunciar el Primer Ideal.') : null,
+        h('ul', { class: 'lista poderes' }, r.potencias.map(p => {
+          const P = PJ.POTENCIAS[p], x = d.habilidades[P.n], esc = x ? PJ.escaladoPotencia(x.grados) : null;
+          return h('li', { class: x ? '' : 'latente' }, h('b', null, P.n), ` (${PJ.ATR[P.a].n})`,
+            x ? h('span', { class: 'datos-arte' },
+              h('span', null, h('b', null, 'Grados '), x.grados), h('span', null, h('b', null, 'Mod. '), signo(x.mod)),
+              h('span', null, h('b', null, 'Dado '), esc.dado), h('span', null, h('b', null, 'Tamaño '), esc.tamano)) : h('span', { class: 'chip small soft' }, 'latente'),
+            h('a', { class: 'enl noprint', href: `index.html#/arbol/${p}`, target: '_blank', rel: 'noopener' }, 'árbol'));
+        }))));
+      return sec;
+    };
+    const poderes = stormlight ? radiante() : (() => {
       const sec = h('section', { class: 'pnl', 'data-tab': 'poderes' });
       const arte = (nombre, clave) => {
         const lista = c.poderes.filter(p => p.arte === clave);
@@ -246,7 +284,7 @@
     const equipo = h('section', { class: 'pnl', 'data-tab': 'equipo' },
       h('h3', null, 'Equipo'),
       h('div', { class: 'datos-arte' },
-        h('span', null, h('b', null, 'Arquillas '), h('input', { type: 'number', min: 0, class: 'cant', value: c.arquillas, onchange: e => silencioso(c => { c.arquillas = Math.max(0, +e.target.value || 0); c.arquillasIni = null; }) })),
+        h('span', null, h('b', null, PJ.AMBITOS[PJ.ambito(c)].Divisa + ' '), h('input', { type: 'number', min: 0, class: 'cant', value: c.arquillas, onchange: e => silencioso(c => { c.arquillas = Math.max(0, +e.target.value || 0); c.arquillasIni = null; }) })),
         h('span', null, h('b', null, 'Peso '), `${d.peso.toFixed(1).replace('.', ',')} / ${d.carga} kg`),
         kit ? h('span', null, h('b', null, 'Conjunto '), enlaceEntrada(kit.id, kit.title.replace(/^Equipo inicial de /i, ''))) : null),
       d.peso > d.carga ? h('p', { class: 'mal' }, 'Llevas más peso que tu capacidad de carga.') : null,
@@ -303,12 +341,16 @@
         h('button', { type: 'button', class: 'btn peligro', onclick: () => { if (confirm(`¿Borrar a «${c.nombre || 'Sin nombre'}»? No se puede deshacer.`)) { PJ.store.borrar(c.id); location.hash = '#/'; } } }, 'Borrar personaje')));
 
     // ---------------- Cabecera y ensamblado
-    const sub = [PJ.ASCENDENCIAS[c.ascendencia].n, PJ.ui.nombreCamino(c.camino) || 'sin camino', `Era ${c.era}`].join(' · ');
+    const sub = [PJ.ascDe(c).n, PJ.ui.nombreCamino(c.camino) || 'sin camino', d.radiante ? d.radiante.nombre : null, stormlight ? 'Stormlight' : `Era ${c.era}`].filter(Boolean).join(' · ');
     const paneles = { resumen, acciones, talentos, poderes, equipo, historia, ajustes };
     const mostrar = k => {
       tabActual = k;
       raiz.querySelectorAll('.pnl').forEach(p => p.classList.toggle('on', p.dataset.tab === k));
-      raiz.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.tab === k));
+      raiz.querySelectorAll('.tab').forEach(t => {
+        const on = t.dataset.tab === k;
+        t.classList.toggle('on', on);
+        if (on && t.parentElement && t.parentElement.scrollWidth > t.parentElement.clientWidth) { const n = t.parentElement; n.scrollLeft = t.offsetLeft - (n.clientWidth - t.offsetWidth) / 2; }   // en pantallas estrechas la fila se desplaza: deja la activa a la vista
+      });
     };
     raiz.innerHTML = '';
     raiz.appendChild(h('div', { class: 'hoja' },
@@ -321,7 +363,7 @@
           h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar'))),
       d.pendientes || d.errores ? h('div', { class: 'banda noprint' }, d.errores ? `${d.errores} error(es)` : '', d.errores && d.pendientes ? ' · ' : '', d.pendientes ? `${d.pendientes} pendiente(s) de completar. ` : '',
         h('a', { href: `#/personajes/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
-      h('nav', { class: 'tabs noprint' }, TABS.map(([k, n]) => h('button', { type: 'button', class: 'tab', 'data-tab': k, onclick: () => mostrar(k) }, n))),
+      h('nav', { class: 'tabs noprint' }, TABS.map(([k, n]) => h('button', { type: 'button', class: 'tab', 'data-tab': k, onclick: () => mostrar(k) }, k === 'poderes' && stormlight ? 'Radiante' : n))),
       TABS.map(([k]) => paneles[k])));
     mostrar(tabActual);
   };

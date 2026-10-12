@@ -31,7 +31,7 @@
         const d = PJ.derivar(c);
         return h('a', { class: 'carta', href: '#/personajes/p/' + c.id },
           h('b', null, c.nombre || 'Sin nombre'),
-          h('span', null, `${PJ.ASCENDENCIAS[c.ascendencia].n} · ${PJ.ui.nombreCamino(c.camino) || 'sin camino'} · nivel ${d.nivel}`),
+          h('span', null, `${PJ.ambito(c) === 'Stormlight' ? 'Stormlight · ' : ''}${PJ.ascDe(c).n} · ${PJ.ui.nombreCamino(c.camino) || 'sin camino'}${d.radiante ? ' · ' + d.radiante.nombre : ''} · nivel ${d.nivel}`),
           d.pendientes ? h('span', { class: 'mal' }, `${d.pendientes} pendiente(s) de completar`) : null);
       })) : h('p', { class: 'vacio' }, 'Todavía no hay ningún personaje. Crea uno con el asistente paso a paso.')));
   }
@@ -46,7 +46,9 @@
     barra.hidden = !partes.length;
     if (!partes.length) return lista(raiz);
     if (partes[0] === 'nuevo') {
-      const c = PJ.nuevoPersonaje();
+      // La ambientación de la cabecera decide con qué ámbito y era arranca el personaje (se puede cambiar en el primer paso)
+      const amb = (g.CosmereAmb && g.CosmereAmb.id()) || '';
+      const c = PJ.nuevoPersonaje(amb === 'stormlight' ? { ambito: 'Stormlight' } : { era: amb === 'mistborn/2' ? 2 : 1 });
       PJ.store.guardar(c);
       location.replace(`#/personajes/p/${c.id}/crear/datos`);
       return;

@@ -36,6 +36,36 @@
     koloss: { n: 'Sangre koloss', arbol: 'ascendencia-de-sangre-koloss', auto: ['talento-resistencia-koloss-principal-de-sangre-koloss'], maxCreacion: { fuerza: 4 }, maxAtributo: { fuerza: 1 } },
   };
 
+  // Ascendencias por ámbito. `extraNivel1`: talento adicional ya en el nivel 1 (humana: de un camino heroico;
+  // cantora: uno de los talentos de formas iniciales, junto a Cambiar de forma, que es automático).
+  PJ.ASCENDENCIAS_STORMLIGHT = {
+    humana: { n: 'Humana', arbol: null, auto: [], extraNivel1: true, origen: 'origen-stormlight-ascendencia-humana' },
+    cantora: { n: 'Cantora', arbol: 'ascendencia-cantora', auto: ['talento-cambiar-de-forma-principal-de-cantor'], extraNivel1: true, origen: 'origen-stormlight-ascendencia-cantora' },
+  };
+  PJ.ASCENDENCIAS_AMB = { Mistborn: PJ.ASCENDENCIAS, Stormlight: PJ.ASCENDENCIAS_STORMLIGHT };
+  PJ.AMBITOS = {
+    Mistborn: { n: 'Mistborn', divisa: 'arquillas', Divisa: 'Arquillas' },
+    Stormlight: { n: 'Stormlight', divisa: 'marcos', Divisa: 'Marcos' },
+  };
+  PJ.ambito = c => (PJ.AMBITOS[c && c.ambito] ? c.ambito : 'Mistborn');
+  PJ.ascDe = c => { const T = PJ.ASCENDENCIAS_AMB[PJ.ambito(c)]; return T[c && c.ascendencia] || T.humana; };
+
+  // Potencias de Roshar (habilidades que da el Primer Ideal de una orden radiante) y su atributo.
+  PJ.POTENCIAS = {
+    abrasion: { n: 'Abrasión', a: 'velocidad' }, adhesion: { n: 'Adhesión', a: 'presencia' }, cohesion: { n: 'Cohesión', a: 'voluntad' },
+    division: { n: 'División', a: 'intelecto' }, gravitacion: { n: 'Gravitación', a: 'discernimiento' }, iluminacion: { n: 'Iluminación', a: 'presencia' },
+    progresion: { n: 'Progresión', a: 'discernimiento' }, tension: { n: 'Tensión', a: 'fuerza' }, transformacion: { n: 'Transformación', a: 'voluntad' },
+    transportacion: { n: 'Transportación', a: 'intelecto' },
+  };
+  PJ.POTENCIA_POR_NOMBRE = Object.fromEntries(Object.entries(PJ.POTENCIAS).map(([k, v]) => [v.n, k]));
+  // Escalado de potencias (capítulo 6): grados -> dado y tamaño máximo.
+  PJ.escaladoPotencia = grados => {
+    const t = [['—', '—'], ['d4', 'Pequeño (0,75 m)'], ['d6', 'Mediano (1,5 m)'], ['d8', 'Grande (3 m)'], ['d10', 'Enorme (4,5 m)'], ['d12', 'Gargantuesco (6 m)']];
+    const [dado, tamano] = t[Math.max(0, Math.min(5, grados))];
+    return { dado, tamano };
+  };
+  PJ.IDEALES = ['Primer', 'Segundo', 'Tercer', 'Cuarto'];
+
   PJ.BENDICIONES = {
     consciencia: { n: 'Bendición de la Consciencia', atr: { discernimiento: 2 }, max: { discernimiento: 2 } },
     potencia: { n: 'Bendición de la Potencia', atr: { fuerza: 1, velocidad: 1 }, max: { fuerza: 1, velocidad: 1 } },
@@ -83,7 +113,7 @@
     return gana + fue * veces;
   };
   PJ.talentosAscendenciaExtra = (nivel, asc) => {
-    const base = asc === 'humana' ? 1 : 0;
+    const base = (asc && typeof asc === 'object' ? asc.extraNivel1 : asc === 'humana') ? 1 : 0;
     return base + [6, 11, 16, 21].filter(n => nivel >= n).length;
   };
   PJ.talentosLibres = (nivel, elecciones21) => (Math.min(nivel, 20) - 1) + (elecciones21 || []).filter(x => x === 'talento').length;
@@ -107,7 +137,7 @@
   PJ.cargasFeruquimia = grados => 2 + Math.max(0, grados);
 
   // Recompensas al empezar en niveles superiores (capítulo 13): { arquillas por era, rangos de recompensa }.
-  PJ.recompensasInicio = (nivelInicial, era) => {
+  PJ.recompensasInicio = (nivelInicial, era, ambito) => {
     if (nivelInicial <= 1) return null;
     const r = PJ.rango(nivelInicial);
     const tabla = {
@@ -117,6 +147,7 @@
       4: { ar: [2500, 5000], rec: { 1: 2, 2: 1, 3: 1, 4: 1 } },
       5: { ar: [2500, 5000], rec: { 1: 2, 2: 1, 3: 1, 4: 1 } },
     }[r];
-    return { arquillas: tabla.ar[era === 2 ? 1 : 0], recompensas: tabla.rec };
+    // Stormlight usa la misma escala que la Era 2 de Mistborn (200 / 1.000 / 2.000 / 5.000 marcos)
+    return { arquillas: tabla.ar[era === 2 || ambito === 'Stormlight' ? 1 : 0], recompensas: tabla.rec };
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -58,6 +58,9 @@
     }
     r.estado.estados = '';
     r.hemalurgia = Object.assign({}, base.hemalurgia, c.hemalurgia);
+    r.radiante = Object.assign({}, base.radiante, c.radiante);
+    if (!r.radiante.hitos || typeof r.radiante.hitos !== 'object') r.radiante.hitos = {};
+    if (!PJ.AMBITOS[r.ambito]) r.ambito = 'Mistborn';
     if (!r.id) r.id = PJ.nuevoId();
     return r;
   }

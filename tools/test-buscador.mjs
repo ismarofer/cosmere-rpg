@@ -57,6 +57,26 @@ const cases = [
   ['defensas', /calculo:Defensas/i, 2],
   ['alcance de los sentidos', /calculo:Alcance de los sentidos/i, 1],
   ['prevenirse con palanca', /talento:Prevenirse con palanca/i, 1],
+  ['cultura alezi', /origen:Alezi/i, 1],
+  ['ascendencia cantora', /origen:Ascendencia cantora/i, 1],
+  ['pericia oyente', /pericia:Pericia Oyente/i, 1],
+  ['hoja esquirlada', /arma:Hoja esquirlada/i, 1],
+  ['semiesquirla', /arma:Semiesquirla/i, 1],
+  ['armadura esquirlada', /armadura:Armadura esquirlada/i, 1],
+  ['sillalibre', /equipo:Sillalibre/i, 1],
+  ['moldeador de almas', /equipo:Moldeador de almas/i, 1],
+  ['cambiar de forma', /talento:Cambiar de forma/i, 1],
+  ['entrenamiento de esquirlada', /talento:Entrenamiento de esquirlada/i, 1],
+  ['filo asesino', /talento:Filo asesino/i, 1],
+  ['enlace inverso', /talento:Enlace inverso/i, 1],
+  ['escuadron aereo', /talento:Escuadrón aéreo/i, 1],
+  ['luz y antiluz', /regla:Luz y antiluz/i, 1],
+  ['fabricar fabriales', /regla:Fabricación de fabriales comunes/i, 1],
+  ['honorspren', /regla:Honorspren/i, 1],
+  ['equipo inicial roshar', /regla:Equipo inicial \(Roshar\)/i, 1],
+  ['abrasion inversa', /talento:Abrasión inversa/i, 1],
+  ['absorber luz tormentosa', /accion:Absorber luz tormentosa/i, 1],
+  ['forma tormenta', /talento:Formas de destrucción/i, 1],
 ];
 
 const djCases = [
@@ -87,7 +107,48 @@ for (const e of ctx.DATA_BASE) {
   }
 }
 const asc = ctx.DATA_ARBOLES.filter((a) => a.tipo === 'Ascendencia/Cultura');
-if (asc.length !== 2 || asc.some((a) => !a.efectos.length)) { fail++; console.log('FAIL ascendencias sin efectos'); }
+// caminos heroicos: Mistborn + Stormlight en el mismo árbol; lo común, Cosmere; las especialidades nuevas, solo Stormlight
+const heroicos = ctx.DATA_BASE.filter((e) => e.cat === 'talento' && e.f.tipo_origen === 'Camino heroico');
+const espDe = (amb, origen) => new Set(heroicos.filter((e) => e.ambientacion === amb && e.f.origen === origen).map((e) => e.f.especialidad));
+const heroCasos = [
+  ['hay talentos comunes (Cosmere)', heroicos.filter((e) => e.ambientacion === 'Cosmere').length >= 40],
+  ['Espía solo Stormlight', espDe('Stormlight', 'Agente').has('Espía') && !espDe('Mistborn', 'Agente').has('Espía')],
+  ['Rebelde solo Mistborn', espDe('Mistborn', 'Agente').has('Rebelde') && !espDe('Stormlight', 'Agente').has('Rebelde')],
+  ['Ardid táctico es de Político', heroicos.some((e) => e.title === 'Ardid táctico' && e.f.especialidad === 'Político')],
+  ['Plan maestro es de Planificador', heroicos.some((e) => e.title === 'Plan maestro' && e.f.especialidad === 'Planificador')],
+  ['sin talentos heroicos sin especialidad', heroicos.every((e) => e.f.especialidad)],
+];
+for (const [n, ok] of heroCasos) { if (!ok) { fail++; console.log('FAIL heroicos:', n); } }
+// caminos radiantes: nueve órdenes con 9 talentos de vínculo (+ el árbol Iluminado); el talento de Primer Ideal da Investidura
+const radiantes = ctx.DATA_ARBOLES.filter((a) => a.tipo === 'Camino radiante');
+const idealOk = radiantes.filter((a) => a.nombre !== 'Iluminado').every((a) => a.talentos.length === 9 && a.talento_principal &&
+  ctx.DATA_BASE.find((e) => e.id === a.talento_principal).x.efectos.some((x) => x.objetivo === 'investidura_max'));
+const potencias = ctx.DATA_ARBOLES.filter((a) => a.tipo === 'Potencia');
+if (potencias.length !== 10 || potencias.some((a) => a.talentos.length !== 8)) { fail++; console.log('FAIL potencias (10 árboles de 8 talentos)'); }
+if (radiantes.length !== 10 || !idealOk) { fail++; console.log('FAIL caminos radiantes'); }
+// talentos de Mistborn: texto, prerrequisitos y enlaces del PDF (tools/extraer_talentos_pdf.py)
+const tm = (t, o) => ctx.DATA_BASE.find((e) => e.cat === 'talento' && e.title === t && e.ambientacion !== 'Stormlight' && (!o || e.f.origen === o));
+const nombresReq = (e) => (e.x.req || []).map((i) => ctx.DATA_BASE.find((x) => x.id === i).title);
+const pdfCasos = [
+  ['Ruptura de brumoso una sola vez', ctx.DATA_BASE.filter((e) => e.cat === 'talento' && e.f.origen === 'Brumoso' && /^Ruptura de brumoso/.test(e.title)).length === 1],
+  ['Poderoso (Enviado) cuelga de Demostración práctica', nombresReq(tm('Poderoso', 'Enviado')).includes('Demostración práctica')],
+  ['Burbuja defensiva cuelga de Burbuja espontánea', nombresReq(tm('Burbuja defensiva')).includes('Burbuja espontánea')],
+  ['Quemar instintivamente (Nacidoble) cuelga del principal', nombresReq(tm('Quemar instintivamente', 'Nacidoble')).some((n) => /Herencia nacidoble/.test(n))],
+  ['Francotirador con monedas sin texto de otra sección', !/aluminio/i.test(tm('Francotirador con monedas').body + (tm('Francotirador con monedas').mecanica || ''))],
+  ['Contemplación profunda sin párrafo de Medicina', !/dado de recuperación/.test((tm('Contemplación profunda').mecanica || '') + tm('Contemplación profunda').body)],
+  ['Echar leña al fuego y Ejecución fluida son de activación Especial (la carta del libro lleva ★)', tm('Echar leña al fuego').f.activacion === 'Especial' && tm('Ejecución fluida').f.activacion === 'Especial'],
+  ['Vidente social sin crédito de ilustrador en el prerrequisito', !/CLARK/.test(tm('Vidente social').f.prerrequisito)],
+  ['Análisis rápido (común) cuelga de todas las variantes de Ojo avizor',
+   ctx.DATA_BASE.filter((e) => e.cat === 'talento' && e.title === 'Ojo avizor').every((o) => ctx.DATA_BASE.filter((e) => e.title === 'Análisis rápido' && e.cat === 'talento').some((a) => (a.x.req || []).includes(o.id)))],
+  ['Tercer Ideal cuelga del Segundo (Corredores del viento)',
+   nombresReq(ctx.DATA_BASE.find((e) => e.cat === 'talento' && /^Tercer Ideal/.test(e.title) && e.f.origen === 'Corredores del viento')).some((n) => /^Segundo Ideal/.test(n))],
+  ['Segundo Ideal cuelga del Primer Ideal (principal)',
+   nombresReq(ctx.DATA_BASE.find((e) => e.cat === 'talento' && /^Segundo Ideal/.test(e.title) && e.f.origen === 'Corredores del viento')).some((n) => /^Primer Ideal/.test(n))],
+  ['talentos de potencia sin talento padre cuelgan de la potencia',
+   ctx.DATA_BASE.filter((e) => e.cat === 'talento' && e.f.tipo_origen === 'Potencia' && !/talento/i.test(e.f.prerrequisito)).every((e) => e.x.power)],
+];
+for (const [n, ok] of pdfCasos) { if (!ok) { fail++; console.log('FAIL talentos (PDF):', n); } }
+if (asc.length !== 3 || asc.some((a) => !a.efectos.length)) { fail++; console.log('FAIL ascendencias sin efectos'); }
 const mod = ctx.DATA_BASE.filter((e) => e.cat === 'modificador');
 if (mod.length < 100 || mod.some((m) => m.x.fuente_id && !ctx.DATA_BASE.some((e) => e.id === m.x.fuente_id))) { fail++; console.log('FAIL modificadores'); }
 

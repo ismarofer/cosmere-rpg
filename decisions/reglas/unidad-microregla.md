@@ -73,6 +73,14 @@ Los consejos de DJ de otros temas (p. ej. «Preparar la escena (DJ)» en Combate
 - **Metadatos**: título, fuente (`primary_source_name`) y descripción breve de cada página salen del HTML público de Demiplane (`app.demiplane.com/nexus/cosmererpg/rules/<slug>`); no se copia su texto.
 - **Pendiente de cargar**: la Guía del mundo (trasfondo: autonomía, armonía, el lord Legislador, las brumas, religiones…) y los personajes pregenerados.
 
+## Stormlight
+
+- Las microrreglas de Stormlight son **solo las que no tiene Mistborn**: luz tormentosa e Investidura, caminos radiantes, ideales, spren, escuderos, órdenes, potencias, fabriales (y sus efectos únicos), esferas, equipo inicial de Roshar, cantores y la bienvenida a Roshar (85). Combate, conversaciones, empeños, descanso, dirección y las reglas básicas ya existen y no se repiten.
+- Tema «Stormlight» (con asuntos propios) y ambientación Stormlight, de modo que el filtro global de la cabecera las separa. Id `regla-roshar-<slug>`.
+- Las fuentes no se declaran por id sino por (categoría, título) en `tools/buscador_reglas_stormlight.py`; si el libro cambia y una falta, el build falla. Las órdenes y los spren se componen por palabras clave del título (el PDF dejó textos de unas órdenes en los ficheros de otras).
+- Lo que Mistborn y Stormlight comparten pero con cifras o divisa distintas se publica separado con coletilla: «Equipo inicial (Scadrial)» y «Equipo inicial (Roshar)», «Objetos Investidos (Roshar)».
+- Siguen sin publicarse los consejos de DJ de Stormlight sin página de reglas propia (p. ej. «Cómo gestionar la luz tormentosa», «Los Rompedores del Cielo y el canon»); quedan en la página de su camino.
+
 ## Una sola sección «Reglas»
 
 El menú Reglas tiene un único catálogo (las microrreglas). Quedan fuera, sin publicar: introducción y ambientación, interpretación, ejemplos de habilidades, ejemplos de recompensas y compañeros animales, y personajes pregenerados. El trasfondo (Guía del mundo y ambientaciones) se incorporará más adelante. El texto específico de cada camino se ve en la página de su camino (catálogo «Textos de caminos», fuera del menú).

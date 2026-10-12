@@ -15,13 +15,19 @@ Qué hace:
     contra el libro si se corrige algo).
   - Rasgos de armas/armaduras: se cortan del texto de "Rasgos de las armas/armaduras".
 """
-import json, re, sys, unicodedata
+import collections, json, re, sys, unicodedata
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from buscador_efectos import aplicar as aplicar_efectos, OBJ_NOMBRE
 from buscador_guia import glosario, limpia_guia
 from buscador_personaje import redirige_modificadores, reorganizar
 from buscador_reglas import build_reglas
+from buscador_reglas_stormlight import reglas as reglas_stormlight, kits_en_equipo
+from buscador_stormlight_ordenes import enlaza as enlaza_ordenes
+from buscador_stormlight_cantor import talentos as stormlight_talentos
+from buscador_stormlight_objetos import objetos as stormlight_objetos, pericias as stormlight_pericias_objetos
+from buscador_personaje import DEF_PERICIA
+from buscador_stormlight import origenes as stormlight_origenes, pericias_especializadas as stormlight_pericias, pericias_de_utilidad as stormlight_utilidad, habilidades_potencia as stormlight_habilidades_potencia
 from buscador_extras import build_mini, build_creacion, build_habilidades_investidas, apply_ambientacion, aplicar_eras, es_basura, link_talents, split_ascendencias
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -236,12 +242,17 @@ ESTADOS = {"Concentrado", "Desorientado", "Desprovisto", "Afligido", "Agotado", 
            "Mejorado", "Mermado"}
 
 ACTIVACION = {"1": "1 acción", "2": "2 acciones", "3": "3 acciones", "0": "Acción gratuita",
-              "r": "Reacción", "R": "Reacción", "*": "Especial", "8": "Siempre activo"}
+              "r": "Reacción", "R": "Reacción", "*": "Especial", "8": "Siempre activo",
+              "∞": "Siempre activo", "↻": "Reacción", "▷": "Acción gratuita"}  # los tres últimos, en el Manual de Stormlight
 
 SKILLS = ["Agilidad", "Armamento ligero", "Armamento pesado", "Atletismo", "Engaño", "Deducción",
           "Diplomacia", "Disciplina", "Hurto", "Intimidación", "Liderazgo", "Manufactura", "Medicina",
           "Percepción", "Perspicacia", "Persuasión", "Saber", "Sigilo", "Supervivencia", "Feruquimia",
           "Alomancia", "Hemalurgia", "Pilotaje"]
+
+def quita_icono(t):
+    """«2 Avance cauteloso», «∞ Robusto», «↻ Ojo avizor», «r Resiliencia heroica», «* Postura resuelta»: el título sin su icono."""
+    return re.sub(r"^(?:[\d★∞↻▷*]+\s*|r\s+(?=[A-ZÁÉÍÓÚÑ]))+(?=[A-Za-zÁÉÍÓÚÑ¡¿])", "", t.strip())
 
 def parse_talent(title, body, source_label, source_kind, pages, path, extra_map):
     joined = " ".join(body.split("\n")[:6])
@@ -257,7 +268,7 @@ def parse_talent(title, body, source_label, source_kind, pages, path, extra_map)
     if ms:
         skill, degrees = ms.group(1).strip(), int(ms.group(2))
     t = clean_title(title)
-    t = re.sub(r"^[\d★\s]+(?=[A-Za-zÁÉÍÓÚÑ])", "", t)  # la cifra del icono de acción se cuela en algunos encabezados
+    t = quita_icono(t)  # la cifra o el símbolo del icono de acción se cuela en algunos encabezados
     star = "★" in title
     t = t.replace("★", "").strip()
     info = extra_map.get(norm(t), {})
@@ -280,6 +291,8 @@ SPEC_ORDER = {  # en estos caminos el encabezado de la 1.ª especialidad se pier
     "Erudito": ["Cirujano", "Inventor", "Estratega"],
 }
 
+TREE_SIGUE_TRAS_ESPECIALIDAD = False  # en el Manual de Stormlight (Erudito) las tarjetas del árbol van detrás de los textos largos
+
 def tree_map(txt, ftitle=""):
     """Mapa nombre-de-talento -> {esp, star} a partir del árbol del camino (# especialidad / #### talento)."""
     mp, cur = {}, ""
@@ -290,7 +303,7 @@ def tree_map(txt, ftitle=""):
         if not h:
             continue
         lvl, title = len(h.group(1)), h.group(2)
-        if order and lvl == 2 and clean_title(title).startswith("Especialidad de"):
+        if order and lvl == 2 and clean_title(title).startswith("Especialidad de") and not TREE_SIGUE_TRAS_ESPECIALIDAD:
             break
         if lvl == 1 and re.match(r"(C[oó]mo usar|Cap[ií]tulo)", clean_title(title), re.I):
             break
@@ -301,7 +314,7 @@ def tree_map(txt, ftitle=""):
         elif lvl == 4 and (cur or order):
             star = "★" in title
             name = clean_title(title.replace("★", "")).strip()
-            name = re.sub(r"^\d\s+", "", name)
+            name = quita_icono(name)
             if order:
                 if not name or len(name.split()) > 5 or re.search(r"\bERA\b|Cap[ií]tulo", name, re.I) or norm(name) in seen:
                     continue
@@ -331,108 +344,118 @@ def process_manual():
         for f in sorted(chdir.glob("*.md")):
             meta, txt = read_md(f)
             ftitle = clean_title(meta.get("title", f.stem))
-            pages = meta.get("pages", "")
-            tmap = tree_map(txt, ftitle) if num in ("05", "06", "07") else {}
-            chunks = split_chunks(txt, tmap)
+            _procesa_texto(num, cat0, chapter_label, ftitle, meta.get("pages", ""), txt, f, f.stem)
+    _cierra_talentos()
+
+
+KIND_OVERRIDE = {}  # capítulo -> tipo de origen del talento, cuando el libro es otro (Stormlight: «06» son los caminos radiantes)
+
+def _procesa_texto(num, cat0, chapter_label, ftitle, pages, txt, f, stem):
+    """Reparte el texto de un camino/capítulo en entradas (talentos, acciones, texto). `f` solo identifica la sección propia."""
+    tmap = tree_map(txt, ftitle) if num in ("05", "06", "07") else {}
+    chunks = split_chunks(txt, tmap)
+    prev = None
+    # la maquetación a doble columna deja los primeros talentos de la 1.ª especialidad antes de su encabezado
+    cur_spec = ""
+    for c in chunks:
+        m0 = re.match(r"^Especialidad de (.+)$", clean_title(c["title"] or ""))
+        if m0 and c["level"] == 2:
+            cur_spec = m0.group(1).strip()
+            break
+    for c in chunks:
+        title = c["title"] or ftitle
+        mspec = re.match(r"^Especialidad de (.+)$", clean_title(title))
+        if mspec and c["level"] == 2:
+            cur_spec = mspec.group(1).strip()
+        elif clean_title(title).lower().startswith("talento principal"):
+            cur_spec = "Principal"
+        body = body_text(c["lines"])
+        if c["level"] == 0 and len(chunks) > 1:
+            continue  # cola de la sección anterior (maquetación a doble columna)
+        if c["level"] == 0 and len(body) < 120:
+            continue
+        clean_t = clean_title(title)
+        path = [chapter_label, ftitle] if clean_t != ftitle else [chapter_label]
+        if c["title"] and clean_t != ftitle and c["level"] >= 2:
+            pass
+        # --- talentos
+        if TALENT_BODY.match(body) or (c["level"] == 4 and norm(quita_icono(clean_title(title.replace("★", "")).strip())) in tmap and len(body) > 40):
+            kind = KIND_OVERRIDE.get(num) or {"05": "Camino heroico", "06": "Camino de nacido del metal",
+                    "07": "Arte metálica", "03": "Ascendencia/Cultura"}.get(num, "Otro")
+            e = parse_talent(title, body, ftitle, kind, pages, [chapter_label, ftitle],
+                             tmap if num == "05" else {})
+            e["body"] = body
+            # La especialidad no se puede deducir de forma fiable (columnas desordenadas): solo el talento principal
+            if "(principal" in title.lower():
+                e["f"]["especialidad"] = "Principal"
+            if kind == "Arte metálica":
+                mm = re.match(r"^(Alomancia|Feruquimia|Hemalurgia)\s+de\s+(.+)$", ftitle)
+                e["f"]["arte"] = mm.group(1) if mm else ftitle
+                e["f"]["metal"] = mm.group(2) if mm else ""
+            key = (kind, ftitle, norm(e["title"]))
+            old = TALENTS.get(key)
+            if old is None:
+                TALENTS[key] = e
+            else:
+                # el mismo talento aparece en el árbol (resumen) y en la descripción completa
+                best, other = (e, old) if (e["f"]["activacion"] != "—" and old["f"]["activacion"] == "—") or                             (len(e["body"]) > len(old["body"]) and (e["f"]["activacion"] != "—") == (old["f"]["activacion"] != "—")) else (old, e)
+                if other["f"]["especialidad"] and not best["f"]["especialidad"]:
+                    best["f"]["especialidad"] = other["f"]["especialidad"]
+                if other["f"]["clave"] and not best["f"]["clave"]:
+                    best["f"]["clave"] = other["f"]["clave"]
+                if other["body"] != best["body"]:
+                    best["_resumen"] = other["body"]
+                TALENTS[key] = best
             prev = None
-            # la maquetación a doble columna deja los primeros talentos de la 1.ª especialidad antes de su encabezado
-            cur_spec = ""
-            for c in chunks:
-                m0 = re.match(r"^Especialidad de (.+)$", clean_title(c["title"] or ""))
-                if m0 and c["level"] == 2:
-                    cur_spec = m0.group(1).strip()
-                    break
-            for c in chunks:
-                title = c["title"] or ftitle
-                mspec = re.match(r"^Especialidad de (.+)$", clean_title(title))
-                if mspec and c["level"] == 2:
-                    cur_spec = mspec.group(1).strip()
-                elif clean_title(title).lower().startswith("talento principal"):
-                    cur_spec = "Principal"
-                body = body_text(c["lines"])
-                if c["level"] == 0 and len(chunks) > 1:
-                    continue  # cola de la sección anterior (maquetación a doble columna)
-                if c["level"] == 0 and len(body) < 120:
-                    continue
-                clean_t = clean_title(title)
-                path = [chapter_label, ftitle] if clean_t != ftitle else [chapter_label]
-                if c["title"] and clean_t != ftitle and c["level"] >= 2:
-                    pass
-                # --- talentos
-                if TALENT_BODY.match(body) or (c["level"] == 4 and norm(re.sub(r"^\d\s+", "", clean_title(title.replace("★", "")).strip())) in tmap and len(body) > 40):
-                    kind = {"05": "Camino heroico", "06": "Camino de nacido del metal",
-                            "07": "Arte metálica", "03": "Ascendencia/Cultura"}.get(num, "Otro")
-                    e = parse_talent(title, body, ftitle, kind, pages, [chapter_label, ftitle],
-                                     tmap if num == "05" else {})
-                    e["body"] = body
-                    # La especialidad no se puede deducir de forma fiable (columnas desordenadas): solo el talento principal
-                    if "(principal" in title.lower():
-                        e["f"]["especialidad"] = "Principal"
-                    if kind == "Arte metálica":
-                        mm = re.match(r"^(Alomancia|Feruquimia|Hemalurgia)\s+de\s+(.+)$", ftitle)
-                        e["f"]["arte"] = mm.group(1) if mm else ftitle
-                        e["f"]["metal"] = mm.group(2) if mm else ""
-                    key = (kind, ftitle, norm(e["title"]))
-                    old = TALENTS.get(key)
-                    if old is None:
-                        TALENTS[key] = e
-                    else:
-                        # el mismo talento aparece en el árbol (resumen) y en la descripción completa
-                        best, other = (e, old) if (e["f"]["activacion"] != "—" and old["f"]["activacion"] == "—") or                             (len(e["body"]) > len(old["body"]) and (e["f"]["activacion"] != "—") == (old["f"]["activacion"] != "—")) else (old, e)
-                        if other["f"]["especialidad"] and not best["f"]["especialidad"]:
-                            best["f"]["especialidad"] = other["f"]["especialidad"]
-                        if other["f"]["clave"] and not best["f"]["clave"]:
-                            best["f"]["clave"] = other["f"]["clave"]
-                        if other["body"] != best["body"]:
-                            best["_resumen"] = other["body"]
-                        TALENTS[key] = best
-                    prev = None
-                    continue
-                # --- acciones / reacciones
-                m = COST_HEAD.match(re.sub(r"\s*\bERA\s*[12]\b", "", title).strip())
-                if m and (num in ("11", "06", "09")):
-                    cost = m.group(2).lower()
-                    tipo = "Reacción" if cost == "r" else ("Acción gratuita" if cost == "0" else "Acción")
-                    add({"cat": "accion", "title": clean_title(m.group(1)), "path": [chapter_label, ftitle],
-                         "pages": pages, "body": body, "era": find_era(title),
-                         "f": {"coste": {"r": "r"}.get(cost, cost), "tipo": tipo,
-                               "contexto": ftitle}})
-                    prev = None
-                    continue
-                # --- estados
-                if f.stem.endswith("Estados") and clean_t in ESTADOS and c["level"] == 2:
-                    add({"cat": "estado", "title": clean_t, "path": [chapter_label, "Estados"],
-                         "pages": pages, "body": body, "f": {}})
-                    prev = None
-                    continue
-                # --- habilidades
-                ms = re.match(r"^(.+?)\s*\(([A-Za-zñé]+)\)$", clean_t)
-                if num == "04" and ms and ms.group(2) in ATTR_TYPE and c["level"] == 2:
-                    attr = ms.group(2)
-                    add({"cat": "habilidad", "title": ms.group(1).strip(),
-                         "path": [chapter_label, "Habilidades"], "pages": pages, "body": body,
-                         "f": {"atributo": attr, "defensa": ATTR_TYPE[attr]}})
-                    prev = None
-                    continue
-                # --- resto de texto
-                if len(body) < 150:
-                    if c["level"] >= 3 and prev is not None and len(body) >= 40:
-                        prev["body"] += f"\n\n#### {clean_t}\n{body}"
-                    continue
-                cat = cat0
-                if norm(clean_t) == norm(ftitle) and c["level"] >= 1:
-                    # varios fragmentos con el nombre de la propia sección (p. ej. intro + tabla): se unen
-                    own = OWN.get((f, norm(clean_t)))
-                    if own is not None:
-                        own["body"] += "\n\n" + body
-                        prev = own
-                        continue
-                # Capítulo 7: las tablas de armas/armaduras/equipo van a catálogos curados;
-                # su texto sigue disponible como 'objeto'
-                prev = add({"cat": cat, "title": clean_t, "path": path, "pages": pages, "body": body,
-                            "era": find_era(title), "f": {"seccion": ftitle}})
-                if norm(clean_t) == norm(ftitle) and c["level"] >= 1:
-                    OWN[(f, norm(clean_t))] = prev
+            continue
+        # --- acciones / reacciones
+        m = COST_HEAD.match(re.sub(r"\s*\bERA\s*[12]\b", "", title).strip())
+        if m and (num in ("11", "06", "09")):
+            cost = m.group(2).lower()
+            tipo = "Reacción" if cost == "r" else ("Acción gratuita" if cost == "0" else "Acción")
+            add({"cat": "accion", "title": clean_title(m.group(1)), "path": [chapter_label, ftitle],
+                 "pages": pages, "body": body, "era": find_era(title),
+                 "f": {"coste": {"r": "r"}.get(cost, cost), "tipo": tipo,
+                       "contexto": ftitle}})
+            prev = None
+            continue
+        # --- estados
+        if stem.endswith("Estados") and clean_t in ESTADOS and c["level"] == 2:
+            add({"cat": "estado", "title": clean_t, "path": [chapter_label, "Estados"],
+                 "pages": pages, "body": body, "f": {}})
+            prev = None
+            continue
+        # --- habilidades
+        ms = re.match(r"^(.+?)\s*\(([A-Za-zñé]+)\)$", clean_t)
+        if num == "04" and ms and ms.group(2) in ATTR_TYPE and c["level"] == 2:
+            attr = ms.group(2)
+            add({"cat": "habilidad", "title": ms.group(1).strip(),
+                 "path": [chapter_label, "Habilidades"], "pages": pages, "body": body,
+                 "f": {"atributo": attr, "defensa": ATTR_TYPE[attr]}})
+            prev = None
+            continue
+        # --- resto de texto
+        if len(body) < 150:
+            if c["level"] >= 3 and prev is not None and len(body) >= 40:
+                prev["body"] += f"\n\n#### {clean_t}\n{body}"
+            continue
+        cat = cat0
+        if norm(clean_t) == norm(ftitle) and c["level"] >= 1:
+            # varios fragmentos con el nombre de la propia sección (p. ej. intro + tabla): se unen
+            own = OWN.get((f, norm(clean_t)))
+            if own is not None:
+                own["body"] += "\n\n" + body
+                prev = own
+                continue
+        # Capítulo 7: las tablas de armas/armaduras/equipo van a catálogos curados;
+        # su texto sigue disponible como 'objeto'
+        prev = add({"cat": cat, "title": clean_t, "path": path, "pages": pages, "body": body,
+                    "era": find_era(title), "f": {"seccion": ftitle}})
+        if norm(clean_t) == norm(ftitle) and c["level"] >= 1:
+            OWN[(f, norm(clean_t))] = prev
+
+
+def _cierra_talentos():
     for e in TALENTS.values():
         # la línea "Prerrequisito: … Activación: X" ya está en los campos: fuera del cuerpo
         e["body"] = re.sub(r"^\s*Prerrequisitos?:.{0,260}?Activaci[oó]n:\s*\S+\s*", "", e["body"], flags=re.S).strip() or e["body"]
@@ -462,6 +485,457 @@ def process_manual():
         elif mech:
             e["resumen"] = re.split(r"\n\s*\n", mech)[0].strip()
         add(e)
+
+# --------------------------------------------------------------------------- Stormlight: Guía del Mundo y bestiario (DJ)
+GUIA_SL = RES / "Guia del Mundo del Archivo de las Tormentas"
+GUIA_SL_CAP = {"02": "Cap. 1 El Mundo", "03": "Cap. 2 Naciones y Culturas", "04": "Cap. 3 Cosmología y Religión",
+               "05": "Cap. 4 Historia de Roshar", "06": "Cap. 5 Aliados y Organizaciones", "07": "Cap. 6 Puntos de Interés",
+               "08": "Cap. 7 Shadesmar"}
+# capítulo -> {nº de fichero: (catálogo, tipo)}; «*» es el valor por defecto del capítulo
+GUIA_SL_CLASE = {
+    "02": {"*": ("historia", "El mundo")},
+    "03": {"01": ("lugar", "Pueblos"), "13": ("lugar", "Pueblos"), "*": ("lugar", "Región")},
+    "04": {"07": ("cosmologia", "Religión"), "*": ("cosmologia", "Cosmología")},
+    "05": {"*": ("historia", "Historia")},
+    "06": {"*": ("pnj", "Personaje")},
+    "07": {"*": ("lugar", "Lugar de interés")},
+    "08": {"*": ("lugar", "Lugar de interés")},
+}
+GUIA_SL_ORGANIZACIONES = {"La coalición de monarcas", "Las fuerzas de Odium", "El Diagrama", "Los Sangre Espectral", "Rompedores del Cielo",
+                          "Hijos de Honor", "Cantamundos", "Kaladin y el Puente Cuatro"}
+
+
+def process_stormlight_guia():
+    """Guía del Mundo del Archivo de las Tormentas (lore de Roshar): una entrada por apartado, solo Modo DJ, en los mismos catálogos
+    que la de Mistborn (Lugares, Personajes y organizaciones, Cosmología y religión, Historia, Glosario). La ambientación de la
+    cabecera es lo que las separa."""
+    n = 0
+    for chdir in sorted(GUIA_SL.iterdir()):
+        num = chdir.name[:2]
+        if num not in GUIA_SL_CAP:
+            continue
+        for f in sorted(chdir.glob("*.md")):
+            fnum = f.stem[:2]
+            titulo = re.sub(r"^\d+ - ", "", f.stem).strip()
+            if re.match(r"(?i)c[oó]mo usar", titulo):
+                continue  # instrucciones del libro
+            meta, txt = read_md(f)
+            chunks = split_chunks(txt)
+            if not chunks:
+                continue
+            h1c = next((c for c in chunks if c["title"] and c["level"] == 1 and not re.match(r"Cap[ií]tulo \d|Apéndice", c["title"])
+                        and body_text(c["lines"])), None)
+            partes = _partes_guia(chunks, titulo, h1c)
+            body = _texto_partes(partes)
+            if len(body) < 150:
+                continue
+            clase = GUIA_SL_CLASE.get(num, {})
+            cat, tipo = clase.get(fnum) or clase.get("*") or ("cosmologia", "Cosmología")
+            if cat == "pnj" and titulo in GUIA_SL_ORGANIZACIONES:
+                tipo = "Organización"
+            e = add({"cat": cat, "title": titulo, "path": ["Guía Roshar · " + GUIA_SL_CAP[num], tipo], "pages": meta.get("pages", ""),
+                     "body": body, "f": {"tipo": tipo}}, gated=True)
+            e["era"] = "Stormlight"
+            e["libro"] = "Guía Roshar"
+            n += 1
+    # Apéndice A: glosario y pronunciación (mismo formato de tabla que el de Mistborn)
+    d = next((x for x in sorted(GUIA_SL.iterdir()) if x.name.startswith("10 - ")), None)
+    if d:
+        meta, txt = read_md(next(d.glob("*.md")))
+        # el glosario de Stormlight son tres líneas por término (nombre, pronunciación, traducción), tras «Nombre en inglés / …»
+        lineas, salta = [], False  # entre «Apéndice A / Glosario y pronunciación» y la cabecera de la tabla hay un párrafo; la letra suelta rotula la sección
+        for l in (x.strip() for x in txt.splitlines()):
+            if not l or l.startswith("#"):
+                continue
+            if re.match(r"(?:Ap[eé]ndice A|Glosario y pronunciaci)", l):
+                salta = True
+                continue
+            if re.match(r"(?i)(Nombre en ingl|Pronunciaci[oó]n$|Traducci[oó]n$)", l):
+                salta = False
+                continue
+            if salta or re.fullmatch(r"[A-ZÁÉÍÓÚÑ]", l):
+                continue
+            if re.match(r"(?:Este libro contiene|Ap[eé]ndice B)", l):
+                break
+            lineas.append(l)
+        filas = [tuple(lineas[i:i + 3]) for i in range(0, len(lineas) - 2, 3)]
+        vistos = set()
+        for nombre, pron, trad in filas:
+            trad = trad.strip() or nombre
+            if norm(nombre) in vistos or not nombre.strip():
+                continue
+            vistos.add(norm(nombre))
+            e = add({"cat": "glosario", "title": nombre, "path": ["Guía Roshar · Apéndice A", "Glosario"], "pages": meta.get("pages", ""),
+                     "body": f"Pronunciación: {pron}.\n\nTraducción: {trad}.", "f": {"pronunciacion": pron, "traduccion": trad}}, gated=True)
+            e["era"] = "Stormlight"
+            e["libro"] = "Guía Roshar"
+            n += 1
+    return n
+
+
+def process_adversarios_stormlight():
+    """Bestiario (capítulo 8 de la Guía del Mundo de Stormlight): mismos bloques de estadísticas que los de Mistborn."""
+    advdir = next(GUIA_SL.glob("09 - *"))
+    antes = len(DJ_ENTRIES)
+    existentes = {norm(e["title"]) for e in DJ_ENTRIES if e["cat"] == "adversario"}
+    n = 0
+    for f in sorted(advdir.glob("*.md")):
+        if f.stem.startswith("01 -"):
+            continue  # «Cómo usar los adversarios»: consejos de DJ
+        meta, txt = read_md(f)
+        ftitle = clean_title(meta.get("title", f.stem))
+        # glifos de coste de acción del PDF: ▶ una acción, ▷ acción gratuita, ↻ reacción (después viene un espacio en U+2002)
+        txt = re.sub(r"(?m)^▶\s*", "1 ", txt)
+        txt = re.sub(r"(?m)^▷\s*", "0 ", txt)
+        txt = re.sub(r"(?m)^↻\s*", "r ", txt)
+        txt = re.sub(r"(?m)^([0-3])[^\S\n]+", r"\1 ", txt)  # «2 Acometida»: tras la cifra va un espacio en U+2002 y otro normal
+        txt = re.sub(r"(?m)^### (RASGOS|ACCIONES)\s*$", lambda m: "### " + m.group(1).capitalize(), txt)  # en mayúsculas se tomaría por maquetación
+        n += stat_blocks(f, ftitle, meta.get("pages", ""), txt, ["Guía Roshar · Cap. 8 Adversarios"], {})
+    nuevos = DJ_ENTRIES[antes:]
+    for e in nuevos:
+        e["era"] = "Stormlight"
+        e["libro"] = "Guía Roshar"
+        if norm(e["title"]) in existentes:  # mismo nombre que uno de Mistborn: el título los distingue (Combates los identifica por él)
+            e["title"] += " (Roshar)"
+    return n
+
+# --------------------------------------------------------------------------- Stormlight: caminos heroicos
+
+STORMLIGHT = RES / "Manual del Archivo de las Tormentas"
+# las tarjetas del árbol vienen por especialidad, ocho talentos cada una, en este orden (el PDF pone el rótulo detrás o delante)
+SL_SPEC_ORDER = {
+    "Agente": ["Investigador", "Espía", "Ladrón"], "Cazador": ["Arquero", "Asesino", "Rastreador"],
+    "Enviado": ["Diplomático", "Fiel", "Mentor"], "Erudito": ["Artifabriano", "Estratega", "Cirujano"],
+    "Guerrero": ["Duelista", "Portador de esquirlada", "Soldado"], "Líder": ["Campeón", "Oficial", "Político"],
+}
+# fichero -> caminos que contiene y el encabezado «<Plural> de Roshar» con el que empieza cada uno después del primero
+SL_ARCHIVOS = [
+    ("02 - Agente.md", [("Agente", None), ("Cazador", "Cazadores de Roshar"), ("Enviado", "Enviados de Roshar")]),
+    ("03 - Erudito.md", [("Erudito", None)]),
+    ("04 - Guerrero.md", [("Guerrero", None)]),
+    ("05 - Líder.md", [("Líder", None)]),
+]
+
+def process_stormlight_heroicos():
+    """Caminos heroicos del Manual de Stormlight con el mismo extractor que los de Mistborn, en un estado aparte
+    (no se mezclan con los talentos de Mistborn hasta fusionar los comunes). Devuelve las entradas nuevas."""
+    guardado = (list(ENTRIES), dict(TALENTS), dict(OWN), dict(SPEC_ORDER))
+    global TREE_SIGUE_TRAS_ESPECIALIDAD
+    ENTRIES.clear(); TALENTS.clear(); OWN.clear(); SPEC_ORDER.clear(); SPEC_ORDER.update(SL_SPEC_ORDER)
+    TREE_SIGUE_TRAS_ESPECIALIDAD = True
+    try:
+        d = next(STORMLIGHT.glob("05 - *"))
+        cat0, chapter_label = CHAPTER_CAT["05"]
+        for fichero, caminos in SL_ARCHIVOS:
+            meta, txt = read_md(d / fichero)
+            cortes = [0]
+            for nombre, enc in caminos[1:]:
+                m = re.search(r"^## " + re.escape(enc) + r"\s*$", txt, re.M)
+                if not m:
+                    raise ValueError(f"Stormlight heroicos: no se encuentra «{enc}» en {fichero}")
+                cortes.append(m.start())
+            cortes.append(len(txt))
+            for (nombre, _), a, b in zip(caminos, cortes, cortes[1:]):
+                _procesa_texto("05", cat0, chapter_label, nombre, meta.get("pages", ""), txt[a:b], (fichero, nombre), fichero)
+        _cierra_talentos()
+        nuevas = list(ENTRIES)
+    finally:
+        TREE_SIGUE_TRAS_ESPECIALIDAD = False
+        ENTRIES[:] = guardado[0]
+        TALENTS.clear(); TALENTS.update(guardado[1])
+        OWN.clear(); OWN.update(guardado[2])
+        SPEC_ORDER.clear(); SPEC_ORDER.update(guardado[3])
+    for e in nuevas:
+        e["era"] = "Stormlight"
+        e["libro"] = "Manual Stormlight"
+    return nuevas
+
+def _palabras(e):
+    t = norm((e.get("body") or "") + " " + (e.get("mecanica") or ""))
+    t = re.sub(r"(?<=[a-z])-\s+(?=[a-z])", "", t)  # palabras partidas por guion a final de línea de columna
+    return collections.Counter(re.findall(r"[a-z0-9]+", t))
+
+def _coseno(a, b):
+    num = sum(a[k] * b[k] for k in a if k in b)
+    den = (sum(v * v for v in a.values()) * sum(v * v for v in b.values())) ** 0.5
+    return num / den if den else 0.0
+
+def _equivalentes(a, b):
+    """Mismo texto salvo la redacción de cada traducción: palabras muy parecidas y casi la misma longitud (una cláusula añadida o
+    quitada cambia la longitud)."""
+    pa, pb = _palabras(a), _palabras(b)
+    na, nb = sum(pa.values()), sum(pb.values())
+    return bool(na and nb) and 0.85 <= na / nb <= 1.18 and _coseno(pa, pb) >= 0.85
+
+def _prerreq_equivalente(a, b, nombres):
+    """Mismo prerrequisito: mismas letras o, al menos, los mismos talentos y habilidades nombrados y las mismas cifras; la redacción de la
+    parte libre («compañero» / «seguidor», «tener» / «contar con») cambia con la traducción. `nombres`: títulos de talento y habilidades."""
+    if _letras(a) == _letras(b):
+        return True
+
+    def firma(t):
+        n = " " + norm(re.sub(r"(?<=[A-Za-záéíóúñ])-\s+(?=[a-záéíóúñ])", "", t)) + " "
+        enc = {x for x in nombres if " " + x + " " in n}
+        return enc | set(re.findall(r"\d+", n))
+    fa, fb = firma(a), firma(b)
+    return bool(fa) and fa == fb
+
+def _letras(t):
+    return re.sub(r"[^a-z0-9]", "", norm(t))
+
+# Decisión del autor: cuando la redacción difiere solo en palabras, o Mistborn exige más (versión más moderna y restrictiva), manda Mistborn
+# y el talento pasa a ser común. Los pares con otro talento padre o condición no comparable se quedan como variantes.
+FUSION_PREFIERE_MISTBORN = {(o, norm(t)) for o, t in (
+    ("Agente", "Contactos en los bajos fondos"), ("Enviado", "Presciencia"), ("Guerrero", "Posición vigilante (principal de Guerrero)"),
+    ("Agente", "Comportamiento arriesgado"), ("Líder", "Autoridad"))}
+
+def fusiona_heroicos(base, sl):
+    """Los talentos de Stormlight que son los mismos que uno de Mistborn (mismo camino y nombre, mismos prerrequisitos y activación,
+    texto equivalente) pasan a ser uno solo, ambientación Cosmere y fuente «Manual del Juego»
+    (decisions/reglas/contenido-comun-entre-ambientaciones.md). El resto se queda como variante de Stormlight. Devuelve las entradas que se añaden."""
+    mb = {}
+    for e in base:
+        if e["cat"] == "talento" and e["f"]["tipo_origen"] == "Camino heroico":
+            mb.setdefault((e["f"]["origen"], norm(e["title"])), e)
+    nombres = {_base_titulo(e["title"]) for e in list(base) + list(sl) if e["cat"] == "talento"} | {norm(h) for h in SKILLS}
+    nombres = {n for n in nombres if len(n) >= 5}
+    out, comunes = [], 0
+    for x in sl:
+        m = mb.get((x["f"]["origen"], norm(x["title"]))) if x["cat"] == "talento" else None
+        forzado = m is not None and (x["f"]["origen"], norm(x["title"])) in FUSION_PREFIERE_MISTBORN
+        if forzado or (m is not None and m.get("era", "Ambas") == "Ambas" and m["f"]["activacion"] == x["f"]["activacion"]
+                and _prerreq_equivalente(m["f"]["prerrequisito"], x["f"]["prerrequisito"], nombres)
+                and _equivalentes(m, x)):
+            m["era"] = "Cosmere"
+            m["libro"] = "Manual del Juego"
+            comunes += 1
+        else:
+            out.append(x)
+    return out, comunes
+
+# En el Manual de Mistborn las dos últimas especialidades de Líder quedaron con el rótulo cambiado (los talentos de «Político» bajo
+# «Planificador» y al revés): se corrige por el encabezado «Especialidad de …» del propio libro.
+ESPECIALIDADES_CAMBIADAS = {("Líder", "Planificador"): "Político", ("Líder", "Político"): "Planificador"}
+
+def corrige_especialidades(base):
+    for e in base:
+        if e["cat"] != "talento":
+            continue
+        f = e["f"]
+        k = (f["origen"], f.get("especialidad", ""))
+        if k in ESPECIALIDADES_CAMBIADAS:
+            f["especialidad"] = ESPECIALIDADES_CAMBIADAS[k]
+        if f.get("especialidades"):
+            f["especialidades"] = [ESPECIALIDADES_CAMBIADAS.get((f["origen"], x), x) for x in f["especialidades"]]
+
+def process_stormlight_radiantes():
+    """Caminos radiantes del Manual de Stormlight (capítulo 5): el talento principal de Primer Ideal y el árbol de vínculo con el spren de
+    cada orden. Las cartas resumen de los árboles de potencia que trae cada fichero se descartan: sus talentos, con su texto completo, son
+    del capítulo 6 (potencias)."""
+    global KIND_OVERRIDE
+    guardado = (list(ENTRIES), dict(TALENTS), dict(OWN))
+    ENTRIES.clear(); TALENTS.clear(); OWN.clear()
+    KIND_OVERRIDE = {"06": "Camino radiante"}
+    try:
+        d = next(STORMLIGHT.glob("06 - *"))
+        etiqueta = "Capítulo 5 · Caminos radiantes"
+        largos = {}
+        for f in sorted(d.glob("*.md")):
+            meta, txt = read_md(f)
+            ftitle = clean_title(meta.get("title", f.stem))
+            # talentos con descripción completa: «## Nombre» seguido de «Prerrequisito…» (los de la carta resumen son «#### …»)
+            largos[ftitle] = {norm(quita_icono(m.group(1))) for m in re.finditer(r"^## (.+?)\s*\r?\n+\s*Prerrequisitos?:", txt, re.M)}
+            _procesa_texto("06", "camino", etiqueta, ftitle, meta.get("pages", ""), txt, f, f.stem)
+        _cierra_talentos()
+        nuevas = [e for e in ENTRIES if e["cat"] != "talento" or norm(e["title"]) in largos.get(e["f"]["origen"], set())
+                  or norm(re.sub(r"\s*\(.*?\)\s*$", "", e["title"])) in largos.get(e["f"]["origen"], set())]
+    finally:
+        KIND_OVERRIDE = {}
+        ENTRIES[:] = guardado[0]
+        TALENTS.clear(); TALENTS.update(guardado[1])
+        OWN.clear(); OWN.update(guardado[2])
+    # el árbol «Iluminado» (brumaspren iluminados) es de los Vigilantes de la verdad pero es un árbol aparte, con su talento principal
+    for e in nuevas:
+        if e["cat"] == "talento" and e["f"]["origen"] == "Vigilantes de la verdad" and norm(re.sub(r"\s*\(.*?\)", "", e["title"]).strip()) in ILUMINADO:
+            e["f"]["origen"] = "Iluminado"
+            e["path"] = [e["path"][0], "Iluminado"]
+    for e in nuevas:
+        e["era"] = "Stormlight"
+        e["libro"] = "Manual Stormlight"
+    return nuevas
+
+ILUMINADO = {norm(t) for t in ("Visión del futuro", "Vistazo al futuro", "Alterar la fortuna", "Vacío de visión", "Buscar en el pasado")}
+
+# Abrasión: su fichero del capítulo 6 quedó casi vacío en la conversión del PDF; sus ocho talentos solo existen como cartas resumen del árbol que
+# acompaña a los Danzantes del Filo y a los Portadores del Polvo. Se transcriben (título, activación, prerrequisito, texto de la carta). Las
+# cartas solo dan el prerrequisito cuando es «pronunciar el Primer Ideal»: el resto de enlaces del árbol (flechas) no está en el texto.
+ABRASION_CARTAS = [
+    ("Movimiento sin fricción", "Siempre activo", "pronunciar el Primer Ideal",
+     "Mientras estés infuso con Abrasión, aumenta tu movimiento en 3 e ignora Ralentizado."),
+    ("Abrasión inversa", "Especial", "pronunciar el Primer Ideal",
+     "Puedes aumentar la fricción de un objeto o zona, cancelando el terreno difícil y otorgando una ventaja para interactuar con él."),
+    ("Patinaje grácil", "Siempre activo", "—",
+     "Cuando usas Patinar y su acción gratuita de Movimiento, no estás obligado a moverte en línea recta."),
+    ("Reclamación de luz tormentosa", "Acción gratuita", "—",
+     "Al inicio de tu turno, puedes poner fin a cualquier número de infusiones para recuperar su Investidura restante."),
+    ("Objetivo resbaladizo", "Especial", "—",
+     "Mientras estés infuso con Abrasión, los ataques no pueden hacerte un rasguño y las Acometidas reactivas contra ti sufren una desventaja."),
+    ("Potenciación distante", "Siempre activo", "—", "Usas tus potencias y sus talentos como si tu cercanía fuera de 6 metros."),
+    ("Combatiente escurridizo", "Especial", "—",
+     "Mientras estés infuso con Abrasión, puedes interrumpir una acción de Moverse con otras acciones. Infliges daño adicional si atacas cuando te estás moviendo."),
+    ("Patinaje fluido", "Siempre activo", "—", "Mientras tienes Investidura, estás infuso con Abrasión y Patinar te cuesta 1 punto menos de concentración."),
+]
+
+SL_POTENCIAS = ["Abrasión", "Adhesión", "Cohesión", "División", "Gravitación", "Iluminación", "Progresión", "Tensión", "Transformación",
+                "Transportación"]  # los ficheros 02 a 11, en orden (los títulos de dos de ellos están sin traducir)
+
+def process_stormlight_potencias():
+    """Potencias (capítulo 6 del Manual de Stormlight): el texto de cada potencia y su árbol de talentos. El PDF dejó el comienzo de
+    la Gravitación al final del fichero de la División y el capítulo siguiente al final del de la Transportación: se cortan."""
+    global KIND_OVERRIDE
+    guardado = (list(ENTRIES), dict(TALENTS), dict(OWN))
+    ENTRIES.clear(); TALENTS.clear(); OWN.clear()
+    KIND_OVERRIDE = {"07": "Potencia"}
+    try:
+        d = next(STORMLIGHT.glob("07 - *"))
+        etiqueta = "Capítulo 6 · Potencias"
+        ficheros = sorted(d.glob("*.md"))
+        for k, f in enumerate(ficheros):
+            meta, txt = read_md(f)
+            if k == 0:
+                nombre = clean_title(meta.get("title", f.stem))
+            else:
+                nombre = SL_POTENCIAS[k - 1]
+                otras = [x for x in SL_POTENCIAS if x != nombre]
+                corte = re.search(r"^#{1,2} (?:Capítulo 7\s*$|Objetos\s*$|.*\b(?:" + "|".join(otras) + r")\b)", txt, re.M)
+                if corte and corte.start() > 400:
+                    txt = txt[:corte.start()]
+            _procesa_texto("07", "arte", etiqueta, nombre, meta.get("pages", ""), txt, f, f.stem)
+        _cierra_talentos()
+        nuevas = list(ENTRIES)
+        for t, activ, pre, txt in ABRASION_CARTAS:
+            nuevas.append({"cat": "talento", "title": t, "path": [etiqueta, "Abrasión"], "pages": "219-222", "body": txt, "resumen": txt,
+                           "f": {"origen": "Abrasión", "tipo_origen": "Potencia", "especialidad": "", "especialidades": [],
+                                 "prerrequisito": pre, "habilidad": "", "grados": None, "activacion": activ}})
+    finally:
+        KIND_OVERRIDE = {}
+        ENTRIES[:] = guardado[0]
+        TALENTS.clear(); TALENTS.update(guardado[1])
+        OWN.clear(); OWN.update(guardado[2])
+    # el encabezado «### presencia» es el atributo de la potencia y encabeza su introducción
+    ATRIBUTOS = {norm(a) for a in ("Fuerza", "Velocidad", "Intelecto", "Voluntad", "Discernimiento", "Presencia")}
+    for e in nuevas:
+        if e["cat"] == "arte" and norm(e["title"]) in ATRIBUTOS and len(e["path"]) > 1:
+            e["body"] = "Atributo asociado: " + e["title"].capitalize() + ".\n\n" + e["body"]
+            e["title"] = "Qué es la potencia de " + e["path"][1]
+    for e in nuevas:
+        e["era"] = "Stormlight"
+        e["libro"] = "Manual Stormlight"
+    return nuevas
+
+# Textos del Manual de Stormlight que no son catálogo (los catálogos de objetos y orígenes ya se cargan aparte) y que sirven de fuente a
+# microrreglas: bienvenida a Roshar, cantores y culturas, uso de objetos, esferas, equipo inicial, viajes, fabriales y manufactura.
+SL_TEXTOS = {"01": ("03",), "03": ("02", "03"), "08": ("01", "02", "03", "07", "08", "09")}
+
+def process_stormlight_textos():
+    guardado = (list(ENTRIES), dict(TALENTS), dict(OWN))
+    ENTRIES.clear(); TALENTS.clear(); OWN.clear()
+    try:
+        for chdir in sorted(STORMLIGHT.iterdir()):
+            num = chdir.name[:2]
+            if not chdir.is_dir() or num not in SL_TEXTOS or num not in CHAPTER_CAT:
+                continue
+            cat0, chapter_label = CHAPTER_CAT[num]
+            for f in sorted(chdir.glob("*.md")):
+                if f.stem[:2] not in SL_TEXTOS[num]:
+                    continue
+                meta, txt = read_md(f)
+                ftitle = clean_title(meta.get("title", f.stem))
+                _procesa_texto(num, cat0, chapter_label, ftitle, meta.get("pages", ""), txt, f, f.stem)
+        _cierra_talentos()
+        nuevas = [e for e in ENTRIES if e["cat"] not in ("talento", "accion")]
+    finally:
+        ENTRIES[:] = guardado[0]
+        TALENTS.clear(); TALENTS.update(guardado[1])
+        OWN.clear(); OWN.update(guardado[2])
+    for e in nuevas:
+        e["era"] = "Stormlight"
+        e["libro"] = "Manual Stormlight"
+    return nuevas
+
+# --------------------------------------------------------------------------- talentos de Mistborn desde el PDF
+FUENTE_TALENTOS = ROOT / "tools" / "fuentes" / "talentos-mistborn.json"
+FUENTE_TALENTOS_SL = ROOT / "tools" / "fuentes" / "talentos-stormlight.json"
+TIPOS_PDF = {"Camino heroico", "Camino de nacido del metal", "Arte metálica", "Ascendencia/Cultura", "Camino radiante", "Potencia"}
+ALIAS_TITULO_PDF = {"talento principal de nacidoble": "herencia nacidoble"}  # el PDF titula así el talento principal del nacidoble
+
+def _base_titulo(t):
+    n = norm(re.sub(r"\s*\(.*?\)", "", quita_icono(t)).replace("★", "").strip())
+    return ALIAS_TITULO_PDF.get(n, n)
+
+def _misma_especialidad(a, b):
+    a, b = norm(a or ""), norm(b or "")
+    return bool(a) and bool(b) and (a == b or a.startswith(b) or b.startswith(a))
+
+def aplica_talentos_pdf(base, fuente=None, respaldo=None):
+    """Sustituye el texto, el prerrequisito, la activación y la carta resumen de los talentos de `base` por los del PDF
+    (tools/extraer_talentos_pdf.py → tools/fuentes/talentos-*.json): la conversión a .md mezcla columnas. Quita las entradas
+    repetidas que eran la carta resumen de otra (p. ej. «Ruptura de brumoso» y «Ruptura de brumoso (principal de brumoso)»).
+    `respaldo`: prerrequisitos de otro libro por (tipo, título), para las erratas en que la descripción larga omite el prerrequisito.
+    Devuelve (aplicados, sin_pdf, quitados)."""
+    fuente = fuente or FUENTE_TALENTOS
+    if not fuente.exists():
+        print("  [!] falta", fuente.name, "(python tools/extraer_talentos_pdf.py): se usa el texto del .md")
+        return 0, 0, 0
+    pdf = json.loads(fuente.read_text(encoding="utf-8"))["talentos"]
+    idx = {}
+    for t in pdf:
+        idx.setdefault((t["tipo"], _base_titulo(t["titulo"])), []).append(t)
+    usados, emparejados, sin_pdf = set(), set(), []
+    for e in base:
+        if e["cat"] != "talento" or e["f"].get("tipo_origen") not in TIPOS_PDF:
+            continue
+        cand = [t for t in idx.get((e["f"]["tipo_origen"], _base_titulo(e["title"])), []) if id(t) not in usados]
+        mejor = [t for t in cand if e["f"]["origen"] in t["origenes"]]
+        esps = [e["f"].get("especialidad")] + list(e["f"].get("especialidades") or [])
+        if e["f"]["tipo_origen"] == "Camino heroico" and any(esps):
+            por_esp = [t for t in cand if any(_misma_especialidad(t["especialidad"], x) for x in esps)]
+            mejor = por_esp or mejor
+        elif len(mejor) > 1:
+            mejor = [t for t in mejor if t["especialidad"] in (e["f"].get("especialidad"), "")] or mejor
+        t = (mejor or cand or [None])[0]
+        if t is None:
+            sin_pdf.append(e)
+            continue
+        usados.add(id(t))
+        emparejados.add(id(e))
+        f = e["f"]
+        prer = t["prerreq"]
+        if not prer and respaldo:
+            prer = respaldo.get((e["f"]["tipo_origen"], _base_titulo(e["title"]))) or ""
+        f["prerrequisito"] = prer or f.get("prerrequisito", "—")
+        if t["activacion"] in ACTIVACION:
+            f["activacion"] = ACTIVACION[t["activacion"]]
+        tema, mec = list(t["tema"]), list(t["mecanica"])
+        if not tema and mec:
+            tema, mec = [mec[0]], mec[1:]
+        e["body"] = "\n\n".join(tema)
+        if mec:
+            e["mecanica"] = "\n\n".join(mec)
+        else:
+            e.pop("mecanica", None)
+        if t["resumen"]:
+            e["resumen"] = t["resumen"]
+    # entradas sin pareja que repiten el título de una emparejada del mismo camino: eran la carta resumen
+    claves = {(e["f"]["origen"], _base_titulo(e["title"])) for e in base if id(e) in emparejados}
+    quitar = {id(e) for e in sin_pdf if (e["f"]["origen"], _base_titulo(e["title"])) in claves}
+    base[:] = [e for e in base if id(e) not in quitar]
+    return len(emparejados), len(sin_pdf) - len(quitar), len(quitar)
+
+def prerrequisitos_de(fuente):
+    if not fuente.exists():
+        return {}
+    return {(t["tipo"], _base_titulo(t["titulo"])): t["prerreq"] for t in json.loads(fuente.read_text(encoding="utf-8"))["talentos"] if t["prerreq"]}
 
 # --------------------------------------------------------------------------- objetos (curado + parseo)
 
@@ -1044,6 +1518,10 @@ def process_legado():
 
 def libro_de(e):
     """Libro de origen, con el nombre de la ambientación: «Manual X», «Guía X» (Mistborn → Scadrial) o «Campaña Y»."""
+    if e.get("libro"):  # Stormlight y lo común ya traen su libro
+        return e["libro"]
+    if e.get("ambientacion") == "Cosmere":
+        return "Manual del Juego"
     p0 = (e.get("path") or [""])[0]
     if p0.startswith("Guía"):
         return "Guía Scadrial"
@@ -1104,7 +1582,8 @@ def acciones_de_poder(entries):
         elif e["cat"] == "accion":
             sec = e["f"].get("contexto", "")
             e["f"]["origen"] = ("Hemalurgia" if "Hemalúrgicos" in sec else
-                                "Nacidos del metal" if "Nacidos del Metal" in sec else "General")
+                                "Nacidos del metal" if "Nacidos del Metal" in sec else
+                                "Radiante" if "radiantes" in sec.lower() else "General")
 
 
 def acciones_de_caminos(base):
@@ -1208,7 +1687,22 @@ def main():
     n_adv += process_adversarios_legado()
     process_legado()
     n_guia = process_guia()
+    n_guia += process_stormlight_guia()
+    n_adv += process_adversarios_stormlight()
     base = dedupe(ENTRIES)
+    n_pdf, n_sin_pdf, n_quit = aplica_talentos_pdf(base)
+    print(f"  talentos de Mistborn desde el PDF: {n_pdf} aplicados, {n_sin_pdf} sin pareja, {n_quit} repetidos quitados")
+    corrige_especialidades(base)
+    alt_pre = prerrequisitos_de(FUENTE_TALENTOS)
+    sl_heroicos = dedupe(process_stormlight_heroicos())
+    r = aplica_talentos_pdf(sl_heroicos, FUENTE_TALENTOS_SL, alt_pre)
+    print(f"  talentos heroicos de Stormlight desde el PDF: {r[0]} aplicados, {r[1]} sin pareja, {r[2]} repetidos quitados")
+    heroicos_sl, n_comunes = fusiona_heroicos(base, sl_heroicos)
+    base = base + heroicos_sl  # Stormlight: caminos heroicos (los talentos iguales a los de Mistborn ya se han fundido en estos)
+    for etiqueta, lista in (("radiantes", dedupe(process_stormlight_radiantes())), ("potencias", dedupe(process_stormlight_potencias()))):
+        r = aplica_talentos_pdf(lista, FUENTE_TALENTOS_SL, alt_pre)
+        print(f"  talentos {etiqueta} de Stormlight desde el PDF: {r[0]} aplicados, {r[1]} sin pareja, {r[2]} repetidos quitados")
+        base = base + lista
     fix_aluminio(base)
     fix_juventud(base)
     acciones_de_poder(base)
@@ -1229,14 +1723,50 @@ def main():
     apply_ambientacion(dj)
     aplicar_eras(base)
     aplicar_eras(dj)
+    cantor = stormlight_talentos(RES)  # árbol de cantor: antes de enlazar prerrequisitos y calcular efectos
+    r = aplica_talentos_pdf(cantor, FUENTE_TALENTOS_SL)
+    print(f"  talentos de cantor desde el PDF: {r[0]} aplicados, {r[1]} sin pareja")
+    base = base + cantor
     link_talents(base)
     split_ascendencias(base)
     nuevas, arboles = aplicar_efectos(base)
+    enlaza_ordenes(RES, arboles)  # órdenes Radiantes <-> sus dos potencias
     reorganizar(base, dj)
     base = base + finalize(nuevas)
     redirige_modificadores(base)
     base = base + acciones_de_caminos(base)
+    # los conjuntos de equipo inicial, también como entradas del catálogo Equipo (antes de que la microrregla los consuma)
+    kits = []
+    for e in base:
+        if e["id"].startswith("objeto-equipo-inicial-de-"):
+            k = dict(e)
+            k["cat"] = "equipo"
+            k["id"] = "equipo-inicial-de-" + e["id"].rsplit("-de-", 1)[1]
+            k["f"] = {"tipo": "Equipo inicial", "peso": "—", "peso_g": None, "precio": "—", "precio_n": None, "nota": ""}
+            kits.append(k)
     n_reglas = build_reglas(base)
+    base = base + kits + kits_en_equipo(RES)
+    for e in base:
+        if e["cat"] == "equipo":
+            e["f"].setdefault("tipo", "Equipo")
+    base = base + stormlight_origenes(RES) + stormlight_pericias(RES) + stormlight_utilidad() + stormlight_habilidades_potencia(RES)
+    obj_sl = stormlight_objetos(RES, sys.modules[__name__])
+    base = base + obj_sl + stormlight_pericias_objetos(obj_sl, base, DEF_PERICIA)  # ya con su forma final: después de reorganizar() y de los efectos
+    # microrreglas de Stormlight: solo las que no tiene Mistborn (spren, luz tormentosa, ideales, órdenes, potencias, fabriales…)
+    textos_sl = process_stormlight_textos()
+    for e in textos_sl:
+        e["ambientacion"] = "Stormlight"
+    reglas_sl, consumidas = reglas_stormlight(textos_sl, base, RES)
+    usadas = {id(e) for e in consumidas}
+    base = [e for e in base if id(e) not in usadas] + reglas_sl
+    for e in base:  # la ascendencia humana existe en las dos ambientaciones y cambia: el título las distingue
+        if e["id"] == "origen-ascendencia-humana":
+            e["title"] = "Ascendencia humana (Scadrial)"
+        elif e["id"] == "regla-equipo-inicial":
+            e["title"] = "Equipo inicial (Scadrial)"
+    for e in base:  # los enlaces a «Equipo inicial» (guía de creación) apuntan al de Mistborn
+        if "[[regla|Equipo inicial]]" in e.get("body", ""):
+            e["body"] = e["body"].replace("[[regla|Equipo inicial]]", "[[regla|Equipo inicial (Scadrial)]]")
     s1 = dump(base, "DATA_BASE", OUT / "base.js", {"DATA_ARBOLES": arboles, "DATA_OBJETIVOS": OBJ_NOMBRE})
     s2 = dump(dj, "DATA_DJ", OUT / "dj.js")
     from collections import Counter
@@ -1245,7 +1775,7 @@ def main():
     print(f"base.js {s1/1024:.0f} KB | dj.js {s2/1024:.0f} KB")
     print("base:", dict(c))
     print("dj:  ", dict(d))
-    print("equipo:", n_equipo, "| adversarios:", n_adv, "| microrreglas:", n_reglas)
+    print("equipo:", n_equipo, "| adversarios:", n_adv, "| microrreglas:", n_reglas, "| talentos heroicos comunes:", n_comunes)
 
 if __name__ == "__main__":
     main()

@@ -106,6 +106,91 @@ if (PJ.store) {
   cierto('importar JSON inválido falla', falla);
 }
 
+// --- Stormlight (Roshar)
+for (const asc of Object.values(PJ.ASCENDENCIAS_STORMLIGHT)) {
+  for (const id of asc.auto) cierto(`talento auto Stormlight existe ${id}`, D.byId[id]);
+  cierto(`origen ${asc.origen} existe`, D.byId[asc.origen]);
+}
+eq('culturas de Stormlight', D.culturasStormlight.length, 13);
+for (const p of Object.keys(PJ.POTENCIAS)) cierto(`árbol de potencia ${p}`, D.arbol[p] && D.arbol[p].tipo === 'Potencia');
+cierto('hay nueve órdenes jugables', D.ordenes.length === 9 && D.ordenes.every(a => a.potencias.length === 2));
+eq('recompensas Stormlight rango 2', PJ.recompensasInicio(8, 1, 'Stormlight'), { arquillas: 1000, recompensas: { 1: 2, 2: 1 } });
+const sTalento = id => D.byId[id];
+cierto('Stormlight ve talentos Stormlight y Cosmere, no Mistborn',
+  PJ.ambCubre({ ambito: 'Stormlight' }, { ambientacion: 'Stormlight' }) && PJ.ambCubre({ ambito: 'Stormlight' }, { ambientacion: 'Cosmere' }) &&
+  !PJ.ambCubre({ ambito: 'Stormlight' }, { ambientacion: 'Mistborn' }));
+cierto('Mistborn no ve Stormlight pero sí Cosmere y su era',
+  !PJ.ambCubre({ era: 1 }, { ambientacion: 'Stormlight' }) && PJ.ambCubre({ era: 1 }, { ambientacion: 'Cosmere' }) &&
+  PJ.ambCubre({ era: 2 }, { ambientacion: 'Mistborn Era 2' }) && !PJ.ambCubre({ era: 1 }, { ambientacion: 'Mistborn Era 2' }));
+
+const s = PJ.nuevoPersonaje({ ambito: 'Stormlight', nombre: 'Kal', camino: 'guerrero' });
+Object.assign(s.atributos.creacion, { fuerza: 3, velocidad: 3, intelecto: 1, voluntad: 2, discernimiento: 2, presencia: 1 });
+const ds = PJ.derivar(s);
+eq('Stormlight: 18 habilidades', Object.keys(ds.habilidades).length, 18);
+cierto('Stormlight sin Alomancia ni Feruquimia', !ds.habilidades.Alomancia && !ds.habilidades.Feruquimia);
+eq('Stormlight: habilidad gratuita del camino', ds.habilidades.Atletismo.gratis, 1);
+eq('Stormlight: sin Investidura', ds.investidura, null);
+eq('Stormlight: salud', ds.salud, 13);
+eq('Stormlight: sin artes metálicas', ds.artes, { alomancia: null, feruquimia: null });
+eq('Stormlight humano: un talento adicional', ds.presupuesto.talentos.total, 1);
+eq('Stormlight: sin orden radiante', ds.radiante, null);
+
+const cantor = PJ.nuevoPersonaje({ ambito: 'Stormlight', ascendencia: 'cantora', camino: 'erudito' });
+const dc = PJ.derivar(cantor);
+cierto('cantor: Cambiar de forma automático', dc.talentos.auto.includes('talento-cambiar-de-forma-principal-de-cantor'));
+eq('cantor: un talento de formas a elegir', dc.presupuesto.talentos.total, 1);
+eq('cantor: sin errores por ascendencia', PJ.ascDe(cantor).n, 'Cantora');
+const evCantor = PJ.talentosElegibles(cantor, dc, 'ascendencia-cantora').filter(x => x.ev.cumple).map(x => x.id).sort();
+cierto('cantor puede elegir Formas de delicadeza', evCantor.includes('talento-formas-de-delicadeza'));
+const humano = PJ.nuevoPersonaje({ ambito: 'Stormlight', camino: 'erudito' });
+const evHumano = PJ.talentosElegibles(humano, PJ.derivar(humano), 'ascendencia-cantora');
+cierto('humano no cumple los talentos de cantor', evHumano.every(x => !x.ev.cumple));
+
+// Radiante: Primer Ideal de Corredor del viento (Adhesión y Gravitación)
+const PRIMER = D.arbol['corredores-del-viento'].talento_principal;
+const SEGUNDO = 'talento-segundo-ideal-corredor-del-viento';
+const r = PJ.nuevoPersonaje({ ambito: 'Stormlight', camino: 'guerrero', nivel: 4, talentos: [PRIMER] });
+Object.assign(r.atributos.creacion, { fuerza: 2, velocidad: 3, intelecto: 1, voluntad: 2, discernimiento: 3, presencia: 1 });
+let dr = PJ.derivar(r);
+eq('radiante: orden', dr.radiante && dr.radiante.orden, 'corredores-del-viento');
+eq('radiante: Investidura 2 + mayor de DIS/PRE', dr.investidura, 5);
+cierto('radiante sin pronunciar: potencias visibles pero bloqueadas', dr.habilidades['Adhesión'].bloqueada && dr.habilidades['Adhesión'].grados === 0);
+eq('Segundo Ideal bloqueado sin pronunciar el Primero', PJ.evaluarTalento(SEGUNDO, dr.ctxPre, {}).cumple, false);
+r.radiante.ideales = 1;
+dr = PJ.derivar(r);
+eq('radiante: Adhesión con 1 grado gratuito', [dr.habilidades['Adhesión'].gratis, dr.habilidades['Adhesión'].atributo], [1, 'presencia']);
+eq('radiante: Gravitación modificador (DIS 3 + 1)', dr.habilidades['Gravitación'].mod, 4);
+eq('Segundo Ideal disponible tras el Primero', PJ.evaluarTalento(SEGUNDO, dr.ctxPre, {}).cumple, true);
+eq('talento de Adhesión disponible', PJ.evaluarTalento('talento-acometida-vinculante', dr.ctxPre, {}).cumple, true);
+eq('talento de otra potencia bloqueado', PJ.evaluarTalento('talento-trampa-adhesiva', dr.ctxPre, {}).cumple, false);
+const nr = PJ.nuevoPersonaje({ ambito: 'Stormlight', camino: 'guerrero', nivel: 4 });
+eq('sin orden no hay potencias', PJ.evaluarTalento('talento-acometida-vinculante', PJ.derivar(nr).ctxPre, {}).cumple, false);
+// empezar por encima del nivel 1: los Ideales que tengas como talento se dan por pronunciados
+const r6 = PJ.nuevoPersonaje({ ambito: 'Stormlight', camino: 'guerrero', nivel: 6, nivelInicial: 6, talentos: [PRIMER, SEGUNDO] });
+eq('nivel inicial alto: Ideales automáticos', PJ.derivar(r6).radiante.ideales, 2);
+cierto('nivel inicial alto: las potencias ya están', !!PJ.derivar(r6).habilidades['Gravitación']);
+// Ideales de más de una orden
+const r2 = PJ.nuevoPersonaje({ ambito: 'Stormlight', camino: 'guerrero', nivel: 4, talentos: [PRIMER, D.arbol['danzante-del-filo'].talento_principal] });
+cierto('dos órdenes: aviso', PJ.derivar(r2).avisos.some(a => /más de una orden/.test(a.texto)));
+
+// Mistborn no cambia: sigue con Alomancia/Feruquimia y sin radiante
+eq('Mistborn: 20 habilidades', Object.keys(PJ.derivar(c).habilidades).length, 20);
+eq('Mistborn: sin radiante', PJ.derivar(c).radiante, null);
+
+// Prerrequisitos de Stormlight que antes quedaban sin entender
+const evS = (cl, over) => PJ.evaluarClausula(cl, Object.assign({}, ctxVacio, over), 'x').estado;
+eq('habilidad de potencia', evS('Cohesión 2 o más', { grados: { 'Cohesión': 2 } }), 'ok');
+eq('palabra partida por el PDF', evS('pro- nunciar el Primer Ideal', { ideales: 1 }), 'ok');
+eq('Ideal sin pronunciar', evS('pronunciar el Tercer Ideal', { ideales: 2 }), 'falta');
+eq('ascendencia cantora', evS('ascendencia cantora', { ascendencia: 'cantora' }), 'ok');
+eq('cláusula con coma', PJ.clausulas('Progresión 2 o más, pro- nunciar el Primer Ideal'), ['Progresión 2 o más', 'pronunciar el Primer Ideal']);
+
+if (PJ.store) {
+  const rr = PJ.store.importar(PJ.store.exportar(r6));
+  eq('importación conserva el ámbito', rr.ambito, 'Stormlight');
+  eq('importación conserva los talentos de Ideal', rr.talentos, [PRIMER, SEGUNDO]);
+}
+
 console.log(`\n${ok} comprobaciones correctas, ${fallos} fallos.`);
 process.exit(fallos ? 1 : 0);
 

@@ -51,3 +51,13 @@
 #pyr #panel fieldset.cerr legend::before { content: "▸ "; }
 #pyr #panel fieldset.cerr > :not(legend) { display: none; }
 #pyr #panel fieldset.cerr { gap: 0; padding-bottom: 2px; }
+
+/* pantallas estrechas: las tres columnas pasan a apilarse */
+@media (max-width: 900px) {
+  #pyr { height: auto; min-height: 0; }
+  #pyr header { flex-wrap: wrap; }
+  #pyr main { grid-template-columns: minmax(0, 1fr); }
+  #pyr #centro { height: 60vw; min-height: 240px; }
+  #pyr aside { overflow-y: visible; }
+  #pyr #lista, #pyr #panel { border: 0; border-top: 1px solid #333; }
+}

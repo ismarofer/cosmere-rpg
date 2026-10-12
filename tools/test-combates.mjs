@@ -56,7 +56,9 @@ eq('con 2 jugadores el mismo encuentro es extremo', CB.resumenAmenaza(enc).dific
 // --- Adversarios reales
 const advs = CB.adversarios.todos(ctx.DATA_DJ);
 const advLegado = ctx.DATA_DJ.filter(x => x.cat === 'adversario' && x.f.fuente === 'Legado').length;
-eq('38 adversarios de la Guía del Mundo', advs.length - advLegado, 38);
+const advSL = ctx.DATA_DJ.filter(x => x.cat === 'adversario' && x.ambientacion === 'Stormlight').length;
+eq('38 adversarios de la Guía del Mundo (Scadrial)', advs.length - advLegado - advSL, 38);
+eq('55 perfiles del bestiario de Roshar', advSL, 55);
 eq('adversarios del Apéndice A del Legado', advLegado, 44);
 let sinBloques = 0;   // en perfiles con «— » las reacciones no figuran en f.acciones pero sí se leen, de ahí el «<»
 for (const a of advs) {

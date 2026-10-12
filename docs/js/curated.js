@@ -24,14 +24,15 @@
       cargas_mente_max: 'coins', dado_mando: 'crown', tamano: 'user', puntos_atributo: 'sliders', recompensa: 'gift', restriccion: 'alert' },
 
     // Ambientación (id interno: ambientacion) = a qué juego/ambientación pertenece cada entrada. Jerarquía por ruta: lo general (mistborn)
-    // aplica a todo lo que cuelga de él. Stormlight ya tiene etiqueta pero aún no contenido: al añadirlo, mapear su ambientación en ambientacionPath.
+    // aplica a todo lo que cuelga de él. «Cosmere» (ruta '') es lo común a todas las ambientaciones y se ve con cualquier filtro
+    // (ver decisions/reglas/contenido-comun-entre-ambientaciones.md). Stormlight se va cargando poco a poco (hoy: orígenes del Manual).
     ambientaciones: [
-      { id: '', label: 'Todo el Cosmere', ic: 'cosmere' },
+      { id: '', label: 'Cosmere', ic: 'cosmere' },
       { id: 'mistborn/1', label: 'Mistborn · Era 1', ic: 'mistborn' },
       { id: 'mistborn/2', label: 'Mistborn · Era 2', ic: 'mistborn' },
       { id: 'stormlight', label: 'Stormlight', ic: 'stormlight' },
     ],
-    ambientacionPath: { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn/1', 'Mistborn Era 2': 'mistborn/2' },
+    ambientacionPath: { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn/1', 'Mistborn Era 2': 'mistborn/2', 'Stormlight': 'stormlight', 'Cosmere': '' },
 
     // Menú superior y portada (el menú "caminos" se completa con los árboles de talentos)
     menu: [
@@ -41,7 +42,7 @@
       { id: 'caminos', label: 'Caminos', ic: 'tree', desc: 'Árboles de talentos: heroicos, nacidos del metal, alomancia, feruquimia…', trees: true },
       { id: 'equipo', label: 'Equipo', ic: 'bag', desc: 'Armas, armaduras, objetos y metales' },
       { id: 'reglas', label: 'Reglas', ic: 'book', desc: 'Todas las reglas del juego, una a una, las acciones y reacciones, y los modificadores del personaje' },
-      { id: 'mundo', label: 'Mundo', ic: 'globe', desc: 'Guía del Mundo de Scadrial: lugares, personajes y organizaciones, cosmología, historia y glosario. Contiene spoilers.', dj: true },
+      { id: 'mundo', label: 'Mundo', ic: 'globe', desc: 'Guía del Mundo de Scadrial (Mistborn) y de Roshar (Stormlight): lugares, personajes y organizaciones, cosmología, historia y glosario. Contiene spoilers.', dj: true },
       { id: 'dj', label: 'Dirección', ic: 'crown', desc: 'Adversarios, módulos, aventura y herramientas de mesa', dj: true,
         // Herramientas de mesa: van tras una línea separadora (como en Caminos). `soon`: aún sin página
         tools: [
@@ -57,6 +58,10 @@
       { id: 'nacidos-del-metal', label: 'Caminos de nacidos del metal', short: 'Nacidos del metal', ic: 'zap', match: { tipo_origen: 'Camino de nacido del metal' } },
       { id: 'alomancia', label: 'Alomancia', short: 'Alomancia', parent: 'nacidos-del-metal', ic: 'flame', match: { tipo_origen: 'Arte metálica', arte: 'Alomancia' } },
       { id: 'feruquimia', label: 'Feruquimia', short: 'Feruquimia', parent: 'nacidos-del-metal', ic: 'sparkle', match: { tipo_origen: 'Arte metálica', arte: 'Feruquimia' } },
+      // «Radiantes» solo agrupa: sus árboles cuelgan de Órdenes y Potencias (el `match` no coincide con ningún talento)
+      { id: 'radiantes', label: 'Caminos radiantes', short: 'Radiantes', ic: 'sun', match: { tipo_origen: '(grupo)' } },
+      { id: 'ordenes', label: 'Órdenes radiantes', short: 'Órdenes', parent: 'radiantes', ic: 'sun', match: { tipo_origen: 'Camino radiante' } },
+      { id: 'potencias', label: 'Potencias', short: 'Potencias', parent: 'radiantes', ic: 'flame', match: { tipo_origen: 'Potencia' } },
       { id: 'ascendencia', label: 'Ascendencias', short: 'Ascendencias', ic: 'globe', match: { tipo_origen: 'Ascendencia/Cultura' } },
     ],
 
@@ -66,19 +71,19 @@
       'arma.tipo_dano': { golpe: 'hammer', laceración: 'slash' },
       'arma.familia': { 'De fuego (ligera)': 'flame', 'De fuego (pesada)': 'flame', 'De fuego (especial)': 'flame' },
       'accion.tipo': { 'Acción': 'pip', 'Reacción': 'rotate', 'Acción gratuita': 'pipo' },
-      'talento.tipo_origen': { 'Camino heroico': 'user', 'Camino de nacido del metal': 'zap', 'Arte metálica': 'flame', 'Ascendencia/Cultura': 'globe' },
+      'talento.tipo_origen': { 'Camino heroico': 'user', 'Camino de nacido del metal': 'zap', 'Camino radiante': 'sun', 'Potencia': 'flame', 'Arte metálica': 'flame', 'Ascendencia/Cultura': 'globe' },
       'origen.tipo': { Ascendencia: 'globe', Cultura: 'compass' },
       'lugar.tipo': { Pueblos: 'users', Región: 'compass', 'Lugar de interés': 'mountain' },
       'pnj.tipo': { Personaje: 'user', Organización: 'users' },
       'cosmologia.tipo': { Cosmología: 'sparkle', Religión: 'sun', 'Artes metálicas': 'flame' },
-      'historia.tipo': { Historia: 'bookmark', 'El mundo en cada era': 'globe' },
+      'historia.tipo': { Historia: 'bookmark', 'El mundo en cada era': 'globe', 'El mundo': 'globe' },
       'pericia.tipo': { 'Pericia cultural': 'globe', 'Pericia en arma': 'sword', 'Pericia en armadura': 'shield', 'Pericia de utilidad': 'hammer', 'Pericia especializada': 'star' },
       'rasgo.aplica': { 'Armas': 'sword', 'Armaduras': 'shield' },
       'adversario.rol': { Secuaz: 'user', Rival: 'swords', Jefe: 'crown' },
       'habilidad.defensa': { 'Física': 'activity', 'Cognitiva': 'bulb', 'Espiritual': 'sun' },
       'habilidad.atributo': { Fuerza: 'activity', Velocidad: 'activity', Intelecto: 'bulb', Voluntad: 'bulb', Discernimiento: 'sun', Presencia: 'sun' },
       'calculo.depende': { Fuerza: 'activity', Velocidad: 'activity', Intelecto: 'bulb', Voluntad: 'bulb', Discernimiento: 'sun', Presencia: 'sun', Armadura: 'shield', Nivel: 'award' },
-      'ambientacion': { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn', 'Mistborn Era 2': 'mistborn', 'Stormlight': 'stormlight' },
+      'ambientacion': { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn', 'Mistborn Era 2': 'mistborn', 'Stormlight': 'stormlight', 'Cosmere': 'cosmere' },
     },
     // Columnas cuyo valor se pinta con el glifo de coste de acción
     actCols: ['activacion', 'coste'],
@@ -159,7 +164,7 @@
       // ------------------------------------------------------------------ Equipo
       {
         id: 'arma', label: 'Armas', group: 'equipo', ic: 'sword',
-        desc: 'Armas cuerpo a cuerpo, a distancia, especiales y de fuego (Era 2).',
+        desc: 'Armas cuerpo a cuerpo, a distancia y especiales (de fuego en la Era 2 de Mistborn; hojas esquirladas y semiesquirlas en Stormlight).',
         cols: [
           { k: 'title', l: 'Arma', main: true },
           { k: 'familia', l: 'Familia', f: 'chips', ic: 'sword' },
@@ -172,7 +177,7 @@
           { k: 'rasgos', l: 'Rasgos', f: 'select', list: true, ic: 'tag' },
           { k: 'experto', l: 'Rasgos de experto', f: 'text', hide: true, ic: 'tag' },
           { k: 'peso', l: 'Peso', fl: 'Peso (en gramos)', sk: 'peso_g', t: 'num', f: 'range', fk: 'peso_g', ic: 'box' },
-          { k: 'precio', l: 'Precio', fl: 'Precio (en arquillas)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
+          { k: 'precio', l: 'Precio', fl: 'Precio (arquillas en Mistborn, marcos en Stormlight)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', ic: 'globe' },
         ],
       },
@@ -184,16 +189,18 @@
           { k: 'rasgos', l: 'Rasgos', f: 'select', list: true, ic: 'tag' },
           { k: 'experto', l: 'Rasgos de experto', f: 'text', ic: 'tag' },
           { k: 'peso', l: 'Peso', fl: 'Peso (en gramos)', sk: 'peso_g', t: 'num', f: 'range', fk: 'peso_g', ic: 'box' },
-          { k: 'precio', l: 'Precio', fl: 'Precio (en arquillas)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
+          { k: 'precio', l: 'Precio', fl: 'Precio (arquillas en Mistborn, marcos en Stormlight)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', ic: 'globe' },
         ],
       },
       {
-        id: 'equipo', label: 'Equipo', group: 'equipo', ic: 'bag', desc: 'Herramientas y recursos cotidianos (precios en arquillas: ar).',
+        id: 'equipo', label: 'Equipo', group: 'equipo', ic: 'bag', desc: 'Herramientas y recursos cotidianos, esferas, monturas, vehículos y fabriales comunes. Precios en arquillas (ar) en Mistborn y en marcos (mc) en Stormlight.',
         cols: [
           { k: 'title', l: 'Objeto', main: true },
+          { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'bag' },
+          { k: 'cargas', l: 'Cargas', hide: true, narrow: true },
           { k: 'peso', l: 'Peso', fl: 'Peso (en gramos)', sk: 'peso_g', t: 'num', f: 'range', fk: 'peso_g', ic: 'box' },
-          { k: 'precio', l: 'Precio', fl: 'Precio (en arquillas)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
+          { k: 'precio', l: 'Precio', fl: 'Precio (arquillas en Mistborn, marcos en Stormlight)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
           { k: 'ext', l: 'Descripción' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
@@ -272,35 +279,35 @@
       { id: 'legado', label: 'Legado (aventura)', group: 'dj', dj: true, ic: 'bookmark', desc: 'Nacidos de la Bruma: Legado. Contiene spoilers.', cols: txt([{ k: 'capitulo', l: 'Parte', f: 'select' }]) },
 
       // ------------------------------------------------------------------ Mundo (Guía del Mundo; solo Modo DJ: contiene spoilers)
-      { id: 'lugar', label: 'Lugares', group: 'mundo', dj: true, ord: 1, ic: 'mountain', desc: 'Regiones y culturas de Scadrial y lugares de interés de cada era.',
+      { id: 'lugar', label: 'Lugares', group: 'mundo', dj: true, ord: 1, ic: 'mountain', desc: 'Regiones y culturas de Scadrial y de Roshar, y lugares de interés (de cada era en Scadrial; Shadesmar en Roshar).',
         cols: [
           { k: 'title', l: 'Lugar', main: true },
           { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'compass' },
           { k: 'ext', l: 'Extracto' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ] },
-      { id: 'pnj', label: 'Personajes y organizaciones', group: 'mundo', dj: true, ord: 2, ic: 'users', desc: 'Aliados, rivales y organizaciones de Scadrial, con su papel en cada era.',
+      { id: 'pnj', label: 'Personajes y organizaciones', group: 'mundo', dj: true, ord: 2, ic: 'users', desc: 'Aliados, rivales y organizaciones de Scadrial (con su papel en cada era) y de Roshar.',
         cols: [
           { k: 'title', l: 'Nombre', main: true },
           { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'user' },
           { k: 'ext', l: 'Extracto' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ] },
-      { id: 'cosmologia', label: 'Cosmología y religión', group: 'mundo', dj: true, ord: 3, ic: 'sparkle', desc: 'Adonalsium, las Esquirlas, las artes metálicas como magia del mundo, el Lord Legislador y las religiones de Scadrial.',
+      { id: 'cosmologia', label: 'Cosmología y religión', group: 'mundo', dj: true, ord: 3, ic: 'sparkle', desc: 'Adonalsium, las Esquirlas, las artes metálicas como magia del mundo, el Lord Legislador y las religiones de Scadrial; en Roshar, las Esquirlas, los Heraldos, los Deshechos y las religiones.',
         cols: [
           { k: 'title', l: 'Título', main: true },
           { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'sun' },
           { k: 'ext', l: 'Extracto' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ] },
-      { id: 'historia', label: 'Historia', group: 'mundo', dj: true, ord: 4, ic: 'bookmark', desc: 'Historia de Scadrial por eras y cómo es el mundo en cada una: sociedad, ciencia y tecnología.',
+      { id: 'historia', label: 'Historia', group: 'mundo', dj: true, ord: 4, ic: 'bookmark', desc: 'Historia de Scadrial por eras y cómo es el mundo en cada una; historia de Roshar y cómo es su mundo: ecosistema, altas tormentas, spren, ciencia y tecnología.',
         cols: [
           { k: 'title', l: 'Título', main: true },
           { k: 'tipo', l: 'Tipo', f: 'chips', ic: 'bookmark' },
           { k: 'ext', l: 'Extracto' },
           { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ] },
-      { id: 'glosario', label: 'Glosario', group: 'mundo', dj: true, ord: 5, ic: 'book', desc: 'Términos de Scadrial con su pronunciación y su traducción al español.',
+      { id: 'glosario', label: 'Glosario', group: 'mundo', dj: true, ord: 5, ic: 'book', desc: 'Términos de Scadrial y de Roshar con su pronunciación y su traducción al español.',
         cols: [
           { k: 'title', l: 'Término', main: true },
           { k: 'pronunciacion', l: 'Pronunciación' },

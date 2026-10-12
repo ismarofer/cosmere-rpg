@@ -195,6 +195,14 @@ def extraer_talento(e):
 
 # --------------------------------------------------------------------------- transcritos a mano
 # Talentos principales de los caminos de nacidos del metal y otros casos que no siguen una frase simple.
+# Talento principal de Primer Ideal de cada orden Radiante (Manual de Stormlight, cap. 5): es igual en las nueve órdenes
+PRIMER_IDEAL = [
+    ("recurso", "investidura_max", "fija", "2 + Discernimiento o Presencia (el mayor)", "valor máximo de Investidura al adquirirlo"),
+    ("recurso", "investidura", "otorga", None, "acciones Absorber luz tormentosa, Aumentar y Revitalizar"),
+    ("meta", "meta", "otorga", 1, "meta «Pronunciar el Primer Ideal»"),
+    ("poder", "poder", "otorga", 2, "las dos potencias de la orden, con 1 grado en cada una (al completar la meta)"),
+]
+
 MANUAL_TALENTO = {
     "Ruptura de brumoso (principal de brumoso)": [
         ("poder", "poder", "otorga", 1, "un poder alomántico a tu elección (disponible en tu era)"),
@@ -259,6 +267,17 @@ ASC_EFECTOS = {
             "Al alcanzar un nuevo rango (niveles 6, 11, 16 y 21) obtienes un talento adicional, del árbol kandra o de cualquier camino heroico.",
             "niveles 6, 11, 16 y 21; del árbol kandra o de un camino heroico", False),
     ],
+    "ascendencia-cantora": [
+        eff("tamano", "tamano", "otorga", "Mediano", None, None, True, "Si eliges la ascendencia cantora, tu tamaño es Mediano.", None, False),
+        eff("arbol", "arbol", "desbloquea", 1, None, None, True,
+            "Árbol de talentos único: siempre que obtengas un talento nuevo, podrás elegirlo del árbol de talentos de cantor.", "árbol de cantor", False),
+        eff("talento", "talento", "otorga", 2, None, None, True,
+            "Obtienes el talento Cambiar de forma (principal de cantor) del árbol de cantor, junto con un talento adicional vinculado.",
+            "Cambiar de forma (principal de cantor) y un talento adicional vinculado", False),
+        eff("talento_adicional", "talento", "otorga", 1, None, None, True,
+            "Al alcanzar un nuevo rango (niveles 6, 11, 16 y 21) obtienes un talento adicional, del árbol de cantor o de cualquier camino heroico.",
+            "niveles 6, 11, 16 y 21; del árbol de cantor o de un camino heroico", False),
+    ],
     "ascendencia-de-sangre-koloss": [
         eff("tamano", "tamano", "otorga", "Mediano", None, None, True, "Si eliges la ascendencia de sangre koloss, tu tamaño es Mediano.", None, False),
         eff("atributo_max", "fuerza", "suma", 1, None, None, True, "Tu puntuación máxima para el atributo Fuerza aumenta en 1.", None, False),
@@ -289,6 +308,8 @@ def aplicar(entries):
             continue
         ef = extraer_talento(e)
         manual = MANUAL_TALENTO.get(e["title"])
+        if manual is None and e["f"].get("tipo_origen") == "Camino radiante" and e["title"].startswith("Primer Ideal (principal de "):
+            manual = PRIMER_IDEAL
         if manual:
             txt = "Efectos del talento principal (transcritos del libro)."
             ef = [tuple_to_eff(t, txt) for t in manual]
@@ -340,7 +361,7 @@ def aplicar(entries):
         textos = []
         if f0["tipo_origen"] in ("Camino heroico", "Camino de nacido del metal"):
             for c in entries:
-                if c["cat"] == "camino" and c["path"][1] == nombre and c["title"].lower().startswith("talento principal"):
+                if c["cat"] == "camino" and len(c["path"]) > 1 and c["path"][1] == nombre and c["title"].lower().startswith("talento principal"):
                     m = re.search(r"Habilidad inicial: ([^.]+)\.", c["body"])
                     if m and norm(m.group(1)) != "ninguna":
                         h = ws(m.group(1))
@@ -349,7 +370,8 @@ def aplicar(entries):
                                            f"1 grado gratuito en {h} (si es tu camino inicial)", False))
                     textos.append(c["id"])
         if f0["tipo_origen"] == "Ascendencia/Cultura":
-            key = {"Ascendencia kandra": "ascendencia-kandra", "Ascendencia de sangre koloss": "ascendencia-de-sangre-koloss"}.get(nombre)
+            key = {"Ascendencia kandra": "ascendencia-kandra", "Ascendencia de sangre koloss": "ascendencia-de-sangre-koloss",
+                   "Ascendencia cantora": "ascendencia-cantora"}.get(nombre)
             if key:
                 efectos = ASC_EFECTOS[key]
         arboles.append({

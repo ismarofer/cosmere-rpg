@@ -16,7 +16,7 @@ def ws(s):
 
 
 # --------------------------------------------------------------------------- ambientacion
-AMBIENTACION = {"Ambas": "Mistborn", "Era 1": "Mistborn Era 1", "Era 2": "Mistborn Era 2"}
+AMBIENTACION = {"Ambas": "Mistborn", "Era 1": "Mistborn Era 1", "Era 2": "Mistborn Era 2", "Stormlight": "Stormlight", "Cosmere": "Cosmere"}
 
 
 def apply_ambientacion(entries):
@@ -253,6 +253,27 @@ def basename(t):
     return ws(re.sub(r"\s*\(.*?\)\s*", " ", t))
 
 
+def _compatibles(a, b):
+    """Dos talentos pueden requerirse si son de la misma ambientación o alguno es común (Cosmere)."""
+    fa, fb = a.get("ambientacion", "Mistborn").split()[0], b.get("ambientacion", "Mistborn").split()[0]
+    return fa == fb or "Cosmere" in (fa, fb)
+
+
+ORDINALES = {"primer": "Primer", "segundo": "Segundo", "tercer": "Tercer", "cuarto": "Cuarto"}
+
+
+def _ideal_de(tal_origen, ordinal):
+    """El talento «<Ordinal> Ideal» de una orden Radiante (el Primer Ideal es su talento principal)."""
+    for t in tal_origen:
+        n = norm(t["title"])
+        if ordinal == "primer":
+            if n.startswith("primer ideal"):
+                return t
+        elif n.startswith(ordinal + " ideal"):
+            return t
+    return None
+
+
 def link_talents(entries):
     tal = [e for e in entries if e["cat"] == "talento"]
     for e in tal:
@@ -261,26 +282,40 @@ def link_talents(entries):
     for e in tal:
         by_origin.setdefault(e["f"]["origen"], []).append(e)
     for e in tal:
-        pr = norm(ws(e["f"]["prerrequisito"]))
+        pr = re.sub(r"(?<=[a-z])- (?=[a-z])", "", norm(ws(e["f"]["prerrequisito"])))  # «pro- nunciar»: guion de fin de línea
         origin = e["f"]["origen"]
-        e["x"]["power"] = (e["f"]["tipo_origen"] == "Arte metálica" and
+        tipo = e["f"]["tipo_origen"]
+        e["x"]["power"] = (tipo == "Arte metálica" and
                            (pr == norm(origin) or "poder " in pr or pr.startswith(norm(origin))))
         i = pr.find("talento")
-        if i < 0:
-            continue
-        text = pr[i:]
-        for pool, key in ((sorted(by_origin[origin], key=lambda t: -len(basename(t["title"]))), "req"),
-                          (sorted([t for t in tal if t["f"]["origen"] != origin], key=lambda t: -len(basename(t["title"]))), "xreq")):
-            for c in pool:
-                if c is e:
-                    continue
-                b = norm(basename(c["title"]))
-                if len(b) < 5:
-                    continue
-                m = re.search(r"(?<![a-z0-9])" + re.escape(b) + r"(?![a-z0-9])", text)
-                if m:
-                    e["x"][key].append(c["id"])
-                    text = text[:m.start()] + " " * (m.end() - m.start()) + text[m.end():]
+        if i >= 0:
+            text = pr[i:]
+            for pool, key in ((sorted(by_origin[origin], key=lambda t: -len(basename(t["title"]))), "req"),
+                              (sorted([t for t in tal if t["f"]["origen"] != origin], key=lambda t: -len(basename(t["title"]))), "xreq")):
+                halladas = {}   # nombre base -> ya localizado en el texto (todas las variantes de ese nombre se enlazan)
+                for c in pool:
+                    if c is e or not _compatibles(e, c):
+                        continue
+                    b = norm(basename(c["title"]))
+                    if len(b) < 5:
+                        continue
+                    if halladas.get(b):
+                        e["x"][key].append(c["id"])   # otra variante (Mistborn / Stormlight) del mismo talento
+                        continue
+                    m = re.search(r"(?<![a-z0-9])" + re.escape(b) + r"(?![a-z0-9])", text)
+                    if m:
+                        e["x"][key].append(c["id"])
+                        halladas[b] = True
+                        text = text[:m.start()] + " " * (m.end() - m.start()) + text[m.end():]
+        # Radiantes: «pronunciar el Segundo Ideal» enlaza con ese talento de la misma orden; el Primer Ideal es el talento principal
+        if tipo == "Camino radiante":
+            for m in re.finditer(r"pronunciar el (primer|segundo|tercer|cuarto) ideal", pr):
+                t = _ideal_de(by_origin[origin], m.group(1))
+                if t is not None and t is not e:
+                    e["x"]["req"].append(t["id"])
+        # Potencias: la raíz es el «Primer Ideal» de la orden; sin talento padre, cuelga de la potencia como las artes metálicas del poder
+        if tipo == "Potencia" and not i >= 0:
+            e["x"]["power"] = True
         e["x"]["req"] = list(dict.fromkeys(e["x"]["req"]))
         e["x"]["xreq"] = list(dict.fromkeys(e["x"]["xreq"]))
 
@@ -295,7 +330,8 @@ def split_ascendencias(entries):
         m = re.search(r"\(principal de ([^)]+)\)", e["title"])
         if m and e["x"]["main"]:
             name = ws(m.group(1))
-            label[e["id"]] = "Ascendencia " + (name if name.startswith("sangre") is False else "de " + name)
+            label[e["id"]] = {"cantor": "Ascendencia cantora"}.get(name) or "Ascendencia " + (
+                name if name.startswith("sangre") is False else "de " + name)
     changed = True
     while changed:
         changed = False

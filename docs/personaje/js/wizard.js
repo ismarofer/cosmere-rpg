@@ -46,6 +46,22 @@
     kandra: '6 puntos de atributo; Forma natural y Disfraz kandra; Bendiciones; sin poderes de nacido del metal.',
     koloss: 'Fuerza hasta 4 en la creación y máximo 6; Resistencia koloss.',
   };
+  const CORTA_ASCENDENCIA_STORMLIGHT = {
+    humana: '12 puntos de atributo; un talento adicional de un camino heroico, ahora y al llegar a cada rango.',
+    cantora: '12 puntos de atributo; Cambiar de forma más un talento de formas iniciales; un árbol propio de talentos de forma.',
+  };
+
+  // Cambiar de ámbito deja a un lado lo que no se traslada (ascendencia, camino, talentos, pericias, equipo…) y conserva
+  // nombre, nivel, atributos e historia.
+  PJ.cambiarAmbito = function (c, amb) {
+    if (!PJ.AMBITOS[amb] || PJ.ambito(c) === amb) return;
+    c.ambito = amb; c.ascendencia = 'humana'; c.bendiciones = []; c.camino = null;
+    c.talentos = []; c.pericias = []; c.poderes = []; c.recompensas = []; c.habilidades = {};
+    c.kit = null; c.equipoLibre = false; c.equipo = []; c.armas = []; c.armadura = null; c.armaduraGratis = false;
+    c.arquillas = 0; c.arquillasIni = null; c.manuales = []; c.efectosOff = {}; c.confirmados = {};
+    c.hemalurgia = { clavos: [] }; c.estado.cargas = {}; c.radiante = { ideales: null, hitos: {}, spren: '' };
+  };
+  const divisa = c => PJ.AMBITOS[PJ.ambito(c)];
 
   const botonSel = (on, texto, onclick, disabled) =>
     h('button', { type: 'button', class: 'btn small' + (on ? ' peligro' : ''), disabled, onclick }, on ? 'Quitar' : (texto || 'Elegir'));
@@ -61,9 +77,10 @@
     };
   };
 
-  const panelCamino = slug => {
+  const panelCamino = (slug, stormlight) => {
     const D_ = D(), a = D_.arbol[slug];
-    const tp = D_.byId[a.talento_principal], crear = D_.byId['camino-como-crear-un-' + slug];
+    const base = 'camino-como-crear-un-' + slug;
+    const tp = D_.byId[a.talento_principal], crear = (stormlight ? D_.byId[base + '-2'] : null) || D_.byId[base];
     const gratis = PJ.HAB_INICIAL[slug];
     const cuerpo = [];
     if (tp) cuerpo.push('## Talento principal', `[[talento|${tp.title}|${limpioTitulo(tp.title)}]]. ${descCorta(tp)}`);
@@ -101,12 +118,22 @@
   function pasoDatos({ c, d, modo, cambiar, silencioso }) {
     const rango = PJ.rango(c.nivel);
     const maxBen = 1 + (rango >= 3 ? 1 : 0);
+    const stormlight = PJ.ambito(c) === 'Stormlight';
     return h('div', { class: 'paso' },
       h('p', { class: 'muted' }, 'Los datos básicos del personaje. Puedes empezar en un nivel superior al 1: el asistente te pedirá todo lo acumulado hasta ese nivel.'),
       h('div', { class: 'form' },
         h('label', null, 'Nombre', h('input', { type: 'text', value: c.nombre, oninput: e => silencioso(c => { c.nombre = e.target.value; }) })),
         h('label', null, 'Jugador/a', h('input', { type: 'text', value: c.jugador, oninput: e => silencioso(c => { c.jugador = e.target.value; }) })),
-        h('label', null, 'Era',
+        modo === 'crear' ? h('label', null, 'Ambientación',
+          h('select', {
+            onchange: e => {
+              const v = e.target.value;
+              const hayElecciones = c.camino || c.talentos.length || c.pericias.length || c.equipo.length || c.armas.length || c.kit;
+              if (hayElecciones && !confirm('Cambiar de ambientación borra el camino, los talentos, las pericias y el equipo elegidos. ¿Continuar?')) { e.target.value = PJ.ambito(c); return; }
+              cambiar(c => { PJ.cambiarAmbito(c, v); });
+            },
+          }, Object.entries(PJ.AMBITOS).map(([k, a]) => h('option', { value: k, selected: PJ.ambito(c) === k }, a.n)))) : null,
+        stormlight ? null : h('label', null, 'Era',
           h('select', { onchange: e => cambiar(c => { c.era = +e.target.value; PJ.aplicarPoderesIniciales(c); }) },
             h('option', { value: 1, selected: c.era === 1 }, 'Era 1 (Imperio Final)'),
             h('option', { value: 2, selected: c.era === 2 }, 'Era 2 (Elendel)'))),
@@ -123,10 +150,11 @@
             }),
           })) : null),
       h('h3', null, 'Ascendencia'),
-      h('ul', { class: 'lista talentos' }, Object.entries(PJ.ASCENDENCIAS).map(([k, a]) => {
+      h('ul', { class: 'lista talentos' }, Object.entries(PJ.ASCENDENCIAS_AMB[PJ.ambito(c)]).map(([k, a]) => {
         const on = c.ascendencia === k;
         return fila({
-          ref: 'origen-ascendencia-' + ID_ASCENDENCIA[k], titulo: a.n, corta: CORTA_ASCENDENCIA[k], on,
+          ref: stormlight ? a.origen : 'origen-ascendencia-' + ID_ASCENDENCIA[k], titulo: a.n,
+          corta: (stormlight ? CORTA_ASCENDENCIA_STORMLIGHT : CORTA_ASCENDENCIA)[k], on,
           accion: on ? h('span', { class: 'chip small' }, 'elegida') : h('button', {
             type: 'button', class: 'btn small',
             onclick: () => cambiar(c => {
@@ -152,18 +180,27 @@
 
   function pasoCamino({ c, d, cambiar }) {
     const arboles = PJ.datos().arbol;
+    const stormlight = PJ.ambito(c) === 'Stormlight';
     const kandra = c.ascendencia === 'kandra';
     const carta = slug => {
       const a = arboles[slug]; if (!a) return null;
       const bloqueado = kandra && PJ.CAMINOS_METAL.includes(slug);
       const on = c.camino === slug;
       return fila({
-        panel: panelCamino(slug), titulo: a.nombre, corta: cortaCamino(slug), on, bloq: bloqueado,
+        panel: panelCamino(slug, stormlight), titulo: a.nombre, corta: cortaCamino(slug), on, bloq: bloqueado,
         chips: bloqueado ? h('span', { class: 'chip small mal' }, 'No disponible para kandra') : null,
         accion: on ? h('span', { class: 'chip small' }, 'elegido')
           : h('button', { type: 'button', class: 'btn small', disabled: bloqueado, onclick: () => cambiar(c => { c.camino = slug; PJ.aplicarPoderesIniciales(c); }) }, 'Elegir'),
       });
     };
+    if (stormlight) {
+      return h('div', { class: 'paso' },
+        h('p', { class: 'muted' }, 'Tu camino inicial te da su talento principal y un grado gratuito en una habilidad. Empiezas siempre con un camino heroico.'),
+        h('h3', null, 'Caminos heroicos'),
+        h('ul', { class: 'lista talentos' }, PJ.CAMINOS_HEROICOS.map(carta)),
+        h('p', { class: 'nota' }, 'Los caminos radiantes no se eligen aquí: desde el nivel 2 eliges el talento de Primer Ideal de una orden en el paso de talentos (con permiso de la DJ puedes empezar ya como Radiante).'),
+        h('p', null, h('a', { href: 'index.html#/caminos', target: '_blank', rel: 'noopener' }, 'Consultar los caminos en el buscador')));
+    }
     return h('div', { class: 'paso' },
       h('p', { class: 'muted' }, 'Tu camino inicial te da su talento principal y un grado gratuito en una habilidad. Los caminos de nacido del metal son excluyentes entre sí.'),
       h('h3', null, 'Caminos heroicos'),
@@ -206,13 +243,13 @@
     const p = d.presupuesto.grados;
     const grupos = PJ.ATRIBUTOS.map(a => h('div', { class: 'grupo' },
       h('h4', null, a.n, ' ', h('small', null, `(${d.atributos[a.k].total})`)),
-      Object.entries(PJ.HABILIDADES).filter(([, k]) => k === a.k).map(([nombre]) => {
-        const x = d.habilidades[nombre];
+      Object.entries(d.habilidades).filter(([, x]) => x.atributo === a.k).map(([nombre, x]) => {
         return h('div', { class: 'fila' },
-          h('span', { class: 'nom' }, nombre, PJ.HAB_ARTES.includes(nombre) ? h('small', { class: 'muted' }, ' (arte metálica)') : null),
+          h('span', { class: 'nom' }, nombre, PJ.HAB_ARTES.includes(nombre) ? h('small', { class: 'muted' }, ' (arte metálica)') : null,
+            x.potencia ? h('small', { class: 'muted' }, x.bloqueada ? ' (potencia: se desbloquea al pronunciar el Primer Ideal)' : ' (potencia)') : null),
           puntos(x.asignados, {
             etiqueta: nombre, gratis: x.gratis, n: p.max - x.gratis,
-            max: Math.min(p.max - x.gratis, x.asignados + Math.max(0, p.total - p.usados)),
+            max: x.bloqueada ? 0 : Math.min(p.max - x.gratis, x.asignados + Math.max(0, p.total - p.usados)),
             alCambiar: v => cambiar(c => { if (v) c.habilidades[nombre] = v; else delete c.habilidades[nombre]; }),
           }),
           h('span', { class: 'mod' }, (x.mod >= 0 ? '+' : '') + x.mod));
@@ -220,20 +257,28 @@
     return h('div', { class: 'paso' },
       PJ.pasoElecciones21({ c, cambiar }),
       barra(p.usados, p.total, `grados de habilidad (máximo ${p.max} por habilidad en el rango ${d.rango})`),
-      h('p', { class: 'muted' }, 'El modificador es el atributo más los grados. Los grados gratuitos de tu camino no consumen puntos.'),
+      h('p', { class: 'muted' }, 'El modificador es el atributo más los grados. Los grados gratuitos de tu camino no consumen puntos.' +
+        (d.radiante ? (d.radiante.ideales >= 1 ? ' Las potencias de tu orden llegan con 1 grado gratuito y suben como cualquier habilidad.' : ' Las potencias de tu orden están bloqueadas hasta pronunciar el Primer Ideal (paso «Radiante»).') : '')),
       h('div', { class: 'grupos' }, grupos),
       avisosLista(d.avisos.filter(a => /grados/.test(a.texto)), ['error']));
   }
 
   let arbolSel = null, filtroTalento = '';
-  function opcionesArboles(c) {
-    const A = PJ.datos().arbol, asc = PJ.ASCENDENCIAS[c.ascendencia];
+  function opcionesArboles(c, d) {
+    const Dt = PJ.datos(), A = Dt.arbol, asc = PJ.ascDe(c);
     const out = [];
     const add = (slug, grupo) => { if (A[slug] && !out.some(o => o.slug === slug)) out.push({ slug, grupo, nombre: A[slug].nombre }); };
     if (c.camino) add(c.camino, 'Tu camino inicial');
     if (asc.arbol) add(asc.arbol, 'Ascendencia');
+    if (d.radiante) {
+      add(d.radiante.orden, 'Tu camino radiante');
+      d.radiante.potencias.forEach(p => add(p, 'Tus potencias'));
+    }
     PJ.CAMINOS_HEROICOS.forEach(s => add(s, 'Caminos heroicos'));
-    if (c.ascendencia !== 'kandra') {
+    if (PJ.ambito(c) === 'Stormlight') {
+      Dt.ordenes.forEach(a => add(a.slug, 'Caminos radiantes'));
+      add('iluminado', 'Caminos radiantes');
+    } else if (c.ascendencia !== 'kandra') {
       PJ.CAMINOS_METAL.forEach(s => add(s, 'Caminos de nacido del metal'));
       add('metales-de-scadrial', 'Artes metálicas');
       for (const p of c.poderes || []) add(`${p.arte}-de-${p.metal}`, 'Poderes que posees');
@@ -243,7 +288,7 @@
 
   function pasoTalentos({ c, d, cambiar }) {
     const t = d.presupuesto.talentos;
-    const opts = opcionesArboles(c);
+    const opts = opcionesArboles(c, d);
     if (!opts.some(o => o.slug === arbolSel)) arbolSel = (opts[0] || {}).slug;
     const A = PJ.datos();
     const todos = arbolSel ? PJ.talentosElegibles(c, d, arbolSel).filter(x => !x.poseido) : [];
@@ -296,13 +341,15 @@
         h('label', null, 'Filtrar', h('input', { type: 'search', value: filtroTalento, oninput: e => { filtroTalento = e.target.value; pintar(); } })),
         h('label', { class: 'chk' }, h('input', { type: 'checkbox', checked: !!c.ignorarPrerreq, onchange: e => cambiar(c => { c.ignorarPrerreq = e.target.checked; }) }), ' Ignorar prerrequisitos (decisión de la DJ)')),
       zona,
-      c.ascendencia === 'humana' ? h('p', { class: 'muted' }, 'Como humano, tu talento adicional de nivel 1 debe ser de un camino heroico.') : null);
+      c.ascendencia === 'humana' ? h('p', { class: 'muted' }, 'Como humano, tu talento adicional de nivel 1 debe ser de un camino heroico.') : null,
+      c.ascendencia === 'cantora' ? h('p', { class: 'muted' }, 'Como cantor, además de Cambiar de forma eliges un talento de formas iniciales (Formas de delicadeza, de determinación o de sabiduría) y, al llegar a cada rango, otro del árbol de cantor o de un camino heroico.') : null,
+      PJ.ambito(c) === 'Stormlight' ? h('p', { class: 'muted' }, 'Los caminos radiantes se abren en el nivel 2: el talento de Primer Ideal da Investidura y la meta de pronunciarlo; las potencias llegan al lograr esa meta (paso «Radiante»).') : null);
   }
 
   function pasoPericias({ c, d, cambiar }) {
     const p = d.presupuesto.pericias;
     let texto = '';
-    const culturas = PJ.datos().culturasEra(c.era);
+    const culturas = PJ.datos().culturasDe(c);
     const lleno = p.usadas >= p.total;
     const anadirOtra = () => { if (texto.trim() && !lleno) cambiar(c => { c.pericias.push({ texto: texto.trim(), cultural: false }); }); };
     const otra = h('li', { class: 'talento' },
@@ -331,8 +378,7 @@
           : h('button', { type: 'button', class: 'btn small', disabled: lleno, onclick: () => cambiar(c => { c.pericias.push({ texto: e.f.pericia, cultural: false }); }) }, 'Añadir'),
       });
     };
-    const eraOk = e => { const m = /Era (\d)/.exec(e.ambientacion || ''); return !m || +m[1] === +c.era; };
-    const delManual = tipo => PJ.datos().base.filter(e => e.cat === 'pericia' && e.f.tipo === tipo && eraOk(e));
+    const delManual = tipo => PJ.datos().base.filter(e => e.cat === 'pericia' && e.f.tipo === tipo && PJ.ambCubre(c, e));
     const grupoManual = tipo => {
       const es = delManual(tipo);
       return es.length ? h('details', { class: 'grupo-pericias' }, h('summary', null, tipo + ' (' + es.length + ')'),
@@ -354,7 +400,9 @@
       h('h3', null, 'Elegir pericias'),
       h('ul', { class: 'lista talentos' }, otra, culturas.map(filaCultura)),
       grupoManual('Pericia en arma'), grupoManual('Pericia en armadura'), grupoManual('Pericia de utilidad'),
-      h('p', { class: 'muted' }, 'Las pericias especializadas (hoja koloss, capa de bruma, Hemalurgo…) solo se obtienen con talentos, recompensas o permiso de la DJ: añádelas con «Otra pericia».'),
+      h('p', { class: 'muted' }, PJ.ambito(c) === 'Stormlight'
+        ? 'Las pericias especializadas (hoja esquirlada, armadura esquirlada, fabricación de fabriales…) solo se obtienen con talentos, recompensas o permiso de la DJ: añádelas con «Otra pericia».'
+        : 'Las pericias especializadas (hoja koloss, capa de bruma, Hemalurgo…) solo se obtienen con talentos, recompensas o permiso de la DJ: añádelas con «Otra pericia».'),
       h('p', null, h('a', { href: 'index.html#/c/pericia', target: '_blank', rel: 'noopener' }, 'Reglas de pericias en el buscador')));
   }
 
@@ -426,7 +474,9 @@
   };
   const iniDe = c => (c.arquillasIni != null ? c.arquillasIni : c.arquillas + gastoEquipo(c));
   const fijarArquillas = (c, ini) => { c.arquillasIni = Math.max(0, redondea(ini)); c.arquillas = Math.max(0, redondea(c.arquillasIni - gastoEquipo(c))); };
-  const dadosKit = k => { const m = /(\d+)d(\d+)\s+arquillas/i.exec((k && k.body) || ''); return m ? [+m[1], +m[2]] : null; };
+  const dadosKit = k => { const m = /(\d+)d(\d+)\s+(?:arquillas|marcos)/i.exec((k && k.body) || ''); return m ? [+m[1], +m[2]] : null; };
+  // En Mistborn Era 2 el dinero inicial se multiplica por 10; en Stormlight no
+  const factorDinero = c => (PJ.ambito(c) === 'Mistborn' && c.era === 2 ? 10 : 1);
 
   // El estado de la interfaz (sección y filtros) vive aquí porque cambiar() reconstruye todo el asistente
   const eq = { sec: 'inicial', tipo: '', peso: '', cat: '', busca: '' };
@@ -474,7 +524,7 @@
       : null);
 
     const secInicial = () => {
-      const kits = D.base.filter(e => e.id.startsWith('objeto-equipo-inicial-de-'));
+      const kits = D.base.filter(e => e.cat === 'equipo' && e.f && e.f.tipo === 'Equipo inicial' && PJ.ambCubre(c, e));
       const kit = c.kit && byId[c.kit];
       const dados = dadosKit(kit);
       const elegir = (id, libre) => cambiar(cc => {
@@ -485,13 +535,13 @@
       const tirar = () => {
         let t = 0;
         for (let i = 0; i < dados[0]; i++) t += 1 + Math.floor(Math.random() * dados[1]);
-        mut(cc => t * (cc.era === 2 ? 10 : 1));
+        mut(cc => t * factorDinero(cc));
       };
       return h('div', null,
         h('ul', { class: 'lista talentos' },
           fila({
             titulo: 'Elección libre', on: !!c.equipoLibre,
-            corta: 'No usas un conjunto inicial: eliges todo tu equipo y tú decides con cuántas arquillas empiezas.',
+            corta: 'No usas un conjunto inicial: eliges todo tu equipo y tú decides con cuántos ' + divisa(c).divisa + ' empiezas.',
             accion: botonSel(!!c.equipoLibre, 'Elegir', () => elegir(null, !c.equipoLibre)),
           }),
           kits.map(k => {
@@ -502,9 +552,9 @@
             });
           })),
         c.kit || c.equipoLibre ? h('div', { class: 'form fila' },
-          h('label', null, 'Arquillas iniciales', h('input', { type: 'number', min: 0, step: 'any', value: iniDe(c), onchange: e => mut(() => Math.max(0, +e.target.value || 0)) })),
-          dados ? h('button', { type: 'button', class: 'btn', onclick: tirar }, `Tirar ${dados[0]}d${dados[1]}${c.era === 2 ? ' × 10' : ''}`) : null,
-          kit && !dados ? h('span', { class: 'nota' }, 'Este conjunto no incluye dinero.') : null) : h('p', { class: 'muted' }, 'Elige un conjunto o marca "Elección libre" para fijar tus arquillas iniciales.'));
+          h('label', null, divisa(c).Divisa + ' iniciales', h('input', { type: 'number', min: 0, step: 'any', value: iniDe(c), onchange: e => mut(() => Math.max(0, +e.target.value || 0)) })),
+          dados ? h('button', { type: 'button', class: 'btn', onclick: tirar }, `Tirar ${dados[0]}d${dados[1]}${factorDinero(c) > 1 ? ' × ' + factorDinero(c) : ''}`) : null,
+          kit && !dados ? h('span', { class: 'nota' }, 'Este conjunto no incluye dinero.') : null) : h('p', { class: 'muted' }, 'Elige un conjunto o marca "Elección libre" para fijar tus ' + divisa(c).divisa + ' iniciales.'));
     };
 
     const resumen = () => {
@@ -512,20 +562,20 @@
       const ini = iniDe(c), gasto = gastoEquipo(c), resto = redondea(ini - gasto);
       const cifra = (n, v, cls) => h('span', { class: 'cifra ' + (cls || '') }, h('span', { class: 'nota' }, n), h('b', null, fmtAr(v)));
       const lineas = kit ? String(kit.body || '').split('\n').map(l => l.replace(/^#+\s*/, '').trim())
-        .filter(l => /^(armas|armadura|equipo|dinero|divisa|pericia|mente)/i.test(l)).map(l => PJ.ui.plano(l).replace(/\s*era\s*(\d)\s*/gi, ' (era $1) ').replace(/\s+/g, ' ').trim()) : [];
+        .filter(l => /^(armas|armadura|equipo|dinero|divisa|esferas|pericia|mente|conexi[oó]n)/i.test(l)).map(l => PJ.ui.plano(l).replace(/\s*era\s*(\d)\s*/gi, ' (era $1) ').replace(/\s+/g, ' ').trim()) : [];
       return h('div', { class: 'banda-equipo' },
         h('div', { class: 'be-fila' },
           h('span', null, h('b', null, 'Equipo inicial: '),
             kit ? kit.title.replace(/^Equipo inicial de /i, '').replace(/^./, s => s.toUpperCase()) : c.equipoLibre ? 'Elección libre' : 'sin elegir'),
           kit ? h('button', { type: 'button', class: 'btn small', onclick: () => PJ.ui.abrirPanel(kit.id) }, 'Ver conjunto') : null,
-          h('span', { class: 'cifras' }, cifra('Arquillas iniciales', ini), cifra('Gastadas', gasto), cifra('Restantes', resto, resto < 0 ? 'mal' : ''))),
-        resto < 0 ? h('p', { class: 'mal nota' }, `Te pasas ${fmtAr(-resto)} arquillas.`) : null,
+          h('span', { class: 'cifras' }, cifra(divisa(c).Divisa + ' iniciales', ini), cifra('Gastadas', gasto), cifra('Restantes', resto, resto < 0 ? 'mal' : ''))),
+        resto < 0 ? h('p', { class: 'mal nota' }, `Te pasas ${fmtAr(-resto)} ${divisa(c).divisa}.`) : null,
         lineas.length ? h('details', null, h('summary', null, 'Incluido en el conjunto'), h('ul', { class: 'lista' }, lineas.map(l => h('li', null, l)))) : null);
     };
 
     const secArmadura = () => h('div', null,
       c.kit && c.armadura ? h('p', null, delConjunto(c.armaduraGratis, v => mut(cc => { cc.armaduraGratis = v; }))) : null,
-      h('ul', { class: 'lista talentos' }, D.base.filter(e => e.cat === 'armadura').map(a => {
+      h('ul', { class: 'lista talentos' }, D.base.filter(e => e.cat === 'armadura' && PJ.ambCubre(c, e)).map(a => {
         const on = a.id === c.armadura;
         return fila({
           ref: a.id, titulo: limpioTitulo(a.title), corta: descEquipo(a), on,
@@ -549,7 +599,7 @@
         })) : h('p', { class: 'muted' }, 'Sin armas.'),
         h('h4', { class: 'titulo-grupo' }, 'Añadir un arma'),
         catalogoFiltrable({
-          items: D.base.filter(e => e.cat === 'arma'), buscador: true,
+          items: D.base.filter(e => e.cat === 'arma' && PJ.ambCubre(c, e)), buscador: true,
           barras: pintar => [
             grupo('Tipo', [['', 'Todas'], ['Cuerpo a cuerpo', 'Cuerpo a cuerpo'], ['A distancia', 'A distancia']].map(([v, t]) => chipFiltro(eq.tipo === v, t, () => { eq.tipo = v; pintar(); }))),
             grupo('Peso', [['', 'Cualquiera'], ['lig', 'Ligeras'], ['pes', 'Pesadas'], ['otras', 'Otras']].map(([v, t]) => chipFiltro(eq.peso === v, t, () => { eq.peso = v; pintar(); }))),
@@ -567,7 +617,7 @@
     };
 
     const secObjetos = () => {
-      const items = D.base.filter(e => e.cat === 'equipo');
+      const items = D.base.filter(e => e.cat === 'equipo' && PJ.ambCubre(c, e) && e.f.tipo !== 'Equipo inicial');
       const cats = [...new Set(items.map(catEquipo))].sort((a, b) => (a === 'Varios') - (b === 'Varios') || a.localeCompare(b, 'es'));
       let libre = '';
       return h('div', null,
@@ -623,7 +673,7 @@
     return h('div', { class: 'paso' },
       h('p', { class: 'muted' }, 'Al empezar por encima del nivel 1 recibes recompensas ya ganadas. Anótalas aquí (el detalle de cada una está en el libro).'),
       r ? h('div', null,
-        h('p', null, h('b', null, r.arquillas + ' arquillas'), ' de dinero inicial ',
+        h('p', null, h('b', null, r.arquillas + ' ' + divisa(c).divisa), ' de dinero inicial ',
           h('button', { type: 'button', class: 'btn small', onclick: () => cambiar(c => { fijarArquillas(c, r.arquillas); }) }, 'Aplicar')),
         h('ul', { class: 'lista' }, Object.entries(r.recompensas).map(([n, cant]) => h('li', { class: contar(+n) > cant ? 'mal' : '' }, `Recompensas de rango ${n}: ${contar(+n)} / ${cant}`)))) : h('p', null, 'Empiezas en nivel 1: sin recompensas adicionales.'),
       h('ul', { class: 'lista' }, c.recompensas.map((x, i) => h('li', null, h('span', { class: 'chip small' }, 'R' + x.rango), ' ', x.texto,
@@ -647,22 +697,85 @@
         h('div', null, h('b', null, 'Salud'), ' ', d.salud), h('div', null, h('b', null, 'Concentración'), ' ', d.concentracion),
         d.investidura !== null ? h('div', null, h('b', null, 'Investidura'), ' ', d.investidura) : null,
         h('div', null, h('b', null, 'Defensas'), ` ${d.defensas.fisica} / ${d.defensas.cognitiva} / ${d.defensas.espiritual}`),
-        h('div', null, h('b', null, 'Camino'), ' ', PJ.ui.nombreCamino(c.camino) || '—')),
+        h('div', null, h('b', null, 'Camino'), ' ', PJ.ui.nombreCamino(c.camino) || '—'),
+        d.radiante ? h('div', null, h('b', null, 'Orden radiante'), ' ', d.radiante.nombre, ` (${d.radiante.ideales} Ideal${d.radiante.ideales === 1 ? '' : 'es'})`) : null),
       pendientes.length ? h('div', null, h('h4', null, 'Pendiente de completar'), avisosLista(d.avisos)) :
         d.avisos.length ? avisosLista(d.avisos) : h('p', { class: 'bien' }, 'Todo en orden: no hay nada pendiente.'));
+  }
+
+  // Roshar: orden, Ideales (con los hitos de su meta) y potencias. Los Ideales que se pueden marcar son los de los talentos
+  // de Ideal que ya tienes; pronunciar el Primer Ideal es lo que da las dos potencias (con 1 grado) a la hoja.
+  function pasoRadiante({ c, d, cambiar, silencioso }) {
+    const r = d.radiante, Dt = PJ.datos();
+    if (!r) {
+      return h('div', { class: 'paso' },
+        h('p', { class: 'muted' }, 'Todavía no eres Radiante. Desde el nivel 2 puedes elegir el talento de Primer Ideal de una de las órdenes (paso «Talentos»); con él obtienes Investidura y la meta de pronunciar el Primer Ideal.'),
+        h('p', { class: 'muted' }, 'Hasta entonces puedes ir atrayendo a un spren con la DJ y anotarlo en Conexiones (paso «Historia»).'),
+        h('ul', { class: 'lista talentos' }, Dt.ordenes.map(a => fila({
+          panel: { etiqueta: 'Camino radiante', title: a.nombre, path: ['Camino radiante'],
+            facts: [['Spren', a.spren], ['Potencias', a.potencias.map(p => PJ.POTENCIAS[p].n).join(' y ')], ['Filosofía', a.filosofia]],
+            body: (Dt.byId[a.talento_principal] ? descCorta(Dt.byId[a.talento_principal]) : ''), href: `index.html#/arbol/${a.slug}` },
+          titulo: a.nombre, corta: `${a.spren} · ${a.potencias.map(p => PJ.POTENCIAS[p].n).join(' y ')}. ${a.filosofia}`,
+        }))));
+    }
+    const orden = Dt.arbol[r.orden];
+    const ideales = [];
+    for (let k = 1; k <= Math.max(1, r.maxPoseido); k++) {
+      const tiene = k <= r.maxPoseido;
+      const hitos = (c.radiante.hitos || {})[k] || 0;
+      const dicho = r.ideales >= k;
+      const prev = k === 1 || r.ideales >= k - 1;
+      ideales.push(fila({
+        titulo: `${PJ.IDEALES[k - 1]} Ideal`,
+        corta: tiene ? 'Meta de Ideal: tres hitos; al completarla pronuncias las Palabras y se desbloquean los beneficios restantes del talento.' : `Aún no tienes el talento del ${PJ.IDEALES[k - 1]} Ideal.`,
+        on: dicho, bloq: !tiene,
+        accion: tiene ? [
+          PJ.ui.puntos(hitos, { n: 3, etiqueta: `Hitos del ${PJ.IDEALES[k - 1]} Ideal`, dis: dicho, alCambiar: v => cambiar(c => { c.radiante.hitos[k] = v; }) }),
+          h('label', { class: 'chk' }, h('input', {
+            type: 'checkbox', checked: dicho, disabled: !dicho && !prev,
+            onchange: e => cambiar(c => { c.radiante.ideales = e.target.checked ? k : k - 1; if (e.target.checked) c.radiante.hitos[k] = 3; }),
+          }), ' Pronunciado')] : [],
+      }));
+    }
+    const sinHitos = r.ideales < 1;
+    return h('div', { class: 'paso' },
+      h('div', { class: 'datos-arte' },
+        h('span', null, h('b', null, 'Orden '), orden.nombre),
+        h('span', null, h('b', null, 'Spren '), r.spren || '—'),
+        h('span', null, h('b', null, 'Investidura '), d.investidura === null ? '—' : String(d.investidura))),
+      r.filosofia ? h('p', { class: 'nota' }, 'Filosofía: ' + r.filosofia) : null,
+      h('div', { class: 'form' },
+        h('label', null, 'Tu spren (nombre o tipo, opcional)', h('input', { type: 'text', value: c.radiante.spren || '', oninput: e => silencioso(c => { c.radiante.spren = e.target.value; }) }))),
+      h('h3', null, 'Ideales'),
+      h('ul', { class: 'lista talentos' }, ideales),
+      h('h3', null, 'Potencias'),
+      sinHitos ? h('p', { class: 'muted' }, 'Las potencias de tu orden llegan al pronunciar el Primer Ideal, con 1 grado gratuito en cada una (suben en el paso «Habilidades» como cualquier otra).') : null,
+      h('ul', { class: 'lista talentos' }, r.potencias.map(p => {
+        const P = PJ.POTENCIAS[p], x = d.habilidades[P.n], arte = Dt.byId['habilidad-stormlight-' + p];
+        const esc = x ? PJ.escaladoPotencia(x.grados) : null;
+        return fila({
+          ref: arte ? arte.id : null, titulo: P.n,
+          corta: `${PJ.ATR[P.a].n}` + (x ? ` · ${x.grados} grado${x.grados === 1 ? '' : 's'} · modificador ${x.mod >= 0 ? '+' : ''}${x.mod} · dado ${esc.dado} · tamaño ${esc.tamano}` : ' · bloqueada hasta pronunciar el Primer Ideal'),
+          on: !!x, bloq: !x,
+          accion: h('a', { class: 'btn small', href: `index.html#/arbol/${p}`, target: '_blank', rel: 'noopener' }, 'Árbol'),
+        });
+      })),
+      h('p', { class: 'muted' }, 'Con un talento de Primer Ideal obtienes también las acciones Absorber luz tormentosa, Aumentar y Revitalizar (están en la pestaña «Acciones» de la hoja).'));
   }
 
   // ------------------------------------------------------------------ secuencias
   PJ.PASOS = {
     datos: { n: 'Datos', fn: pasoDatos }, camino: { n: 'Camino', fn: pasoCamino }, atributos: { n: 'Atributos', fn: pasoAtributos },
     habilidades: { n: 'Habilidades', fn: pasoHabilidades }, talentos: { n: 'Talentos', fn: pasoTalentos }, pericias: { n: 'Pericias', fn: pasoPericias },
-    poderes: { n: 'Poderes', fn: pasoPoderes }, equipo: { n: 'Equipo', fn: pasoEquipo }, recompensas: { n: 'Recompensas', fn: pasoRecompensas },
+    poderes: { n: 'Poderes', fn: pasoPoderes }, radiante: { n: 'Radiante', fn: pasoRadiante }, equipo: { n: 'Equipo', fn: pasoEquipo }, recompensas: { n: 'Recompensas', fn: pasoRecompensas },
     historia: { n: 'Historia', fn: pasoHistoria }, resumen: { n: 'Resumen', fn: pasoResumen },
   };
   PJ.secuencia = (modo, c) => {
-    if (modo === 'nivel') return ['atributos', 'habilidades', 'talentos', 'pericias', 'poderes', 'resumen'];
+    const stormlight = PJ.ambito(c) === 'Stormlight';
+    if (modo === 'nivel') return ['atributos', 'habilidades', 'talentos', 'pericias', stormlight ? 'radiante' : 'poderes', 'resumen'];
     const s = ['datos', 'camino', 'atributos', 'habilidades', 'talentos', 'pericias'];
-    if (PJ.CAMINOS_METAL.includes(c.camino)) s.push('poderes');
+    if (stormlight) { if (PJ.derivar(c).radiante) s.push('radiante'); }
+    else if (PJ.CAMINOS_METAL.includes(c.camino)) s.push('poderes');
     s.push('equipo');
     if (c.nivelInicial > 1) s.push('recompensas');
     s.push('historia', 'resumen');

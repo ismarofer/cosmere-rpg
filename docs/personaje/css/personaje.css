@@ -231,6 +231,10 @@ body.pj .est-nuevo { margin-top: .6rem; }
 body.pj .filtros-hoja { margin: .2rem 0 .6rem; }
 
 @media (max-width: 800px) {
+  /* pestañas de la ficha: una sola fila desplazable en vez de partirse en dos niveles */
+  body.pj .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-left: -.6rem; margin-right: -.6rem; padding: 0 .6rem; }
+  body.pj .tabs::-webkit-scrollbar { display: none; }
+  body.pj .tab { flex: none; white-space: nowrap; padding: .5rem .7rem; }
   body.pj .tres-reinos { grid-template-columns: 1fr; }
   body.pj .cuerpo-asistente { grid-template-columns: 1fr; }
   body.pj .barra-pasos { flex-wrap: wrap; }

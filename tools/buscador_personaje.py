@@ -152,6 +152,10 @@ UTILIDAD = [
     "Fabricar armamento", "Fabricar equipo", "Ingeniería", "Juegos de manos", "Literatura", "Logística militar",
     "Mantenimiento de armas de fuego", "Mantenimiento de ballestas", "Mecánica de automóviles", "Montar a caballo", "Oratoria", "Religión",
 ]
+# Ejemplos de pericia de utilidad que dan igual los dos manuales (Mistborn y Archivo de las Tormentas): son del Cosmere, no de una
+# ambientación (decisions/reglas/contenido-comun-entre-ambientaciones.md). Al cargar otra ambientación, revisar esta lista.
+UTILIDAD_COMUN = {"Cuidado de animales", "Estrategia militar", "Fabricar armaduras", "Fabricar equipo", "Ingeniería",
+                  "Montar a caballo", "Religión"}
 DEF_PERICIA = {
     "Pericia en arma": "Las pericias en arma tienen relación con el mantenimiento y manejo de un tipo específico de arma. Eres experto en su limpieza, cuidado y fabricación, y puedes usar sus rasgos de experto, porque sabes cómo empuñarla mejor en combate.",
     "Pericia en armadura": "Las pericias en armadura se centran en el mantenimiento y el uso de cualquier tipo de armadura. Eres experto en su limpieza, cuidado e incluso fabricación, y puedes aprovechar sus rasgos de experto, porque sabes cómo vestirla y moverte con ella.",
@@ -188,8 +192,12 @@ def _pericias_del_manual(base):
             out.append(nueva(tipo, nombre, "Pericia especializada en" if esp else "Pericia en", "\n\n".join(partes),
                              e["pages"], e["ambientacion"], f"pericia-{cat}-{slug(nombre)}"))
     for nombre in UTILIDAD:
-        out.append(nueva("Pericia de utilidad", nombre, "Pericia en", DEF_PERICIA["Pericia de utilidad"], "60-62", "Mistborn",
-                         "pericia-utilidad-" + slug(nombre)))
+        comun = nombre in UTILIDAD_COMUN  # el Manual de Stormlight la da como ejemplo con el mismo nombre
+        p = nueva("Pericia de utilidad", nombre, "Pericia en", DEF_PERICIA["Pericia de utilidad"], "60-62",
+                  "Cosmere" if comun else "Mistborn", "pericia-utilidad-" + slug(nombre))
+        if comun:
+            p["libro"] = "Manual del Juego"
+        out.append(p)
     out.append(nueva("Pericia especializada", "Hemalurgo", "Pericia especializada en",
                      DEF_PERICIA["Pericia especializada"] + "\n\nLa pericia especializada Hemalurgo te permite implantarte clavos hemalúrgicos "
                      "a ti mismo o a otros personajes dispuestos; se obtiene como recompensa junto a los clavos (consulta «Clavos hemalúrgicos» en el capítulo 8).",

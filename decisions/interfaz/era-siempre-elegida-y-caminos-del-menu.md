@@ -7,9 +7,9 @@ applies-to: docs/js/curated.js (ambientaciones), docs/js/app.js (visible, treeSh
 
 ## Decisión
 
-- El filtro de ambientación **no ofrece «Mistborn» a secas**: en Mistborn se elige Era 1 o Era 2 (además de «Todo el Cosmere» y las demás ambientaciones).
+- El filtro de ambientación **no ofrece «Mistborn» a secas**: en Mistborn se elige Era 1 o Era 2 (además de «Cosmere» y las demás ambientaciones).
 - Al elegir una era se ve **lo exclusivo de esa era más lo común a ambas** (entradas etiquetadas «Mistborn»). Lo exclusivo de la otra era queda oculto.
-- El filtro afecta también al **menú Caminos** y a la portada: un árbol aparece solo si tiene algún talento visible con esa ambientación (o, sin talentos, alguna entrada de su arte), y las especialidades se acotan igual.
+- El filtro es el global de la cabecera ([filtro-ambientacion-en-listas](filtro-ambientacion-en-listas.md)) y afecta también al **menú Caminos** y a la portada: un árbol aparece solo si tiene algún talento visible con esa ambientación (o, sin talentos, alguna entrada de su arte), y las especialidades se acotan igual.
 
 ## Qué es exclusivo de cada era
 

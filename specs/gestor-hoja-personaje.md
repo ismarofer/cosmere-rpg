@@ -163,7 +163,24 @@ Cada módulo extiende la hoja con su bloque propio:
 ### 4.8 Ámbito y era (P0)
 
 - La **era** se elige en la creación y se guarda en el personaje; filtra ascendencias, metales y equipo (los entradas del buscador están etiquetadas `Mistborn`, `Mistborn Era 1`, `Mistborn Era 2`).
-- Dejar preparado el campo `ambito` en el modelo para que, en el futuro, el gestor admita otra ambientación (Stormlight) sin cambiar el esquema.
+- El campo `ambito` (`Mistborn` | `Stormlight`) decide qué contenido ofrece el gestor; ver §4.9.
+
+### 4.9 Stormlight (P0, implementado)
+
+El mismo asistente y la misma hoja sirven a un personaje de Roshar (`ambito: 'Stormlight'`). Criterio: [decisions/reglas/personajes-por-ambito.md](../decisions/reglas/personajes-por-ambito.md).
+
+| Paso | Diferencia con Mistborn |
+|---|---|
+| Datos | Ámbito en lugar de era. Ascendencias: humana (un talento adicional de camino heroico) y cantora (Cambiar de forma automático + un talento de formas iniciales). Sin bendiciones. |
+| Camino | Solo caminos heroicos. Los radiantes se eligen como talento de Primer Ideal (nivel ≥ 2) en el paso de talentos. |
+| Habilidades | 18 (sin Alomancia ni Feruquimia) más las 2 potencias de la orden, con 1 grado gratuito al pronunciar el Primer Ideal. |
+| Talentos | Heroicos (Stormlight + Cosmere), cantor y radiantes; los de potencia solo para quien tenga una orden que la maneja. «pronunciar el N-ésimo Ideal» se evalúa con los Ideales marcados. |
+| Pericias | Culturas de Roshar (13), armas, armaduras y utilidad de Stormlight y Cosmere. |
+| Radiante (nuevo) | Orden y spren, Ideales con los 3 hitos de su meta y «Pronunciado», potencias con grados, dado y tamaño (Escalado de potencias). Investidura = 2 + mayor de DIS/PRE desde el Primer Ideal. |
+| Equipo | Equipo inicial de Roshar, objetos de Stormlight, dinero en marcos (sin ×10). |
+| Recompensas | 200 / 1.000 / 2.000 / 5.000 marcos y las mismas recompensas por rango. |
+
+Pruebas: `tools/test-personaje.mjs` (sección «Stormlight»).
 
 ## 5. Modelo de datos
 

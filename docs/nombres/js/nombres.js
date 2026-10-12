@@ -1,7 +1,9 @@
 /* Generador de nombres (integrado en el buscador, #/nombres, Dirección). NOM.montar(el) pinta la herramienta en `el`.
    Fuente: «Nombres de…» de cada cultura (Mistborn Manual, cap. 2 · Cultura). Dos modos: nombres del libro tal cual, o inventados
    con una cadena de Márkov de orden 2 entrenada con los nombres de esa cultura (suenan igual, pero no están en el libro).
-   NOM.generar(...) es puro para poder probarlo. Los nombres guardados viven en localStorage. */
+   Las culturas de Stormlight salen de las entradas «Cultura» de DATA_BASE (sección «Nombres»). La ambientación es la de la cabecera
+   (window.CosmereAmb), esta herramienta no tiene filtro propio. NOM.generar(...) es puro para poder probarlo. Los nombres
+   guardados viven en localStorage. */
 (function (g) {
   'use strict';
 
@@ -22,6 +24,14 @@
     { id: 'kandra', label: 'Tierra Natal kandra', era: 0, nombres: 'CharSun, CheOon, DenMar, Draalm, FhorSell, JeOrr, JilMaar, KeeLaan, Laahm, LunPook, ParSaag, RaDuun, RenKood, SaCaar, SovDell, TaLeur, TeeSar, TeSun, VarLuur, ZanMuur' },
   ];
   const lista = s => (s ? s.split(',').map(x => x.trim()).filter(Boolean) : []);
+  CULTURAS.forEach(c => { c.amb = c.era === 1 ? 'Mistborn Era 1' : c.era === 2 ? 'Mistborn Era 2' : 'Mistborn'; });
+  // Culturas de otras ambientaciones: de los datos del libro («#### Nombres» al final de cada entrada de cultura)
+  (g.DATA_BASE || []).forEach(e => {
+    if (e.cat !== 'origen' || !e.f || e.f.tipo !== 'Cultura' || e.ambientacion === 'Mistborn' || /^Mistborn/.test(e.ambientacion)) return;
+    const m = /#### Nombres\n([^\n]+)/.exec(e.body);
+    if (!m) return;
+    CULTURAS.push({ id: e.id, label: e.title, era: 0, amb: e.ambientacion, nombres: m[1].replace(/\.\s*$/, '') });
+  });
   CULTURAS.forEach(c => { c.lista = lista(c.nombres); c.listaClanes = lista(c.clanes); });
 
   // ------------------------------------------------------------------ generador (puro)
@@ -90,9 +100,8 @@
   }
   let st, res = [], root;
   function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(st)); } catch (e) { /* sin almacenamiento */ } }
-  // Ambientación (mismas etiquetas e iconos que CURATED.ambientaciones): una era muestra lo suyo más lo común (`era` 0)
-  const AMBS = [[0, 'Todo el Cosmere', 'cosmere'], [1, 'Mistborn · Era 1', 'mistborn'], [2, 'Mistborn · Era 2', 'mistborn']];
-  const visibles = () => CULTURAS.filter(c => !st.era || !c.era || c.era === st.era);
+  // La ambientación es la de la cabecera: una era muestra lo suyo más lo común a las dos; Stormlight, sus culturas.
+  const visibles = () => CULTURAS.filter(c => !g.CosmereAmb || g.CosmereAmb.cubre(c.amb));
 
   function tirar() {
     const ids = st.culturas.filter(id => visibles().some(c => c.id === id));
@@ -106,15 +115,15 @@
   const chip = (on, a, v, txt) => `<button type="button" class="nm-chip${on ? ' on' : ''}" data-a="${a}" data-v="${esc(v)}" aria-pressed="${on}">${txt}</button>`;
   function render() {
     const vis = visibles();
-    const ambTxt = e => (e ? 'Mistborn · Era ' + e : 'Mistborn');
+    const ambTxt = a => a.replace(/ Era /, ' · Era ');
+    const todas = !g.CosmereAmb || g.CosmereAmb.id() === '';
     const guardados = st.guardados.map((n, i) => `<li><button type="button" class="nm-nom" data-a="copiar" data-v="${esc(n.nombre)}" title="Copiar">${esc(n.nombre)}</button>
       <span class="nm-cult">${esc(n.cultura)}</span><button type="button" class="nm-x" data-a="quitar" data-v="${i}" aria-label="Quitar">×</button></li>`).join('');
     root.innerHTML = `<div class="nm">
       <h2>Generador de nombres</h2>
       <p class="nm-nota">Nombres típicos de cada cultura del Manual (cap. 2 · Cultura). «Inventados» combina sus sonidos para crear nombres nuevos con el mismo estilo. Pulsa un nombre para copiarlo; ☆ lo guarda.</p>
       <div class="nm-col">
-        <div class="nm-fila"><span class="nm-et">Ambientación</span>${AMBS.map(([e, l, i]) => chip(st.era === e, 'era', e, (g.UI && g.UI.ic ? g.UI.ic(i, 'sm') : '') + l)).join('')}</div>
-        <div class="nm-fila"><span class="nm-et">Cultura</span>${vis.map(c => chip(st.culturas.includes(c.id), 'cult', c.id, esc(c.label) + (st.era ? '' : ` <small>${ambTxt(c.era)}</small>`))).join('')}
+        <div class="nm-fila"><span class="nm-et">Cultura</span>${vis.map(c => chip(st.culturas.includes(c.id), 'cult', c.id, esc(c.label) + (todas ? ` <small>${esc(ambTxt(c.amb))}</small>` : ''))).join('')}
           <button type="button" class="nm-link" data-a="todas">todas</button><button type="button" class="nm-link" data-a="ninguna">ninguna</button></div>
         <div class="nm-fila"><span class="nm-et">Tipo</span>${chip(st.modo === 'libro', 'modo', 'libro', 'Del libro')}${chip(st.modo === 'mezcla', 'modo', 'mezcla', 'Mezcla')}${chip(st.modo === 'inventado', 'modo', 'inventado', 'Inventados')}
           ${vis.some(c => c.listaClanes.length && st.culturas.includes(c.id)) ? `<label class="nm-chk"><input type="checkbox" data-a="clan"${st.clan ? ' checked' : ''}> con clan koloss</label>` : ''}</div>
@@ -139,8 +148,7 @@
     const b = ev.target.closest('[data-a]');
     if (!b || !root.contains(b)) return;
     const a = b.dataset.a, v = b.dataset.v;
-    if (a === 'era') { st.era = +v; }
-    else if (a === 'cult') { st.culturas = st.culturas.includes(v) ? st.culturas.filter(x => x !== v) : st.culturas.concat(v); }
+    if (a === 'cult') { st.culturas = st.culturas.includes(v) ? st.culturas.filter(x => x !== v) : st.culturas.concat(v); }
     else if (a === 'todas') st.culturas = visibles().map(c => c.id);
     else if (a === 'ninguna') st.culturas = [];
     else if (a === 'modo') st.modo = v;
@@ -170,6 +178,12 @@
     // contenedor propio: los manejadores no deben quedarse en la vista compartida al cambiar de página
     el.innerHTML = '';
     root = el.appendChild(document.createElement('div'));
+    // la ambientación de la cabecera puede haber cambiado desde la última vez: solo se mantienen las culturas visibles
+    const vis = visibles().map(c => c.id);
+    const antes = st.culturas.join();
+    st.culturas = st.culturas.filter(id => vis.includes(id));
+    if (!st.culturas.length) st.culturas = vis.slice(0, 1);
+    if (st.culturas.join() !== antes) res = [];
     if (!res.length && st.culturas.length) tirar();
     render();
     root.addEventListener('click', onClick);

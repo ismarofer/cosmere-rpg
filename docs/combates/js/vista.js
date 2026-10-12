@@ -11,7 +11,7 @@
   const act = k => (g.UI && g.UI.act ? g.UI.act(k) : '');
 
   let bib, enc = null, root, advs = null, mods = [];
-  const ui = { q: '', rol: '', amb: '', libro: '', abiertos: new Set(), dano: {}, desvio: true, perforante: false, aviso: '' };
+  const ui = { q: '', rol: '', libro: '', abiertos: new Set(), dano: {}, desvio: true, perforante: false, aviso: '' };
 
   // ------------------------------------------------------------------ almacenamiento
   function cargar() {
@@ -69,9 +69,8 @@
   }
 
   // ------------------------------------------------------------------ encuentro
-  const AMBS = [['', 'Todo el Cosmere', 'cosmere'], ['Mistborn Era 1', 'Mistborn · Era 1', 'mistborn'], ['Mistborn Era 2', 'Mistborn · Era 2', 'mistborn']];
-  // Lo general («Mistborn») aplica a cualquier era; elegir una era muestra lo general más lo de esa era.
-  const encajaAmb = a => !ui.amb || a.ambientacion === 'Mistborn' || a.ambientacion === ui.amb;
+  // La ambientación es la de la cabecera (window.CosmereAmb): esta herramienta no tiene filtro propio.
+  const encajaAmb = a => !g.CosmereAmb || g.CosmereAmb.cubre(a.ambientacion);
   function vAdvs(r) {
     const q = norm(ui.q);
     const lista = advs.filter(a => (!ui.rol || a.rol === ui.rol) && encajaAmb(a) && (!ui.libro || a.libro === ui.libro) && (!q || norm(a.nombre).includes(q)));
@@ -173,7 +172,6 @@
           <p class="nota">Los módulos (alomancia, feruquimia, clavos) aumentan la amenaza pero el libro no da cifra: ajústala a mano en su casilla.</p>
           <label class="cb-campo">Notas del encuentro <textarea data-a="notas-enc" rows="2">${esc(enc.notas)}</textarea></label></section>
         <section class="cb-col cb-picker"><h3>Adversarios</h3>
-          <div class="cb-filtros"><span class="muted">Ambientación:</span>${AMBS.map(([k, l, i]) => `<button class="chip${ui.amb === k ? ' on' : ''}" data-a="amb" data-id="${esc(k)}">${g.UI && g.UI.ic ? g.UI.ic(i, 'sm') : ''}${l}</button>`).join('')}</div>
           <div class="cb-filtros"><span class="muted">Fuente:</span>${['', ...new Set(advs.map(a => a.libro).filter(Boolean))].map(l => `<button class="chip${ui.libro === l ? ' on' : ''}" data-a="libro" data-id="${esc(l)}">${g.UI && g.UI.ic ? g.UI.ic('book', 'sm') : ''}${l ? esc(l) : 'Todas'}</button>`).join('')}</div>
           <div class="cb-filtros"><input id="cb-q" type="search" placeholder="Buscar adversario…" value="${esc(ui.q)}">
             ${['Secuaz', 'Rival', 'Jefe'].map(x => `<button class="chip${ui.rol === x ? ' on' : ''}" data-a="rol" data-id="${x}">${x}</button>`).join('')}</div>
@@ -211,7 +209,6 @@
       case 'deshacer': if (CB.deshacer(enc)) { guardar(); render(); } break;
       case 'restaurar': cambiar('Restaurar valores', e => e.combatientes.forEach(CB.restaurar)); break;
       case 'rol': ui.rol = ui.rol === id ? '' : id; render(); break;
-      case 'amb': ui.amb = id; render(); break;
       case 'libro': ui.libro = id; render(); break;
       case 'añadir': {
         const ad = advs.find(x => x.nombre === id);

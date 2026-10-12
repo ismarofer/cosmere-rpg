@@ -10,6 +10,7 @@ applies-to: tools/build-buscador.py, docs/js/curated.js, docs/js/app.js, docs/co
 - **No se publica el número de página.** El campo `pages` se descarta al generar `docs/data/*.js` y ninguna pantalla muestra «págs.».
 - **Sí se publica la fuente** en el campo `libro` de cada entrada, calculado por `libro_de()` en `tools/build-buscador.py`:
   - `Manual <ambientación>`: hoy `Manual Mistborn` (el Manual del JdR); en el futuro `Manual Stormlight`,
+  - `Manual del Juego`: el contenido común a todas las ambientaciones (ambientación Cosmere, ver [contenido-comun-entre-ambientaciones](../reglas/contenido-comun-entre-ambientaciones.md)),
   - `Guía <mundo>`: hoy `Guía Scadrial` (la Guía del Mundo de Mistborn); en el futuro `Guía Roshar`,
   - `Campaña <nombre>` si viene de un libro de campaña: hoy `Campaña Legado`; en el futuro, p. ej., `Campaña Caminapiedras`.
 - La fuente se muestra en las fichas (junto a la ambientación) y es **filtro** en toda lista filtrable, justo después de la ambientación.

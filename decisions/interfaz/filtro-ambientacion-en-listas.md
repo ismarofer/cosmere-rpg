@@ -1,22 +1,23 @@
 ---
-description: Toda lista filtrable de la aplicación ofrece la ambientación como filtro, con su icono, igual que en la portada.
-applies-to: docs/js/curated.js, docs/js/app.js, docs/combates/js/vista.js y cualquier lista, tabla o catálogo con filtros nuevo
+description: La ambientación es un filtro global, en la cabecera junto a la marca; recorta menús, portada, listas, árboles, búsqueda y herramientas. Ninguna lista tiene filtro de ambientación propio.
+applies-to: docs/index.html (#ambpick), docs/js/app.js (visible, window.CosmereAmb), docs/js/curated.js (ambientaciones), docs/combates/js/vista.js y cualquier lista, tabla, catálogo o herramienta nueva
 ---
 
-# Filtro de ambientación en las listas filtrables
+# Filtro global de ambientación (cabecera)
 
 ## Decisión
 
-Siempre que una pantalla muestre una lista con filtros (catálogos, selectores de adversarios, listas de talentos, etc.), la **ambientación** debe estar disponible como filtro, con el **icono** de cada ambientación, como en el selector de la portada (`CURATED.ambientaciones`: Todo el Cosmere, Mistborn · Era 1, Mistborn · Era 2, Stormlight; no hay opción «Mistborn» a secas, ver [era-siempre-elegida-y-caminos-del-menu](era-siempre-elegida-y-caminos-del-menu.md)).
+- La ambientación se elige **una sola vez, en la cabecera**, junto a «Cosmere RPG», con su icono, y es la misma en todas las páginas. Opciones (`CURATED.ambientaciones`): **Cosmere** (todo), Mistborn · Era 1, Mistborn · Era 2 y Stormlight; no hay «Mistborn» a secas, ver [era-siempre-elegida-y-caminos-del-menu](era-siempre-elegida-y-caminos-del-menu.md).
+- Lo elegido **se aplica en todas partes**: menús (los árboles de Caminos, los contadores), portada, catálogos, árboles de talentos y sus especialidades, búsqueda y herramientas que listan contenido (selector de adversarios de Combates…). Se recuerda en el navegador.
+- **«Cosmere» muestra todo.** Una ambientación concreta muestra lo suyo más lo común a todas (entradas con ambientación `Cosmere`, ver [contenido-comun-entre-ambientaciones](../reglas/contenido-comun-entre-ambientaciones.md)); una era de Mistborn, además, lo común a las dos eras.
+- **Las listas no tienen filtro de ambientación propio**: la columna «Ambientación» puede mostrarse como dato, pero no es un filtro (`c.k === 'ambientacion'` se ignora al armar los filtros).
 
 ## Cómo aplicarlo
 
-- **Catálogos** (`docs/js/curated.js`): añadir a `cols` la columna `{ k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' }`. Los iconos de cada valor salen de `vicons['ambientacion']`. Los catálogos con `cols: txt()` ya la incluyen.
-- **Listas propias** (herramientas como combates): usar los mismos iconos (`cosmere`, `mistborn`, `stormlight`) y etiquetas que `CURATED.ambientaciones`, no texto suelto.
-- **Siempre es el primer filtro** de la lista, antes de cualquier otro (en catálogos se ordena automáticamente; en listas propias, colócalo el primero).
-- Una era muestra lo general de la ambientación más lo de esa era (misma jerarquía que el buscador).
-- Si una lista ya está acotada por una elección previa que implica la ambientación (p. ej. la era del personaje en el asistente), el filtro no hace falta; deja constancia de ello al crearla.
+- **Catálogos** (`docs/js/curated.js`): basta con que las entradas lleven `ambientacion`; la lista parte ya recortada por el filtro global (`visible()` en `app.js`).
+- **Herramientas con listas propias** (combates, etc.): no pintan botones de ambientación; preguntan a `window.CosmereAmb.cubre(nombreDeAmbientacion)` y se repintan al cambiar (la navegación vuelve a montar la vista).
+- **Excepción:** lo que ya viene acotado por una elección del propio usuario que implica la ambientación (la era del personaje en el asistente) sigue su propia lógica: el asistente usa el ámbito del personaje (Mistborn o Stormlight, ver [personajes-por-ambito](../reglas/personajes-por-ambito.md)), no el filtro de la cabecera, que solo decide con qué ámbito arranca un personaje nuevo.
 
 ## Por qué
 
-La ambientación cambia qué reglas, adversarios y objetos son válidos en la mesa (Era 1 frente a Era 2, y en el futuro otras ambientaciones del Cosmere). Tener el mismo filtro, con el mismo icono, en todas partes evita listas con contenido de otra era y mantiene una interfaz coherente.
+La ambientación cambia qué reglas, adversarios y objetos son válidos en la mesa. Con un único selector en la cabecera, siempre visible, no hay que repetirlo ni se pueden dejar desalineadas la portada, el menú y las listas, y cada página se acota igual.

@@ -52,8 +52,25 @@
       id: e.id, nombre: e.title.replace(/^Pericias?\s+/i, ''),
     }));
     D.culturasEra = era => D.culturas.filter(c => { const x = R.CULTURAS_ERA[c.nombre]; return !x || x === era; });
+    // Stormlight: las culturas son las «Pericia cultural» de sus orígenes (ids origen-stormlight-pericia-…)
+    D.culturasStormlight = base.filter(e => e.ambientacion === 'Stormlight' && e.cat === 'pericia' && e.f && e.f.tipo === 'Pericia cultural').map(e => ({
+      id: e.id, nombre: e.title.replace(/^Pericias?\s+/i, ''),
+    }));
+    D.culturasDe = c => (R.ambito(c) === 'Stormlight' ? D.culturasStormlight : D.culturasEra(c.era));
+    // Órdenes radiantes jugables: los caminos radiantes que declaran sus potencias
+    D.ordenes = arboles.filter(a => a.tipo === 'Camino radiante' && a.potencias && a.potencias.length);
     _D = D;
     return D;
+  };
+
+  // ¿Entra la entrada `e` en el catálogo de este personaje? Stormlight ve Stormlight + Cosmere; Mistborn ve Mistborn
+  // (de su era) + Cosmere. Las entradas sin ambientación valen para todos.
+  PJ.ambCubre = (c, e) => {
+    const a = (e && e.ambientacion) || '';
+    if (R.ambito(c) === 'Stormlight') return a === 'Stormlight' || a === 'Cosmere' || a === '';
+    if (a === 'Stormlight') return false;
+    const m = /Era (\d)/.exec(a);
+    return !m || +m[1] === +c.era;
   };
 
   // ---------- Personaje nuevo ----------
@@ -70,6 +87,9 @@
       historia: { proposito: '', obstaculo: '', metas: [], conexiones: [], aspectoTexto: '', aspectoImg: '', trasfondo: '', notas: '' },
       estado: { salud: null, concentracion: null, investidura: null, cargas: {}, estados: '', lista: [] },
       manuales: [], efectosOff: {}, confirmados: {},
+      // Roshar: ideales pronunciados (null = automático: todos los que tengas como talento si empiezas por encima del nivel 1)
+      // y hitos de la meta de cada Ideal
+      radiante: { ideales: null, hitos: {}, spren: '' },
     };
     return Object.assign(c, over || {});
   };
@@ -77,14 +97,18 @@
   // ---------- Prerrequisitos ----------
   const SK = Object.keys(R.HABILIDADES);
   const ATRN = R.ATRIBUTOS.map(a => a.n);
-  const reNivel = new RegExp('(' + SK.concat(ATRN).join('|') + ') (\\d+) o más', 'g');
+  const SKP = Object.values(R.POTENCIAS).map(p => p.n);
+  const reNivel = new RegExp('(' + SK.concat(SKP, ATRN).join('|') + ') (\\d+) o (?:más|superior)', 'g');
 
+  // El PDF parte palabras a final de línea («pro- nunciar»): se recomponen antes de interpretar nada.
+  const sinGuiones = t => String(t || '').replace(/(\p{L})- (\p{L})/gu, '$1$2');
   PJ.clausulas = function (texto) {
-    return String(texto || '').split(';').map(s => s.trim()).filter(s => s && !/^(—|ninguno\.?)$/i.test(s));
+    return sinGuiones(texto).split(/;|,\s+(?=pronunciar el)/).map(s => s.trim()).filter(s => s && !/^(—|ninguno\.?)$/i.test(s));
   };
 
   PJ.evaluarClausula = function (cl, ctx, selfId) {
     const D = PJ.datos();
+    cl = sinGuiones(cl);
     const res = (estado) => ({ texto: cl, estado });
     let m;
     const grado = n => (ATRN.includes(n) ? ctx.atr[R.ATRIBUTOS.find(a => a.n === n).k] : (ctx.grados[n] || 0));
@@ -104,14 +128,19 @@
       const okH = /humana/.test(lo) && ctx.ascendencia === 'humana';
       const okK = /kandra/.test(lo) && ctx.ascendencia === 'kandra';
       const okS = /koloss/.test(lo) && ctx.ascendencia === 'koloss';
-      return res(okH || okK || okS ? 'ok' : 'falta');
+      const okC = /cantora?\b/.test(lo) && ctx.ascendencia === 'cantora';
+      return res(okH || okK || okS || okC ? 'ok' : 'falta');
+    }
+    if ((m = cl.match(/^pronunciar el (Primer|Segundo|Tercer|Cuarto|Quinto) Ideal/i))) {
+      const n = R.IDEALES.concat('Quinto').findIndex(x => x.toLowerCase() === m[1].toLowerCase()) + 1;
+      return res((ctx.ideales || 0) >= n ? 'ok' : 'falta');
     }
     if (/^no tener ning[uú]n otro talento/i.test(cl)) {
       const otros = ctx.idsPoseidos.filter(id => id !== selfId && D.esPrincipal(id) && (D.arbolesDe[id] || []).some(s => R.CAMINOS_METAL.includes(s)));
       return res(otros.length === 0 ? 'ok' : 'falta');
     }
     if ((m = cl.match(/^talento\s+(?:principal\s+)?(.+)$/i))) {
-      const alts = m[1].split(/\s+o\s+(?:talento\s+(?:principal\s+)?)?/i).map(a => norm(a));
+      const alts = m[1].split(/\s+[ou]\s+(?:talento\s+(?:principal\s+)?)?/i).map(a => norm(a));
       const conocidos = alts.filter(a => D.titulos.has(a));
       if (conocidos.length) return res(conocidos.some(a => ctx.titulos.has(a)) ? 'ok' : 'falta');
     }
@@ -127,6 +156,12 @@
     const arbolesPoder = (D.arbolesDe[id] || []).map(s => s.match(/^(alomancia|feruquimia)-de-(.+)$/)).filter(Boolean);
     if (arbolesPoder.length && !arbolesPoder.some(m => ctx.poderes.has(m[1] + ':' + m[2]))) {
       cls.unshift({ texto: `Requiere tener desbloqueado el poder ${arbolesPoder.map(m => m[1] + ' de ' + m[2]).join(' o ')}`, estado: 'falta' });
+      cumple = false;
+    }
+    // Un talento de potencia solo es de quien tiene una orden radiante que la maneja
+    const potTrees = (D.arbolesDe[id] || []).filter(s => D.arbol[s] && D.arbol[s].tipo === 'Potencia');
+    if (potTrees.length && !potTrees.some(s => ctx.potenciasOrden && ctx.potenciasOrden.has(s))) {
+      cls.unshift({ texto: `Requiere una orden radiante que maneje ${potTrees.map(s => D.arbol[s].nombre).join(' o ')}`, estado: 'falta' });
       cumple = false;
     }
     if (ctx.sinNacidosDelMetal && (D.arbolesDe[id] || []).some(s => R.CAMINOS_METAL.includes(s) || /^(alomancia|feruquimia)-de-/.test(s) || s === 'metales-de-scadrial')) {
@@ -151,7 +186,8 @@
 
   PJ.derivar = function (c) {
     const D = PJ.datos();
-    const asc = R.ASCENDENCIAS[c.ascendencia] || R.ASCENDENCIAS.humana;
+    const asc = R.ascDe(c);
+    const stormlight = R.ambito(c) === 'Stormlight';
     const nivel = Math.max(1, c.nivel | 0);
     const rango = R.rango(nivel);
     const avisos = [];
@@ -236,17 +272,39 @@
       const a = D.arbol[camino];
       if (a && a.talento_principal && idsPoseidos.includes(a.talento_principal)) for (const s of R.HAB_PRINCIPAL[camino] || []) gratis[s] = Math.max(gratis[s] || 0, 1);
     }
+    // Roshar: la orden sale del Primer Ideal que tengas; las potencias llegan al pronunciarlo
+    let radiante = null;
+    if (stormlight) {
+      const arb = D.ordenes.find(a => idsPoseidos.includes(a.talento_principal));
+      if (arb) {
+        const nIdeal = id => R.IDEALES.findIndex(n => new RegExp('^' + n + ' Ideal', 'i').test((D.byId[id] || {}).title || '')) + 1;
+        const poseidos = arb.talentos.filter(id => idsPoseidos.includes(id)).map(nIdeal).filter(Boolean);
+        const maxPoseido = poseidos.length ? Math.max(...poseidos) : 0;
+        const explicito = c.radiante && Number.isInteger(c.radiante.ideales) ? c.radiante.ideales : null;
+        const ideales = Math.max(0, Math.min(maxPoseido, explicito !== null ? explicito : (c.nivelInicial > 1 ? maxPoseido : 0)));
+        radiante = { orden: arb.slug, nombre: arb.nombre, spren: arb.spren, filosofia: arb.filosofia, maxPoseido, ideales, potencias: arb.potencias.slice() };
+        if (ideales >= 1) for (const p of arb.potencias) gratis[R.POTENCIAS[p].n] = 1;
+      }
+      if (D.ordenes.filter(a => idsPoseidos.includes(a.talento_principal)).length > 1) {
+        aviso('aviso', 'Tienes el Primer Ideal de más de una orden: lo normal es un solo camino radiante (salvo permiso de la DJ).');
+      }
+    }
+
     const asignados = c.habilidades || {};
     const gradoMax = R.gradoMaximo(rango);
     const habilidades = {};
     let usadosGrados = 0;
-    for (const [nombre, attr] of Object.entries(R.HABILIDADES)) {
-      const as = asignados[nombre] || 0;
+    const lista = Object.entries(R.HABILIDADES).filter(([n]) => !stormlight || !R.HAB_ARTES.includes(n));
+    if (radiante) for (const p of radiante.potencias) lista.push([R.POTENCIAS[p].n, R.POTENCIAS[p].a]);
+    for (const [nombre, attr] of lista) {
+      // una potencia no se puede usar ni mejorar hasta pronunciar el Primer Ideal
+      const bloqueada = !!(radiante && R.POTENCIA_POR_NOMBRE[nombre] && radiante.ideales < 1);
+      const as = bloqueada ? 0 : (asignados[nombre] || 0);
       const gr = gratis[nombre] || 0;
       const grados = as + gr;
       usadosGrados += as;
       const mod = A(attr) + grados + sumaBonos('hab:' + nombre);
-      habilidades[nombre] = { atributo: attr, asignados: as, gratis: gr, grados, mod, max: gradoMax };
+      habilidades[nombre] = { atributo: attr, asignados: as, gratis: gr, grados, mod, max: gradoMax, potencia: !!R.POTENCIA_POR_NOMBRE[nombre], bloqueada };
       if (grados > gradoMax) aviso('error', `${nombre}: ${grados} grados superan el máximo del rango (${gradoMax}).`);
     }
     const totalGrados = R.gradosTotales(nivel, c.elecciones21);
@@ -259,7 +317,7 @@
 
     // Talentos: presupuesto
     const libres = R.talentosLibres(nivel, c.elecciones21);
-    const extra = R.talentosAscendenciaExtra(nivel, c.ascendencia);
+    const extra = R.talentosAscendenciaExtra(nivel, asc);
     const talentosTotal = libres + extra;
     if (elegidos.length > talentosTotal) aviso('error', `Tienes ${elegidos.length} talentos elegidos y solo ${talentosTotal} disponibles.`);
     else if (elegidos.length < talentosTotal) aviso('pendiente', `Te faltan ${talentosTotal - elegidos.length} talentos por elegir.`);
@@ -278,7 +336,10 @@
     const titulos = new Set(idsPoseidos.map(id => norm(sinPrincipal((D.byId[id] || {}).title))));
     const grados = Object.fromEntries(Object.entries(habilidades).map(([k, v]) => [k, v.grados]));
     const atrTot = Object.fromEntries(ATR_KEYS.map(k => [k, A(k)]));
-    const ctxPre = { nivel, atr: atrTot, grados, poderes, titulos, idsPoseidos, ascendencia: c.ascendencia, sinNacidosDelMetal: !!asc.sinNacidosDelMetal };
+    const ctxPre = {
+      nivel, atr: atrTot, grados, poderes, titulos, idsPoseidos, ascendencia: c.ascendencia, sinNacidosDelMetal: !!asc.sinNacidosDelMetal,
+      ideales: radiante ? radiante.ideales : 0, potenciasOrden: new Set(radiante ? radiante.potencias : []),
+    };
     for (const id of elegidos) {
       if (c.ignorarPrerreq) break;
       const ev = PJ.evaluarTalento(id, ctxPre, c.confirmados);
@@ -298,15 +359,15 @@
     // Valores derivados
     const hemalurgia = ((c.hemalurgia && c.hemalurgia.clavos) || []).length;
     if (hemalurgia) bono('defensa_espiritual', -2, 'Hemalurgia', 'Clavos hemalúrgicos');
-    const tieneAlomancia = habilidades.Alomancia.grados > 0;
-    const tieneFeruquimia = habilidades.Feruquimia.grados > 0;
+    const tieneAlomancia = !stormlight && habilidades.Alomancia.grados > 0;
+    const tieneFeruquimia = !stormlight && habilidades.Feruquimia.grados > 0;
     const defensas = {};
     for (const d of R.DEFENSAS) defensas[d.k] = 10 + A(d.a[0]) + A(d.a[1]) + sumaBonos('defensa_' + d.k);
     const armaduraE = c.armadura && D.byId[c.armadura];
     const desvio = (armaduraE ? armaduraE.f.desvio || 0 : 0) + sumaBonos('desvio');
     const salud = R.saludBase(nivel, A('fuerza')) + sumaBonos('salud_max');
     const concentracion = 2 + A('voluntad') + sumaBonos('concentracion_max');
-    const investidura = (tieneAlomancia || sumaBonos('investidura_max')) ? 2 + Math.max(A('discernimiento'), A('presencia')) + sumaBonos('investidura_max') : null;
+    const investidura = (tieneAlomancia || radiante || sumaBonos('investidura_max')) ? 2 + Math.max(A('discernimiento'), A('presencia')) + sumaBonos('investidura_max') : null;
     const movimiento = R.movimiento(A('velocidad')) + sumaBonos('movimiento');
 
     let peso = 0;
@@ -321,7 +382,7 @@
     if (artes.feruquimia) artes.feruquimia.mentes = Math.max(1, A('intelecto'));
 
     return {
-      nivel, rango, atributos, habilidades, defensas, desvio, salud, concentracion, investidura, movimiento,
+      radiante, nivel, rango, atributos, habilidades, defensas, desvio, salud, concentracion, investidura, movimiento,
       sentidos: R.sentidos(A('discernimiento')), recuperacion: R.dadoRecuperacion(A('voluntad')),
       levantamiento: R.levantamiento(A('fuerza')), carga: R.carga(A('fuerza')), peso: peso / 1000,
       conexiones: R.conexiones(A('presencia')),
@@ -332,7 +393,7 @@
         pericias: { total: periciasTotal, usadas: periciasUsadas },
       },
       talentos: { auto, elegidos, todos: idsPoseidos }, ctxPre, bonos, noAplicados, artes,
-      recompensasInicio: R.recompensasInicio(c.nivelInicial || 1, c.era),
+      recompensasInicio: R.recompensasInicio(c.nivelInicial || 1, c.era, R.ambito(c)),
       avisos,
       pendientes: avisos.filter(a => a.tipo === 'pendiente').length,
       errores: avisos.filter(a => a.tipo === 'error').length,
@@ -344,7 +405,7 @@
     const D = PJ.datos();
     const a = D.arbol[slugArbol];
     if (!a) return [];
-    return (a.talentos || []).map(id => D.byId[id]).filter(Boolean).map(e => {
+    return (a.talentos || []).map(id => D.byId[id]).filter(e => e && PJ.ambCubre(c, e)).map(e => {
       const ev = PJ.evaluarTalento(e.id, d.ctxPre, c.confirmados);
       return { id: e.id, titulo: e.title, principal: !!(e.x && e.x.main), especialidad: (e.f && e.f.especialidad) || '', activacion: (e.f && e.f.activacion) || '', ev, poseido: d.talentos.todos.includes(e.id) };
     });

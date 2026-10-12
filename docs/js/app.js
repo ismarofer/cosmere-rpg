@@ -70,10 +70,14 @@
   // ambientacion: lo general aplica a lo particular y viceversa (jerarquía por ruta)
   function visible(e) {
     if (!ambientacion) return true;
-    const ep = C.ambientacionPath[e.ambientacion] || 'mistborn';
+    const ep = e.ambientacion in C.ambientacionPath ? C.ambientacionPath[e.ambientacion] : 'mistborn';
+    if (ep === '') return true; // Cosmere: común a todas las ambientaciones
     return ep === ambientacion || ambientacion.startsWith(ep + '/') || ep.startsWith(ambientacion + '/');
   }
   function computeAllow() { allow = new Set(); ALL.forEach((e, i) => { if (visible(e)) allow.add(i); }); }
+  // La ambientación elegida en la cabecera decide lo que se ve en todas partes (menús, listas, árboles, búsqueda, herramientas):
+  // las herramientas que filtran por ambientación (combates…) preguntan aquí, no tienen filtro propio.
+  window.CosmereAmb = { cubre: (nombre) => visible({ ambientacion: nombre }), id: () => ambientacion };
 
   const bookOf = (e) => e.libro || 'Manual Mistborn';
   // todo enlace a una entrada abre el panel lateral; el título del panel lleva a la página propia
@@ -83,7 +87,7 @@
   const catIcon = (id) => (catById[id] ? catById[id].ic : (pageById[id] ? pageById[id].ic : 'dot'));
 
   // ------------------------------------------------------------------ iconos y valores
-  const AMB_ICON = { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn', 'Mistborn Era 2': 'mistborn', 'Stormlight': 'stormlight' };
+  const AMB_ICON = { 'Mistborn': 'mistborn', 'Mistborn Era 1': 'mistborn', 'Mistborn Era 2': 'mistborn', 'Stormlight': 'stormlight', 'Cosmere': 'cosmere' };
   function vicon(catId, colKey, value) {
     const m = C.vicons[catId + '.' + colKey] || C.vicons[colKey];
     const n = m && m[value];
@@ -335,7 +339,7 @@
       if (g.trees) {
         const item = (href, label, kids, icon) => `<div class="ci${kids ? ' has' : ''}"><a href="${href}">${icon || ''}<span>${esc(label)}</span>${kids ? ic('right', 'sm') : ''}</a>${kids ? `<div class="cfly${kids.leaf ? ' leaf' : ''}">${kids.html}</div>` : ''}</div>`;
         const treeItem = (t) => { const sp = specsOfTree(t); return item('#/arbol/' + t.slug, treeNice(t), sp.length ? { html: sp.map((x) => item('#/arbol/' + t.slug + '/' + slugOf(x), x)).join('') } : null); };
-        const secHtml = (s) => shownTrees().filter((t) => t.section === s).map(treeItem).join('') + childSecs(s).map((c) => item('#/caminos/' + c.id, c.short, { html: shownTrees().filter((t) => t.section === c).map(treeItem).join('') }, ic(c.ic, 'sm'))).join('');
+        const secHtml = (s) => shownTrees().filter((t) => t.section === s).map(treeItem).join('') + childSecs(s).filter((c) => shownTrees().some((t) => t.section === c)).map((c) => item('#/caminos/' + c.id, c.short, { html: shownTrees().filter((t) => t.section === c).map(treeItem).join('') }, ic(c.ic, 'sm'))).join('');
         panel = '<div class="cmenu">' + topSecs().map((s) => {
           const h = secHtml(s);
           return h ? item('#/caminos/' + s.id, s.short, { html: h, leaf: !childSecs(s).length && !shownTrees().some((t) => t.section === s && specsOfTree(t).length) }, ic(s.ic, 'sm')) : '';
@@ -370,11 +374,7 @@
     el.innerHTML = `
       <section class="hero">
         <h1><span class="logo big" aria-hidden="true"></span>${esc(C.brand)}</h1>
-        <p class="muted">Consulta de reglas: busca o explora por categorías</p>
-        <div class="escpick" role="group" aria-label="Ambientación"><b>Ambientación:</b>${C.ambientaciones.map((a) => `<button type="button" class="sp${a.id === ambientacion ? ' on' : ''}" data-esc="${esc(a.id)}">${a.ic ? ic(a.ic, 'sm') : ''}${esc(a.label)}</button>`).join('')}</div>
         <div id="heroslot" class="heroslot"></div>
-        <p class="muted"><a class="btn" href="#/personajes">Crear o abrir una hoja de personaje</a></p>
-        <p class="hint">Prueba: <a href="#/buscar?q=ballesta">ballesta</a> · <a href="#/buscar?q=curar">curar</a> · <a href="#/buscar?q=nivel de amenaza">nivel de amenaza</a> · <a href="#/buscar?q=ayudar">ayudar</a> · <code>talento: medicina</code> · <code>"frase exacta"</code> · <code>-excluir</code></p>
       </section>
       <section class="menugrid">${groups}</section>`;
   }
@@ -443,27 +443,17 @@
     return arr;
   }
 
-  // Ambientación como filtro de lista: sin «Mistborn» a secas; elegir una era incluye además lo común a ambas (misma regla que la portada).
-  const ambCubre = (v, amb) => amb === v || (amb === 'Mistborn' && v.startsWith('Mistborn '));
-  function ambFacet(facet, rows) {
-    // Las dos eras se ofrecen siempre (aunque todo el catálogo sea común a ambas); el resto, solo si hay contenido.
-    const vals = ['Mistborn Era 1', 'Mistborn Era 2'];
-    facet.forEach(([v]) => { if (v !== 'Mistborn' && !vals.includes(v)) vals.push(v); });
-    return vals.map((v) => [v, rows.filter((e) => ambCubre(v, e.ambientacion)).length]);
-  }
-
   function viewCatalog(el, catId, params) {
     const cat = catById[catId];
     if (!cat) { el.innerHTML = '<p class="empty">Categoría no encontrada.</p>'; return; }
     const host = el; el = document.createElement('div'); host.innerHTML = ''; host.appendChild(el);
     const rowsAll = ALL.filter((e) => e.cat === cat.id && visible(e));
-    // la ambientación siempre es el primer filtro (decisions/interfaz)
-    const fcols = cat.cols.filter((c) => c.f).sort((a, b) => (b.k === 'ambientacion') - (a.k === 'ambientacion'));
+    // la ambientación no es un filtro de la lista: es la de la cabecera, que ya ha recortado `rowsAll` (decisions/interfaz)
+    const fcols = cat.cols.filter((c) => c.f && c.k !== 'ambientacion');
     const facets = {};
     fcols.forEach((c) => {
       if (c.f === 'chips' || c.f === 'select') {
         facets[c.k] = facetValues(c, rowsAll);
-        if (c.k === 'ambientacion') facets[c.k] = ambFacet(facets[c.k], rowsAll);
         c._eff = (c.f === 'chips' && facets[c.k].length > 16) ? 'select' : c.f;
       }
     });
@@ -519,7 +509,7 @@
     function match(e) {
       for (const c of cat.cols) {
         const fs = F['f_' + c.k];
-        if (fs && !(c.k === 'ambientacion' ? [...fs].some((v) => ambCubre(v, e.ambientacion)) : valuesOf(c, e).some((v) => fs.has(v)))) return false;
+        if (fs && !valuesOf(c, e).some((v) => fs.has(v))) return false;
         const rg = F['r_' + c.k];
         if (rg) {
           const v = getVal(e, c.fk || c.sk || c.k);
@@ -651,13 +641,27 @@
       (cur ? secs : secs.flatMap((s) => [s, ...childSecs(s)])).map((s) => {
         const ts = shownTrees().filter((t) => t.section === s);
         if (!ts.length) return '';
-        const humana = byId.get('origen-ascendencia-humana');
+        const humanas = ALL.filter((e) => e.cat === 'origen' && e.path[1] === 'Ascendencia' && /^Ascendencia humana/.test(e.title) && visible(e));
         const extra = s.id === 'ascendencia'
-          ? `${humana ? `<div class="grid"><a class="card tcard" href="#/e/${humana.id}">${ic('globe')}<strong>Ascendencia humana</strong><span>Sin árbol propio: elige un talento de un camino heroico en los niveles 1, 6, 11, 16 y 21</span></a></div>` : ''}<h3>${ic('book', 'sm')}Texto de las ascendencias</h3><div class="pills">${ALL.filter((e) => e.cat === 'origen' && e.path[1] === 'Ascendencia' && /^Ascendencia/.test(e.title) && visible(e)).map((e) => `<a class="pill" href="${esc(hrefOf(e))}">${esc(e.title)}</a>`).join('')}</div>` : '';
+          ? `${humanas.length ? `<div class="grid">${humanas.map((h) => `<a class="card tcard" href="#/e/${h.id}">${ic('globe')}<strong>${esc(h.title)}</strong><span>Sin árbol propio: elige un talento de un camino heroico en los niveles 1, 6, 11, 16 y 21</span></a>`).join('')}</div>` : ''}<h3>${ic('book', 'sm')}Texto de las ascendencias</h3><div class="pills">${ALL.filter((e) => e.cat === 'origen' && e.path[1] === 'Ascendencia' && /^Ascendencia/.test(e.title) && visible(e) && ts.some((t) => t.talents.some((x) => x.ambientacion.split(' ')[0] === e.ambientacion.split(' ')[0]))).map((e) => `<a class="pill" href="${esc(hrefOf(e))}">${esc(e.title)}</a>`).join('')}</div>` : '';
         const spec = (t) => specsOfTree(t).length ? `<div class="pills specs">${specsOfTree(t).map((x) => `<a class="pill" href="#/arbol/${t.slug}/${slugOf(x)}">${esc(x)}</a>`).join('')}</div>` : '';
         const showHead = !(secId && s.id === secId);
         return `<section class="group"><h2>${showHead ? `<a href="#/caminos/${s.id}">` : ''}${ic(s.ic)}${esc(s.label)}${showHead ? '</a>' : ''}</h2><div class="grid">${ts.map((t) => treeCard(t)).join('')}</div>${s.id === 'heroicos' ? ts.map((t) => spec(t) ? `<h4><a href="#/arbol/${t.slug}">${esc(t.name)}</a></h4>${spec(t)}` : '').join('') : ''}${extra}</section>`;
       }).join('');
+  }
+
+  // Talentos con variante de Mistborn y de Stormlight (mismo camino y nombre, distinto padre o condición): con el filtro «Cosmere»
+  // se ven los dos, así que llevan una insignia con su ambientación.
+  let variantes = null;
+  function variantKey(e) { return e.f.origen + '|' + e.title.replace(/\s*\(.*?\)\s*$/, '').toLowerCase(); }
+  function esVariante(e) {
+    if (e.cat !== 'talento' || e.ambientacion === 'Cosmere') return false;
+    if (!variantes) {
+      const fam = new Map();
+      ALL.forEach((x) => { if (x.cat === 'talento' && x.ambientacion !== 'Cosmere') { const k = variantKey(x), a = x.ambientacion.split(' ')[0]; (fam.get(k) || fam.set(k, new Set()).get(k)).add(a); } });
+      variantes = new Set([...fam].filter(([, v]) => v.size > 1).map(([k]) => k));
+    }
+    return variantes.has(variantKey(e));
   }
 
   function nodeHtml(n, hl) {
@@ -667,7 +671,7 @@
     const xr = (e.x.xreq || []).map((id) => byId.get(id)).filter(Boolean).map((t) => t.title);
     const mech = (e.resumen || e.mecanica) ? (e.resumen || e.mecanica).replace(/\s+/g, ' ').replace(/#+\s*/g, '').replace(/\[\[(?:[^\]|]*\|)*([^\]|]*)\]\]/g, '$1').replace(/[*_]/g, '').trim() : '';
     return `<a class="node b${n.branch}${e.x.main ? ' main' : ''}${hl === e.id ? ' hl' : ''}" data-id="${esc(e.id)}" href="#/e/${esc(e.id)}"${f.especialidad ? ` title="${esc((f.especialidades && f.especialidades.length ? f.especialidades : [f.especialidad]).join(' · '))}"` : ''}>` +
-      `<span class="nt">${U.act(f.activacion)}${esc(n.title)}</span>` +
+      `<span class="nt">${U.act(f.activacion)}${esc(n.title)}${!ambientacion && esVariante(e) ? `<span class="vbadge">${esc(e.ambientacion.split(' ')[0])}</span>` : ''}</span>` +
       (req || xr.length ? `<span class="nr">${req}${xr.length ? `<span class="req x">${esc(xr.join(', '))}</span>` : ''}</span>` : '') +
       (mech ? `<span class="nm" title="${esc(mech)}">${esc(mech)}</span>` : '') + '</a>';
   }
@@ -743,11 +747,24 @@
       const m = (ps[0] || '').replace(/\s+/g, ' ').replace(/\[\[(?:[^\]|]*\|)*([^\]|]*)\]\]/g, '$1').replace(/[*_#]/g, '').trim();
       return `<a class="actcard" href="#/e/${esc(a.id)}"><b>${ic('flame', 'sm')}${esc(a.title)}</b><span class="req">${esc(act)}</span><span class="nm">${esc(m)}</span></a>`;
     };
+    // Orden Radiante ↔ sus dos potencias (datos: DATA_ARBOLES[].potencias / .ordenes, de la tabla «Órdenes Radiantes»)
+    const enlaceArbol = (s) => { const t = treeBySlug.get(s); return t && treeShown(t) ? `<a class="pill" href="#/arbol/${esc(s)}">${esc(t.name)}</a>` : ''; };
+    const ordenPotencias = (() => {
+      const a = arbolBySlug.get(tree.slug);
+      if (!a || !(a.potencias || a.ordenes)) return '';
+      if (a.potencias) {
+        return `<section class="group"><h2>${ic('flame')}Potencias de la orden</h2><div class="pills">${a.potencias.map(enlaceArbol).join('')}</div>` +
+          `<p class="muted">Spren: ${esc(a.spren)}. «${esc(a.filosofia)}»</p></section>`;
+      }
+      const os = a.ordenes.map(enlaceArbol).join('');
+      return os ? `<section class="group"><h2>${ic('sun')}Órdenes que la controlan</h2><div class="pills">${os}</div></section>` : '';
+    })();
     const crumbSec = tree.section.parent ? C.treeSections.find((s) => s.id === tree.section.parent) : null;
     el.innerHTML = `
       <p class="crumbs"><a href="#/caminos">Caminos</a> › ${crumbSec ? `<a href="#/caminos/${crumbSec.id}">${esc(crumbSec.short)}</a> › ` : ''}<a href="#/caminos/${tree.section.id}">${esc(tree.section.short)}</a>${locked ? ` › <a href="#/arbol/${tree.slug}">${esc(tree.name)}</a>` : ''}</p>
       <header class="chead"><h1>${ic(tree.section.ic, 'lg')}${locked ? `${esc(tree.name)}: ${esc(locked)}` : esc(tree.name)}</h1>
         <p class="muted">${(() => { const n = lay.nodes.filter((x) => !x.virtual).length; return tree.talents.length ? `${n} ${n === 1 ? 'talento' : 'talentos'}` : 'Sin árbol de talentos'; })()} · ${esc(tree.section.label)}</p></header>
+      ${locked ? '' : ordenPotencias}
       ${locked ? '' : efPanel}
       ${acts.length ? `<section class="actions"><h2>${ic('flame')}Acciones ${locked ? 'de la especialidad' : 'del poder'}</h2><div class="actgrid">${acts.map(actCard).join('')}</div></section>` : ''}
       ${tree.talents.length ? `<h2>${ic('tree')}Árbol de talentos</h2>
@@ -867,7 +884,9 @@
     if (cur.trim()) parts.push(cur.trim());
     return '<span class="chips">' + parts.map((p) => {
       const base = p.split(/[\[:]/)[0].trim();
-      const tgt = p.includes(':') ? null : traitIndex.get(aplica + '|' + nc(base));
+      const k = aplica + '|' + nc(base) + '|';
+      const fam = e.ambientacion.split(' ')[0];
+      const tgt = p.includes(':') ? null : (traitIndex.get(k + fam) || traitIndex.get(k + 'Cosmere') || traitIndex.get(k + 'Mistborn'));
       return tgt ? `<a class="chip link" href="${esc(hrefOf(tgt))}">${ic('tag', 'sm')}${esc(p)}</a>` : `<span class="chip">${esc(p)}</span>`;
     }).join(' ') + '</span>';
   }
@@ -938,8 +957,13 @@
   function placeSearch(home) {
     const q = $('#q');
     const target = home ? $('#heroslot') : $('#hdrslot');
-    if (target && q.parentElement !== target) target.appendChild(q);
-    document.body.classList.toggle('is-home', !!home);
+    document.body.classList.toggle('is-home', !!home);   // antes de mover: la cabecera oculta no admite foco
+    if (target && q.parentElement !== target) {
+      // mover el nodo le quita el foco: se conserva para poder seguir escribiendo tras pasar de la portada a resultados
+      const foco = document.activeElement === q, a = q.selectionStart, b = q.selectionEnd;
+      target.appendChild(q);
+      if (foco) { q.focus(); try { q.setSelectionRange(a, b); } catch (e) {} }
+    }
   }
   function renderBase(raw) {
     const i = raw.indexOf('?');
@@ -1001,20 +1025,27 @@
     catById = {}; CATS.forEach((c) => (catById[c.id] = c));
     byId = new Map(ALL.map((e) => [e.id, e]));
     traitIndex = new Map();
-    ALL.forEach((e) => { if (e.cat === 'rasgo') traitIndex.set(e.f.aplica + '|' + nc(e.f.nombre || e.title), e); });
+    // un rasgo por ambientación (el texto de cada manual es el suyo); la clave lleva la familia: Mistborn, Stormlight o Cosmere
+    ALL.forEach((e) => { if (e.cat === 'rasgo') traitIndex.set(e.f.aplica + '|' + nc(e.f.nombre || e.title) + '|' + e.ambientacion.split(' ')[0], e); });
     engine = new S.Engine(ALL, { synonyms: C.synonyms, aliases: C.aliases, boost: C.boost });
     computeAllow();
     buildTrees();
     buildMenu();
 
     if (!C.ambientaciones.some((a) => a.id === ambientacion)) ambientacion = '';
-    document.addEventListener('click', (ev) => {
-      const b = ev.target.closest('[data-esc]');
-      if (!b) return;
-      ambientacion = b.dataset.esc; store.set('cosmere_ambientacion', ambientacion); computeAllow(); buildMenu();
-      const { raw } = parseHash();
-      if (raw.startsWith('/e/')) { renderBase(lastBase); route(); } else route();
-    });
+    // selector de ambientación, en la cabecera junto a la marca: cambia lo que se ve en la página y en los menús
+    const slotAmb = $('#ambpick');
+    if (slotAmb) {
+      const icono = () => { const a = C.ambientaciones.find((x) => x.id === ambientacion); return a && a.ic ? ic(a.ic, 'sm') : ''; };
+      slotAmb.innerHTML = `<span class="ambic" aria-hidden="true">${icono()}</span><select id="ambsel" aria-label="Ambientación">${C.ambientaciones.map((a) =>
+        `<option value="${esc(a.id)}"${a.id === ambientacion ? ' selected' : ''}>${esc(a.label)}</option>`).join('')}</select>`;
+      $('#ambsel').addEventListener('change', (ev) => {
+        ambientacion = ev.target.value; store.set('cosmere_ambientacion', ambientacion); computeAllow(); buildMenu();
+        $('.ambic', slotAmb).innerHTML = icono();
+        const { raw } = parseHash();
+        if (raw.startsWith('/e/')) { renderBase(lastBase); route(); } else route();
+      });
+    }
 
     let timer = null;
     const q = $('#q');
@@ -1047,6 +1078,9 @@
         return;
       }
       if (!ev.target.closest('.mpanel')) closeMenus();
+      // cabecera compacta: pulsar en la fila de un elemento con subnivel (salvo en su texto, que navega) lo despliega
+      const fila = ev.target.closest('.ci.has > a');
+      if (fila && !ev.target.closest('.ci.has > a > span') && window.matchMedia('(max-width: 1240px)').matches) { ev.preventDefault(); fila.parentElement.classList.toggle('open'); return; }
       if (ev.target.closest('#navtoggle')) document.body.classList.toggle('nav-open');
       else if (ev.target.closest('.mpanel a, .brand')) document.body.classList.remove('nav-open');
       const cb = ev.target.closest('#copylink');

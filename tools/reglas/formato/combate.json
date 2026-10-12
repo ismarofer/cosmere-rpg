@@ -1,0 +1,355 @@
+[
+ {
+  "titulo": "Rondas y turnos",
+  "definiciones": [
+   "Jugar un turno rápido",
+   "Jugar un turno lento"
+  ]
+ },
+ {
+  "titulo": "Fases del turno",
+  "definiciones": [
+   "1. Turnos rápidos de los PJs",
+   "2. Turnos rápidos de los PNJs",
+   "3. Turnos lentos de los PJs",
+   "4. Turnos lentos de los PNJs",
+   "5. Empieza la siguiente ronda"
+  ]
+ },
+ {
+  "titulo": "Acciones y reacciones",
+  "definiciones": [
+   "Acciones (1)",
+   "Reacciones (r)",
+   "Acciones gratuitas (0)"
+  ]
+ },
+ {
+  "titulo": "Cómo hacer un ataque",
+  "cambios": [
+   [
+    "1.\tElige tu objetivo.",
+    "3.\tResuelve el daño.",
+    "◆ 1. Elige tu objetivo.\n◆ 2. Haz la prueba de ataque y tira los dados de daño.\n◆ 3. Resuelve el daño."
+   ],
+   [
+    "determina cuánto daño sufre el objetivo:",
+    "determina cuánto daño sufre el objetivo: fallo, rasguño, impacto o impacto crítico (cada caso tiene su propia regla)."
+   ]
+  ],
+  "definiciones": [
+   "Número de objetivos",
+   "Ataques cuerpo a cuerpo",
+   "Ataques a distancia",
+   "Objetivos válidos"
+  ]
+ },
+ {
+  "titulo": "Paso 2: Haz la prueba de ataque y tira los dados de daño",
+  "definiciones": [
+   "Dados de daño"
+  ]
+ },
+ {
+  "titulo": "Fallo",
+  "cambios": [
+   [
+    "Fallo. Si la prueba",
+    "Si la prueba"
+   ]
+  ]
+ },
+ {
+  "titulo": "Rasguño",
+  "cambios": [
+   [
+    "Rasguño. Al fallar",
+    "Al fallar"
+   ]
+  ]
+ },
+ {
+  "titulo": "Impacto",
+  "cambios": [
+   [
+    "Impacto. Si la prueba",
+    "Si la prueba"
+   ]
+  ]
+ },
+ {
+  "titulo": "Impacto crítico",
+  "cambios": [
+   [
+    "Impacto crítico. Si obtienes",
+    "Si obtienes"
+   ]
+  ]
+ },
+ {
+  "titulo": "Ataques sin armas",
+  "definiciones": [
+   "Pericia",
+   "Rasgos únicos",
+   "Siempre disponible",
+   "Entrenamiento de fuerza"
+  ]
+ },
+ {
+  "titulo": "Armas improvisadas",
+  "cambios": [
+   [
+    "Pericia: a diferencia",
+    "**Pericia.** A diferencia"
+   ],
+   [
+    " Cómo usar un arma improvisada: cuando",
+    "\n\n**Cómo usar un arma improvisada.** Cuando"
+   ]
+  ]
+ },
+ {
+  "titulo": "Ataques con más de un objetivo",
+  "cambios": [
+   [
+    "\n\nLas armas pesadas son ideales",
+    "o dos si empleas una pesada.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Maniobras creativas",
+  "cambios": [
+   [
+    "englobada en la acción Acometida",
+    "englobada en la acción Acometida (consulta “Acciones y reacciones” anteriormente en este capítulo). Al llevar a cabo la Acometida, describe cómo quieres atacar; si la DJ considera que la maniobra es posible, elegirá una defensa como objetivo (y podrá añadir una o más desventajas según la complejidad del movimiento). Si la prueba tiene éxito, la DJ determinará las consecuencias narrativas o mecánicas de la maniobra, además del daño habitual.\n\nLas armas pesadas son ideales para maniobras que destrocen el entorno, hagan retroceder a los enemigos o aprovechen su gran inercia y alcance. Al llevar a cabo pruebas de Armamento pesado, la DJ podría aplicar menos desventajas a las maniobras que exploten estas virtudes.\n\nPor su parte, las armas ligeras favorecen los movimientos precisos, como hacer caer un objeto del cinturón de un enemigo o apuntar a una zona concreta del cuerpo. Al llevar a cabo pruebas de Armamento ligero, la DJ puede ser más laxa con las desventajas en este tipo de maniobras sutiles.\n\nPor ejemplo, podrías intentar desarmar a un rival disparándole a la mano que empuña el arma. Si la DJ da el visto bueno a la acción, podría pedirte un ataque contra la Defensa cognitiva del oponente, aplicando una desventaja si usas un arma ligera o dos si empleas una pesada."
+   ]
+  ]
+ },
+ {
+  "titulo": "Tipos de daño",
+  "definiciones": [
+   "Energía",
+   "Espiritual",
+   "Golpe",
+   "Laceración",
+   "Vital"
+  ]
+ },
+ {
+  "titulo": "Tiradas de lesión",
+  "definiciones": [
+   "Armadura",
+   "Capacidades",
+   "Lesiones"
+  ]
+ },
+ {
+  "titulo": "Armas",
+  "cambios": [
+   [
+    "con ambas manos.\n\nAl atacar con ella",
+    "con ambas manos. Al atacar con ella"
+   ],
+   [
+    "Rasgo único. Las hojas koloss tienen el siguiente rasgo único:\n\nEngorrosa.",
+    "Rasgo único. Las hojas koloss tienen el siguiente rasgo único:\n\n**Engorrosa.**"
+   ],
+   [
+    "Rasgos únicos. Los palos de ruido tienen el siguiente ú i",
+    "Rasgo único. Los palos de ruido tienen el siguiente rasgo único:\n\n**Ensordecedora.** Mientras empuñas esta arma, puedes usar 1 para llevar a cabo una prueba de Armamento ligero y comparar el resultado con la Defensa espiritual de los personajes (a excepción de ti mismo) cuyo alcance de los sentidos incluya tu espacio. Además de la posibilidad de sobreestimular a personajes con oído sobrenatural, los personajes contra los que tengas éxito sufren 1d6 de daño vital y quedan Desorientados hasta el final de su siguiente turno. Si llevas a cabo esta prueba mientras empuñas dos palos de ruido, obtienes una ventaja contra personajes con oído sobrenatural y, si tienes éxito contra ellos, también quedan Aturdidos hasta el final de su siguiente turno."
+   ],
+   [
+    "el siguiente rasgo único: Flexibilidad en combate.",
+    "el siguiente rasgo único:\n\n**Flexibilidad en combate.**"
+   ],
+   [
+    "Disparo rápido. No tienes límite",
+    "**Disparo rápido.** No tienes límite"
+   ],
+   [
+    "#### A merced de otro",
+    "trata como una influencia fuerte.",
+    "#### Bastones de duelo",
+    "antes"
+   ],
+   [
+    "la prueba sufre tantas desventajas",
+    "la prueba sufre tantas desventajas como ataques previos hayas hecho con el arma en ese mismo turno. Por ejemplo, al llevar a cabo tu tercer ataque con la ametralladora rotatoria en un solo turno, la prueba de ataque sufre dos desventajas.\n\nPeso engorroso. Debido a su enorme peso y retroceso, resulta extremadamente difícil usar una ametralladora rotatoria sin anclarla sobre una superficie estable. Mientras no esté anclada, el arma tiene el rasgo Voluminosa [6]. Tanto tú como cualquier otro personaje que pueda alcanzarla podéis usar la acción Interactuar para anclarla sobre una superficie horizontal estable; cada vez que lo hagas, el valor del rasgo Voluminosa se reduce en 2. Por ejemplo, si usas Interactuar de este modo dos veces, el arma pasa a ser Voluminosa [2]. Si una ametralladora rotatoria anclada se desplaza de su superficie por cualquier motivo, queda desanclada y vuelve a ser Voluminosa [6]."
+   ],
+   [
+    "aumentar la potencia de una explosión programada.",
+    "aumentar la potencia de una explosión programada.\n\nLas autoridades vigilan de cerca este tipo de materiales peligrosos, especialmente en los núcleos urbanos. A menos que cuentes con un patrocinador (consulta “Categorías de recompensa” en el capítulo 8) que autorice la adquisición, transporte o uso de dinamita, te resultará increíblemente difícil comprarla y, si te descubren con ella, te arriesgas a ser arrestado y procesado.\n\nRasgo único. La dinamita tiene el siguiente rasgo único:\n\nDetonación retardada. Mientras tocas uno o más cartuchos de dinamita, puedes usar 2 para colocar y encender una mecha, eligiendo un tiempo de detonación de entre 10 y 60 segundos (de 1 a 6 rondas de combate). Pasado este tiempo, los cartuchos explotan. Cuando esto suceda, lleva a cabo un ataque de Manufactura contra la Defensa física de los personajes situados a 1,5 metros de la dinamita; consulta las reglas del rasgo Explosiva para… (el texto del libro está cortado aquí)."
+   ],
+   [
+    "contra los ataques que se llevan a cabo con esta arma.",
+    "contra los ataques que se llevan a cabo con esta arma. Inercia. Al atacar con esta arma, obtienes una ventaja en el ataque si en este mismo turno ya te has movido al menos 3 metros en línea recta hacia el objetivo. Mano secundaria. Mientras empuñes esta arma en la mano secundaria, solo te cuesta 1 punto de concentración (en lugar de 2) hacer una Acometida con ella. Mortífera. Al impactar a un objetivo con esta arma, puedes gastar O para que el objetivo sufra una lesión de inmediato. Peligrosa. La DJ puede gastar C de un ataque con esta arma para que también hagas un rasguño accidental a un aliado dentro de la cercanía o alcance del arma. Esto inflige el daño habitual por rasguño. Perforante. El valor de desvío del objetivo no puede reducir el daño que inflige esta arma. Preparación rápida. Puedes usar la acción Interactuar como 0 para preparar esta arma. Única. Esta arma presenta reglas singulares. Estas se detallan en su propia descripción o justo después de la palabra “Única” en las tablas de armas (por ejemplo, “Única: pierde el rasgo A dos manos”). Voluminosa [X]. Para empuñar esta arma con soltura, tu valor de Fuerza debe ser igual o superior al número indicado entre corchetes. Si tu Fuerza es menor, sufres una desventaja en todos los ataques con esta arma y estás Ralentizado mientras la empuñas."
+   ]
+  ],
+  "definiciones": [
+   "Tipo",
+   "Habilidad",
+   "Daño",
+   "Alcance",
+   "Rasgos",
+   "Rasgos de experto",
+   "Peso",
+   "Precio",
+   "A dos manos",
+   "Arrojadiza [X/Y]",
+   "Cargada [X]",
+   "Defensiva",
+   "Desechable",
+   "Discreta",
+   "Explosiva [X]",
+   "Frágil",
+   "Indirecta",
+   "Inercia",
+   "Mano secundaria",
+   "Mortífera",
+   "Peligrosa",
+   "Perforante",
+   "Preparación rápida",
+   "Única",
+   "Voluminosa [X]",
+   "Detonación retardada",
+   "Peso engorroso"
+  ]
+ },
+ {
+  "titulo": "Alcance",
+  "cambios": [
+   [
+    "\n\n(consulta “Acciones y reacciones” anteriormente en este capítulo). Al llevar a cabo la Acometida",
+    "además del daño habitual.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Efectos de zona",
+  "cambios": [
+   [
+    "sea técnicamente",
+    "sea técnicamente bidimensional, un personaje subido a un taburete por encima del nivel del suelo suele sufrir el mismo efecto de zona que uno sentado en el suelo, siempre que se ajuste a la historia."
+   ]
+  ]
+ },
+ {
+  "titulo": "Designar a personajes y objetos como objetivos",
+  "cambios": [
+   [
+    "a pesar de lo que dicten las normas.",
+    "a pesar de lo que dicten las normas.\n\n#### Tipos de objetivo\nLas reglas determinan a quién o a qué puedes elegir como objetivo de un efecto. Cada objetivo pertenece normalmente a una de las categorías siguientes (aunque, como siempre, la DJ toma la decisión final):\n\n**Personaje.** La inmensa mayoría de efectos del juego tienen como objetivo a personajes. Este término engloba a personajes jugadores, PNJs, animales y otros seres con características y cierto nivel de animación, conciencia o independencia. Tú eres un personaje, de modo que si una regla permite elegir como objetivo a “un personaje”, puedes elegirte a ti mismo. (A discreción de la DJ, podrías emplear de forma creativa un efecto destinado a personajes para afectar a un objeto o zona. Siempre corresponde a la DJ decidir cómo funcionan estos efectos).\n\n**Objeto.** Si algo no es un personaje pero puede recogerse o desplazarse de forma razonable, lo más probable es que cuente como un objeto. Una piedra es sin duda un objeto, pero la montaña de la que proviene no lo es.\n\n**Enemigo.** Un enemigo es todo personaje que en ese momento se incline a oponerse a tus planes, se resista a tus pruebas, te ataque, actúe de forma hostil o, en general, no se alegre de tu existencia en el mundo.\n\n**Aliado.** No hace falta que los aliados compartan tus mismos ideales; basta con que te consideren una persona neutral o amistosa. Están dispuestos a ayudarte o a dejarte a tu aire, y no interferirán contigo si tú no lo haces con ellos. Al hacer una prueba contra las defensas de un aliado, este puede elegir (a discreción de la DJ) que tu prueba tenga éxito automáticamente. Nota: tú no cuentas como aliado de ti mismo.\n\n**Tú.** Este libro se ha redactado principalmente en segunda persona, por lo que el uso del “tú” es constante; con todo, para que una regla se te aplique, debes contar con el talento o efecto correspondiente. “Tú” se refiere de forma específica al destinatario de la regla, tal y como se ha expuesto anteriormente en esta sección.\n\n**Objetivo.** Como sustantivo, “objetivo” es un término genérico para cualquier persona o cosa a la que se le pueda aplicar un efecto, lo que incluye tanto a personajes como a objetos. Muchas reglas indican que elijas un “objetivo” sin aclarar de qué tipo se trata. Si no se especifica, puedes aplicar el efecto a cualquiera de los dos (dentro de lo razonable). No obstante, la mayoría de reglas dan por sentado que el blanco será un personaje, por lo que los efectos podrían incluir consecuencias que los objetos no pueden sufrir (como quedar Retenido). Ignora o adapta cualquier efecto irrelevante al elegir objetos como objetivo.\n\n**Otros tipos.** Ciertos efectos especifican otros objetivos no definidos en las reglas; se trata de situaciones de sentido común en pos de la flexibilidad. Por ejemplo, si una capacidad permite apuntar a una superficie, puedes afectar a muchas zonas si eso encaja en la historia, en lugar de perderte en definiciones precisas."
+   ]
+  ]
+ },
+ {
+  "titulo": "Influir en un objetivo",
+  "cambios": [
+   [
+    "\n\nAliado. No hace falta",
+    "en lugar de perderte en definiciones precisas.",
+    ""
+   ],
+   [
+    "\n\nbidimensional, un personaje subido",
+    "siempre que se ajuste a la historia.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Tamaño de personajes",
+  "cambios": [
+   [
+    "\n\na quién o a qué puedes elegir como objetivo",
+    "no se alegre de tu existencia en el mundo.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Cuadrícula táctica: cuándo usarla",
+  "cambios": [
+   [
+    "son divisibles por de batalla.",
+    "son divisibles por 1,5, se trasladan con facilidad a la cuadrícula. Por ejemplo, un personaje o efecto Mediano ocupa una única casilla de 1,5 metros. (Si vuestro grupo usa la cuadrícula de forma habitual, quizá prefieras dividir el valor de movimiento y los alcances por 1,5 para anotar el número de casillas correspondiente en la hoja de personaje y facilitar así las consultas)."
+   ],
+   [
+    "siguiendo las líneas de 1,5, se trasladan",
+    "facilitar así las consultas).",
+    "siguiendo las líneas de la cuadrícula. Al establecer el punto de origen de un efecto, puedes iniciarlo en cualquier espacio adyacente al que ocupas (no es necesario que la zona incluya tu propio espacio).\n\nSi un efecto solo afecta a una zona Pequeña (0,75 metros de diámetro), por lo general afectará a una casilla entera de 1,5 metros, ya que es el incremento mínimo de la cuadrícula; con todo, la DJ puede tomarse ciertas licencias creativas al resolver el resultado si beneficia a la narrativa."
+   ],
+   [
+    "\n\nMAPA: ; FICHAS: la cuadrícula.",
+    "si beneficia a la narrativa.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Combate sobre monturas",
+  "cambios": [
+   [
+    "\n\ntus enemigos para generar efectos divertidos",
+    "ofrece inspiración para los posibles desenlaces.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Oportunidades y Complicaciones en combate",
+  "cambios": [
+   [
+    "Oportunidad Complicación",
+    "obligándote a moverte o sufrir las consecuencias.",
+    "#### Oportunidades y Complicaciones en combate\n| Oportunidad | Complicación |\n|---|---|\n| Llegan refuerzos aliados. | Llegan refuerzos enemigos. |\n| Un enemigo herido opta por huir o rendirse. | Un aliado tropieza y queda Tumbado. |\n| Un transeúnte inocente logra ponerse a salvo. | Un aliado o un inocente quedan expuestos al peligro y hay que salvarlos. |\n| Un enemigo se distrae, lo que otorga ventaja en los ataques en su contra. | Un enemigo advierte tu presencia. |\n| Un enemigo deja caer un arma o equipo. | Dejas caer (o dañas) tu arma o equipo. |\n| Detectas un punto ventajoso u otro elemento del entorno que puedes aprovechar. | Llegan las brumas y ofuscan el campo de batalla. |\n| Ves viales metálicos o una mente de metal que podrías quitar al oponente. | Te quedas sin metales o pierdes una carga de tu mente de metal. |\n| El efecto de tu poder alomántico es más potente de lo previsto. | El efecto de tu poder alomántico es menos potente de lo previsto. |\n| Localizas a un oponente oculto y revelas su posición a tus aliados. | Te distraes y un oponente se escabulle sin activar tu Acometida reactiva. |\n| Víctima de un exceso de confianza, un oponente revela un secreto por accidente. | Rematas por error a un enemigo al que pretendías dejar con vida para interrogarlo. |\n| Empleas tu poder feruquímico con gran eficiencia y sus beneficios duran 1 ronda extra. | Decantas demasiada carga de golpe y los beneficios del poder duran 1 ronda menos. |\n| Un elemento del entorno cambia, dejando expuesto o entorpeciendo a tu rival. | Un elemento del entorno cambia, obligándote a moverte o sufrir las consecuencias. |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Elección de adversarios",
+  "definiciones": [
+   "Secuaz (0,5 de amenaza)",
+   "Rival (1 de amenaza)",
+   "Jefe (4 de amenaza)"
+  ]
+ },
+ {
+  "titulo": "Cálculo de la amenaza total",
+  "cambios": [
+   [
+    "puedes usar la tabla «Escalado de amenazas de adversarios»:\n",
+    "puedes usar la tabla Escalado de amenazas de adversarios o calcularlo por tu cuenta: si un adversario es de un rango superior al de los PJs, dobla el valor de amenaza por cada rango de diferencia. Si el rango del adversario es inferior al de los PJs, reduce el valor a la mitad por cada rango de diferencia, redondeando al cuarto más cercano.\n\nPor ejemplo, si el grupo es de rango 1, un adversario Rival de rango 2 tiene un valor de amenaza de 2. Si el grupo sube a rango 2, ese mismo adversario pasa a tener un valor de amenaza de 1. Y si el grupo alcanza el rango 3, el valor de amenaza del adversario baja hasta 0,5.\n\n#### Escalado de amenazas de adversarios\n"
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo decidir la dificultad de la escena",
+  "cambios": [
+   [
+    "Los combates fáciles tienen",
+    "◆ Los combates fáciles tienen"
+   ],
+   [
+    "sin demasiados apuros. Los combates promedio",
+    "sin demasiados apuros.\n◆ Los combates promedio"
+   ],
+   [
+    "de este tipo. Los combates difíciles",
+    "de este tipo.\n◆ Los combates difíciles"
+   ],
+   [
+    "\n\nlas Oportunidades y las Complicaciones de las formas siguientes.",
+    ""
+   ],
+   [
+    "(o que los jugadores sigan una Escalado de amenazas",
+    "baja hasta 0,5.",
+    "(o que los jugadores sigan una estrategia muy depurada), es posible que debas incrementar la amenaza total de las escenas de lucha. Por el contrario, si la mayor parte de los PJs son mejores fuera del combate (o si sus jugadores no priorizan la táctica), convendría reducir la amenaza total."
+   ]
+  ]
+ }
+]

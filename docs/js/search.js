@@ -219,7 +219,7 @@
 
   function snippet(e, plainTerms, len) {
     len = len || 170;
-    const body = (e.body + ' ' + (e.mecanica || '')).replace(/\s*\n+\s*/g, ' ').replace(/#{2,}\s*/g, '');
+    const body = (e.body + ' ' + (e.mecanica || '')).replace(/\s*\n+\s*/g, ' ').replace(/#{2,}\s*/g, '').replace(/\*\*/g, '');
     const n = normChars(body);
     let pos = -1;
     for (const t of plainTerms) {

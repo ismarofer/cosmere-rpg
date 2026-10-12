@@ -1,0 +1,230 @@
+[
+ {
+  "titulo": "Progresión del poder",
+  "desde": "Grados Límite Dado Alcance",
+  "md": "| Grados | Límite | Dado | Alcance |\n|---|---|---|---|\n| 0 | 1 | 1 (sin tirada) | 3 m |\n| 1 | 1 | d4 | 6 m |\n| 2 | 2 | d6 | 12 m |\n| 3 | 3 | d8 | 24 m |\n| 4 | 4 | d10 | 48 m |\n| 5 | 5 | d12 | 96 m |\n| 6 o más* | Igual al rango | d20 | 192 m |",
+  "hasta": "*Solo es posible superar"
+ },
+ {
+  "titulo": "Acciones y reacciones",
+  "desde": "Tipo Coste Tipo Coste",
+  "md": "| Acción | Acción |\n|---|---|\n| Acometida | Interactuar |\n| Acometida reactiva | Moverse |\n| Agarrar | Obtener ventaja |\n| Ayudar | Prepararse * |\n| Charlar | Prevenirse |\n| Destrabarse | Recuperarse |\n| Empujar | Soltar |\n| Esquivar | Usar una habilidad |\n| Evitar peligro |  |",
+  "hasta": "*Debes usar 1"
+ },
+ {
+  "titulo": "Ataques sin armas",
+  "desde": "Fuerza Daño sin armas",
+  "md": "| Fuerza | Daño sin armas |\n|---|---|\n| 0 a 2 | 1 golpe (sin tirada) |\n| 3 a 4 | 1d4 golpe |\n| 5 a 6 | 1d8 golpe |\n| 7 a 8 | 2d6 golpe |\n| 9 o más | 2d10 golpe |"
+ },
+ {
+  "titulo": "Lesiones",
+  "desde": "Tirada de lesión Duración",
+  "md": "| Tirada de lesión | Duración |\n|---|---|\n| −6 o menos | Muerte. Tu personaje muere (consulta “Muerte”). |\n| −5 a 0 | Lesión permanente. Sufres una lesión permanente. |\n| 1 a 5 | Lesión grave. Sufres una lesión temporal con una duración de 6d6 días. |\n| 6 a 15 | Lesión leve. Sufres una lesión temporal con una duración de 1d6 días. |\n| 16 o más | Herida superficial. Sufres una lesión temporal hasta que concluya un descanso largo. |"
+ },
+ {
+  "titulo": "Lesiones",
+  "desde": "d8 Efecto Sugerencias narrativas",
+  "md": "| d8 | Efecto | Sugerencias narrativas |\n|---|---|---|\n| 1 a 2 | Agotado [−1] | Cualquier herida que merme tu resistencia general. |\n| 3 | Agotado [−2] | Cualquier herida que merme tu resistencia general. |\n| 4 a 5 | Ralentizado | Una lesión en el pie o la pierna, o cualquier herida que reduzca tu velocidad. |\n| 6 | Desorientado | Una lesión en la cabeza o una herida extensa que afecte a tus sentidos. |\n| 7 | Sorprendido | Te sientes abrumado por la conmoción que te produce la lesión. |\n| 8 | Solo puedes usar una mano | Una lesión en el brazo o la mano, o cualquier daño que merme tu coordinación. |",
+  "hasta": "#### Los PNJs menores"
+ },
+ {
+  "titulo": "Tamaño de personajes",
+  "desde": "Tamaño del personaje Zona controlada",
+  "md": "| Tamaño del personaje | Zona controlada |\n|---|---|\n| Pequeño | 0,75 m |\n| Mediano | 1,5 m |\n| Grande | 3 m |\n| Enorme | 4,5 m |\n| Gargantuesco | 6 m |\n| Colosal | 9 m o más |"
+ },
+ {
+  "titulo": "Terreno peligroso",
+  "desde": "Ejemplo de terreno Daño",
+  "md": "| Ejemplo de terreno | Daño |\n|---|---|\n| Charco de ácido | 1d10 vital |\n| Frío extremo | 1d4 vital |\n| Fuego abrasador | 1d8 por energía |\n| Humo venenoso | 1d6 vital |\n| Pinchos de madera | 1d4 por laceración |"
+ },
+ {
+  "titulo": "Cálculo de la amenaza total",
+  "desde": "puedes usar la tabla\n\n#### Escalado de amenazas de adversarios\nRango del grupo contra rango del adversario",
+  "md": "puedes usar la tabla «Escalado de amenazas de adversarios»:\n| Rango del grupo contra rango del adversario | Amenaza de Secuaz | Amenaza de Rival | Amenaza de Jefe |\n|---|---|---|---|\n| 3 rangos por debajo del adversario | 4 | 8 | 32 |\n| 2 rangos por debajo del adversario | 2 | 4 | 16 |\n| 1 rango por debajo del adversario | 1 | 2 | 8 |\n| Mismo rango que el adversario | 0,5 | 1 | 4 |\n| 1 rango por encima del adversario | 0,25 | 0,5 | 2 |\n| 2 rangos por encima del adversario | 0 | 0,25 | 1 |\n| 3 rangos por encima del adversario | 0 | 0 | 0,5 |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Umbrales colectivos",
+  "desde": "Complejidad Ejemplo Éxitos Fallos",
+  "md": "| Complejidad | Ejemplo | Éxitos | Fallos |\n|---|---|---|---|\n| Simple | Atrapar a un delincuente común. (Persecución) | 4 | 3 |\n| Básica | Descifrar los secretos de un tomo antiguo. (Descubrimiento) | * | 4 |\n| Promedio | Robar el alijo de atium de un noble. (Misión) | 8 | 4 |\n| Elaborada | Localizar una ciudad antigua perdida en el tiempo. (Exploración) | 9 | 4 |\n| Insuperable | Inutilizar una aeronave militar antes de que bombardee una ciudad. (Misión) | 11 | 5 |",
+  "hasta": "*Consulta la sección"
+ },
+ {
+  "titulo": "Regla especial: Contra todo pronóstico",
+  "desde": "Peligro\n\nCD sugerida Efecto del fallo",
+  "md": "| Peligro | CD sugerida | Efecto del fallo |\n|---|---|---|\n| Comida en mal estado | 12 | Sufres 2d4 de daño vital. |\n| Deshidratación | 14 | Pierdes toda la concentración, excepto 1 punto. |\n| Energía perdida | 14 | Quedas Agotado [−1]. |\n| Ropa estropeada | 15 | Sufres una desventaja en las pruebas de Persuasión y Liderazgo hasta que te des un baño. La armadura pierde el rasgo Presentable hasta que se repare. |\n| Sentidos ofuscados | 18 | Quedas Desorientado durante el resto de la escena. |\n| Viales rotos | 10 | Se rompen todos tus viales de metal menos dos. Si se rompe algún vial de metales raros, puedes renunciar a los beneficios de un descanso largo para rescatar el contenido. |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Regla especial: Ganando terreno",
+  "desde": "Ejemplo\n\nDistancia inicial",
+  "md": "| Ejemplo | Distancia inicial | Distancia de fuga |\n|---|---|---|\n| Correr por los pasillos de una fortaleza. | 2 | 4 |\n| Huir de un nacido de la bruma por los tejados de Luthadel. | 3 | 6 |\n| Cazar a un infractor de la ley por los variopintos paisajes de los Áridos. | 4 | 8 |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Compañeros",
+  "desde": "PNJ Rol y número Ejemplos de perfil de PNJ Bonificaciones de desarrollo",
+  "md": "| PNJ (rango) | Rol y número | Ejemplos de perfil de PNJ | Bonificaciones de desarrollo |\n|---|---|---|---|\n| 1 | 1 Secuaz | Cuervo*, alguacil, soldado de guarnición, forajido u otro PNJ que no sea Jefe de rango 1 o inferior. | — |\n| 2 | 2 Secuaces o 1 Rival | Caballo*, mataneblinos, aristócrata u otro PNJ que no sea Jefe de rango 2 o inferior. | Secuaz: +2 a todas las pruebas, +10 de salud. |\n| 3 | 3 Secuaces o 1 Rival | Kandra, quimera hemalúrgica u otro PNJ que no sea Jefe de rango 3 o inferior. | Secuaz: +4 a todas las pruebas, +20 de salud. Rival: +2 a todas las pruebas, +10 de salud. |\n| 4+ | 5 Secuaces, 2 Rivales o 1 Jefe | Koloss u otro PNJ de cualquier rango. | Secuaz: +6 a todas las pruebas, +40 de salud. Rival: +4 a todas las pruebas, +20 de salud. |",
+  "hasta": "*Consulta el apéndice"
+ },
+ {
+  "titulo": "Clavos hemalúrgicos",
+  "desde": "Rango de PJ Recompensas",
+  "md": "| Rango de PJ | Recompensas |\n|---|---|\n| 1 | Pericia especializada Hemalurgo. |\n| 2 | Clavo hemalúrgico de cobre, hierro, estaño o cinc. |\n| 3 | Clavo hemalúrgico de bendaleo, latón, bronce, cadmio, electro, oro, peltre o acero. |",
+  "hasta": "*El rango de recompensa"
+ },
+ {
+  "titulo": "Clavos hemalúrgicos",
+  "desde": "Rango de PJ Investidura máxima de la granada",
+  "md": "| Rango de PJ | Investidura máxima de la granada |\n|---|---|\n| 1 | 1 punto de Investidura. |\n| 2 | 3 puntos de Investidura. |\n| 3 o más | 5 puntos de Investidura. |"
+ },
+ {
+  "titulo": "Creaciones raras",
+  "desde": "Rango de PJ Objetos",
+  "md": "| Rango de PJ | Objetos |\n|---|---|\n| 1 | Capa de bruma, gabán de bruma (Era 2) |\n| 2 | Hoja koloss |\n| 3 o más | Aeronave (Era 2) |"
+ },
+ {
+  "titulo": "Cuerpos Verdaderos kandra",
+  "desde": "Rango de PJ Material fue vel dis Capacidad especial",
+  "md": "| Rango de PJ | Material | FUE | VEL | DIS | Capacidad especial |\n|---|---|---|---|---|---|\n| 1 | Madera | 0 | 2 | 3 | — |\n| 1 | Piedra | 4 | 0 | 1 | — |\n| 2 | Cristal | 2 | 1 | 3 | Atractivo cristalino |\n| 3 | Metal | 4 | 2 | 3 | Mente de metal esquelética |\n| 4 | Aluminio | 3 | 3 | 3 | Alománticamente inerte |",
+  "hasta": "Atractivo cristalino. Obtienes"
+ },
+ {
+  "titulo": "Metales raros",
+  "desde": "Rango de PJ Metal Cantidad\n\n1 Aluminio",
+  "md": "| Rango de PJ | Metal | Cantidad |\n|---|---|---|\n| 1 | Aluminio | 10 gramos |\n| — | Atium (Era 1) | 3 cuentas |\n| — | Aleación de lerasium* (Era 1) | 1 cuenta |\n| 4 o más | Lerasium puro* (Era 1) | 1 cuenta |",
+  "hasta": "*Consulta el recuadro"
+ },
+ {
+  "titulo": "Metales raros",
+  "desde": "Rango de PJ Metal\n\nRango de PJ",
+  "md": "| Metal | Rango de PJ | Metal | Rango de PJ |\n|---|---|---|---|\n| Aluminio | 1 | Duraluminio | 1 |\n| Atium | 3 | Electro | 1 |\n| Bendaleo | 2 | Nicrosil | 2 |\n| Cadmio | 1 | Oro | 1 |\n| Cromo | 2 |  |  |"
+ },
+ {
+  "titulo": "Patrocinadores",
+  "desde": "Rango de PJ Comodidades",
+  "md": "| Rango de PJ | Comodidades |\n|---|---|\n| 1 | Viaje y alojamiento Confortable |\n| 2 | Viaje y alojamiento Lujoso |\n| 3 | Viaje y alojamiento Aristocrático |\n| 4 o más | Viaje y alojamiento Aristocrático con comodidades personalizadas (como un recadero local) |"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Rango del líder\n\nEscala máxima",
+  "md": "| Rango del líder | Escala máxima | Máximo de metas simultáneas |\n|---|---|---|\n| 1 | Escala 1 | 1 |\n| 2 | Escala 2 | 2 |\n| 3 | Escala 3 | 3 |\n| 4 | Escala 4 | 4 |\n| 5 | Escala 5 | 5 |"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Escala\n\nBeneficio mensual\n\n(Era 1)",
+  "md": "| Escala | Beneficio mensual (Era 1) | Beneficio mensual (Era 2) |\n|---|---|---|\n| 1 | 50 ar | 100 ar |\n| 2 | 125 ar | 250 ar |\n| 3 | 250 ar | 500 ar |\n| 4 o más | 500 ar | 1000 ar |",
+  "hasta": "MARIE SEEBERGER"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Escala\n\nPersona importante",
+  "md": "| Escala | Persona importante | Ubicación segura | Evento restringido |\n|---|---|---|---|\n| 1 | Un alcalde de pueblo, el director de una empresa pequeña o el líder de una casa noble menor. | Una visita a una fábrica o acceso a la residencia o negocio de un ciudadano medio. | Una fiesta privada de un noble menor o un acto civil con aforo limitado. |\n| 2 | El alcalde de una ciudad, un administrador regional, el líder de una casa noble o el de una gran compañía. | Acceso al interior de una instalación gubernamental regional o visita a un centro de producción importante. | Una velada de una de las Grandes Casas o una junta de inversores de una gran empresa. |\n| 3 | Un jefe de Estado o un líder militar. | Acceso al interior de una instalación administrativa o militar del Estado. | Una inspección de las fuerzas armadas, una cena de Estado o una gala internacional. |\n| 4 o más | Líder de una organización secreta o una potencia extranjera de origen desconocido. | Santuario oculto de un grupo encubierto. | Cumbre de gente poderosa cuya influencia trasciende Scadrial. |",
+  "hasta": "#### Ejemplo de organización: red criminal"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Nombre Efecto",
+  "md": "| Nombre | Efecto |\n|---|---|\n| Huida limpia | La organización prepara una ruta de escape y dispone hasta tres caballos en un lugar y momento determinados. Si la escala es 3 o superior, también puede proporcionar una diligencia con dos caballos (y un conductor, si es necesario) o hasta tres caballos adicionales. |\n| Músculo prestado | Los miembros de la organización recurren a un especialista. Elige a un miembro; durante la próxima semana, dispondrá de tantos compañeros de Músculo a sueldo (consulta “Compañeros”) como indique la escala de la organización. |\n| Servicio de “mensajería” | Los miembros de la organización introducen de contrabando un objeto Pequeño en la ubicación que elijan. El tamaño máximo aumenta con la escala: Mediano en escala 3, Grande en escala 4 y Enorme en escala 5. |",
+  "hasta": "#### Ejemplo de organización: célula de resistencia"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Escala Efecto\n\n1 Recuperas",
+  "md": "| Escala | Efecto |\n|---|---|\n| 1 | Recuperas 1d4 puntos de salud o 1 punto de concentración. |\n| 2 | Recuperas 1d8 puntos de salud o 1d4 puntos de concentración. |\n| 3 | Recuperas 2d10 puntos de salud y 1d4 puntos de concentración, y pasas a estar Resuelto. |\n| 4 o más | Recuperas 3d12 puntos de salud y 1d6 puntos de concentración, y pasas a estar Resuelto o Concentrado. |",
+  "hasta": "#### Ejemplo de organización: club social"
+ },
+ {
+  "titulo": "Organizaciones",
+  "desde": "Escala Efecto\n\n1 El rumor es plausible",
+  "md": "| Escala | Efecto |\n|---|---|\n| 1 | El rumor es plausible; el miembro obtiene una ventaja en su prueba y puede tratar las Defensas cognitiva y espiritual del objetivo como si fueran 1 punto inferiores. |\n| 2 | El rumor es razonablemente convincente; el miembro obtiene una ventaja en su prueba y puede tratar las Defensas cognitiva y espiritual del objetivo como si fueran 2 puntos inferiores. |\n| 3 | El rumor es muy persuasivo; el miembro obtiene una ventaja en su prueba y puede tratar las Defensas cognitiva y espiritual del objetivo como si fueran 3 puntos inferiores. |\n| 4 o más | El rumor resulta abrumadoramente convincente; el miembro obtiene una ventaja en su prueba y puede tratar las Defensas cognitiva y espiritual del objetivo como si fueran 4 puntos inferiores. |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Alojamiento",
+  "desde": "Alojamiento Precio por persona y noche",
+  "md": "| Alojamiento | Precio por persona y noche |\n|---|---|\n| Pobre | 0,2 ar |\n| Modesto | 1 ar |\n| Confortable | 5 ar |\n| Lujoso | 25 ar |\n| Aristocrático | 40 ar |"
+ },
+ {
+  "titulo": "Establecer conexiones",
+  "desde": "Presencia Tiempo necesario para establecer conexiones",
+  "md": "| Presencia | Tiempo necesario para establecer conexiones |\n|---|---|\n| 0 | 1 año |\n| 1 a 2 | 50 días |\n| 3 a 4 | 5 días |\n| 5 a 6 | 1 día |\n| 7 a 8 | 1 hora |\n| 9 o más | Tu reputación te precede. Tienes conexiones en lugares que ni siquiera has llegado a visitar. |"
+ },
+ {
+  "titulo": "Clase de dificultad",
+  "desde": "Dificultad CD",
+  "md": "| Dificultad | CD |\n|---|---|\n| Fácil | 10 |\n| Media | 15 |\n| Alta | 20 |\n| Muy alta | 25 |\n| Casi imposible | 30 |"
+ },
+ {
+  "titulo": "Armas",
+  "desde": "Tipo Habilidad Daño Alcance Rasgos Rasgos de experto Peso Precio",
+  "md": "| Tipo | Habilidad | Daño | Alcance | Rasgos | Rasgos de experto | Peso | Precio |\n|---|---|---|---|---|---|---|---|\n| Arma improvisada | La misma que un arma similar | El mismo que un arma similar | Cuerpo a cuerpo | Frágil, Única | Única | — | — |\n| Ataque sin armas | Atletismo | Única | Cuerpo a cuerpo | Única | Inercia, Mano secundaria | No pesa | — |\n| Bastón de duelo | Armamento pesado o Armamento ligero | 1d8 golpe | Cuerpo a cuerpo | Discreta, Única | Mano secundaria | 1,5 kg | 40 ar |\n| Hoja koloss | Armamento pesado | 1d12 golpe | Cuerpo a cuerpo [+1,5] | Voluminosa [6], Peligrosa, Mortífera, A dos manos, Única | Única: pierde el rasgo Peligrosa, el daño pasa a ser 1d20 golpe | 100 kg | Solo recompensa |\n| Palo de ruido | Armamento ligero | 1d4 golpe | Cuerpo a cuerpo | Frágil, Única | Mano secundaria | 250 g | 100 ar |",
+  "hasta": "#### Hojas koloss"
+ },
+ {
+  "titulo": "Armas de fuego",
+  "desde": "Tipo Habilidad Daño Alcance Rasgos",
+  "md": "La tabla completa de armas de fuego (daño, alcance, rasgos, peso y precio) está en el [[#/c/arma|catálogo de armas]].\n",
+  "hasta": "Tras el Catacendro, la tecnología"
+ },
+ {
+  "titulo": "Armas de fuego",
+  "desde": "Tipo Materiales Efecto",
+  "md": "| Tipo | Materiales | Efecto |\n|---|---|---|\n| Munición para atraedores | Metal, cerámica, pólvora | Si la alomancia de hierro mueve el núcleo metálico de esta bala, los laterales cerámicos estallan. El ataque obtiene el rasgo Explosiva [3] y el alomante que movió la bala pasa a ser el objetivo del ataque, sufriendo 1d4 de daño por golpe adicional. |\n| Munición para brazos de peltre | Metal, pólvora extra | Con un impacto, el objetivo queda Mermado [Fuerza −2] durante una ronda. |\n| Munición para lanzamonedas | Metal, cerámica, pólvora | Si la alomancia de acero mueve la vaina de esta bala, su núcleo cerámico mantiene la trayectoria original. Este proyectil se considera alománticamente inerte. |\n| Munición para ojos de estaño | Metal, pólvora extra | Al dispararse, estos proyectiles emiten un estruendo que puede sobreestimular a personajes con oído sobrenatural. Además, si el alcance de los sentidos de un personaje incluye el espacio del atacante, dicho personaje pierde 1 punto de concentración. |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Armaduras",
+  "desde": "Tipo\n\nValor de desvío Rasgos",
+  "md": "| Tipo | Valor de desvío | Rasgos | Rasgos de experto | Peso | Precio de compra |\n|---|---|---|---|---|---|\n| Uniforme | 0 | Presentable | — | 2,5 kg | 20 ar |\n| Capa de bruma | 0 | Única | Única | 2,5 kg | Solo recompensa |\n| Cuero | 1 | — | Presentable | 5 kg | 30 ar |\n| Gabán de bruma (Era 2) | 1 | Presentable | Única | 5 kg | Solo recompensa |\n| Coraza | 2 | Voluminosa [3] | Presentable | 15 kg | 50 ar |\n| Coraza de cerámica | 2 | Voluminosa [3], Frágil | Única: Voluminosa [2] en lugar de Voluminosa [3] | 10 kg | 250 ar |\n| Armadura de placas y malla | 3 | Voluminosa [4] | Única: Voluminosa [3] en lugar de Voluminosa [4] | 20 kg | 200 ar |\n| Armadura de madera | 3 | Voluminosa [5], Frágil | Única: pierde el rasgo Frágil | 15 kg | 1000 ar |",
+  "hasta": "#### Rasgos de las armaduras"
+ },
+ {
+  "titulo": "Viales de metal",
+  "desde": "Metal Precio en la Era 1 Precio en la Era 2",
+  "md": "| Metal | Precio en la Era 1 | Precio en la Era 2 |\n|---|---|---|\n| Aluminio | 25 ar/vial | 50 ar/vial |\n| Atium | 150 ar/cuenta | No disponible |\n| Bendaleo | No disponible | 500 ar/vial |\n| Cadmio | No disponible | 50 ar/vial |\n| Cromo | No disponible | 10 ar/vial |\n| Duraluminio | 25 ar/vial | 50 ar/vial |\n| Electro | 10 ar/vial | 50 ar/vial |\n| Nicrosil | No disponible | 50 ar/vial |\n| Oro | 5 ar/vial | 25 ar/vial |",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Vehículos",
+  "desde": "Vehículo Tipo",
+  "md": "| Vehículo | Tipo | Velocidad de viaje | Precio de alquiler al día | Precio de compra |\n|---|---|---|---|---|\n| Carro de caballos | Terrestre | 6 km/h | 5 ar | 500 ar |\n| Coche (Era 2) | Terrestre | 45 km/h | 200 ar | 4000 ar |\n| Tren (Era 2) | Terrestre | 90 km/h | 25 ar por pasajero | 50 000 ar |\n| Barca de remos | Acuático | 4,5 km/h río abajo, 1,5 km/h río arriba | 10 ar | 250 ar |\n| Barcaza mercante | Acuático | 7,5 km/h | 25 ar | 10 000 ar |\n| Barco de vapor (Era 2) | Acuático | 30 km/h | 100 ar | 75 000 ar |\n| Aeronave (Era 2) | Aéreo | 30 km/h | Solo recompensa | Solo recompensa |",
+  "hasta": "#### Viajes"
+ },
+ {
+  "titulo": "Manufactura",
+  "desde": "Material Precio en la Era 1 Precio en la Era 2",
+  "md": "| Material | Precio en la Era 1 | Precio en la Era 2 |\n|---|---|---|\n| Aluminio* | No disponible | 500 ar |\n| Atium | 2500 ar | No disponible |\n| Bendaleo | No disponible | 2500 ar |\n| Cadmio | No disponible | 1250 ar |\n| Cromo | No disponible | 500 ar |\n| Duraluminio | No disponible | 1250 ar |\n| Electro | 250 ar | 1250 ar |\n| Nicrosil | No disponible | 250 ar |\n| Oro | 125 ar | 500 ar |",
+  "hasta": "*Consulta el apartado"
+ },
+ {
+  "titulo": "Progreso de los personajes",
+  "desde": "Rango\n\nNivel de personaje",
+  "md": "| Rango | Nivel | Puntos de atributo | Salud obtenida | Grado máximo en habilidad | Grados en habilidad | Talentos obtenidos |\n|---|---|---|---|---|---|---|\n| 1 | 1 | 12 puntos de atributo | 10 + FUE salud | 2 | 4 grados en habilidad (+1 del camino inicial) | 1 talento del camino inicial más talento(s) de ascendencia adicional(es) |\n| 1 | 2 | — | +5 salud | 2 | +2 grados en habilidad | +1 talento |\n| 1 | 3 | +1 punto de atributo | +5 salud | 2 | +2 grados en habilidad | +1 talento |\n| 1 | 4 | — | +5 salud | 2 | +2 grados en habilidad | +1 talento |\n| 1 | 5 | — | +5 salud | 2 | +2 grados en habilidad | +1 talento |\n| 2 | 6 | +1 punto de atributo | +4 +FUE salud | 3 | +2 grados en habilidad | +1 talento más talento de ascendencia adicional |\n| 2 | 7 | — | +4 salud | 3 | +2 grados en habilidad | +1 talento |\n| 2 | 8 | — | +4 salud | 3 | +2 grados en habilidad | +1 talento |\n| 2 | 9 | +1 punto de atributo | +4 salud | 3 | +2 grados en habilidad | +1 talento |\n| 2 | 10 | — | +4 salud | 3 | +2 grados en habilidad | +1 talento |\n| 3 | 11 | — | +3 + FUE salud | 4 | +2 grados en habilidad | +1 talento más talento de ascendencia adicional |\n| 3 | 12 | +1 punto de atributo | +3 salud | 4 | +2 grados en habilidad | +1 talento |\n| 3 | 13 | — | +3 salud | 4 | +2 grados en habilidad | +1 talento |\n| 3 | 14 | — | +3 salud | 4 | +2 grados en habilidad | +1 talento |\n| 3 | 15 | +1 punto de atributo | +3 salud | 4 | +2 grados en habilidad | +1 talento |\n| 4 | 16 | — | +2 +FUE salud | 5 | +2 grados en habilidad | +1 talento más talento de ascendencia adicional |\n| 4 | 17 | — | +2 salud | 5 | +2 grados en habilidad | +1 talento |\n| 4 | 18 | +1 punto de atributo | +2 salud | 5 | +2 grados en habilidad | +1 talento |\n| 4 | 19 | — | +2 salud | 5 | +2 grados en habilidad | +1 talento |\n| 4 | 20 | — | +2 salud | 5 | +2 grados en habilidad | +1 talento |\n| 5 | 21 o más | — | +1 salud | 5 | Elige: +1 grado en habilidad o bien +1 talento | Más talento de ascendencia adicional solo en el nivel 21 |",
+  "hasta": "#### Niveles y metas"
+ },
+ {
+  "titulo": "Ejemplo de conjunto de características: Detective",
+  "desde": "Físico Cognitivo Espiritual fue def vel",
+  "md": "| Físico |  |  | Cognitivo |  |  | Espiritual |  |  |\n|---|---|---|---|---|---|---|---|---|\n| FUE 2 | DEF 15 | VEL 3 | INT 5 | DEF 18 | VOL 3 | DIS 3 | DEF 15 | PRE 2 |",
+  "hasta": "Salud: 50 (40 a 60)"
+ },
+ {
+  "titulo": "Metales en la alomancia",
+  "desde": "Metal alomántico Efecto\n\nNombre de brumoso",
+  "md": "| Metal alomántico | Efecto | Nombre de brumoso | Metal emparejado | Era | Tirón o Empujón | Externo o interno | Categoría |\n|---|---|---|---|---|---|---|---|\n| Hierro | Tira de los metales cercanos | Atraedor | Acero | Ambas | Tirón | Externo | Físico |\n| Acero | Empuja los metales cercanos | Lanzamonedas | Hierro | Ambas | Empujón | Externo | Físico |\n| Estaño | Agudiza tus sentidos | Ojo de estaño | Peltre | Ambas | Tirón | Interno | Físico |\n| Peltre | Potencia tus capacidades físicas | Brazo de peltre / violento | Estaño | Ambas | Empujón | Interno | Físico |\n| Cinc | Inflama las emociones ajenas | Encendedor | Latón | Ambas | Tirón | Externo | Mental |\n| Latón | Calma las emociones ajenas | Aplacador | Cinc | Ambas | Empujón | Externo | Mental |\n| Cobre | Oculta el uso de las artes Investidas cercanas | Ahumador / nube de cobre | Bronce | Ambas | Tirón | Interno | Mental |\n| Bronce | Detecta el uso de artes Investidas | Buscador | Cobre | Ambas | Empujón | Interno | Mental |\n| Cromo | Elimina las reservas de Investidura ajenas | Sanguijuela | Nicrosil | Era 2 | Tirón | Externo | Mejora |\n| Nicrosil | Potencia los efectos Investidos ajenos | Nicroestallante | Cromo | Era 2 | Empujón | Externo | Mejora |\n| Aluminio | Elimina tus reservas de Investidura | Mosquito de aluminio / vacío | Duraluminio | Era 2 † | Tirón | Interno | Mejora |\n| Duraluminio | Potencia tus efectos Investidos | Mosquito de duraluminio | Aluminio | Era 2 † | Empujón | Interno | Mejora |\n| Cadmio | Crea una burbuja de tiempo ralentizado a tu alrededor | Pulsador | Bendaleo | Era 2 | Tirón | Externo | Temporal |\n| Bendaleo | Crea una burbuja de tiempo acelerado a tu alrededor | Deslizador | Cadmio | Era 2 | Empujón | Externo | Temporal |\n| Oro | Revela tu pasado y tus yoes alternativos | Augur | Electro | Ambas ‡ | Tirón | Interno | Temporal |\n| Electro | Revela tus posibles futuros inmediatos | Oráculo | Oro | Era 2 ‡ | Empujón | Interno | Temporal |\n| Atium | Revela los posibles futuros inmediatos de los demás | Vidente | n/a | Era 1 | n/a | n/a | Divino |\n| Malatium* | Revela el pasado y los yoes alternativos de los demás | Adivino | n/a | Era 1 | n/a | n/a | Divino |\n| Lerasium† | Te convierte en nacido de la bruma | n/a | n/a | Era 1 | n/a | n/a | Divino |\n| Aleaciones de lerasium† | Te convierten en brumoso del poder del metal aleado | n/a | n/a | Era 1 | n/a | n/a | Divino |\n| Armonium* | Desconocido | n/a | n/a | Era 2 | n/a | n/a | Divino |\n| Trellium* | Desconocido | n/a | n/a | Era 2 | n/a | n/a | Divino |\n\n*Este poder no aparece representado en este libro. †Este metal aparece en la sección “Metales raros” del capítulo 8. ‡A finales de la Era 1, las propiedades del aluminio, el duraluminio y el electro empiezan a conocerse más allá del Ministerio de Acero.",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Metales en la feruquimia",
+  "desde": "Metal feruquímico Efecto\n\nNombre de ferrin",
+  "md": "| Metal feruquímico | Efecto | Nombre de ferrin | Metal emparejado | ¿Aleación o puro? | Era | Categoría |\n|---|---|---|---|---|---|---|\n| Hierro | Almacena peso | Ajustador | Acero | Puro | Ambas | Físico |\n| Acero | Almacena velocidad física | Mensajero de acero | Hierro | Aleación | Ambas | Físico |\n| Estaño | Almacena sentidos | Susurravientos | Peltre | Puro | Ambas | Físico |\n| Peltre | Almacena fuerza | Bruto | Estaño | Aleación | Ambas | Físico |\n| Cinc | Almacena velocidad mental | Chispeante | Latón | Puro | Ambas | Cognitivo |\n| Latón | Almacena calor | Alma de fuego | Cinc | Aleación | Ambas | Cognitivo |\n| Cobre | Almacena recuerdos | Archivero | Bronce | Puro | Ambas | Cognitivo |\n| Bronce | Almacena desvelo | Centinela | Cobre | Aleación | Ambas | Cognitivo |\n| Cromo | Almacena Fortuna | Hilador | Nicrosil | Puro | Era 2 | Espiritual |\n| Nicrosil | Almacena capacidades Investidas | Portaalmas | Cromo | Aleación | Era 2 | Espiritual |\n| Aluminio | Almacena Identidad | Genuino | Duraluminio | Puro | Era 2 † | Espiritual |\n| Duraluminio | Almacena Conexión | Conector | Aluminio | Aleación | Era 2 † | Espiritual |\n| Cadmio | Almacena aliento | Resollante | Bendaleo | Puro | Era 2 | Híbrido |\n| Bendaleo | Almacena nutrición | Incorporador | Cadmio | Aleación | Era 2 | Híbrido |\n| Oro | Almacena salud | Hacedor de sangre | Electro | Puro | Ambas | Híbrido |\n| Electro | Almacena determinación | Pináculo | Oro | Aleación | Era 2 † | Híbrido |\n| Atium | Almacena juventud | Cronodevanador | n/a | n/a | Era 1 | Divino |\n| Malatium* | Desconocido | n/a | n/a | n/a | Era 1 | Divino |\n| Lerasium* | Desconocido | n/a | n/a | n/a | Era 1 | Divino |\n| Aleaciones de lerasium* | Desconocido | n/a | n/a | n/a | Era 1 | Divino |\n| Armonium* | Desconocido | n/a | n/a | n/a | Era 2 | Divino |\n| Trellium* | Desconocido | n/a | n/a | n/a | Era 2 | Divino |\n\n*Este poder no aparece representado en este libro. †A finales de la Era 1, las propiedades del aluminio, el duraluminio y el electro empiezan a conocerse más allá del Ministerio de Acero.",
+  "hasta": "<FIN>"
+ },
+ {
+  "titulo": "Medallones feruquímicos",
+  "desde": "Metal Rasgo feruquímico\n\nRango de PJ",
+  "md": "| Metal | Rasgo feruquímico | Rango de PJ |\n|---|---|---|\n| Acero | Velocidad | 2 |\n| Aluminio | Identidad | 1 |\n| Bendaleo | Nutrición | 1 |\n| Bronce | Desvelo | 2 |\n| Cadmio | Aliento | 1 |\n| Cinc | Velocidad mental | 1 |\n| Cobre | Recuerdos | 1 |\n| Cromo | Fortuna | 2 |\n| Duraluminio | Conexión | 1 |\n| Electro | Determinación | 2 |\n| Estaño | Sentidos | 1 |\n| Hierro | Peso | 1 |\n| Latón | Calor | 1 |\n| Nicrosil | Investidura | * |\n| Oro | Salud | 2 |\n| Peltre | Fuerza | 2 |",
+  "hasta": "*No disponible para personajes jugadores."
+ }
+]

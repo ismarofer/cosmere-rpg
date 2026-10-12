@@ -1,0 +1,95 @@
+{
+ "tema": "Orígenes",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Ascendencias",
+   "reglas": [
+    {
+     "slug": "ascendencia",
+     "titulo": "Ascendencia",
+     "fuentes": [
+      "origen-ascendencia"
+     ],
+     "anexo": "Las ascendencias, con lo que otorga cada una, están en el [[#/c/origen|catálogo de orígenes]]."
+    },
+    {
+     "slug": "cuerpos-kandra",
+     "titulo": "Cuerpos kandra",
+     "fuentes": [
+      "origen-cuerpos-kandra"
+     ]
+    },
+    {
+     "slug": "generaciones-kandra",
+     "titulo": "Generaciones kandra",
+     "fuentes": [
+      "origen-generaciones-kandra"
+     ]
+    },
+    {
+     "slug": "crear-un-kandra-ya-disfrazado",
+     "titulo": "Crear un kandra ya disfrazado",
+     "fuentes": [
+      "origen-crear-un-kandra-ya-disfrazado"
+     ]
+    },
+    {
+     "slug": "contratos-kandra",
+     "titulo": "Contratos kandra",
+     "fuentes": [
+      "origen-contratos-kandra"
+     ]
+    },
+    {
+     "slug": "historia-de-los-koloss",
+     "titulo": "Historia de los koloss",
+     "fuentes": [
+      "origen-historia-de-los-koloss"
+     ]
+    },
+    {
+     "slug": "convertirse-en-koloss",
+     "titulo": "Convertirse en koloss",
+     "fuentes": [
+      "origen-convertirse-en-koloss"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Culturas",
+   "reglas": [
+    {
+     "slug": "cultura",
+     "titulo": "Cultura",
+     "fuentes": [
+      "origen-cultura",
+      {
+       "id": "origen-pericias-culturales-de-la-era-1",
+       "encabezado": "Pericias culturales de la Era 1"
+      },
+      {
+       "id": "origen-pericias-culturales-de-la-era-2",
+       "encabezado": "Pericias culturales de la Era 2"
+      },
+      {
+       "id": "origen-pericias-culturales-de-ambas-eras",
+       "encabezado": "Pericias culturales de ambas eras"
+      }
+     ],
+     "anexo": "Las culturas y sus pericias están en el [[#/c/origen|catálogo de orígenes]]."
+    },
+    {
+     "slug": "otras-culturas",
+     "titulo": "Otras culturas",
+     "fuentes": [
+      {
+       "id": "origen-otras-culturas",
+       "hasta": "En qué aspectos destaca"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

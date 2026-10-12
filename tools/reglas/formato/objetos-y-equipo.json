@@ -1,0 +1,215 @@
+[
+ {
+  "titulo": "Equipo inicial",
+  "lista": true,
+  "cambios": [
+   [
+    "arquillas eRA 1 o",
+    "arquillas (Era 1) o"
+   ],
+   [
+    "Literatura.\n\nSi ya la tienes",
+    "Literatura. Si ya la tienes"
+   ]
+  ],
+  "definiciones": [
+   "Armas:",
+   "Armadura:",
+   "Equipo:",
+   "Dinero:",
+   "Armas:",
+   "Armadura:",
+   "Equipo:",
+   "Divisa:",
+   "Armas:",
+   "Armadura:",
+   "Equipo:",
+   "Dinero:",
+   "Conexión:",
+   "Armas, armadura y dinero:",
+   "Equipo:",
+   "Ruptura:",
+   "Armas, armadura y dinero:",
+   "Equipo:",
+   "Mente de metal:",
+   "Armas:",
+   "Armadura:",
+   "Equipo:",
+   "Dinero:",
+   "Pericia adicional:",
+   "Armas:",
+   "Armadura:",
+   "Equipo:",
+   "Dinero:"
+  ]
+ },
+ {
+  "titulo": "Divisa",
+  "definiciones": [
+   "Óbolo",
+   "Arquilla",
+   "Nota"
+  ]
+ },
+ {
+  "titulo": "Armas de fuego",
+  "cambios": [
+   [
+    "Oportunidad Complicación",
+    "no podrá usarse en absoluto hasta que superes dicha prueba.",
+    "| Oportunidad | Complicación |\n|---|---|\n| Disparar el arma sobresalta al objetivo, lo que le hace perder 1d4 puntos de concentración. Si su concentración se reduce a 0 de este modo, queda Aturdido hasta el final de la escena. | El arma sufre un fallo de ignición con un estruendo ensordecedor. Todos los personajes situados a 1,5 metros de ti (incluyéndote a ti) quedáis Desorientados hasta el final de tu siguiente turno. |\n| El disparo destroza la cobertura del objetivo. Este pierde los beneficios de la acción Prevenirse y su antigua cobertura deja de ofrecer ventaja alguna. | Una bala o casquillo se encalla en el mecanismo de disparo, impidiendo el funcionamiento correcto del arma. No podrás dispararla hasta que la recargues. |\n| El proyectil rebota e impacta en algún elemento del entorno de forma provechosa, como al romper la cuerda que sujeta una lámpara de araña o al quitar de la mano el arma a un enemigo. | Aparece una grieta en una pieza clave del arma. Esta obtiene el rasgo Peligrosa hasta que la repares durante un descanso largo tras superar una prueba de Manufactura CD 12. Si el arma ya era Peligrosa, no podrá usarse en absoluto hasta que superes dicha prueba. |"
+   ],
+   [
+    "\n\nLas autoridades vigilan de cerca este tipo de materiales peligrosos",
+    "vuelve a ser Voluminosa [6].",
+    ""
+   ],
+   [
+    "\n\n| Tipo | Materiales | Efecto |",
+    "\n\n#### Munición mataneblinos estándar\n| Tipo | Materiales | Efecto |"
+   ],
+   [
+    "el arma adquiere temporalmente el rasgo Frágil para dichas pruebas.",
+    "el arma adquiere temporalmente el rasgo Frágil para dichas pruebas.\n\nCarga de munición mataneblinos. Al recargar un arma de fuego, puedes elegir un tipo de proyectil mataneblinos de tu inventario (como los descritos en la tabla Munición mataneblinos estándar) en lugar de la munición normal. Al hacerlo, cargas tantos proyectiles como indique el valor del rasgo Cargada de dicha arma. El arma de fuego obtendrá el efecto de ese proyectil mataneblinos hasta que vuelvas a recargar."
+   ]
+  ],
+  "definiciones": [
+   "Manufactura de munición mataneblinos",
+   "Calibración especial",
+   "Carga de munición mataneblinos"
+  ]
+ },
+ {
+  "titulo": "Cómo conseguir objetos alománticamente inertes",
+  "cambios": [
+   [
+    "\n\nInercia. Al atacar con esta arma",
+    "y estás Ralentizado mientras la empuñas.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Armaduras",
+  "cambios": [
+   [
+    "\n\n| Tipo | Valor de desvío |",
+    "\n\n#### Tabla de armaduras\n| Tipo | Valor de desvío |"
+   ]
+  ],
+  "definiciones": [
+   "Tipo",
+   "Valor de desvío",
+   "Rasgos",
+   "Rasgos de experto",
+   "Peso",
+   "Precio",
+   "Frágil",
+   "Presentable",
+   "Única",
+   "Voluminosa [X]",
+   "Flecos ondeantes",
+   "Solemnidad de nacido de la bruma",
+   "Flecos ondeantes"
+  ]
+ },
+ {
+  "titulo": "Vehículos",
+  "cambios": [
+   [
+    "#### Viajes",
+    "cuando estés lejos de casa.",
+    "^",
+    "antes"
+   ],
+   [
+    "\n\n| Vehículo | Tipo |",
+    "\n\n#### Tabla de vehículos\n| Vehículo | Tipo |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Manufactura de objetos corrientes",
+  "cambios": [
+   [
+    "1. Consigue los materiales necesarios. 2. Lleva a cabo una prueba de Manufactura. 3. Aplica las mejoras o inconvenientes.",
+    "◆ 1. Consigue los materiales necesarios.\n◆ 2. Lleva a cabo una prueba de Manufactura.\n◆ 3. Aplica las mejoras o inconvenientes."
+   ]
+  ],
+  "definiciones": [
+   "Herramientas e instalaciones",
+   "Coste de los materiales",
+   "Metales raros"
+  ]
+ },
+ {
+  "titulo": "Manufactura, paso 2: lleva a cabo una prueba",
+  "cambios": [
+   [
+    "Resultado de la prueba Calidad del objeto",
+    "y ningún inconveniente.",
+    "| Resultado de la prueba | Calidad del objeto |\n|---|---|\n| 1 a 5 | **Fracaso absoluto.** Pese a todo el tiempo y esfuerzo invertidos, no logras producir nada útil. Los metales raros y las mentes de metal pueden rescatarse para volver a trabajarlos, pero pierdes el resto de materiales y debes empezar de cero. |\n| 6 a 10 | **Creación chapucera.** Fabricar este objeto resulta inusualmente complicado. Logras terminarlo, pero no tiene mejoras y sí un inconveniente. |\n| 11 a 20 | **Creación típica.** La manufactura sale tal como se esperaba. Fabricas el objeto con una mejora y un inconveniente. |\n| 21 a 25 | **Creación de calidad.** ¡Todo sale a pedir de boca! Fabricas el objeto con dos mejoras y un inconveniente. |\n| 26 o más | **¡Creación excepcional!** Haces un gran descubrimiento durante el proceso y fabricas el objeto con tres mejoras y ningún inconveniente. |"
+   ]
+  ],
+  "definiciones": [
+   "Tiempo empleado",
+   "Prueba de Manufactura"
+  ]
+ },
+ {
+  "titulo": "Manufactura, paso 3: aplica las mejoras e inconvenientes",
+  "cambios": [
+   [
+    "d6 Mejora Inconveniente",
+    "esto te pasará factura en el futuro.",
+    "| d6 | Mejora | Inconveniente |\n|---|---|---|\n| 1 | Logras recuperar material suficiente de los restos como para crear algo más. El objeto fabricado no tiene coste de materiales. | El proceso requiere mucha más materia prima de lo esperado. Crear el objeto cuesta el doble. |\n| 2 | Si se fabrica o vende en público, su factura superior te otorga renombre entre artesanos y compradores exigentes. | Dañas accidentalmente tus herramientas o instalaciones. Dependiendo de quién sea el dueño, esto podría costarte arquillas o dañar tu reputación. |\n| 3 | Tu objeto es mucho más ligero de lo habitual. Reduce su peso a la mitad. | Tu objeto es mucho más voluminoso de lo normal. Duplica su peso. |\n| 4 | El objeto es resistente. Ignora los efectos de Complicación que podrían dañarlo o romperlo. | El objeto es delicado. Una Complicación en cualquier prueba en la que se use el objeto hará que se rompa. |\n| 5 | El objeto es de una belleza increíble y asombra a todo el que lo ve. | El objeto es un adefesio total. |\n| 6 | Tu objeto te ha granjeado el reconocimiento de nobles o artesanos; atraes la atención de un posible patrocinador (consulta “Recompensas” en el capítulo 8). | Tu objeto ha despertado los celos profesionales de algunos nobles o artesanos; esto te pasará factura en el futuro. |"
+   ],
+   [
+    "Característica Efecto",
+    "como por ejemplo un arma.",
+    "#### Tabla de características avanzadas\n| Característica | Efecto |\n|---|---|\n| Adornado | Si el objeto es una armadura, obtiene Presentable como rasgo de experto gracias a las florituras artísticas que le añades. |\n| Arma poco convencional | Si el objeto es un arma, obtiene Discreta como rasgo de experto. Si el objeto no es un arma ni una armadura, puede usarse como arma improvisada sin el rasgo Frágil. |\n| Compartimento oculto | El objeto tiene un espacio de almacenaje que puede albergar otro objeto cuyo tamaño sea, como máximo, una cuarta parte del original. |\n| Diseño letal | Si el objeto es un arma, resta 3 al resultado de las tiradas de lesión provocadas por ella. |\n| Equilibrio perfecto | Si el objeto tiene el rasgo Voluminosa, reduce su valor en 1. Además, si es un arma, obtiene Defensiva como rasgo de experto. |\n| Mente de metal especial | Integras una mente de metal ya existente en un nuevo objeto útil, como por ejemplo un arma. |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Fabricación de mentes de metal",
+  "cambios": [
+   [
+    "(como un reloj de Carga de munición mataneblinos.",
+    "hasta que vuelvas a recargar.",
+    "(como un reloj de bolsillo o una polvera), puedes hacerlo durante uno o más días de reposo (a discreción de la DJ). Al remodelar tu mente de metal en un objeto decorativo de tamaño similar, por lo general no necesitas conseguir metal adicional ni seguir las reglas de manufactura estándar. (Para integrar tu mente de metal en equipo útil, consulta “Mentes de metal especiales”, a continuación)."
+   ]
+  ]
+ },
+ {
+  "titulo": "Invención de armas de fuego",
+  "cambios": [
+   [
+    "1.\tElige un arma de fuego mundana",
+    "5.\tAplica las mejoras o inconvenientes.",
+    "◆ 1. Elige un arma de fuego mundana como modelo para tu invención.\n◆ 2. Elige el diseño del prototipo que quieres crear.\n◆ 3. Consigue los materiales necesarios.\n◆ 4. Lleva a cabo una prueba de Manufactura.\n◆ 5. Aplica las mejoras o inconvenientes."
+   ],
+   [
+    "\n\nbolsillo o una polvera), puedes hacerlo",
+    "consulta “Mentes de metal especiales”, a continuación).",
+    ""
+   ],
+   [
+    "Haz una prueba de Manufactura y sube la apuesta. Consulta la tabla Prueba de manufactura de armas de fuego",
+    "y ningún inconveniente.",
+    "#### Armas de fuego, paso 5",
+    "antes"
+   ],
+   [
+    "Resultado de la prueba Calidad del objeto",
+    "y ningún inconveniente.",
+    "| Resultado de la prueba | Calidad del objeto |\n|---|---|\n| 1 a 5 | **Fracaso absoluto.** Pese a todo el tiempo y esfuerzo invertidos, no logras producir un arma que funcione. Los metales raros o mentes de metal pueden rescatarse, pero pierdes el resto de materiales y debes empezar desde cero. |\n| 6 a 10 | **Creación chapucera.** La manufactura te lleva un día extra y el proceso resulta inusualmente complicado. Fabricas el arma con un componente de prototipo, sin mejoras y con un inconveniente. |\n| 11 a 20 | **Creación típica.** La manufactura sale tal como se esperaba. Fabricas el arma con un componente de prototipo, una mejora y un inconveniente. |\n| 21 a 25 | **Creación de calidad.** ¡Todo sale a pedir de boca! Fabricas el arma con un componente de prototipo, dos mejoras y un inconveniente. |\n| 26 o más | **¡Creación excepcional!** Haces un gran descubrimiento durante el proceso y fabricas el arma con un componente de prototipo, tres mejoras y ningún inconveniente. |"
+   ],
+   [
+    "Componente de prototipo Efecto",
+    "Recargar esta arma cuesta una 1 adicional.",
+    "| Componente de prototipo | Efecto | Requisito del arma base | Mejora | Inconveniente |\n|---|---|---|---|---|\n| Bayoneta | Añades una bayoneta al arma para usarla cuerpo a cuerpo. Emplea la misma habilidad que los ataques a distancia del arma, tiene los rasgos Discreta y Mano secundaria, e inflige 1d4 de daño por laceración. Al empuñar el arma de fuego, se considera que también empuñas la bayoneta. | — | El dado de daño de la bayoneta aumenta a 1d8. | Hacer un rasguño con la bayoneta cuesta 1 punto de concentración adicional. |\n| Calibración para munición especial | Al disparar proyectiles mataneblinos, el ataque no sufre una desventaja ni el arma obtiene el rasgo Frágil. Además, dispone de dos recámaras secundarias para 1 bala cada una, lo que aumenta su valor de Cargada en 2. Al recargar, eliges qué tipo de munición pones en cada recámara secundaria (debe ser distinta a la de la recámara principal). Al atacar, eliges desde qué recámara disparas y gastas esa munición. | — | El arma tiene tres recámaras secundarias y su valor de Cargada aumenta en 3 (en lugar de 2). | Al disparar proyectiles mataneblinos, existe riesgo de fallo de ignición, lo que aplica temporalmente al arma el rasgo Peligrosa. |\n| Cañón adicional | El arma obtiene un dado de daño adicional del mismo tipo y el rasgo Voluminosa con un valor determinado por el dado de daño: para d4, Voluminosa [4]; para d6, Voluminosa [5]; para d8, Voluminosa [6]; y para d10, Voluminosa [7]. | Usa Armamento pesado | Reduce el valor del rasgo Voluminosa en 1. | La DJ puede gastar C en un ataque con esta arma para dejarte Tumbado. |\n| Cierre de seguridad | Solo pueden usar el arma quienes conozcan el mecanismo de seguridad (como un botón oculto, una palanca secreta o un seguro alomántico que se activa con un Tirón o Empujón; tú eliges el mecanismo al fabricarla). Puedes usar Interactuar para activar o desactivar el cierre. | — | Puedes activar o desactivar el cierre como 0. | El cierre se encasquilla y requiere una prueba de Alomancia (si es alomántico) o Atletismo (si es mundano) CD 12 para accionarlo. |\n| Garfio de escalada | Mientras empuñas el arma, trepar no hace que estés Ralentizado y tienes éxito automático en las pruebas de Evitar peligro por caídas. | — | — | — |\n| Lanzagranadas | Además de sus otros rasgos, el arma obtiene Cargada [1], pero solo puede disparar granadas de conmoción o de fragmentación (consulta la tabla Armas: Armas de fuego). También obtiene el rasgo Explosiva con un radio igual al de la granada cargada. | Usa Armamento pesado | El arma adquiere Cargada [2] (en lugar de [1]). | El arma adquiere el rasgo Voluminosa [3]. |\n| Precisión mejorada | Atacar a un objetivo en el alcance largo del arma no impone desventaja. | Alcance largo de al menos 180 metros | Tu rango de Oportunidad se amplía en 1 para esta arma. | Solo puedes usar Prevenirse con esta arma en superficies perfectamente planas. |\n| Silenciador | Los demás solo perciben el disparo si su alcance de los sentidos incluye el espacio del atacante. | Usa Armamento ligero | Al disparar contra un personaje Sorprendido, obtienes una ventaja en el ataque. | Los alcances corto y largo del arma se reducen a la mitad. |\n| Tambor ampliado | Duplica el valor del rasgo Cargada del arma. | Usa Armamento pesado | Puedes gastar O en un ataque con esta arma para recargarla (no requiere acción). | Recargar esta arma cuesta una 1 adicional. |"
+   ]
+  ]
+ }
+]

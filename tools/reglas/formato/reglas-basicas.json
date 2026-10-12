@@ -1,0 +1,131 @@
+[
+ {
+  "titulo": "Los jugadores",
+  "cambios": [
+   [
+    "tiras los dados cuando te lo indica la directora La DJ narra los resultados. La DJ describe el desenlace de las acciones que habéis decidido llevar a cabo. A veces basta con describir una escena nueva pero, cuando lo que intentáis conlleva cierto riesgo o probabilidad de fracaso, os pedirá que tiréis los dados para decidir el resultado. Basándose en estas tiradas, narra las consecuencias, y el ciclo vuelve a empezar.",
+    "tiras los dados cuando te lo indica la directora de juego… (el texto del libro está cortado aquí)."
+   ]
+  ]
+ },
+ {
+  "titulo": "La directora de juego",
+  "cambios": [
+   [
+    "aplicar las reglas a medida que se desarrolla",
+    "aplicar las reglas a medida que se desarrolla la historia; por lo tanto, es importante que esté familiarizada con todas las reglas del juego, incluso las que solo atañen a los personajes jugadores.\n\nUna vez que un jugador decide qué intenta hacer su personaje, la DJ determina cómo se resuelven esas acciones. Los jugadores son libres de hacer sugerencias, pero la DJ tiene la última palabra sobre lo que ocurre en la historia. Su papel es infinitamente flexible, ya que debe improvisar en respuesta a las elecciones inesperadas de los jugadores y a los resultados de las tiradas de dados.\n\nEn este juego, la DJ no es una oponente de los demás jugadores, sino que ejerce de guía y colaboradora para crear una historia conjunta. Si bien es cierto que es responsable de determinar a qué peligros y enemigos se enfrentan los PJs, su objetivo final es facilitar una historia que todo el grupo encuentre atractiva y satisfactoria."
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo se juega",
+  "cambios": [
+   [
+    "por diferentes lugares para abordar todos los aspectos de la situación.",
+    "por diferentes lugares para abordar todos los aspectos de la situación. La DJ narra los resultados. La DJ describe el desenlace de las acciones que habéis decidido llevar a cabo. A veces basta con describir una escena nueva pero, cuando lo que intentáis conlleva cierto riesgo o probabilidad de fracaso, os pedirá que tiréis los dados para decidir el resultado. Basándose en estas tiradas, narra las consecuencias, y el ciclo vuelve a empezar."
+   ],
+   [
+    "\n\n2. Añade tu modificador de habilidad.",
+    "Música. Disponer de un portátil o un altavoz con música preparada para los momentos adecuados puede contribuir a la atmósfera en la mesa de juego.",
+    ""
+   ],
+   [
+    "#### Qué es un juego de rol\n",
+    ""
+   ],
+   [
+    "Un juego de rol es una experiencia",
+    "algunas tendrán más probabilidades de éxito que otras.",
+    "^",
+    "antes"
+   ]
+  ],
+  "definiciones": [
+   "La DJ describe la escena",
+   "Los jugadores deciden qué hacen",
+   "La DJ narra los resultados"
+  ]
+ },
+ {
+  "titulo": "Qué hace falta para jugar",
+  "cambios": [
+   [
+    "presenta una guía de seguridad para ayudar al grupo a gestionar estas cuestiones.",
+    "presenta una guía de seguridad para ayudar al grupo a gestionar estas cuestiones.\n\nAdemás, la DJ puede utilizar todos o algunos de los siguientes recursos para mejorar la experiencia de juego:\n\nGuía del mundo de Nacidos de la bruma. Aunque las novelas describen el cambiante mundo de Scadrial, no es necesario haberlas leído para jugar. La Guía del mundo de Nacidos de la bruma (consulta “El JdR del Cosmere”, anteriormente en esta introducción) recopila la información esencial del escenario en un solo volumen de referencia, con reglas y perfiles de los adversarios que pueblan el planeta. Aventuras. Quien ejerza de DJ puede usar la Guía del mundo de Nacidos de la bruma para diseñar sus propias aventuras. Si lo prefiere, también puede recurrir a las aventuras oficiales publicadas, que ofrecen todos los recursos necesarios para contar la historia. Mapas y miniaturas. Aunque las reglas del JdR del Cosmere fomentan el “teatro de la mente”, muchos grupos disfrutan de las ayudas visuales. Las miniaturas y los mapas con cuadrícula facilitan el seguimiento de la posición de los personajes en combate, tal y como se detalla en la sección “Variante: Uso de una cuadrícula” del capítulo 10. Música. Disponer de un portátil o un altavoz con música preparada para los momentos adecuados puede contribuir a la atmósfera en la mesa de juego."
+   ]
+  ],
+  "definiciones": [
+   "Hojas de personaje",
+   "Dados",
+   "Lápices y papel",
+   "Herramientas de seguridad",
+   "Guía del mundo de Nacidos de la bruma",
+   "Aventuras",
+   "Mapas y miniaturas",
+   "Música"
+  ]
+ },
+ {
+  "titulo": "Pruebas de habilidad",
+  "cambios": [
+   [
+    "“Cómo añadir dados adicionales”).",
+    "“Cómo añadir dados adicionales”).\n\n2. Añade tu modificador de habilidad. El número que aparece junto a cada una de las habilidades en tu hoja de personaje es el modificador de habilidad, que refleja lo bueno que eres en ella. Añádelo al resultado de tu tirada con el d20. 3. Aplica bonificaciones o penalizaciones. Ciertas pruebas obtienen bonificaciones o sufren penalizaciones en determinadas circunstancias. En tal caso, añade cualquiera de ellas al resultado de tu tirada con el d20. 4. Compara el total con la dificultad de la prueba. Tu objetivo es llegar a un número objetivo conocido como clase de dificultad (o CD). A tu tirada de d20, súmale los modificadores de habilidad y las bonificaciones y penalizaciones; si el resultado es igual o superior a la CD, la tarea tiene éxito. 5. Resuelve los resultados. Determina las consecuencias del éxito o el fracaso, así como cualquier efecto secundario desencadenado por tus capacidades o el dado de trama (descrito en la sección “Dado de trama”)."
+   ]
+  ],
+  "lista": false,
+  "definiciones": [
+   "1. Elige una habilidad y tira los dados",
+   "2. Añade tu modificador de habilidad",
+   "3. Aplica bonificaciones o penalizaciones",
+   "4. Compara el total con la dificultad de la prueba",
+   "5. Resuelve los resultados",
+   "Dado de trama",
+   "Dado de ventaja o desventaja",
+   "Dado de daño"
+  ]
+ },
+ {
+  "titulo": "Dado de trama",
+  "cambios": [
+   [
+    "el símbolo de Oportunidad ( ) y las dos restantes el de Complicación ( ).",
+    "el símbolo de Oportunidad y las dos restantes el de Complicación."
+   ],
+   [
+    "convertir los resultados con el diagrama siguiente.",
+    "convertir los resultados con la tabla siguiente."
+   ],
+   [
+    "que es el doble del resultado obtenido en un d6 normal.",
+    "que es el doble del resultado obtenido en un d6 normal.\n\n| d6 | Resultado en el dado de trama |\n|---|---|\n| 1 | Complicación (+2) |\n| 2 | Complicación (+4) |\n| 3 o 4 | Cara en blanco |\n| 5 o 6 | Oportunidad |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo subir la apuesta",
+  "cambios": [
+   [
+    "\n\nEn esta sección se detallan los escenarios donde suele ser apropiado (o no) emplear el dado de trama.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo gastar una Oportunidad",
+  "definiciones": [
+   "Ayudar a un aliado",
+   "Recobrar la compostura",
+   "Impacto crítico",
+   "Influir en la narrativa"
+  ]
+ },
+ {
+  "titulo": "Cómo enfrentarse a una Complicación",
+  "definiciones": [
+   "Perjudicar a un aliado",
+   "Distracción",
+   "Influir en la narrativa"
+  ]
+ }
+]

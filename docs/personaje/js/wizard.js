@@ -52,7 +52,7 @@
 
   const panelBendicion = (key, B) => {
     const origen = D().byId['origen-bendiciones-kandra'];
-    const m = origen && origen.body.match(new RegExp(B.n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\.\\s*([^\\n]*?)(?=\\s*Bendici[oó]n de|\\n|$)'));
+    const m = origen && origen.body.match(new RegExp(B.n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\.(?:\\*\\*)?\\s*([^\\n]*?)(?=\\s*(?:\\*\\*)?Bendici[oó]n de|\\n|$)'));
     return {
       etiqueta: 'Bendición', title: B.n, path: ['Ascendencia kandra'],
       facts: [['Efecto', descBendicion(key)], ['Rango', 'Una en la creación; una segunda al llegar al rango 3']],
@@ -71,7 +71,7 @@
     return {
       etiqueta: 'Camino', title: a.nombre, path: [a.tipo],
       facts: [['Tipo', a.tipo], ['Habilidad gratuita', gratis || '—'], ['Talento principal', tp ? limpioTitulo(tp.title) : '—']],
-      body: cuerpo.join('\n'), href: '../index.html#/caminos',
+      body: cuerpo.join('\n'), href: 'index.html#/caminos',
     };
   };
   const cortaCamino = slug => {
@@ -126,7 +126,7 @@
       h('ul', { class: 'lista talentos' }, Object.entries(PJ.ASCENDENCIAS).map(([k, a]) => {
         const on = c.ascendencia === k;
         return fila({
-          ref: 'origen-eleccion-de-ascendencia-' + ID_ASCENDENCIA[k], titulo: a.n, corta: CORTA_ASCENDENCIA[k], on,
+          ref: 'origen-ascendencia-' + ID_ASCENDENCIA[k], titulo: a.n, corta: CORTA_ASCENDENCIA[k], on,
           accion: on ? h('span', { class: 'chip small' }, 'elegida') : h('button', {
             type: 'button', class: 'btn small',
             onclick: () => cambiar(c => {
@@ -170,7 +170,7 @@
       h('ul', { class: 'lista talentos' }, PJ.CAMINOS_HEROICOS.map(carta)),
       h('h3', null, 'Caminos de nacido del metal'),
       h('ul', { class: 'lista talentos' }, PJ.CAMINOS_METAL.map(carta)),
-      h('p', null, h('a', { href: '../index.html#/caminos', target: '_blank', rel: 'noopener' }, 'Consultar los caminos en el buscador')));
+      h('p', null, h('a', { href: 'index.html#/caminos', target: '_blank', rel: 'noopener' }, 'Consultar los caminos en el buscador')));
   }
 
   function pasoAtributos({ c, d, modo, cambiar }) {
@@ -336,7 +336,7 @@
       propias.length ? h('ul', { class: 'lista talentos' }, propias) : h('p', { class: 'muted' }, 'Aún no has elegido ninguna.'),
       h('h3', null, 'Elegir pericias'),
       h('ul', { class: 'lista talentos' }, otra, culturas.map(filaCultura)),
-      h('p', null, h('a', { href: '../index.html#/c/pericia', target: '_blank', rel: 'noopener' }, 'Reglas de pericias en el buscador')));
+      h('p', null, h('a', { href: 'index.html#/c/pericia', target: '_blank', rel: 'noopener' }, 'Reglas de pericias en el buscador')));
   }
 
   function pasoPoderes({ c, d, cambiar }) {
@@ -613,7 +613,7 @@
         h('label', null, 'Rango', h('select', { onchange: e => { rango = +e.target.value; } }, [1, 2, 3, 4, 5].map(n => h('option', { value: n }, 'Rango ' + n)))),
         h('label', null, 'Recompensa', h('input', { type: 'text', placeholder: 'Ej.: Pericia en arma, patrocinador, clavo hemalúrgico…', oninput: e => { texto = e.target.value; } })),
         h('button', { type: 'button', class: 'btn', onclick: () => { if (texto.trim()) cambiar(c => { c.recompensas.push({ texto: texto.trim(), rango }); }); } }, 'Añadir')),
-      h('p', null, h('a', { href: '../index.html#/c/recompensa', target: '_blank', rel: 'noopener' }, 'Catálogo de recompensas en el buscador')));
+      h('p', null, h('a', { href: 'index.html#/c/recompensa', target: '_blank', rel: 'noopener' }, 'Catálogo de recompensas en el buscador')));
   }
 
   function pasoHistoria({ c, cambiar, silencioso }) {
@@ -666,7 +666,7 @@
     const seq = PJ.secuencia(modo, c);
     const paso = seq.includes(pasoPedido) ? pasoPedido : seq[0];
     const idx = seq.indexOf(paso);
-    const base = `#/p/${c.id}/${modo === 'nivel' ? 'nivel' : 'crear'}/`;
+    const base = `#/personajes/p/${c.id}/${modo === 'nivel' ? 'nivel' : 'crear'}/`;
     const guardar = () => { if (!PJ.store.guardar(c)) PJ.ui.aviso('No se pudo guardar en el navegador. Exporta el personaje a JSON.'); };
     const pintar = () => PJ.renderAsistente(raiz, c, modo, paso);
     const cambiar = fn => {
@@ -689,12 +689,12 @@
     const titulo = modo === 'nivel' ? `Subir a nivel ${c.nivel}` : 'Crear personaje';
     const prev = idx > 0 ? h('a', { class: 'btn', href: base + seq[idx - 1], rel: 'prev' }, '← Anterior') : h('span', { class: 'btn-hueco' });
     const sig = idx < seq.length - 1 ? h('a', { class: 'btn primario', href: base + seq[idx + 1], rel: 'next' }, 'Siguiente →') :
-      h('a', { class: 'btn primario', href: `#/p/${c.id}` }, 'Terminar y abrir la hoja');
+      h('a', { class: 'btn primario', href: `#/personajes/p/${c.id}` }, 'Terminar y abrir la hoja');
     raiz.innerHTML = '';
     raiz.appendChild(h('div', { class: 'asistente' },
       h('div', { class: 'cab-asistente' },
         h('h2', null, titulo),
-        h('a', { class: 'btn small', href: `#/p/${c.id}` }, modo === 'nivel' ? 'Volver a la hoja' : 'Guardar y salir')),
+        h('a', { class: 'btn small', href: `#/personajes/p/${c.id}` }, modo === 'nivel' ? 'Volver a la hoja' : 'Guardar y salir')),
       h('div', { class: 'barra-pasos' },
         prev,
         h('nav', { class: 'pasos', 'aria-label': 'Pasos' }, seq.map((k, i) => h('a', { href: base + k, class: 'paso-tab' + (k === paso ? ' on' : '') + (i < idx ? ' hecho' : ''), 'aria-current': k === paso ? 'step' : null }, `${i + 1}. ${PJ.PASOS[k].n}`))),

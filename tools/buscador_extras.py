@@ -26,6 +26,57 @@ def apply_ambientacion(entries):
         e["f"].pop("era", None)
 
 
+# Era a la que se limita cada contenido, según el Manual («Uso de las Eras», tablas «Caminos de nacidos del metal por era» y
+# «Metales de Scadrial»). El libro marca la exclusividad en subtítulos y cabeceras de arte que el título de la entrada no refleja.
+ERA_CAMINOS = {"Nacido de la Bruma": "Era 1", "Feruquimista": "Era 1", "Ferrin": "Era 2", "Nacidoble": "Era 2"}
+ERA_ESPECIALIDADES = {"Inventor": "Era 2", "Pistolero": "Era 2"}
+ERA_METALES = {"atium": "Era 1", "bendaleo": "Era 2", "cadmio": "Era 2", "cromo": "Era 2", "nicrosil": "Era 2"}
+RE_ARTE = re.compile(r"\b(?:alomancia|feruquimia) de (" + "|".join(ERA_METALES) + r")\b", re.I)
+
+
+def es_basura(e):
+    """Restos del parser: marcas de nota al pie (‡, †) y pies de página («Capítulo 6: Artes metálicas 193») convertidos en talento."""
+    t = e["title"].strip()
+    return e["cat"] == "talento" and (re.fullmatch(r"[†‡*]+", t) is not None or re.match(r"Capítulo \d+:", t) is not None)
+
+
+def era_de(e):
+    """Era exclusiva de la entrada, o None si no está limitada (se deja la que ya tiene)."""
+    f = e.get("f") or {}
+    ruta = "/".join(e.get("path") or [])
+    for nombre, era in ERA_CAMINOS.items():
+        if f.get("origen") == nombre or re.search(r"Capítulo 5[^/]*/" + re.escape(nombre) + r"$", ruta):
+            return era
+    if e["cat"] == "talento" and f.get("especialidad") in ERA_ESPECIALIDADES:
+        return ERA_ESPECIALIDADES[f["especialidad"]]
+    m = RE_ARTE.search(ruta) or RE_ARTE.search(f.get("origen") or "") or RE_ARTE.search(e["title"])
+    if m:
+        return ERA_METALES[m.group(1).lower()]
+    if e["id"] == "modulo-medallones-feruquimicos":
+        return "Era 2"
+    return None
+
+
+def aplicar_eras(entries):
+    """Fija la ambientación de lo que el libro limita a una era y propaga a lo derivado (modificadores y acciones de un talento)."""
+    por_id = {}
+    for e in entries:
+        era = era_de(e)
+        if era:
+            e["ambientacion"] = AMBIENTACION[era]
+            por_id[e["id"]] = e["ambientacion"]
+    for e in entries:
+        x = e.get("x") or {}
+        origen = x.get("fuente_id") or (e.get("f") or {}).get("talento")
+        if e["cat"] in ("modificador", "accion") and origen in por_id:
+            e["ambientacion"] = por_id[origen]
+        # subsecciones de «Metales de Scadrial»: notas de disponibilidad válidas para ambas eras
+        if e["cat"] == "arte" and (e.get("path") or [""])[-1] == "Metales de Scadrial":
+            e["ambientacion"] = AMBIENTACION["Ambas"]
+            if not e["title"].strip():
+                e["title"] = "Metales de la Era 2"
+
+
 # --------------------------------------------------------------------------- mini-reglas
 T = "Tabla"  # marcador para fórmulas dadas por tabla
 
@@ -105,7 +156,6 @@ def build_mini(entries):
 CREACION = """La creación de personajes consta de ocho pasos. Seguirlos en orden facilita los cálculos, pero puedes empezar por la historia del personaje y rellenar el resto después. Para inspirarte, los caminos heroicos incluyen ejemplos de arquetipos icónicos.
 
 ### Antes de empezar
-◆ [[personaje|Antes de crear personajes]]
 ◆ [[personaje|Pasos de la creación de personajes]]
 
 ### Paso 1 · Elige tus orígenes

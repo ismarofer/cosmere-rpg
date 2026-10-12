@@ -1,4 +1,4 @@
-﻿# Cosmere RPG · Consulta de reglas
+# Cosmere RPG · Consulta de reglas
 
 Página estática para consultar las reglas del Cosmere RPG **sin LLM**. Hoy contiene Mistborn (Manual, y en Modo DJ la Guía del Mundo y Legado); está pensada para sumar más ambientaciones (Stormlight…) etiquetándolas con su ámbito. Spec: [specs/buscador-reglas-mistborn.md](../specs/buscador-reglas-mistborn.md).
 
@@ -35,7 +35,7 @@ tools/test-buscador.mjs   ← consultas de regresión (node tools/test-buscador.
 
 ## Gestor de hojas de personaje (`personaje/`)
 
-Abre `docs/personaje/index.html` (o el botón «Personajes» del buscador). Funciona también con doble clic y reutiliza `data/base.js` y los estilos del buscador. Spec: [specs/gestor-hoja-personaje.md](../specs/gestor-hoja-personaje.md).
+Está integrado en el buscador: menú **Personaje → Gestión de Personajes** (`#/personajes`), bajo la misma cabecera. Funciona con doble clic y reutiliza `data/base.js` y los estilos del buscador (`personaje/index.html` solo redirige). Spec: [specs/gestor-hoja-personaje.md](../specs/gestor-hoja-personaje.md).
 
 - **Asistente de creación** paso a paso (datos, camino, atributos, habilidades, talentos, pericias, poderes, equipo, recompensas si se empieza por encima del nivel 1, historia, resumen) y **asistente de subida de nivel**.
 - **Hoja** con pestañas (Ficha, Acciones, Talentos, Poderes, Equipo, Historia, Ajustes). «Acciones» lista lo que el personaje puede hacer (generales, de talentos, de alomancia/feruquimia desbloqueadas, vial y hemalurgia). Las tarjetas de acciones y talentos muestran su descripción corta y, al pulsarlas, abren un panel lateral con la descripción completa (igual que las habilidades de la Ficha, salvo Alomancia y Feruquimia, que no tienen ficha propia en el libro). La Ficha reproduce la hoja en papel: tres columnas (física, cognitiva, espiritual) con atributos, escudo de defensa, recurso y habilidades, más derivados y pericias. Los módulos de brumoso, nacido de la bruma, feruquimista, ferrin, nacidoble y hemalurgia aparecen según el camino. Se imprime desde el navegador.
@@ -44,11 +44,11 @@ Abre `docs/personaje/index.html` (o el botón «Personajes» del buscador). Func
 
 ```
 personaje/
-  index.html, css/personaje.css
+  css/personaje.css
   js/rules.js     ← reglas escritas a mano (tablas de progreso, ascendencias, kits…)
   js/engine.js    ← motor puro: PJ.derivar(personaje) → valores, presupuestos y avisos
   js/store.js     ← persistencia e importación/exportación
-  js/ui-common.js, wizard.js, sheet.js, app.js
+  js/ui-common.js, wizard.js, sheet.js, app.js   ← app.js expone PJ.montar(el, ruta) para el router del buscador
 tools/test-personaje.mjs  ← pruebas del motor (node tools/test-personaje.mjs)
 ```
 
@@ -112,3 +112,18 @@ Cada efecto: `{ tipo, objetivo, operacion, valor?, por?, detalle?, condicion?, p
 - Modo DJ es ocultación, no seguridad: quien conozca la ruta de `data/dj.js` puede leerlo si la web está publicada.
 - `data/*.js` contiene el texto de los libros (con copyright): úsalo en local o en un entorno privado.
 
+## Proyector de la mesa (`proyector/`)
+
+Integrado en el buscador (Modo DJ): menú **Dirección → Proyector de la mesa** (`#/proyector`). La consola se monta una sola vez y se oculta al cambiar de sección, así la proyección y la música siguen. La ventana de salida (`proyector/salida.html`) es independiente. Spec: [specs/mapas-proyector.md](../specs/mapas-proyector.md).
+
+## Combates (`combates/`)
+
+Solo Modo DJ: menú **Dirección → Combates** (`#/combates`). Es una **lista de combates preparados**: cada encuentro guarda el grupo (número de jugadores y nivel medio, de donde sale el rango) y sus adversarios, y muestra el **nivel de amenaza** según el Manual (fácil / promedio / difícil). Dentro de un encuentro, una tabla permite editar la salud, concentración, Investidura y desvío de cada adversario, anotar estados y lesiones, y consultar sus acciones y rasgos (con botón para pagar costes). No simula turnos. Se guarda en el navegador (`cosmere-combates-v2`) y se exporta/importa en JSON. Spec: [specs/gestor-combates.md](../specs/gestor-combates.md).
+
+```
+combates/
+  css/combates.css
+  js/amenaza.js, adversarios.js, combate.js   ← motor puro (sin DOM)
+  js/vista.js                                  ← interfaz: CB.montar(el)
+tools/test-combates.mjs  ← node tools/test-combates.mjs
+```

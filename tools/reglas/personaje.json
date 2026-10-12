@@ -1,0 +1,374 @@
+{
+ "tema": "Personaje",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Atributos",
+   "reglas": [
+    {
+     "slug": "atributos",
+     "titulo": "Atributos",
+     "fuentes": [
+      "personaje-atributos",
+      {
+       "id": "personaje-acerca-de-tus-caracteristicas",
+       "encabezado": "Acerca de tus características"
+      }
+     ]
+    },
+    {
+     "slug": "fuerza",
+     "titulo": "Fuerza",
+     "fuentes": [
+      "personaje-fuerza",
+      {
+       "id": "calculo-capacidad-de-levantamiento-y-de-carga",
+       "encabezado": "Capacidad de levantamiento y de carga",
+       "copia": true
+      },
+      {
+       "id": "personaje-caracteristicas-afectadas-3",
+       "encabezado": "Características afectadas"
+      }
+     ]
+    },
+    {
+     "slug": "velocidad",
+     "titulo": "Velocidad",
+     "fuentes": [
+      {
+       "id": "calculo-valor-de-movimiento",
+       "encabezado": "Valor de movimiento",
+       "copia": true
+      },
+      "personaje-movimiento-fuera-del-combate",
+      {
+       "id": "personaje-caracteristicas-afectadas",
+       "encabezado": "Características afectadas"
+      }
+     ]
+    },
+    {
+     "slug": "intelecto",
+     "titulo": "Intelecto",
+     "fuentes": [
+      {
+       "id": "calculo-pericias-adicionales",
+       "encabezado": "Pericias adicionales",
+       "copia": true
+      },
+      {
+       "id": "personaje-caracteristicas-afectadas-2",
+       "encabezado": "Características afectadas"
+      }
+     ]
+    },
+    {
+     "slug": "voluntad",
+     "titulo": "Voluntad",
+     "fuentes": [
+      "personaje-voluntad",
+      {
+       "id": "calculo-dado-de-recuperacion",
+       "encabezado": "Dado de recuperación",
+       "copia": true
+      },
+      {
+       "id": "personaje-caracteristicas-afectadas-5",
+       "encabezado": "Características afectadas"
+      }
+     ]
+    },
+    {
+     "slug": "discernimiento",
+     "titulo": "Discernimiento",
+     "fuentes": [
+      {
+       "id": "calculo-alcance-de-los-sentidos",
+       "encabezado": "Sentidos",
+       "copia": true
+      },
+      {
+       "id": "personaje-caracteristicas-afectadas-4",
+       "encabezado": "Características afectadas"
+      }
+     ]
+    },
+    {
+     "slug": "presencia",
+     "titulo": "Presencia",
+     "fuentes": [
+      {
+       "id": "personaje-caracteristicas-afectadas-6",
+       "encabezado": "Características afectadas"
+      },
+      "personaje-desvio"
+     ]
+    },
+    {
+     "slug": "establecer-conexiones",
+     "titulo": "Establecer conexiones",
+     "fuentes": [
+      "personaje-establecer-conexiones",
+      "personaje-establecer-conexiones-2"
+     ]
+    },
+    {
+     "slug": "levantar-y-desplazar-personajes",
+     "titulo": "Levantar y desplazar personajes",
+     "fuentes": [
+      "personaje-levantar-y-desplazar-personajes"
+     ]
+    },
+    {
+     "slug": "fisico-cognitivo-y-espiritual",
+     "titulo": "Físico, Cognitivo y Espiritual",
+     "fuentes": [
+      "origen-fisico-cognitivo-y-espiritual"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Defensas, salud y recursos",
+   "reglas": [
+    {
+     "slug": "defensas",
+     "titulo": "Defensas",
+     "fuentes": [
+      {
+       "id": "calculo-defensas-fisica-cognitiva-y-espiritual",
+       "copia": true
+      },
+      "personaje-defensas",
+      {
+       "id": "calculo-valor-de-desvio",
+       "encabezado": "Desvío",
+       "copia": true
+      }
+     ]
+    },
+    {
+     "slug": "salud-concentracion-e-investidura",
+     "titulo": "Salud, concentración e Investidura",
+     "fuentes": [
+      "personaje-salud-concentracion-e-investidura",
+      {
+       "id": "calculo-salud-maxima",
+       "encabezado": "Salud",
+       "copia": true
+      },
+      {
+       "id": "calculo-concentracion-maxima",
+       "encabezado": "Concentración",
+       "copia": true
+      },
+      {
+       "id": "calculo-investidura-maxima",
+       "encabezado": "Investidura",
+       "copia": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Sentidos",
+   "reglas": [
+    {
+     "slug": "sentidos",
+     "titulo": "Sentidos",
+     "fuentes": [
+      "personaje-sentidos",
+      {
+       "id": "personaje-sobreestimulacion",
+       "encabezado": "Sobreestimulación"
+      },
+      {
+       "id": "personaje-sentidos-y-diversidad-funcional",
+       "encabezado": "Sentidos y diversidad funcional"
+      },
+      {
+       "id": "personaje-apuntar-sin-los-sentidos",
+       "encabezado": "Apuntar sin los sentidos"
+      },
+      {
+       "id": "personaje-como-sentir-personajes-y-objetos-ocultos",
+       "encabezado": "Cómo sentir personajes y objetos ocultos"
+      }
+     ]
+    },
+    {
+     "slug": "sentidos-sobrenaturales",
+     "titulo": "Sentidos sobrenaturales",
+     "fuentes": [
+      "personaje-sentidos-sobrenaturales",
+      {
+       "id": "personaje-como-usar-los-sentidos-sobrenaturales",
+       "encabezado": "Cómo usar los sentidos sobrenaturales"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Pericias",
+   "reglas": [
+    {
+     "slug": "pericias",
+     "titulo": "Pericias",
+     "fuentes": [
+      "personaje-pericias",
+      {
+       "id": "personaje-como-usar-las-pericias",
+       "encabezado": "Cómo usar las pericias"
+      },
+      {
+       "id": "personaje-categorias-de-pericia",
+       "encabezado": "Categorías de pericia"
+      },
+      {
+       "id": "personaje-idiomas-conocidos",
+       "encabezado": "Idiomas conocidos"
+      },
+      {
+       "id": "personaje-conocimientos-supuestos",
+       "encabezado": "Conocimientos supuestos"
+      },
+      {
+       "id": "personaje-pensamiento-avanzado",
+       "encabezado": "Pensamiento avanzado"
+      },
+      {
+       "id": "pericia-usos-creativos-de-las-pericias",
+       "encabezado": "Usos creativos de las pericias"
+      }
+     ]
+    },
+    {
+     "slug": "eleccion-de-pericias",
+     "titulo": "Elección de pericias",
+     "fuentes": [
+      "personaje-eleccion-de-pericias"
+     ]
+    },
+    {
+     "slug": "pericias-culturales",
+     "titulo": "Pericias culturales",
+     "fuentes": [
+      "personaje-pericias-culturales"
+     ]
+    },
+    {
+     "slug": "pericias-en-arma",
+     "titulo": "Pericias en arma",
+     "fuentes": [
+      "personaje-pericias-en-arma"
+     ]
+    },
+    {
+     "slug": "pericias-en-armadura",
+     "titulo": "Pericias en armadura",
+     "fuentes": [
+      "personaje-pericias-en-armadura"
+     ]
+    },
+    {
+     "slug": "pericias-de-utilidad",
+     "titulo": "Pericias de utilidad",
+     "fuentes": [
+      "pericia-pericias-de-utilidad"
+     ]
+    },
+    {
+     "slug": "pericias-especializadas",
+     "titulo": "Pericias especializadas",
+     "fuentes": [
+      "pericia-pericias-especializadas",
+      {
+       "id": "objeto-pericias-especializadas",
+       "encabezado": "Pericias especializadas con armas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Creación y progreso",
+   "reglas": [
+    {
+     "slug": "pasos-de-la-creacion-de-personajes",
+     "titulo": "Pasos de la creación de personajes",
+     "fuentes": [
+      "personaje-pasos-de-la-creacion-de-personajes",
+      {
+       "id": "personaje-antes-de-crear-personajes",
+       "encabezado": "Antes de crear personajes"
+      }
+     ]
+    },
+    {
+     "slug": "aventuras-y-progreso",
+     "titulo": "Aventuras y progreso",
+     "fuentes": [
+      "personaje-aventuras-y-progreso"
+     ]
+    },
+    {
+     "slug": "progreso-de-los-personajes",
+     "titulo": "Progreso de los personajes",
+     "fuentes": [
+      "personaje-progreso-de-los-personajes",
+      {
+       "id": "personaje-niveles-y-metas",
+       "encabezado": "Niveles y metas"
+      },
+      {
+       "id": "calculo-progreso-por-nivel",
+       "encabezado": "Cómo subir de nivel",
+       "copia": true
+      },
+      {
+       "id": "calculo-aumento-de-atributos-por-nivel",
+       "encabezado": "Paso 2: Incrementas un atributo",
+       "copia": true
+      },
+      {
+       "id": "calculo-grados-en-habilidad-por-nivel",
+       "encabezado": "Paso 4: Obtienes grados en habilidad",
+       "copia": true
+      },
+      {
+       "id": "calculo-talentos-por-nivel",
+       "encabezado": "Paso 5: Obtienes un talento",
+       "copia": true
+      }
+     ]
+    },
+    {
+     "slug": "rangos-de-juego",
+     "titulo": "Rangos de juego",
+     "fuentes": [
+      "personaje-rangos-de-juego"
+     ]
+    },
+    {
+     "slug": "prerrequisitos",
+     "titulo": "Prerrequisitos",
+     "fuentes": [
+      "personaje-prerrequisitos"
+     ]
+    },
+    {
+     "slug": "como-elegir-recompensas",
+     "titulo": "Cómo elegir recompensas",
+     "fuentes": [
+      "personaje-como-elegir-recompensas"
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "personaje-como-empezar-en-niveles-superiores"
+ ]
+}

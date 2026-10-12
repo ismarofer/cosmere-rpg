@@ -1,0 +1,19 @@
+[
+ {
+  "titulo": "Ascendencia humana",
+  "definiciones": ["Talentos adicionales de ascendencia (niveles 1, 6, 11, 16 y 21)"]
+ },
+ {
+  "titulo": "Ascendencia kandra",
+  "definiciones": ["Atributos kandra (nivel 1)", "Árbol de talentos único (nivel 1)", "Forma natural (nivel 1)", "Talentos adicionales de ascendencia (niveles 6, 11, 16 y 21)"]
+ },
+ {
+  "titulo": "Ascendencia de sangre koloss",
+  "definiciones": ["Atributos koloss (nivel 1)", "Resistencia Koloss (nivel 1)", "Árbol de talentos único (nivel 1)", "Talentos de ascendencia adicionales (niveles 6, 11, 16 y 21)"]
+ },
+ {
+  "titulo": "Bendiciones kandra",
+  "cambios": [["Tu Voluntad aumenta en 2.", "Tu Voluntad aumenta en 2."]],
+  "definiciones": ["Bendición de la Consciencia", "Bendición de la Potencia", "Bendición de la Presencia", "Bendición de la Estabilidad", "Bendición de la Fortaleza", "Obtener una segunda Bendición", "Obtener otros clavos hemalúrgicos"]
+ }
+]

@@ -1,0 +1,165 @@
+{
+ "tema": "Reglas básicas",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Cómo se juega",
+   "reglas": [
+    {
+     "slug": "los-jugadores",
+     "titulo": "Los jugadores",
+     "fuentes": [
+      "personaje-los-jugadores"
+     ]
+    },
+    {
+     "slug": "la-directora-de-juego",
+     "titulo": "La directora de juego",
+     "fuentes": [
+      "personaje-la-directora-de-juego",
+      {
+       "id": "personaje-dj-jugadores-y-vosotros",
+       "encabezado": "DJ, jugadores y vosotros"
+      }
+     ]
+    },
+    {
+     "slug": "como-se-juega",
+     "titulo": "Cómo se juega",
+     "fuentes": [
+      "personaje-como-se-juega",
+      {
+       "id": "personaje-que-es-un-juego-de-rol",
+       "encabezado": "Qué es un juego de rol"
+      }
+     ]
+    },
+    {
+     "slug": "que-hace-falta-para-jugar",
+     "titulo": "Qué hace falta para jugar",
+     "fuentes": [
+      "personaje-que-hace-falta-para-jugar"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Dados y dado de trama",
+   "reglas": [
+    {
+     "slug": "pruebas-de-habilidad",
+     "titulo": "Pruebas de habilidad",
+     "fuentes": [
+      "personaje-pruebas-de-habilidad",
+      {
+       "id": "personaje-como-usar-los-dados-del-jdr-del-cosmere",
+       "encabezado": "Cómo usar los dados del JdR del Cosmere"
+      },
+      {
+       "id": "personaje-como-anadir-dados-adicionales",
+       "encabezado": "Cómo añadir dados adicionales"
+      },
+      {
+       "id": "personaje-20-y-1-naturales",
+       "encabezado": "20 y 1 naturales"
+      }
+     ]
+    },
+    {
+     "slug": "dado-de-trama",
+     "titulo": "Dado de trama",
+     "fuentes": [
+      "personaje-dado-de-trama",
+      {
+       "id": "personaje-como-subir-la-apuesta-tu-mismo",
+       "encabezado": "Cómo subir la apuesta tú mismo"
+      },
+      {
+       "id": "personaje-como-resolver-una-tirada-del-dado-de-trama",
+       "encabezado": "Cómo resolver una tirada del dado de trama"
+      }
+     ]
+    },
+    {
+     "slug": "como-subir-la-apuesta",
+     "titulo": "Cómo subir la apuesta",
+     "fuentes": [
+      "personaje-como-subir-la-apuesta",
+      {
+       "id": "direccion-subir-la-apuesta",
+       "encabezado": "Subir la apuesta"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Oportunidades y Complicaciones",
+   "reglas": [
+    {
+     "slug": "como-gastar-una-oportunidad",
+     "titulo": "Cómo gastar una Oportunidad",
+     "fuentes": [
+      "personaje-como-gastar-una-oportunidad",
+      {
+       "id": "personaje-oportunidades-y-complicaciones-2",
+       "encabezado": "Oportunidades y Complicaciones en las pruebas de habilidad"
+      },
+      {
+       "id": "personaje-oportunidades-y-complicaciones",
+       "encabezado": "Oportunidades y Complicaciones"
+      },
+      {
+       "id": "personaje-como-elegir-oportunidades-y-complicaciones",
+       "encabezado": "Cómo elegir Oportunidades y Complicaciones"
+      }
+     ]
+    },
+    {
+     "slug": "como-enfrentarse-a-una-complicacion",
+     "titulo": "Cómo enfrentarse a una Complicación",
+     "fuentes": [
+      "personaje-como-enfrentarse-a-una-complicacion",
+      {
+       "id": "personaje-bonificacion-de-complicacion",
+       "encabezado": "Bonificación de Complicación"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Convenciones",
+   "reglas": [
+    {
+     "slug": "lo-especifico-supera-a-lo-generico",
+     "titulo": "Lo específico supera a lo genérico",
+     "fuentes": [
+      "personaje-lo-especifico-supera-a-lo-generico"
+     ]
+    },
+    {
+     "slug": "acumulacion-de-efectos-similares",
+     "titulo": "Acumulación de efectos similares",
+     "fuentes": [
+      "personaje-acumulacion-de-efectos-similares"
+     ]
+    },
+    {
+     "slug": "minimo-de-cero",
+     "titulo": "Mínimo de cero",
+     "fuentes": [
+      "personaje-minimo-de-cero"
+     ]
+    },
+    {
+     "slug": "redondear-hacia-abajo",
+     "titulo": "Redondear hacia abajo",
+     "fuentes": [
+      "personaje-redondear-hacia-abajo"
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": []
+}

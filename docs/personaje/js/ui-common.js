@@ -22,7 +22,7 @@
     return e;
   }
 
-  const hrefEntrada = e => '../index.html#/' + (e.cat === 'talento' ? 'talento/' : 'p/') + e.id;
+  const hrefEntrada = e => 'index.html#/' + (e.cat === 'talento' ? 'talento/' : 'p/') + e.id;
   const enlaceEntrada = (id, texto) => {
     const e = PJ.datos().byId[id];
     return e ? h('a', { href: hrefEntrada(e), target: '_blank', rel: 'noopener', class: 'enl' }, texto || e.title) : h('span', null, texto || id);
@@ -103,7 +103,7 @@
     const etiqueta = esc(p[2] || p[1] || '');
     const e = p[0].startsWith('#') ? null : buscarEntrada(p[0], p[1] || '');
     return e ? enlacePanel(e, 'pj-ent', etiqueta) : etiqueta;
-  });
+  }).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   const md = txt => {
     let html = '', lista = false;
     const cerrar = () => { if (lista) { html += '</ul>'; lista = false; } };
@@ -145,8 +145,8 @@
   };
   function asegurarPanel() {
     if (panel) return;
-    cuerpoPanel = h('aside', { class: 'panel', id: 'dinner', role: 'dialog', 'aria-modal': 'true' });
-    panel = h('div', { id: 'drawer', class: 'drawer noprint', hidden: true }, cuerpoPanel);
+    cuerpoPanel = h('aside', { class: 'panel', id: 'pjdinner', role: 'dialog', 'aria-modal': 'true' });
+    panel = h('div', { id: 'pjdrawer', class: 'drawer noprint', hidden: true }, cuerpoPanel);
     document.body.appendChild(panel);
     cuerpoPanel.addEventListener('click', ev => {
       const a = ev.target.closest('a.pj-ent');

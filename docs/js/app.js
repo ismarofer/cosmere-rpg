@@ -1,4 +1,4 @@
-﻿/* Cosmere RPG · Consulta de reglas — aplicación (hash router, sin dependencias). */
+/* Cosmere RPG · Consulta de reglas — aplicación (hash router, sin dependencias). */
 (function () {
   'use strict';
   const S = window.Search, C = window.CURATED, U = window.UI;
@@ -104,7 +104,7 @@
   // ------------------------------------------------------------------ valores de columnas
   function ext(e) {
     if (e._ext) return e._ext;
-    const t = e.body.replace(/\s+/g, ' ').replace(/#+\s*/g, '').replace(/\[\[(?:[^\]|]*\|)*([^\]|]*)\]\]/g, '$1').trim();
+    const t = e.body.replace(/\s+/g, ' ').replace(/#+\s*/g, '').replace(/\*\*/g, '').replace(/\[\[(?:[^\]|]*\|)*([^\]|]*)\]\]/g, '$1').trim();
     e._ext = t.length > 150 ? t.slice(0, 147).replace(/\s\S*$/, '') + '…' : t;
     return e._ext;
   }
@@ -184,13 +184,25 @@
     return e ? `<a href="${esc(hrefOf(e))}">${esc(label)}</a>` : esc(label);
   }
   function inline(text) {
-    return esc(text).replace(/\[\[([^\]]+)\]\]/g, (_, t) => linkToken(t.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"')));
+    return esc(text).replace(/\[\[([^\]]+)\]\]/g, (_, t) => linkToken(t.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"')))
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+  // Tabla de texto del libro en formato «| a | b |» (la segunda fila, |---|---|, separa la cabecera)
+  function tableHtml(rows) {
+    const cells = (r) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => inline(c.trim()));
+    const head = cells(rows[0]);
+    const body = rows.slice(/^\s*\|?\s*:?-{2,}/.test(rows[1] || '') ? 2 : 1).map(cells);
+    return '<div class="rtable"><table><thead><tr>' + head.map((c) => `<th>${c}</th>`).join('') + '</tr></thead><tbody>' +
+      body.map((r) => '<tr>' + r.map((c) => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody></table></div>';
   }
   function md(text) {
-    let html = '', list = false;
+    let html = '', list = false, tbl = [];
     const closeList = () => { if (list) { html += '</ul>'; list = false; } };
+    const closeTbl = () => { if (tbl.length) { html += tableHtml(tbl); tbl = []; } };
     for (const raw of text.split('\n')) {
       const l = raw.trim();
+      if (l[0] === '|') { closeList(); tbl.push(l); continue; }
+      closeTbl();
       if (!l) { closeList(); continue; }
       const h = l.match(/^#{1,6}\s+(.*)$/);
       if (h) { closeList(); html += '<h4>' + esc(h[1]) + '</h4>'; continue; }
@@ -198,7 +210,7 @@
       closeList();
       html += '<p>' + inline(l) + '</p>';
     }
-    closeList();
+    closeList(); closeTbl();
     return html;
   }
 
@@ -230,6 +242,9 @@
       treeBySlug.set(t.slug, t);
     }
   }
+  // Árboles que se muestran con la ambientación elegida: los que tienen algún talento (o, sin talentos, alguna entrada de su arte) visible.
+  const treeShown = (t) => !ambientacion || (t.talents.length ? t.talents.some(visible) : ALL.some((e) => e.path[1] === t.name && visible(e)));
+  const shownTrees = () => TREES.filter(treeShown);
   const treeOf = (e) => treeBySlug.get(slugOf(e.f.origen));
   const specsOfTree = (t) => {
     const s = [...new Set(t.talents.filter(visible).flatMap((e) => (e.f.especialidades && e.f.especialidades.length ? e.f.especialidades : (e.f.especialidad ? [e.f.especialidad] : [])).filter((x) => x !== 'Principal')))];
@@ -302,10 +317,16 @@
       const e = ALL.find((x) => x.cat === p.cat);
       if (e) items.push({ href: pageHref(e), label: p.label, ic: p.ic, sub: p.desc });
     }
-    for (const c of CATS.filter((x) => x.group === g.id)) {
+    for (const c of CATS.filter((x) => x.group === g.id).sort((x, y) => (x.ord || 99) - (y.ord || 99))) {
       items.push({ href: '#/c/' + c.id, label: c.label, ic: c.ic, count: ALL.filter((e) => e.cat === c.id && visible(e)).length });
     }
-    return items;
+    return (g.lead || []).map((t) => ({ href: t.href, label: t.label, ic: t.ic, sub: t.sub })).concat(items);
+  }
+  function toolLink(t, pill) {
+    const body = pill ? `${ic(t.ic, 'sm')}${esc(t.label)}${t.soon ? '<b>próximamente</b>' : ''}`
+      : `${ic(t.ic)}<span>${esc(t.label)}${t.sub ? `<small>${esc(t.sub)}</small>` : ''}</span>${t.soon ? '<b>próximamente</b>' : ''}`;
+    if (t.soon) return `<span class="${pill ? 'pill' : 'soon'} off" aria-disabled="true">${body}</span>`;
+    return `<a${pill ? ' class="pill"' : ''} href="${t.href}">${body}</a>`;
   }
   function buildMenu() {
     const groups = C.menu.filter((g) => !g.dj || DJ);
@@ -314,13 +335,14 @@
       if (g.trees) {
         const item = (href, label, kids, icon) => `<div class="ci${kids ? ' has' : ''}"><a href="${href}">${icon || ''}<span>${esc(label)}</span>${kids ? ic('right', 'sm') : ''}</a>${kids ? `<div class="cfly${kids.leaf ? ' leaf' : ''}">${kids.html}</div>` : ''}</div>`;
         const treeItem = (t) => { const sp = specsOfTree(t); return item('#/arbol/' + t.slug, treeNice(t), sp.length ? { html: sp.map((x) => item('#/arbol/' + t.slug + '/' + slugOf(x), x)).join('') } : null); };
-        const secHtml = (s) => TREES.filter((t) => t.section === s).map(treeItem).join('') + childSecs(s).map((c) => item('#/caminos/' + c.id, c.short, { html: TREES.filter((t) => t.section === c).map(treeItem).join('') }, ic(c.ic, 'sm'))).join('');
+        const secHtml = (s) => shownTrees().filter((t) => t.section === s).map(treeItem).join('') + childSecs(s).map((c) => item('#/caminos/' + c.id, c.short, { html: shownTrees().filter((t) => t.section === c).map(treeItem).join('') }, ic(c.ic, 'sm'))).join('');
         panel = '<div class="cmenu">' + topSecs().map((s) => {
           const h = secHtml(s);
-          return h ? item('#/caminos/' + s.id, s.short, { html: h, leaf: !childSecs(s).length && !TREES.some((t) => t.section === s && specsOfTree(t).length) }, ic(s.ic, 'sm')) : '';
+          return h ? item('#/caminos/' + s.id, s.short, { html: h, leaf: !childSecs(s).length && !shownTrees().some((t) => t.section === s && specsOfTree(t).length) }, ic(s.ic, 'sm')) : '';
         }).join('') + '<hr>' + item('#/caminos', 'Todos los árboles', null, ic('tree', 'sm')) +
           menuItems(g).map((i) => item(i.href, i.label, null, ic(i.ic, 'sm'))).join('') + '</div>';      } else {
-        panel = '<div class="drop">' + menuItems(g).map((i) => `<a href="${i.href}">${ic(i.ic)}<span>${esc(i.label)}${i.sub ? `<small>${esc(i.sub)}</small>` : ''}</span>${i.count != null ? `<b>${i.count}</b>` : ''}</a>`).join('') + '</div>';
+        panel = '<div class="drop">' + menuItems(g).map((i) => `<a href="${i.href}">${ic(i.ic)}<span>${esc(i.label)}${i.sub ? `<small>${esc(i.sub)}</small>` : ''}</span>${i.count != null ? `<b>${i.count}</b>` : ''}</a>`).join('') +
+          (g.tools ? '<hr>' + g.tools.map((t) => toolLink(t)).join('') : '') + '</div>';
       }
       return `<div class="mgroup"><button type="button" class="mbtn" data-menu="${g.id}" aria-expanded="false">${ic(g.ic)}<span>${esc(g.label)}</span>${ic('down', 'sm chev')}</button><div class="mpanel" hidden>${panel}</div></div>`;
     }).join('');
@@ -333,7 +355,7 @@
       let body;
       if (g.trees) {
         body = C.treeSections.map((s) => {
-          const ts = TREES.filter((t) => t.section === s);
+          const ts = shownTrees().filter((t) => t.section === s);
           if (!ts.length) return '';
           const small = s.id === 'heroicos' || s.id === 'nacidos-del-metal';
           return `<div class="sub"><a class="subh" href="#/caminos/${s.id}">${ic(s.ic, 'sm')}${esc(s.short)}</a>` +
@@ -341,6 +363,7 @@
         }).join('') + `<div class="sub"><a class="subh" href="#/c/talento">${ic('star', 'sm')}Todos los talentos</a></div>`;
       } else {
         body = menuItems(g).map((i) => `<a class="pill" href="${i.href}">${ic(i.ic, 'sm')}${esc(i.label)}${i.count != null ? `<b>${i.count}</b>` : ''}</a>`).join('');
+        if (g.tools) body += '<hr class="pillsep">' + g.tools.map((t) => toolLink(t, true)).join('');
       }
       return `<section class="mcard"><h2>${ic(g.ic)}${esc(g.label)}</h2><p class="muted">${esc(g.desc)}</p><div class="pills">${body}</div></section>`;
     }).join('');
@@ -350,7 +373,7 @@
         <p class="muted">Consulta de reglas: busca o explora por categorías</p>
         <div class="escpick" role="group" aria-label="Ambientación"><b>Ambientación:</b>${C.ambientaciones.map((a) => `<button type="button" class="sp${a.id === ambientacion ? ' on' : ''}" data-esc="${esc(a.id)}">${a.ic ? ic(a.ic, 'sm') : ''}${esc(a.label)}</button>`).join('')}</div>
         <div id="heroslot" class="heroslot"></div>
-        <p class="muted"><a class="btn" href="personaje/index.html">Crear o abrir una hoja de personaje</a>${DJ ? ' <a class="btn" href="proyector/index.html">Proyector de la mesa</a>' : ''}</p>
+        <p class="muted"><a class="btn" href="#/personajes">Crear o abrir una hoja de personaje</a></p>
         <p class="hint">Prueba: <a href="#/buscar?q=ballesta">ballesta</a> · <a href="#/buscar?q=curar">curar</a> · <a href="#/buscar?q=nivel de amenaza">nivel de amenaza</a> · <a href="#/buscar?q=ayudar">ayudar</a> · <code>talento: medicina</code> · <code>"frase exacta"</code> · <code>-excluir</code></p>
       </section>
       <section class="menugrid">${groups}</section>`;
@@ -411,16 +434,27 @@
     return arr;
   }
 
+  // Ambientación como filtro de lista: sin «Mistborn» a secas; elegir una era incluye además lo común a ambas (misma regla que la portada).
+  const ambCubre = (v, amb) => amb === v || (amb === 'Mistborn' && v.startsWith('Mistborn '));
+  function ambFacet(facet, rows) {
+    // Las dos eras se ofrecen siempre (aunque todo el catálogo sea común a ambas); el resto, solo si hay contenido.
+    const vals = ['Mistborn Era 1', 'Mistborn Era 2'];
+    facet.forEach(([v]) => { if (v !== 'Mistborn' && !vals.includes(v)) vals.push(v); });
+    return vals.map((v) => [v, rows.filter((e) => ambCubre(v, e.ambientacion)).length]);
+  }
+
   function viewCatalog(el, catId, params) {
     const cat = catById[catId];
     if (!cat) { el.innerHTML = '<p class="empty">Categoría no encontrada.</p>'; return; }
     const host = el; el = document.createElement('div'); host.innerHTML = ''; host.appendChild(el);
     const rowsAll = ALL.filter((e) => e.cat === cat.id && visible(e));
-    const fcols = cat.cols.filter((c) => c.f);
+    // la ambientación siempre es el primer filtro (decisions/interfaz)
+    const fcols = cat.cols.filter((c) => c.f).sort((a, b) => (b.k === 'ambientacion') - (a.k === 'ambientacion'));
     const facets = {};
     fcols.forEach((c) => {
       if (c.f === 'chips' || c.f === 'select') {
         facets[c.k] = facetValues(c, rowsAll);
+        if (c.k === 'ambientacion') facets[c.k] = ambFacet(facets[c.k], rowsAll);
         c._eff = (c.f === 'chips' && facets[c.k].length > 16) ? 'select' : c.f;
       }
     });
@@ -435,6 +469,7 @@
     const head = (c) => `<h4>${c.ic ? ic(c.ic, 'sm') : ''}${esc(c.fl || c.l)}</h4>`;
     const panel = fcols.map((c) => {
       const eff = c._eff || c.f;
+      if ((eff === 'chips' || eff === 'select') && !facets[c.k].length) return '';
       if (eff === 'chips') {
         return `<div class="fgroup">${head(c)}<div class="chips">` + facets[c.k].map(([v, n]) =>
           `<button type="button" class="chip tog" data-k="${c.k}" data-v="${esc(v)}">${vicon(cat.id, c.k, v)}${C.actCols.includes(c.k) ? U.act(v) : ''}${esc(v)} <b>${n}</b></button>`).join('') + '</div></div>';
@@ -475,7 +510,7 @@
     function match(e) {
       for (const c of cat.cols) {
         const fs = F['f_' + c.k];
-        if (fs && !valuesOf(c, e).some((v) => fs.has(v))) return false;
+        if (fs && !(c.k === 'ambientacion' ? [...fs].some((v) => ambCubre(v, e.ambientacion)) : valuesOf(c, e).some((v) => fs.has(v)))) return false;
         const rg = F['r_' + c.k];
         if (rg) {
           const v = getVal(e, c.fk || c.sk || c.k);
@@ -605,7 +640,7 @@
       `<h1>${ic('tree', 'lg')}${secId ? esc(cur.label) : 'Caminos y árboles de talentos'}</h1>` +
       (secId ? '' : '<p class="muted">Cada árbol muestra todos sus talentos y cómo se desbloquean unos a otros.</p>') +
       (cur ? secs : secs.flatMap((s) => [s, ...childSecs(s)])).map((s) => {
-        const ts = TREES.filter((t) => t.section === s);
+        const ts = shownTrees().filter((t) => t.section === s);
         if (!ts.length) return '';
         const humana = byId.get('origen-ascendencia-humana');
         const extra = s.id === 'ascendencia'
@@ -667,7 +702,7 @@
       : lay.specs.length ? `<b>Especialidades:</b> <span class="sp main"><i class="sw"></i>Talento principal</span>${lay.specs.map((s, i) => `<span class="spw"><button type="button" class="sp b${i % 6}${only === s ? ' on' : ''}" data-spec="${esc(s)}" title="${only === s ? 'Quitar filtro' : 'Ver solo ' + esc(s)}"><i class="sw"></i>${esc(s)} <small>${tree.talents.filter((t) => (t.f.especialidades || [t.f.especialidad]).includes(s) && visible(t)).length}</small></button><a class="spgo" href="#/arbol/${tree.slug}/${slugOf(s)}" title="Abrir página de ${esc(s)}">↗</a></span>`).join('')}${only ? '<button type="button" class="sp clear" data-spec="">Ver todas</button>' : ''}` : '';
     const kw = tree.section.id === 'ascendencia' ? nc(tree.name).replace(/^ascendencia( de)? /, '') : null;
     const texts = kw ? ALL.filter((e) => e.cat === 'origen' && e.path[1] === 'Ascendencia' && nc(e.title).includes(kw) && visible(e))
-      : ALL.filter((e) => (e.cat === 'camino' || e.cat === 'arte' || e.cat === 'origen') && e.path[1] === tree.name && visible(e));
+      : ALL.filter((e) => (((e.cat === 'camino' || e.cat === 'arte' || e.cat === 'origen') && e.path[1] === tree.name) || (e.cat === 'regla' && e.f.arbol === tree.name)) && visible(e));
     const arb = arbolBySlug.get(slug);
     const agg = new Map();
     tree.talents.filter(visible).forEach((t) => (t.x.efectos || []).forEach((x) => {
@@ -902,6 +937,11 @@
     const path = i < 0 ? raw : raw.slice(0, i);
     const params = new URLSearchParams(i < 0 ? '' : raw.slice(i + 1));
     const el = $('#view');
+    // Herramientas integradas: el proyector es una sección persistente (se oculta, no se destruye) y Personajes usa estilos con body.pj
+    const proy = path === '/proyector';
+    el.hidden = proy; $('#pyr').hidden = !proy;
+    document.body.classList.toggle('pj', path === '/personajes' || path.startsWith('/personajes/'));
+    if (proy) { window.Proyector.montar($('#pyr')); baseRendered = true; document.title = 'Proyector de la mesa · ' + C.brand; return; }
     placeSearch(false);       // el buscador vuelve a la cabecera antes de reemplazar la vista
     let m, home = false;
     if (path === '/' || path === '') { viewHome(el); home = true; }
@@ -913,6 +953,8 @@
     else if ((m = path.match(/^\/arbol\/([\w-]+)$/))) viewTree(el, m[1], params);
     else if ((m = path.match(/^\/talento\/(.+)$/))) viewTalent(el, decodeURIComponent(m[1]));
     else if ((m = path.match(/^\/p\/(.+)$/))) viewPage(el, decodeURIComponent(m[1]));
+    else if (path === '/combates') window.CB.montar(el);
+    else if (path === '/personajes' || path.startsWith('/personajes/')) window.PJ.montar(el, path.slice('/personajes'.length));
     else el.innerHTML = '<p class="empty">Página no encontrada. <a href="#/">Ir al inicio</a></p>';
     if (home) placeSearch(true);
     baseRendered = true;

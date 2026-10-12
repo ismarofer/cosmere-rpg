@@ -1,0 +1,34 @@
+[
+ {
+  "titulo": "Conjuntos de características",
+  "cambios": [
+   ["Grande (3 metros),", "Grande (3 metros), Enorme (4,5 metros), Gargantuesco (6 metros) y Colosal (9 metros o más). Tipo. El tipo resume su naturaleza fundamental (como humanoide o animal). No hay una lista cerrada de tipos y esto no altera el funcionamiento del conjunto de características; se trata de un término meramente descriptivo. No obstante, cuando encaje con la historia, ciertos efectos podrían afectar a tipos de adversario concretos (especialmente humanoides) de formas especiales."]
+  ],
+  "definiciones": ["Rango", "Rol", "Tamaño", "Tipo"]
+ },
+ {
+  "titulo": "Rol del adversario",
+  "cambios": [
+   ["Los Secuaces son más débiles que los demás adversarios.\n\nTodos tienen", "◆ **Secuaces.** Son más débiles que los demás adversarios. Todos tienen"],
+   ["críticos”. Los Rivales no tienen", "críticos”.\n◆ **Rivales.** No tienen"],
+   ["aventureros. Los Jefes son", "aventureros.\n◆ **Jefes.** Son"]
+  ]
+ },
+ {
+  "titulo": "Acciones del adversario",
+  "cambios": [
+   ["; cuando la historia lo justifique, la DJ puede", "◆ La narrativa da un pequeño giro a favor del grupo.", "."]
+  ]
+ },
+ {
+  "titulo": "Oportunidades y Complicaciones de los adversarios",
+  "cambios": [
+   ["Si un adversario obtiene una Oportunidad O,", "Las pruebas de los adversarios no permiten subir la apuesta y, por lo tanto, no suelen requerir el dado de trama. No obstante, los adversarios pueden verse afectados por las Oportunidades y las Complicaciones de las formas siguientes.\n\nSi un adversario obtiene una Oportunidad O,"],
+   ["#### Oportunidades y Complicaciones\n", "de las formas\n\n", ""]
+  ]
+ },
+ {
+  "titulo": "Cómo interpretar los conjuntos de características",
+  "definiciones": ["Título", "Rango", "Rol", "Tamaño", "Tipo", "Características básicas", "Valor de desvío", "Movimiento", "Sentidos", "Inmunidades", "Habilidades", "Habilidades de artes metálicas", "Rasgos", "Acciones", "Oportunidades y Complicaciones"]
+ }
+]

@@ -1,0 +1,295 @@
+{
+ "tema": "Empeños",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Preparar y concluir un empeño",
+   "reglas": [
+    {
+     "slug": "introduccion-a-los-empenos",
+     "titulo": "Introducción a los empeños",
+     "fuentes": [
+      "empeno-introduccion-a-los-empenos",
+      {
+       "id": "empeno-ambientacion-de-la-escena",
+       "encabezado": "Ambientación de la escena de empeño"
+      },
+      {
+       "id": "empeno-definicion-de-objetivos-y-circunstancias",
+       "encabezado": "Definición de objetivos y circunstancias"
+      },
+      {
+       "id": "empeno-establecimiento-del-umbral-de-empeno",
+       "encabezado": "Establecimiento del umbral de empeño"
+      },
+      {
+       "id": "empeno-presentacion-de-reglas-especiales",
+       "encabezado": "Presentación de reglas especiales"
+      },
+      {
+       "id": "empeno-culminacion-de-empenos",
+       "encabezado": "Culminación de empeños"
+      },
+      {
+       "id": "empeno-orden-de-los-empenos",
+       "encabezado": "Orden de los empeños"
+      },
+      {
+       "id": "empeno-rondas-flexibles",
+       "encabezado": "Rondas flexibles en empeños"
+      },
+      {
+       "id": "empeno-tu-turno",
+       "encabezado": "Tu turno"
+      },
+      {
+       "id": "empeno-como-interpretar-las-pruebas-de-habilidad",
+       "encabezado": "Cómo interpretar las pruebas de habilidad"
+      },
+      {
+       "id": "empeno-como-determinar-el-desenlace",
+       "encabezado": "Cómo determinar el desenlace"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Turnos y umbrales",
+   "reglas": [
+    {
+     "slug": "umbrales-colectivos",
+     "titulo": "Umbrales colectivos",
+     "fuentes": [
+      "empeno-umbrales-colectivos",
+      {
+       "id": "empeno-como-establecer-el-umbral",
+       "encabezado": "Cómo establecer el umbral"
+      },
+      {
+       "id": "empeno-ejemplos-de-umbral-colectivo",
+       "encabezado": "Ejemplos de umbral colectivo"
+      },
+      {
+       "id": "empeno-umbrales-flexibles",
+       "encabezado": "Umbrales flexibles"
+      }
+     ]
+    },
+    {
+     "slug": "umbrales-individuales",
+     "titulo": "Umbrales individuales",
+     "fuentes": [
+      "empeno-umbrales-individuales"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Descubrimiento",
+   "reglas": [
+    {
+     "slug": "empenos-de-descubrimiento",
+     "titulo": "Empeños de descubrimiento",
+     "fuentes": [
+      "empeno-empenos-de-descubrimiento",
+      {
+       "id": "empeno-sin-umbral-de-exito",
+       "encabezado": "Sin umbral de éxito"
+      },
+      {
+       "id": "empeno-resolucion",
+       "encabezado": "Resolución de un descubrimiento"
+      },
+      {
+       "id": "empeno-ejemplos-de-descubrimiento",
+       "encabezado": "Ejemplos de descubrimiento"
+      },
+      {
+       "id": "empeno-ejemplos-de-descubrimiento-2"
+      },
+      {
+       "id": "empeno-ejemplo-de-red-de-investigacion",
+       "encabezado": "Ejemplo de red de investigación"
+      },
+      {
+       "id": "empeno-nuevo-romance"
+      },
+      {
+       "id": "empeno-vivienda-patas-arriba"
+      },
+      {
+       "id": "empeno-mozos-de-la-calle-brillante"
+      },
+      {
+       "id": "empeno-investigacion-del-canton"
+      },
+      {
+       "id": "empeno-refugio-romantico"
+      },
+      {
+       "id": "empeno-cerco-estrechado"
+      },
+      {
+       "id": "empeno-la-ley-del-ministerio-de-acero"
+      }
+     ]
+    },
+    {
+     "slug": "red-de-investigacion",
+     "titulo": "Red de investigación",
+     "fuentes": [
+      "empeno-red-de-investigacion"
+     ]
+    },
+    {
+     "slug": "indicios",
+     "titulo": "Indicios",
+     "fuentes": [
+      "empeno-indicios"
+     ]
+    },
+    {
+     "slug": "pistas",
+     "titulo": "Pistas",
+     "fuentes": [
+      "empeno-pistas"
+     ]
+    },
+    {
+     "slug": "regla-especial-apostar-por-una-corazonada",
+     "titulo": "Regla especial: Apostar por una corazonada",
+     "fuentes": [
+      "empeno-regla-especial-apostar-por-una-corazonada"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Exploración",
+   "reglas": [
+    {
+     "slug": "empenos-de-exploracion",
+     "titulo": "Empeños de exploración",
+     "fuentes": [
+      "empeno-empenos-de-exploracion",
+      {
+       "id": "empeno-descripcion-del-entorno",
+       "encabezado": "Descripción del entorno"
+      },
+      {
+       "id": "empeno-determinacion-del-objetivo",
+       "encabezado": "Determinación del objetivo"
+      },
+      {
+       "id": "empeno-como-hacer-avanzar-una-exploracion",
+       "encabezado": "Cómo hacer avanzar una exploración"
+      },
+      {
+       "id": "empeno-resolucion-2",
+       "encabezado": "Resolución de una exploración"
+      },
+      {
+       "id": "empeno-ejemplos-de-exploracion",
+       "encabezado": "Ejemplos de exploración"
+      },
+      {
+       "id": "empeno-ejemplos-de-exploracion-2"
+      }
+     ]
+    },
+    {
+     "slug": "regla-especial-contra-todo-pronostico",
+     "titulo": "Regla especial: Contra todo pronóstico",
+     "fuentes": [
+      "empeno-regla-especial-contra-todo-pronostico",
+      {
+       "id": "empeno-ejemplos-de-contra-todo-pronostico",
+       "encabezado": "Ejemplos de Contra todo pronóstico"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Misión",
+   "reglas": [
+    {
+     "slug": "empenos-de-mision",
+     "titulo": "Empeños de misión",
+     "fuentes": [
+      "empeno-empenos-de-mision",
+      {
+       "id": "empeno-sesion-informativa-de-la-mision",
+       "encabezado": "Sesión informativa de la misión"
+      },
+      {
+       "id": "empeno-sensacion-de-urgencia",
+       "encabezado": "Sensación de urgencia"
+      },
+      {
+       "id": "empeno-ejemplos-de-mision",
+       "encabezado": "Ejemplos de misión"
+      },
+      {
+       "id": "empeno-ejemplos-de-mision-2"
+      }
+     ]
+    },
+    {
+     "slug": "regla-especial-el-tiempo-corre",
+     "titulo": "Regla especial: El tiempo corre",
+     "fuentes": [
+      "empeno-regla-especial-el-tiempo-corre"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Persecución",
+   "reglas": [
+    {
+     "slug": "empenos-de-persecucion",
+     "titulo": "Empeños de persecución",
+     "fuentes": [
+      "empeno-empenos-de-persecucion",
+      {
+       "id": "empeno-mapa-o-teatro-de-la-mente",
+       "encabezado": "¿Mapa o teatro de la mente?"
+      },
+      {
+       "id": "empeno-adaptacion-a-un-entorno-cambiante",
+       "encabezado": "Adaptación a un entorno cambiante"
+      },
+      {
+       "id": "empeno-pruebas-enfrentadas-durante-las-persecuciones",
+       "encabezado": "Pruebas enfrentadas durante las persecuciones"
+      },
+      {
+       "id": "empeno-ejemplos-de-persecucion",
+       "encabezado": "Ejemplos de persecución"
+      },
+      {
+       "id": "empeno-ejemplos-de-persecucion-2"
+      }
+     ]
+    },
+    {
+     "slug": "regla-especial-ganando-terreno",
+     "titulo": "Regla especial: Ganando terreno",
+     "fuentes": [
+      "empeno-regla-especial-ganando-terreno",
+      "empeno-ganando-terreno"
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "empeno-como-dirigir-un-descubrimiento",
+  "empeno-como-dirigir-una-exploracion",
+  "empeno-como-dirigir-una-mision",
+  "empeno-como-dirigir-una-persecucion",
+  "empeno-consejo-para-la-dj-los-empenos-y-como-seguir-adelante-a-pesar-del-frac",
+  "empeno-ejemplo-de-empeno"
+ ]
+}

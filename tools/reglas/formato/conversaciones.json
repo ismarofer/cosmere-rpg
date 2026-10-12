@@ -1,0 +1,53 @@
+[
+ {
+  "titulo": "Cuándo usar las conversaciones",
+  "cambios": [
+   ["a política y la intriga definen", "La política y la intriga definen"],
+   ["La política y la intriga definen", "lo que quieres de la conversación.", "^", "antes"]
+  ]
+ },
+ {
+  "titulo": "Contribuciones",
+  "cambios": [
+   ["#### Rondas flexibles en conversaciones", "si ese jugador prefiere seguir así o quiere intervenir.", "#### Desenlaces de las contribuciones\nLa resolución de cada contribución depende de lo que pretendas lograr. Algunas solo aportan una ocurrencia ingeniosa o un comentario general, mientras que otras tienen un impacto de peso en la conversación (y podrían requerir una prueba de habilidad).\n\nLa mayoría de las contribuciones buscan uno de estos cinco desenlaces:\n\n**Influir en una persona.** Muchas contribuciones pretenden influir en otra persona mediante mentiras, lógica, intimidación u otros medios; al fin y al cabo, ejercer influencia es el objetivo de casi toda conversación. Para alterar la opinión o conducta de un personaje, lo habitual es hacer una prueba de habilidad contra su Defensa espiritual o cognitiva (según la habilidad empleada). Dependiendo de las circunstancias, la DJ aumenta o disminuye esa CD, y puedes obtener ventajas o desventajas según tu enfoque. Incluso tras una prueba con éxito, la otra persona podría resistirse temporalmente a tu influencia gastando concentración (consulta la sección “La concentración en las conversaciones”, más abajo).\n\n**Ayudar u obstaculizar.** La conversación puede ser un esfuerzo colectivo, por lo que puedes colaborar reforzando los argumentos de un aliado o socavando la posición de un oponente. Esta contribución suele otorgar una ventaja a un aliado (o una desventaja a un rival) en su próxima prueba dentro de la conversación.\n\n**Apoyar a un aliado.** Puedes animar, tranquilizar o apoyar de algún otro modo a otra persona. Esto suele permitir que tu objetivo recupere algo de concentración (según determine la DJ). Se trata de un beneficio valioso, ya que la concentración representa la determinación y paciencia de cada individuo en la conversación (consulta “La concentración en las conversaciones”, más abajo).\n\n**Recopilar información.** Puedes examinar a otra persona o el entorno. Dependiendo de la dificultad, la DJ podría pedirte una prueba de habilidad contra la Defensa espiritual o cognitiva de tu objetivo (según la habilidad utilizada), o simplemente darte la información que buscas.\n\n**Aportar ambientación.** Siempre puedes intervenir para añadir trasfondo o contexto a una conversación. Estas contribuciones no tienen reglas; son solo parte de la diversión de jugar a rol.\n\n#### Cuándo hacer pruebas\nSi el desenlace de tu contribución es incierto, o si depende de tu habilidad, la DJ te pedirá una prueba (normalmente contra la defensa del oponente en la misma categoría que la habilidad). Casi cualquier habilidad puede usarse en una conversación, a discreción de la DJ. La tabla Ejemplos de pruebas en contribuciones sugiere algunas tareas que podrían requerir una prueba.\n\n#### Ejemplos de pruebas en contribuciones\n| Habilidad | Uso |\n|---|---|\n| Deducción | Analizar lógicamente un argumento para encontrar sus fisuras. |\n| Engaño | Mentir para convencer a alguien de una premisa falsa. |\n| Intimidación | Presionar a alguien para debilitar su postura. |\n| Liderazgo | Inspirar a alguien para que siga su mejor naturaleza. |\n| Percepción | Observar a alguien para detectar comportamientos sospechosos. |\n| Perspicacia | Usar la empatía para comprender la posición ajena. |\n| Persuasión | Usar el carisma para convencer a alguien de actuar contra su juicio. |\n\nLa tabla Oportunidades y Complicaciones de conversación ofrece inspiración para aquellas pruebas que arrojen tales resultados.\n\n#### Oportunidades y Complicaciones de conversación\n| Oportunidad | Complicación |\n|---|---|\n| Recuerdas un dato útil y relevante. | Algo que dabas por cierto resulta ser mentira. |\n| Impresionas a un observador. | Te ganas el desprecio de un observador. |\n| Logras que los demás ignoren tus verdaderas intenciones. | Atraes una atención indeseada sobre ti durante la conversación. |\n\n#### Uso de capacidades en las conversaciones\nAunque algunos talentos, acciones y otras capacidades se centran en el combate, puedes encontrar formas creativas de emplearlas en una contribución. Ciertas capacidades ofrecen pautas para su uso fuera del combate (por ejemplo, consulta “Duración de las artes metálicas” en el capítulo 6), mientras que otras quedan sujetas a tu imaginación. Corresponde siempre a la DJ decidir si puedes usar una capacidad para contribuir y de qué manera.\n\nSi una capacidad afecta a un personaje al que “puedes influir”, se refiere a cualquier individuo con el que seas capaz de comunicarte con eficacia.\n\n#### Rondas flexibles en conversaciones\nAunque te veas envuelto en conversaciones que distan mucho de ser educadas, es fundamental que, fuera de la interpretación, todo el mundo se divierta y se sienta partícipe. Generalmente, los personajes intervienen uno a uno (consulta “Contribuciones”) y todos los presentes deben tener ocasión de participar. Cuando todos los interesados han tenido la oportunidad de intervenir, se considera que ha transcurrido una “ronda” de conversación. Aunque no sea tan estructurada como una ronda de combate, ayuda a controlar la duración de tus capacidades y otros efectos del juego.\n\nEs conveniente que la DJ consulte a los jugadores cuyos personajes no hayan intervenido recientemente. Si la última acción de un personaje fue apoyarse estoicamente contra la pared mientras los demás hablaban, conviene comprobar si ese jugador prefiere seguir así o quiere intervenir."]
+  ]
+ },
+ {
+  "titulo": "¿A quién puedes influir?",
+  "cambios": [
+   ["\n\nquiénes son y de qué están dispuestos", "\n\n#### Cómo resistirse a la influencia\nTanto los PNJs como los PJs suelen tener una idea clara de quiénes son y de qué están dispuestos"],
+   ["De lo contrario, una vez que cambie de opinión si quieres, pero tú decides cuáles son las consecuencias y cómo impacta en la historia.", "De lo contrario, una vez que el PNJ agota su concentración, suele ceder en su postura o mostrarse abierto a un compromiso (consulta “Quedarse sin concentración”)."],
+   ["\n\nel PNJ agota su concentración, suele ceder", "(consulta “Quedarse sin concentración”).", ""]
+  ]
+ },
+ {
+  "titulo": "Quedarse sin concentración",
+  "cambios": [
+   ["Puedes hacer que", "Puedes hacer que tu personaje cambie de opinión si quieres, pero tú decides cuáles son las consecuencias y cómo impacta en la historia."]
+  ]
+ },
+ {
+  "titulo": "Indagación",
+  "cambios": [
+   ["Oportunidades Complicaciones", "con una petición irrelevante para el otro bando.", "| Oportunidad | Complicación |\n|---|---|\n| Tus preguntas revelan que compartes un objetivo (o un enemigo) con la persona a la que interrogas. | Revelas por accidente más de lo que pretendías. Puedes gastar 2 puntos de concentración para evitarlo. |\n| Tus sutiles indirectas o vagas amenazas inquietan al interlocutor. Obtienes una ventaja en tu próxima prueba en su contra. | El interlocutor detecta una brecha para sus propios planes. Sufres una desventaja en tu próxima prueba en su contra. |\n| La persona a la que interrogas vislumbra una oportunidad de negocio contigo y se relaja. | Alguien irrumpe en la escena con una petición irrelevante para el otro bando. |"]
+  ]
+ },
+ {
+  "titulo": "Negociación",
+  "cambios": [
+   ["Oportunidades Complicaciones", "lo que amenaza con encarecer el precio si no logras ahuyentarlo.", "| Oportunidad | Complicación |\n|---|---|\n| Te percatas de una pista sutil sobre los recursos reales de los que dispone el otro bando. | Muestras tus cartas respecto a tus recursos actuales. Puedes gastar 2 puntos de concentración para evitarlo. |\n| Convences al otro bando de que cuentas con el respaldo de un patrocinador poderoso. | El bando contrario empieza a sospechar que podrías ser un espía o un informante. |\n| Tu interlocutor revela por descuido que otra persona podría proporcionarte lo que buscas. | Aparece otro postor en escena, lo que amenaza con encarecer el precio si no logras ahuyentarlo. |"]
+  ]
+ },
+ {
+  "titulo": "Argucia",
+  "cambios": [
+   ["Oportunidades Complicaciones", "Un investigador llega en el peor momento posible.", "| Oportunidad | Complicación |\n|---|---|\n| La víctima revela información sobre sí misma sin saberlo, aportando detalles que podrás usar después para sacar más tajada. | Un PNJ neutral se descubre como un agente del bando contrario. |\n| Un PNJ neutral te confunde con una autoridad o alguien de confianza, lo que corrobora tu historia. | Un tercero desvelará tu argucia a menos que logres pagarle o ahuyentarlo. |\n| Ofreces una pequeña muestra o adelanto, lo que tranquiliza a la víctima. | Un investigador llega en el peor momento posible. |"]
+  ]
+ },
+ {
+  "titulo": "Socialización",
+  "cambios": [
+   ["Oportunidades Complicaciones", "de una forma que interrumpiría el diálogo actual.", "| Oportunidad | Complicación |\n|---|---|\n| Detectas un indicio sutil del estado emocional oculto de alguien. | Revelas por descuido un detalle o haces un comentario que te expone al ridículo. |\n| Tomas la delantera en la charla y recuperas 1d4 puntos de concentración. | La conversación te altera o te agota, lo que te hace perder 1 punto de concentración. |\n| Impresionas a tu interlocutor, quien se mostrará más inclinado a ayudarte en el futuro. | Detectas una oportunidad para perseguir una de tus metas, pero de una forma que interrumpiría el diálogo actual. |"]
+  ]
+ }
+]

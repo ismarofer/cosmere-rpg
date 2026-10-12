@@ -1,0 +1,159 @@
+{
+ "tema": "Conversaciones",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Preparar la conversación",
+   "reglas": [
+    {
+     "slug": "cuando-usar-las-conversaciones",
+     "titulo": "Cuándo usar las conversaciones",
+     "fuentes": [
+      "conversacion-cuando-usar-las-conversaciones",
+      {
+       "id": "conversacion-orden-de-las-conversaciones",
+       "encabezado": "Orden de las conversaciones"
+      },
+      {
+       "id": "conversacion-ambientacion-de-la-escena",
+       "encabezado": "Ambientación de la escena de conversación"
+      },
+      {
+       "id": "conversacion-ten-en-cuenta-los-objetivos",
+       "encabezado": "Ten en cuenta los objetivos"
+      },
+      {
+       "id": "conversacion-tipos-de-conversacion",
+       "encabezado": "Tipos de conversación"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Rondas y contribuciones",
+   "reglas": [
+    {
+     "slug": "contribuciones",
+     "titulo": "Contribuciones",
+     "fuentes": [
+      "conversacion-contribuciones",
+      {
+       "id": "conversacion-rondas-flexibles",
+       "encabezado": "Rondas flexibles en conversaciones"
+      },
+      {
+       "id": "conversacion-cuando-hacer-pruebas",
+       "encabezado": "Cuándo hacer pruebas"
+      },
+      {
+       "id": "conversacion-ejemplos-de-pruebas-en-contribuciones",
+       "encabezado": "Ejemplos de pruebas en contribuciones"
+      },
+      {
+       "id": "conversacion-desenlaces-de-las-contribuciones",
+       "encabezado": "Desenlaces de las contribuciones"
+      },
+      {
+       "id": "conversacion-oportunidades-y-complicaciones-de-conversacion",
+       "encabezado": "Oportunidades y Complicaciones de conversación"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Concentración e influencia",
+   "reglas": [
+    {
+     "slug": "a-quien-puedes-influir",
+     "titulo": "¿A quién puedes influir?",
+     "fuentes": [
+      "conversacion-a-quien-puedes-influir",
+      {
+       "id": "conversacion-la-concentracion-en-las-conversaciones",
+       "encabezado": "La concentración en las conversaciones"
+      },
+      {
+       "id": "conversacion-resolucion-de-conversaciones",
+       "encabezado": "Resolución de conversaciones"
+      },
+      {
+       "id": "conversacion-los-personajes-jugadores-y-la-influencia",
+       "encabezado": "Los personajes jugadores y la influencia"
+      }
+     ]
+    },
+    {
+     "slug": "resistirse-a-los-efectos-mecanicos",
+     "titulo": "Resistirse a los efectos mecánicos",
+     "fuentes": [
+      "conversacion-resistirse-a-los-efectos-mecanicos"
+     ]
+    },
+    {
+     "slug": "quedarse-sin-concentracion",
+     "titulo": "Quedarse sin concentración",
+     "fuentes": [
+      "conversacion-quedarse-sin-concentracion",
+      {
+       "id": "conversacion-personajes-jugadores-sin-concentracion",
+       "encabezado": "Personajes jugadores sin concentración"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Tipos de conversación",
+   "reglas": [
+    {
+     "slug": "indagacion",
+     "titulo": "Indagación",
+     "fuentes": [
+      "conversacion-indagacion",
+      {
+       "id": "conversacion-oportunidades-y-complicaciones-de-indagacion",
+       "encabezado": "Oportunidades y Complicaciones de indagación"
+      }
+     ]
+    },
+    {
+     "slug": "negociacion",
+     "titulo": "Negociación",
+     "fuentes": [
+      "conversacion-negociacion",
+      {
+       "id": "conversacion-oportunidades-y-complicaciones-de-negociacion",
+       "encabezado": "Oportunidades y Complicaciones de negociación"
+      }
+     ]
+    },
+    {
+     "slug": "argucia",
+     "titulo": "Argucia",
+     "fuentes": [
+      "conversacion-argucia",
+      {
+       "id": "conversacion-oportunidades-y-complicaciones-de-argucia",
+       "encabezado": "Oportunidades y Complicaciones de argucia"
+      }
+     ]
+    },
+    {
+     "slug": "socializacion",
+     "titulo": "Socialización",
+     "fuentes": [
+      "conversacion-social",
+      {
+       "id": "conversacion-oportunidades-y-complicaciones-de-socializacion",
+       "encabezado": "Oportunidades y Complicaciones de socialización"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "conversacion-ejemplo-de-conversacion"
+ ]
+}

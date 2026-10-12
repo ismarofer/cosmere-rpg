@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg: #f6f4ef; --surface: #fff; --surface2: #efece5; --text: #1e1c19; --muted: #6b665c; --border: #d9d4c7;
   --accent: #6b4a9e; --accent-soft: #e9e1f4; --mark: #ffe58a; --gold: #d49a0b; --shadow: 0 6px 24px rgba(0, 0, 0, .14);
   --b0: #6b4a9e; --b1: #1f8a8a; --b2: #d9731a; --b3: #4c9a2a; --b4: #c2417d; --b5: #3a6fc4;
@@ -322,3 +322,22 @@ a.sp { text-decoration: none; }
 .ci:hover > .cfly, .ci:focus-within > .cfly { display: block; }
 @media (max-width: 760px) { .cfly { display: block; position: static; box-shadow: none; border: 0; padding: 0 0 0 .8rem; } }
 
+
+/* Dirección: herramientas de mesa tras un separador */
+.drop hr { border: 0; border-top: 1px solid var(--border); margin: .3rem 0; }
+.drop .soon { display: flex; align-items: center; gap: .5rem; padding: .45rem .6rem; color: var(--muted); }
+.drop .soon .ic { margin: 0; }
+.drop .soon span { flex: 1; }
+.drop .soon small { display: block; font-size: .78rem; }
+.drop .soon b { font-weight: 500; font-size: .8rem; }
+.pillsep { flex-basis: 100%; height: 0; border: 0; border-top: 1px solid var(--border); margin: .25rem 0; }
+.pill.off { color: var(--muted); border-style: dashed; cursor: default; }
+.pill.off:hover { border-color: var(--border); background: var(--bg); }
+
+
+/* tablas del libro dentro del texto */
+.rtable { overflow-x: auto; margin: .6rem 0; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.rtable table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.rtable th, .rtable td { padding: .35rem .6rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+.rtable th { background: var(--accent-soft); color: var(--text); font-weight: 600; white-space: nowrap; }
+.rtable tr:last-child td { border-bottom: 0; }

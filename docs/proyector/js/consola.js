@@ -351,7 +351,9 @@
 
   const alt = (id, k) => { $(id).onclick = () => { modo[k] = !modo[k]; $(id).classList.toggle('on', modo[k]); enviar({ t: 'modo', modo }); }; };
   alt('#bNegro', 'negro'); alt('#bPausa', 'pausa'); alt('#bCong', 'congelado'); alt('#bCalib', 'calib');
+  const visible = () => !$('#pyr').hidden;   // la consola vive en el buscador: los atajos solo valen con ella a la vista
   addEventListener('keydown', ev => {
+    if (!visible()) return;
     if (/INPUT|SELECT|TEXTAREA/.test(ev.target.tagName) && ev.target.type !== 'radio' && ev.target.type !== 'range') return;
     const k = ev.key.toLowerCase();
     if (k === 'b') $('#bNegro').click(); else if (k === 'p') $('#bPausa').click(); else if (k === 'f') $('#bCong').click();
@@ -360,7 +362,7 @@
   });
 
   $('#bAbrir').onclick = () => {
-    out = window.open('salida.html', 'proyeccion', 'popup,width=1280,height=720');
+    out = window.open('proyector/salida.html', 'proyeccion', 'popup,width=1280,height=720');
     if (!out) alert('El navegador bloqueó la ventana emergente. Permítela e inténtalo de nuevo.');
   };
 
@@ -368,9 +370,9 @@
   const drop = $('#drop');
   drop.onclick = () => $('#fImg').click();
   $('#fImg').onchange = ev => { subir([...ev.target.files]); ev.target.value = ''; };
-  ['dragenter', 'dragover'].forEach(n => addEventListener(n, ev => { ev.preventDefault(); drop.classList.add('over'); }));
+  ['dragenter', 'dragover'].forEach(n => addEventListener(n, ev => { if (!visible()) return; ev.preventDefault(); drop.classList.add('over'); }));
   addEventListener('dragleave', ev => { if (!ev.relatedTarget) drop.classList.remove('over'); });
-  addEventListener('drop', ev => { ev.preventDefault(); drop.classList.remove('over'); subir([...ev.dataTransfer.files]); });
+  addEventListener('drop', ev => { if (!visible()) return; ev.preventDefault(); drop.classList.remove('over'); subir([...ev.dataTransfer.files]); });
 
   // exportar / importar
   $('#bExp').onclick = async () => {

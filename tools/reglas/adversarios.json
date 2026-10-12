@@ -1,0 +1,234 @@
+{
+ "tema": "Adversarios",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Leer un conjunto de características",
+   "reglas": [
+    {
+     "slug": "perfiles",
+     "titulo": "Perfiles",
+     "fuentes": [
+      "direccion-perfiles"
+     ]
+    },
+    {
+     "slug": "conjuntos-de-caracteristicas",
+     "titulo": "Conjuntos de características",
+     "fuentes": [
+      "direccion-conjuntos-de-caracteristicas",
+      {
+       "id": "direccion-como-usar-los-adversarios",
+       "encabezado": "Cómo usar los adversarios"
+      },
+      {
+       "id": "direccion-titulo",
+       "encabezado": "Título"
+      },
+      {
+       "id": "direccion-detalles",
+       "encabezado": "Detalles"
+      }
+     ]
+    },
+    {
+     "slug": "rol-del-adversario",
+     "titulo": "Rol del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-rol",
+       "encabezado": "Rol"
+      }
+     ]
+    },
+    {
+     "slug": "desvio-movimiento-sentidos-e-inmunidades-del-adversario",
+     "titulo": "Desvío, movimiento, sentidos e inmunidades del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-valor-de-desvio",
+       "encabezado": "Valor de desvío"
+      },
+      {
+       "id": "direccion-movimiento",
+       "encabezado": "Movimiento"
+      },
+      {
+       "id": "direccion-sentidos",
+       "encabezado": "Sentidos"
+      },
+      {
+       "id": "direccion-inmunidades",
+       "encabezado": "Inmunidades"
+      }
+     ]
+    },
+    {
+     "slug": "habilidades-y-atributos-del-adversario",
+     "titulo": "Habilidades y atributos del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-habilidades",
+       "encabezado": "Habilidades"
+      },
+      {
+       "id": "direccion-atributos-y-defensas",
+       "encabezado": "Atributos y defensas"
+      }
+     ]
+    },
+    {
+     "slug": "salud-concentracion-e-investidura-del-adversario",
+     "titulo": "Salud, concentración e Investidura del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-actual-y-maxima",
+       "encabezado": "Actual y máxima"
+      },
+      {
+       "id": "direccion-personalizacion-de-la-salud",
+       "encabezado": "Personalización de la salud"
+      }
+     ]
+    },
+    {
+     "slug": "ataques-y-dano-del-adversario",
+     "titulo": "Ataques y daño del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-ataques",
+       "encabezado": "Ataques"
+      },
+      {
+       "id": "direccion-dano",
+       "encabezado": "Daño"
+      },
+      {
+       "id": "direccion-rasgos-de-las-armas",
+       "encabezado": "Rasgos de las armas"
+      },
+      {
+       "id": "direccion-armas-de-aluminio",
+       "encabezado": "Armas de aluminio"
+      }
+     ]
+    },
+    {
+     "slug": "habilidades-de-artes-metalicas-del-adversario",
+     "titulo": "Habilidades de artes metálicas del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-habilidades-de-artes-metalicas",
+       "encabezado": "Habilidades de artes metálicas"
+      }
+     ]
+    },
+    {
+     "slug": "acciones-del-adversario",
+     "titulo": "Acciones del adversario",
+     "fuentes": [
+      {
+       "id": "direccion-acciones-2",
+       "encabezado": "Acciones"
+      },
+      {
+       "id": "direccion-acometidas-reactivas",
+       "encabezado": "Acometidas reactivas"
+      },
+      {
+       "id": "direccion-gasto-de-recursos",
+       "encabezado": "Gasto de recursos"
+      }
+     ]
+    },
+    {
+     "slug": "nombres-duplicados-y-calculos-incluidos",
+     "titulo": "Nombres duplicados y cálculos incluidos",
+     "fuentes": [
+      {
+       "id": "direccion-nombres-duplicados",
+       "encabezado": "Nombres duplicados"
+      },
+      {
+       "id": "direccion-calculos-incluidos",
+       "encabezado": "Cálculos incluidos"
+      }
+     ]
+    },
+    {
+     "slug": "rasgos-leer-un-conjunto-de-caracteristicas",
+     "titulo": "Rasgos del adversario",
+     "fuentes": [
+      "direccion-rasgos-2"
+     ]
+    },
+    {
+     "slug": "modulos-de-adversario",
+     "titulo": "Módulos de adversario",
+     "fuentes": [
+      "direccion-modulos-de-adversario"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Usar adversarios en la escena",
+   "reglas": [
+    {
+     "slug": "como-interpretar-los-conjuntos-de-caracteristicas",
+     "titulo": "Cómo interpretar los conjuntos de características",
+     "fuentes": [
+      "direccion-como-interpretar-los-conjuntos-de-caracteristicas",
+      {
+       "id": "direccion-eras-de-los-adversarios",
+       "encabezado": "Eras de los adversarios"
+      }
+     ]
+    },
+    {
+     "slug": "oportunidades-y-complicaciones-de-los-adversarios",
+     "titulo": "Oportunidades y Complicaciones de los adversarios",
+     "fuentes": [
+      "direccion-oportunidades-y-complicaciones-de-los-adversarios",
+      {
+       "id": "direccion-oportunidades-y-complicaciones",
+       "encabezado": "Oportunidades y Complicaciones"
+      },
+      {
+       "id": "direccion-tiradas-de-los-adversarios",
+       "encabezado": "Tiradas de los adversarios"
+      }
+     ]
+    },
+    {
+     "slug": "como-usar-las-acciones",
+     "titulo": "Cómo usar las acciones",
+     "fuentes": [
+      "direccion-como-usar-las-acciones",
+      {
+       "id": "direccion-ataques-y-armas",
+       "encabezado": "Ataques y armas"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "direccion-acciones",
+  "direccion-acometidas-reactivas-2",
+  "direccion-adversarios-derrotados-2",
+  "direccion-aliados-u-oponentes",
+  "direccion-como-usar-los-adversarios-2",
+  "direccion-dano-2",
+  "direccion-donde-se-encuentran-los-adversarios",
+  "direccion-ejemplo-de-conjunto-de-caracteristicas-detective",
+  "direccion-escenas-en-ciudades-de-la-cuenca",
+  "direccion-escenas-en-ciudades-de-los-dominios",
+  "direccion-escenas-en-ciudades-de-los-dominios-2",
+  "direccion-escenas-en-el-campo-imperial",
+  "direccion-escenas-en-el-campo-imperial-2",
+  "direccion-escenas-en-los-aridos",
+  "direccion-gasto-de-recursos-2",
+  "direccion-rasgos"
+ ]
+}

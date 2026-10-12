@@ -1,0 +1,366 @@
+{
+ "tema": "Objetos y equipo",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Usar objetos",
+   "reglas": [
+    {
+     "slug": "objetos-investidos",
+     "titulo": "Objetos Investidos",
+     "fuentes": [
+      "objeto-objetos-investidos",
+      {
+       "id": "objeto-objetos-con-caracteristicas",
+       "encabezado": "Objetos con características"
+      },
+      {
+       "id": "objeto-uso-de-objetos",
+       "encabezado": "Uso de objetos"
+      }
+     ]
+    },
+    {
+     "slug": "rasgos-de-experto-en-objetos-usar-objetos",
+     "titulo": "Rasgos de experto en objetos",
+     "fuentes": [
+      "objeto-rasgos-de-experto",
+      {
+       "id": "personaje-rasgos-de-experto-en-objetos",
+       "encabezado": "Rasgos de experto en objetos"
+      }
+     ]
+    },
+    {
+     "slug": "cargas",
+     "titulo": "Cargas",
+     "fuentes": [
+      "objeto-cargas",
+      {
+       "id": "arte-activacion-de-objetos-con-cargas",
+       "encabezado": "Activación de objetos con cargas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Equipo inicial y divisa",
+   "reglas": [
+    {
+     "slug": "equipo-inicial",
+     "titulo": "Equipo inicial",
+     "fuentes": [
+      "objeto-equipo-inicial",
+      {
+       "id": "objeto-equipo-inicial-de-artesano",
+       "encabezado": "Equipo inicial de Artesano"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-bajos-fondos",
+       "encabezado": "Equipo inicial de Bajos fondos"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-noble",
+       "encabezado": "Equipo inicial de Noble"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-fugitivo",
+       "encabezado": "Equipo inicial de Fugitivo"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-guardador",
+       "encabezado": "Equipo inicial de Guardador"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-indagador",
+       "encabezado": "Equipo inicial de Indagador"
+      },
+      {
+       "id": "objeto-equipo-inicial-de-mercenario",
+       "encabezado": "Equipo inicial de Mercenario"
+      }
+     ]
+    },
+    {
+     "slug": "divisa",
+     "titulo": "Divisa",
+     "fuentes": [
+      "objeto-divisa"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Armas y munición",
+   "reglas": [
+    {
+     "slug": "municion",
+     "titulo": "Munición",
+     "fuentes": [
+      "objeto-municion"
+     ]
+    },
+    {
+     "slug": "armas-de-fuego",
+     "titulo": "Armas de fuego",
+     "fuentes": [
+      "objeto-armas-armas-de-fuego",
+      "objeto-armas-de-fuego",
+      {
+       "id": "objeto-oportunidades-y-complicaciones-de-las-armas-de-fuego",
+       "encabezado": "Oportunidades y Complicaciones de las armas de fuego"
+      },
+      {
+       "id": "objeto-municion-mataneblinos",
+       "encabezado": "Munición mataneblinos"
+      },
+      {
+       "id": "objeto-municion-mataneblinos-estandar"
+      }
+     ]
+    },
+    {
+     "slug": "como-conseguir-objetos-alomanticamente-inertes",
+     "titulo": "Cómo conseguir objetos alománticamente inertes",
+     "fuentes": [
+      "objeto-como-conseguir-objetos-alomanticamente-inertes"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Armaduras",
+   "reglas": [
+    {
+     "slug": "armaduras",
+     "titulo": "Armaduras",
+     "fuentes": [
+      "objeto-armaduras",
+      {
+       "id": "objeto-rasgos-de-las-armaduras",
+       "encabezado": "Rasgos de las armaduras"
+      },
+      {
+       "id": "objeto-capas-de-bruma",
+       "encabezado": "Capas de bruma"
+      },
+      {
+       "id": "objeto-gabanes-de-bruma",
+       "encabezado": "Gabanes de bruma"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Equipo y metales",
+   "reglas": [
+    {
+     "slug": "equipo",
+     "titulo": "Equipo",
+     "fuentes": [
+      {
+       "id": "objeto-equipo",
+       "hasta": "Aceite. El aceite"
+      },
+      {
+       "id": "objeto-objetos-personales",
+       "encabezado": "Objetos personales"
+      }
+     ]
+    },
+    {
+     "slug": "viales-de-metal",
+     "titulo": "Viales de metal",
+     "fuentes": [
+      "objeto-viales-de-metal",
+      {
+       "id": "objeto-viales-de-metales-raros",
+       "encabezado": "Viales de metales raros"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Viajes",
+   "reglas": [
+    {
+     "slug": "vehiculos",
+     "titulo": "Vehículos",
+     "fuentes": [
+      "objeto-vehiculos",
+      "objeto-vehiculos-2",
+      {
+       "id": "objeto-viajes",
+       "encabezado": "Viajes"
+      }
+     ]
+    },
+    {
+     "slug": "alojamiento",
+     "titulo": "Alojamiento",
+     "fuentes": [
+      "objeto-alojamiento"
+     ]
+    },
+    {
+     "slug": "monturas",
+     "titulo": "Monturas",
+     "fuentes": [
+      "objeto-monturas"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Manufactura",
+   "reglas": [
+    {
+     "slug": "manufactura",
+     "titulo": "Manufactura",
+     "fuentes": [
+      "objeto-manufactura",
+      {
+       "id": "objeto-prerrequisitos-de-manufactura",
+       "encabezado": "Prerrequisitos de manufactura"
+      },
+      {
+       "id": "objeto-costes-de-manufactura-con-metales-raros",
+       "encabezado": "Costes de manufactura con metales raros",
+       "hasta": "o cualquier otra materia prima"
+      }
+     ]
+    },
+    {
+     "slug": "manufactura-de-objetos-corrientes",
+     "titulo": "Manufactura de objetos corrientes",
+     "fuentes": [
+      "objeto-manufactura-de-objetos-corrientes",
+      {
+       "id": "objeto-costes-de-manufactura-con-metales-raros",
+       "desde": "o cualquier otra materia prima"
+      }
+     ]
+    },
+    {
+     "slug": "manufactura-paso-2-lleva-a-cabo-una-prueba",
+     "titulo": "Manufactura, paso 2: lleva a cabo una prueba",
+     "fuentes": [
+      "objeto-paso-2-lleva-a-cabo-una-prueba-de-manufactura",
+      {
+       "id": "objeto-prueba-de-manufactura-de-objetos",
+       "encabezado": "Prueba de manufactura de objetos"
+      }
+     ]
+    },
+    {
+     "slug": "manufactura-paso-3-aplica-las-mejoras-e-inconvenientes",
+     "titulo": "Manufactura, paso 3: aplica las mejoras e inconvenientes",
+     "fuentes": [
+      "objeto-paso-3-aplica-las-mejoras-e-inconvenientes",
+      {
+       "id": "objeto-mejoras-e-inconvenientes-de-objetos",
+       "encabezado": "Mejoras e inconvenientes de objetos"
+      },
+      {
+       "id": "objeto-caracteristicas-avanzadas-de-objetos",
+       "encabezado": "Características avanzadas de objetos"
+      },
+      {
+       "id": "objeto-caracteristicas-avanzadas-de-objetos-2"
+      }
+     ]
+    },
+    {
+     "slug": "manufactura-de-objetos-con-materiales-no-estandar",
+     "titulo": "Manufactura de objetos con materiales no estándar",
+     "fuentes": [
+      "objeto-manufactura-de-objetos-con-materiales-no-estandar"
+     ]
+    },
+    {
+     "slug": "manufactura-de-objetos-de-aluminio",
+     "titulo": "Manufactura de objetos de aluminio",
+     "fuentes": [
+      "objeto-manufactura-de-objetos-de-aluminio"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Mentes de metal",
+   "reglas": [
+    {
+     "slug": "fabricacion-de-mentes-de-metal",
+     "titulo": "Fabricación de mentes de metal",
+     "fuentes": [
+      "objeto-fabricacion-de-mentes-de-metal",
+      {
+       "id": "objeto-recreacion-de-mentes-de-metal-perdidas",
+       "encabezado": "Recreación de mentes de metal perdidas"
+      },
+      {
+       "id": "objeto-remodelacion-de-mentes-de-metal",
+       "encabezado": "Remodelación de mentes de metal"
+      }
+     ]
+    },
+    {
+     "slug": "mentes-de-metal-especiales",
+     "titulo": "Mentes de metal especiales",
+     "fuentes": [
+      "objeto-mentes-de-metal-especiales"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Invención de armas de fuego",
+   "reglas": [
+    {
+     "slug": "invencion-de-armas-de-fuego",
+     "titulo": "Invención de armas de fuego",
+     "fuentes": [
+      "objeto-invencion-de-armas-de-fuego",
+      {
+       "id": "objeto-paso-1-elige-el-arma-base",
+       "encabezado": "Armas de fuego, paso 1: elige el arma base"
+      },
+      {
+       "id": "objeto-paso-2-elige-el-diseno-del-prototipo",
+       "encabezado": "Armas de fuego, paso 2: elige el diseño del prototipo"
+      },
+      {
+       "id": "objeto-paso-3-consigue-los-materiales",
+       "encabezado": "Armas de fuego, paso 3: consigue los materiales"
+      },
+      {
+       "id": "objeto-paso-4-lleva-a-cabo-una-prueba-de-manufactura",
+       "encabezado": "Armas de fuego, paso 4: lleva a cabo una prueba"
+      },
+      {
+       "id": "objeto-paso-5-aplica-las-mejoras-e-inconvenientes",
+       "encabezado": "Armas de fuego, paso 5: aplica las mejoras e inconvenientes"
+      },
+      {
+       "id": "objeto-prueba-de-manufactura-de-armas-de-fuego",
+       "encabezado": "Prueba de manufactura de armas de fuego"
+      },
+      {
+       "id": "objeto-disenos-de-prototipos-de-armas-de-fuego",
+       "encabezado": "Diseños de prototipos de armas de fuego"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "objeto-consejo-para-la-dj-otorgar-objetos-como-recompensa",
+  "objeto-ejemplos-de-propositos",
+  "objeto-las-armas-en-compania-respetuosa",
+  "objeto-proposito",
+  "objeto-proposito-y-obstaculo"
+ ]
+}

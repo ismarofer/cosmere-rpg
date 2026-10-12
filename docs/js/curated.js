@@ -28,7 +28,6 @@
     // aplica a todo lo que cuelga de él. Stormlight ya tiene etiqueta pero aún no contenido: al añadirlo, mapear su ambientación en ambientacionPath.
     ambientaciones: [
       { id: '', label: 'Todo el Cosmere', ic: 'cosmere' },
-      { id: 'mistborn', label: 'Mistborn', ic: 'mistborn' },
       { id: 'mistborn/1', label: 'Mistborn · Era 1', ic: 'mistborn' },
       { id: 'mistborn/2', label: 'Mistborn · Era 2', ic: 'mistborn' },
       { id: 'stormlight', label: 'Stormlight', ic: 'stormlight' },
@@ -37,11 +36,18 @@
 
     // Menú superior y portada (el menú "caminos" se completa con los árboles de talentos)
     menu: [
-      { id: 'personaje', label: 'Personaje', ic: 'user', desc: 'Creación, orígenes, atributos, pericias, habilidades e historia' },
+      { id: 'personaje', label: 'Personaje', ic: 'user', desc: 'Orígenes, habilidades, valores y cálculos, estados e historia',
+        // Enlaces que van los primeros, antes de los catálogos del grupo
+        lead: [{ label: 'Gestión de Personajes', href: '#/personajes', ic: 'users', sub: 'Crear y gestionar hojas de personaje' }] },
       { id: 'caminos', label: 'Caminos', ic: 'tree', desc: 'Árboles de talentos: heroicos, nacidos del metal, alomancia, feruquimia…', trees: true },
       { id: 'equipo', label: 'Equipo', ic: 'bag', desc: 'Armas, armaduras, objetos y metales' },
-      { id: 'reglas', label: 'Reglas', ic: 'book', desc: 'Combate, estados, descanso, conversaciones y empeños' },
-      { id: 'dj', label: 'Dirección', ic: 'crown', desc: 'Adversarios, módulos y aventura', dj: true },
+      { id: 'reglas', label: 'Reglas', ic: 'book', desc: 'Todas las reglas del juego, una a una, y los modificadores del personaje' },
+      { id: 'dj', label: 'Dirección', ic: 'crown', desc: 'Adversarios, módulos, aventura y herramientas de mesa', dj: true,
+        // Herramientas de mesa: van tras una línea separadora (como en Caminos). `soon`: aún sin página
+        tools: [
+          { label: 'Proyector de la mesa', href: '#/proyector', ic: 'mountain', sub: 'Mapas, niebla de guerra y efectos' },
+          { label: 'Combates', href: '#/combates', ic: 'swords', sub: 'Amenaza, salud, concentración, Investidura y acciones' },
+        ] },
     ],
 
     // Secciones de árboles de talentos (caminos). Para sumar radiantes: otra sección con su filtro.
@@ -73,27 +79,29 @@
     catalogs: [
       // ------------------------------------------------------------------ Personaje
       {
-        id: 'calculo', label: 'Valores y cálculos', group: 'personaje', ic: 'sliders',
+        id: 'calculo', label: 'Valores y cálculos', group: 'personaje', ord: 6, ic: 'sliders',
         desc: 'Mini-reglas: cómo se calcula la salud, la concentración, la Investidura, el movimiento, las defensas…',
         cols: [
           { k: 'title', l: 'Valor', main: true },
           { k: 'formula', l: 'Cálculo', ic: 'sliders' },
           { k: 'depende', l: 'Depende de', f: 'chips', list: true, ic: 'activity' },
           { k: 'pages', l: 'Págs.', hide: true },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
-        id: 'habilidad', label: 'Habilidades', group: 'personaje', ic: 'award',
+        id: 'habilidad', label: 'Habilidades', group: 'personaje', ord: 4, ic: 'award',
         desc: 'Las habilidades del juego con su atributo y defensa asociados.',
         cols: [
           { k: 'title', l: 'Habilidad', main: true },
           { k: 'atributo', l: 'Atributo', f: 'chips', ic: 'activity' },
           { k: 'defensa', l: 'Defensa', f: 'chips', ic: 'shield' },
           { k: 'ext', l: 'Extracto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
-        id: 'modificador', label: 'Modificadores del personaje', group: 'personaje', ic: 'modif',
+        id: 'modificador', label: 'Modificadores del personaje', group: 'reglas', ord: 2, ic: 'modif',
         desc: 'Todo lo que cambia algo del personaje (salud, defensas, pericias, poderes…): talentos, ascendencias, caminos y armaduras.',
         cols: [
           { k: 'title', l: 'Fuente → qué modifica', main: true },
@@ -103,14 +111,11 @@
           { k: 'fuente_tipo', l: 'Fuente', f: 'chips', ic: 'tree' },
           { k: 'origen', l: 'Camino / arte', f: 'select', ic: 'tree' },
           { k: 'ext', l: 'Texto del libro' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
-      { id: 'origen', label: 'Orígenes', group: 'personaje', ic: 'globe', desc: 'Ascendencias y culturas, con lo que cada una modifica (pericias, talentos, tamaño…).', cols: txt() },
-      { id: 'atributo', label: 'Atributos y defensas', group: 'personaje', ic: 'activity', desc: 'Atributos, defensas, desvío, salud, movimiento y sentidos.', cols: txt() },
-      { id: 'pericia', label: 'Pericias', group: 'personaje', ic: 'award', desc: 'Cómo elegir y usar las pericias: culturales, de arma, de armadura, de utilidad y especializadas.', cols: txt() },
-      { id: 'historia', label: 'Historia', group: 'personaje', ic: 'bookmark', desc: 'Orígenes, clase social, ocupación, identidad, amigos y facciones.', cols: txt() },
-      { id: 'progreso', label: 'Creación y progreso', group: 'personaje', ic: 'compass', desc: 'Pasos de creación, rangos de juego, prerrequisitos, niveles y recompensas.', cols: txt() },
-      { id: 'personaje', label: 'Reglas de personaje', group: 'reglas', ic: 'user', desc: 'Cómo usar las habilidades: pruebas, ventajas, grados de éxito y ejemplos.', cols: txt() },
+      { id: 'origen', label: 'Orígenes', group: 'personaje', ord: 2, ic: 'globe', desc: 'Lo que se elige al crear el personaje: ascendencias, Bendiciones kandra, culturas y pericias culturales.', cols: txt() },
+      { id: 'historia', label: 'Historia', group: 'personaje', ord: 9, ic: 'bookmark', desc: 'Orígenes, clase social, ocupación, identidad, amigos y facciones.', cols: txt() },
 
       // ------------------------------------------------------------------ Caminos
       {
@@ -129,8 +134,7 @@
           { k: 'pages', l: 'Págs.', hide: true },
         ],
       },
-      { id: 'camino', label: 'Reglas de caminos', group: 'reglas', ic: 'book', desc: 'Texto de los caminos heroicos y de nacidos del metal: ejemplos y reglas.', cols: txt() },
-      { id: 'arte', label: 'Reglas de artes metálicas', group: 'reglas', ic: 'flame', desc: 'Alomancia, feruquimia y hemalurgia: reglas y usos.', cols: txt() },
+      { id: 'camino', label: 'Textos de caminos', group: null /* fuera del menú: se ve en la página de cada camino */, ic: 'book', desc: 'Cómo crear cada camino, especialidades, talentos principales, historia, personajes icónicos y tablas de determinación al azar.', cols: txt() },
 
       // ------------------------------------------------------------------ Equipo
       {
@@ -171,6 +175,7 @@
           { k: 'peso', l: 'Peso', fl: 'Peso (en gramos)', sk: 'peso_g', t: 'num', f: 'range', fk: 'peso_g', ic: 'box' },
           { k: 'precio', l: 'Precio', fl: 'Precio (en arquillas)', sk: 'precio_n', t: 'num', f: 'range', fk: 'precio_n', ic: 'coins' },
           { k: 'ext', l: 'Descripción' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
@@ -179,6 +184,7 @@
           { k: 'title', l: 'Metal', main: true },
           { k: 'era1', l: 'Precio Era 1', sk: 'era1_n', t: 'num', f: 'range', fk: 'era1_n', ic: 'cloud' },
           { k: 'era2', l: 'Precio Era 2', sk: 'era2_n', t: 'num', f: 'range', fk: 'era2_n', ic: 'building' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
@@ -187,15 +193,13 @@
           { k: 'title', l: 'Rasgo', main: true },
           { k: 'aplica', l: 'Aplica a', f: 'chips', ic: 'tag' },
           { k: 'ext', l: 'Efecto' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
-      { id: 'objeto', label: 'Objetos (texto)', group: 'equipo', ic: 'box', desc: 'Reglas y descripciones del capítulo de objetos.', cols: txt() },
-      { id: 'recompensa', label: 'Recompensas y compañeros', group: 'equipo', ic: 'gift', desc: 'Metas, recompensas, clavos hemalúrgicos, compañeros y patrocinadores.', cols: txt() },
 
       // ------------------------------------------------------------------ Reglas
-      { id: 'basicas', label: 'Reglas básicas', group: 'reglas', ic: 'book', desc: 'Introducción, cómo se juega, dados, oportunidades y complicaciones, acciones y ejemplo de juego.', cols: txt() },
       {
-        id: 'accion', label: 'Acciones y reacciones', group: 'reglas', ic: 'pip',
+        id: 'accion', label: 'Acciones y reacciones', group: 'caminos', ic: 'pip',
         desc: 'Acciones (1-3), reacciones (r) y acciones gratuitas (0): las que tiene todo el mundo y las que dan las artes metálicas. Filtra por origen.',
         cols: [
           { k: 'title', l: 'Nombre', main: true },
@@ -204,17 +208,25 @@
           { k: 'coste', l: 'Coste', f: 'chips', narrow: true, ic: 'pip' },
           { k: 'contexto', l: 'Poder o sección', f: 'select', ic: 'book' },
           { k: 'ext', l: 'Resumen' },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
         ],
       },
       {
-        id: 'estado', label: 'Estados', group: 'reglas', ic: 'alert', desc: 'Estados que pueden afectar a un personaje.',
-        cols: [{ k: 'title', l: 'Estado', main: true }, { k: 'ext', l: 'Efecto' }],
+        id: 'estado', label: 'Estados', group: 'personaje', ord: 8, ic: 'alert', desc: 'Estados que pueden afectar a un personaje.',
+        cols: [{ k: 'title', l: 'Estado', main: true }, { k: 'ext', l: 'Efecto' }, { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' }],
       },
-      { id: 'combate', label: 'Combate', group: 'reglas', ic: 'swords', desc: 'Orden, turnos, ataques, alcance, movimiento y oportunidades.', cols: txt() },
-      { id: 'descanso', label: 'Descanso, daño y aventura', group: 'reglas', ic: 'moon', desc: 'Interpretación, tiempo, sucesos, descanso, reposo, daño, lesiones y muerte.', cols: txt() },
-      { id: 'conversacion', label: 'Conversaciones', group: 'reglas', ic: 'chat', desc: 'Reglas de escenas de conversación.', cols: txt() },
-      { id: 'empeno', label: 'Empeños', group: 'reglas', ic: 'compass', desc: 'Descubrimiento, exploración, misión y persecución.', cols: txt() },
-      { id: 'direccion', label: 'Dirección del juego', group: 'reglas', ic: 'file', desc: 'Consejos para la DJ: nivel de amenaza, uso de adversarios, estructura de campaña, eras y seguridad.', cols: txt() },
+      {
+        id: 'regla', label: 'Reglas', group: 'reglas', ord: 1, ic: 'book',
+        desc: 'Cada regla del juego, una a una: busca o filtra por tema y asunto.',
+        cols: [
+          { k: 'title', l: 'Regla', main: true },
+          { k: 'ambientacion', l: 'Ambientación', f: 'chips', hide: true, ic: 'globe' },
+          { k: 'tema', l: 'Tema', f: 'chips', ic: 'book' },
+          { k: 'grupo', l: 'Asunto', f: 'chips', ic: 'tag' },
+          { k: 'ext', l: 'Extracto' },
+          { k: 'pages', l: 'Págs.', hide: true },
+        ],
+      },
 
       // ------------------------------------------------------------------ Modo DJ
       {
@@ -243,7 +255,7 @@
 
     // Entradas especiales (una sola ficha) enlazadas desde el menú
     pages: [
-      { id: 'creacion', label: 'Creación de personaje', group: 'personaje', ic: 'clipboard', cat: 'creacion', title: 'Creación de personaje',
+      { id: 'creacion', label: 'Creación de personaje', group: null /* fuera del menú: lo sustituye Gestión de Personajes */, ic: 'clipboard', cat: 'creacion', title: 'Creación de personaje',
         desc: 'Guía de los ocho pasos, con enlaces a cada regla' },
     ],
 

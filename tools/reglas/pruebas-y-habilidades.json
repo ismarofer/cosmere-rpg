@@ -1,0 +1,214 @@
+{
+ "tema": "Pruebas y habilidades",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Pruebas y dificultad",
+   "reglas": [
+    {
+     "slug": "habilidades",
+     "titulo": "Habilidades",
+     "fuentes": [
+      "personaje-habilidades",
+      {
+       "id": "personaje-como-usar-las-habilidades",
+       "encabezado": "Cómo usar las habilidades"
+      },
+      {
+       "id": "personaje-anatomia-de-una-habilidad",
+       "encabezado": "Anatomía de una habilidad"
+      }
+     ],
+     "anexo": "Cada habilidad (atributo asociado, defensa y usos) está en el [[#/c/habilidad|catálogo de habilidades]]."
+    },
+    {
+     "slug": "clase-de-dificultad",
+     "titulo": "Clase de dificultad",
+     "fuentes": [
+      "personaje-clase-de-dificultad",
+      {
+       "id": "personaje-como-establecer-la-cd",
+       "encabezado": "Cómo establecer la CD"
+      },
+      {
+       "id": "personaje-ejemplos-de-clases-de-dificultad",
+       "encabezado": "Ejemplos de clases de dificultad"
+      },
+      {
+       "id": "personaje-el-criterio-de-la-dj",
+       "encabezado": "El criterio de la DJ"
+      },
+      {
+       "id": "personaje-exitos-automaticos",
+       "encabezado": "Éxitos automáticos"
+      }
+     ]
+    },
+    {
+     "slug": "resultados-de-prueba-variados",
+     "titulo": "Resultados de prueba variados",
+     "fuentes": [
+      "personaje-resultados-de-prueba-variados",
+      {
+       "id": "personaje-grados-de-exito-y-fracaso",
+       "encabezado": "Grados de éxito y fracaso"
+      }
+     ]
+    },
+    {
+     "slug": "pruebas-enfrentadas",
+     "titulo": "Pruebas enfrentadas",
+     "fuentes": [
+      "personaje-pruebas-enfrentadas",
+      {
+       "id": "personaje-pruebas-de-pnjs-enemigos",
+       "encabezado": "Pruebas de PNJs enemigos"
+      }
+     ]
+    },
+    {
+     "slug": "como-resistirse-a-la-influencia",
+     "titulo": "Cómo resistirse a la influencia",
+     "fuentes": [
+      "personaje-como-resistirse-a-la-influencia"
+     ]
+    },
+    {
+     "slug": "como-apuntar-a-distancia",
+     "titulo": "Cómo apuntar a distancia",
+     "fuentes": [
+      "personaje-como-apuntar-a-distancia",
+      {
+       "id": "personaje-como-afectar-a-varios-objetivos",
+       "encabezado": "Cómo afectar a varios objetivos"
+      }
+     ]
+    },
+    {
+     "slug": "efectos-de-habilidad-continuos",
+     "titulo": "Efectos de habilidad continuos",
+     "fuentes": [
+      "personaje-efectos-de-habilidad-continuos"
+     ]
+    },
+    {
+     "slug": "habilidades-como-acciones",
+     "titulo": "Habilidades como acciones",
+     "fuentes": [
+      "personaje-habilidades-como-acciones"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Ventajas y desventajas",
+   "reglas": [
+    {
+     "slug": "ventajas-y-desventajas",
+     "titulo": "Ventajas y desventajas",
+     "fuentes": [
+      "personaje-ventajas-y-desventajas",
+      {
+       "id": "personaje-como-hacer-pruebas-con-ventajas",
+       "encabezado": "Cómo hacer pruebas con ventajas"
+      },
+      {
+       "id": "personaje-como-hacer-pruebas-con-desventajas",
+       "encabezado": "Cómo hacer pruebas con desventajas"
+      },
+      {
+       "id": "personaje-como-hacer-pruebas-con-ambas",
+       "encabezado": "Cómo hacer pruebas con ambas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Oportunidades, complicaciones y rangos del d20",
+   "reglas": [
+    {
+     "slug": "rangos-de-oportunidad-y-complicacion",
+     "titulo": "Rangos de Oportunidad y Complicación",
+     "fuentes": [
+      "personaje-rangos-de-oportunidad-y-complicacion",
+      {
+       "id": "personaje-los-rangos-en-tiradas-con-varios-d20",
+       "encabezado": "Los rangos en tiradas con varios d20"
+      },
+      {
+       "id": "personaje-ampliacion-de-los-rangos-de-los-d20",
+       "encabezado": "Ampliación de los rangos de los d20"
+      },
+      {
+       "id": "personaje-acumulacion-de-ampliaciones-de-rango",
+       "encabezado": "Acumulación de ampliaciones de rango"
+      }
+     ]
+    },
+    {
+     "slug": "como-cambiar-la-magnitud-del-dado",
+     "titulo": "Cómo cambiar la magnitud del dado",
+     "fuentes": [
+      "personaje-como-cambiar-la-magnitud-del-dado"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Colaborar y reintentar",
+   "reglas": [
+    {
+     "slug": "como-colaborar",
+     "titulo": "Cómo colaborar",
+     "fuentes": [
+      "personaje-como-colaborar",
+      {
+       "id": "personaje-ayuda-en-combate",
+       "encabezado": "Ayuda en combate"
+      },
+      {
+       "id": "personaje-ayuda-fuera-del-combate",
+       "encabezado": "Ayuda fuera del combate"
+      },
+      {
+       "id": "personaje-ayuda-en-situaciones-complejas",
+       "encabezado": "Ayuda en situaciones complejas"
+      }
+     ]
+    },
+    {
+     "slug": "nuevos-intentos",
+     "titulo": "Nuevos intentos",
+     "fuentes": [
+      "personaje-nuevos-intentos"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Habilidades alternativas",
+   "reglas": [
+    {
+     "slug": "habilidades-alternativas",
+     "titulo": "Habilidades alternativas",
+     "fuentes": [
+      "direccion-habilidades-alternativas",
+      {
+       "id": "personaje-agilidad-o-atletismo",
+       "encabezado": "¿Agilidad o Atletismo?"
+      },
+      {
+       "id": "personaje-los-sentimientos-como-informacion",
+       "encabezado": "Los sentimientos como información"
+      },
+      {
+       "id": "personaje-liderazgo-o-persuasion",
+       "encabezado": "¿Liderazgo o Persuasión?"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": []
+}

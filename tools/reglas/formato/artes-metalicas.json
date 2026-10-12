@@ -1,0 +1,218 @@
+[
+ {
+  "titulo": "Poderes nacientes",
+  "cambios": [
+   ["mientras toques un objeto que contenga una\n\n#### Ejemplos de poderes nacientes", "relacionados con el rasgo de ese poder.", "mientras toques un objeto que contenga una concentración significativa del metal correspondiente. Este objeto no actúa como una mente de metal completa ni permite almacenar o decantar cargas, pero te permite manifestar efectos menores relacionados con el rasgo de ese poder.\n\n#### Ejemplos de poderes nacientes\n| Arte metálico | Ejemplos de efectos nacientes |\n|---|---|\n| Alomancia de bendaleo | Te aceleras por un instante y obtienes una 1 adicional en combate, o contribuyes más en otra escena. |\n| Alomancia de cinc | Inflamas las emociones de un personaje situado a 3 metros o menos durante 1 ronda. |\n| Alomancia de cobre | No puedes verte afectado por la alomancia emocional durante 1 ronda. |\n| Alomancia de cromo | Tocas a un personaje y haces que pierda 1 punto de Investidura. |\n| Alomancia de estaño | Uno de tus sentidos se vuelve sobrenatural durante 1 ronda. |\n| Alomancia de hierro | Tiras de un objeto metálico situado a 3 metros o menos para que llegue a tu mano. |\n| Feruquimia de bendaleo | De pronto te sientes saciado. Si estás Agotado, reduces en 1 la penalización de ese estado. |\n| Feruquimia de cobre | Recuerdas vívidamente un dato relevante para la escena actual. |\n| Feruquimia de cromo | Cuando saques una cara en blanco en el dado de trama, puedes volver a tirarlo. |\n| Feruquimia de hierro | Te vuelves más pesado momentáneamente como r, ignorando el intento de un enemigo de usar Empujar contra ti. |\n| Feruquimia de latón | Almacenas calor por instinto como r. Durante 1 ronda, reduces en 1 cualquier daño por energía que sufras. |\n| Feruquimia de oro | Tras sufrir un impacto aparentemente grave, te recuperas y recobras 1d6 de salud. |\n| Feruquimia de peltre | Tus músculos se hinchan. Durante 1 ronda, obtienes una ventaja en las pruebas que no sean de ataque y que usen el atributo Fuerza. |"]
+  ],
+  "definiciones": ["Elección consciente", "Esfuerzo instintivo", "Activación accidental", "Práctica controlada"]
+ },
+ {
+  "titulo": "Duración fuera del combate",
+  "definiciones": ["Combate", "Conversación", "Empeño", "Fuera de escena"]
+ },
+ {
+  "titulo": "Aluminio",
+  "cambios": [
+   ["tan impredecibles como si no estuvieras quemando el metal divino.", "otros poderes alománticos.\n\n", ""],
+   ["#### Alomancia de aluminio", "conocen a estos alomantes como vacíos.", "#### Elección de alomancia de aluminio", "antes"]
+  ]
+ },
+ {
+  "titulo": "Anatomía de un poder",
+  "definiciones": ["Título", "Acciones", "Uso del poder", "Talentos"]
+ },
+ {
+  "titulo": "Metales en la alomancia",
+  "cambios": [
+   ["en este libro. †Este metal", "en este libro.\n\n†Este metal"],
+   ["del capítulo 8. ‡A finales", "del capítulo 8.\n\n‡A finales"]
+  ],
+  "definiciones": ["Metal alomántico", "Efecto", "Nombre de brumoso", "Metal emparejado", "Era", "Tirón o Empujón", "Externo o interno", "Categoría"]
+ },
+ {
+  "titulo": "Metales en la feruquimia",
+  "cambios": [
+   ["en este libro. †A finales", "en este libro.\n\n†A finales"]
+  ],
+  "definiciones": ["Metal feruquímico", "Efecto", "Nombre de ferrin", "Metal emparejado", "Era", "Aleación o puro", "Categoría"]
+ },
+ {
+  "titulo": "Alomancia de Acero",
+  "cambios": [
+   ["volar en línea recta hasta la", "volar en línea recta hasta la distancia máxima del Empujón. La DJ podría pedirte una prueba de Alomancia para lograrlo, posiblemente subiendo la apuesta. Si fallas, bajas al suelo de forma segura, pero no en el lugar previsto. La DJ puede gastar C para que aterrices con brusquedad y sufras daño por la caída. Pasar un objeto. Das un Empujón de acero sobre un objeto hacia un aliado dispuesto; si este tiene una mano libre, puede atraparlo. Si hay obstáculos importantes entre ambos, lleva a cabo una prueba de Alomancia para determinar si tienes éxito."],
+   ["#### Físico – Externo – Empujón Consejo", "#### Consejo"],
+   ["\n\ndistancia dirigido contra ti", "gastando 1 punto de Investidura como 0.", ""]
+  ],
+  "definiciones": ["“Volar”", "Pasar un objeto"]
+ },
+ {
+  "titulo": "Alomancia de Bendaleo",
+  "cambios": [
+   ["La alomancia de bendaleo permite proyectar", "se les conoce como deslizadores.", "^", "antes"]
+  ],
+  "definiciones": ["Duelo forzado", "Reposo dilatado", "Acción instantánea"]
+ },
+ {
+  "titulo": "Alomancia de Bronce",
+  "cambios": [
+   ["La alomancia de bronce te permite percibir", "la sensación física correspondiente en el buscador.", "^", "antes"],
+   ["#### Mental – Interno – Empujón\n", ""]
+  ]
+ },
+ {
+  "titulo": "Alomancia de Cadmio",
+  "cambios": [
+   ["\n\n(lo que permite alterar la potencia del encendido", "hasta el inicio de su próximo turno.", ""]
+  ],
+  "definiciones": ["Espectáculo dinámico", "Observación científica", "Tácticas de demora"]
+ },
+ {
+  "titulo": "Alomancia de Cinc",
+  "cambios": [
+   ["Mediante la alomancia de cinc, es posible", "descifrar los estados emocionales de forma mundana.", "^", "antes"],
+   ["#### Mental – Externo – Tirón\n", ""]
+  ],
+  "definiciones": ["Múltiples emociones", "Influencia perspicaz", "Aliento"]
+ },
+ {
+  "titulo": "Alomancia de Cobre",
+  "cambios": [
+   ["La alomancia de cobre genera una nube", "secretospren para detectar potencias.", "^", "antes"]
+  ],
+  "definiciones": ["Deducción de cobre", "Colocación estratégica de la nube"]
+ },
+ {
+  "titulo": "Alomancia de Cromo",
+  "definiciones": ["Drenaje sigiloso", "Drenaje preventivo"]
+ },
+ {
+  "titulo": "Alomancia de Duraluminio",
+  "cambios": [
+   ["#### Mejora – Interno – Empujón Elección", "#### Elección"]
+  ],
+  "definiciones": ["Revitalizar (Alomancia de peltre)", "Burbuja protectora (Alomancia de acero)"]
+ },
+ {
+  "titulo": "Alomancia de Electro",
+  "cambios": [
+   ["La alomancia de electro permite percibir", "quemar electro vuelve el atium ineficaz contra ti.", "^", "antes"],
+   ["\n\n#### Temporal – Interno – Empujón", "por su causa.", ""]
+  ],
+  "definiciones": ["Detección de trampas", "Juegos de azar"]
+ },
+ {
+  "titulo": "Alomancia de Estaño",
+  "cambios": [
+   ["decidir su funcionamiento, como los siguientes:", "decidir su funcionamiento."]
+  ]
+ },
+ {
+  "titulo": "Alomancia de Hierro",
+  "cambios": [
+   ["\n\nde cuál sea más voluminoso).", "desvíen hacia sí mismos.", ""],
+   ["Adherirse a paredes.", "Agilidad o Atletismo.", "#### Consejo para la DJ", "antes"]
+  ],
+  "definiciones": ["Desarmar", "Adherirse a paredes"]
+ },
+ {
+  "titulo": "Alomancia de Latón",
+  "cambios": [
+   ["#### Mental – Externo – Empujón\n", ""]
+  ],
+  "definiciones": ["Múltiples emociones", "Emociones dirigidas", "Manipulación evidente", "Agresión redirigida"]
+ },
+ {
+  "titulo": "Alomancia de Nicrosil",
+  "cambios": [
+   ["Gracias a la alomancia de nicrosil", "los límites habituales de su poder.", "^", "antes"]
+  ]
+ },
+ {
+  "titulo": "Alomancia de Oro",
+  "cambios": [
+   ["Mediante la alomancia de oro, percibes", "celosamente guardado por el Ministerio de Acero.", "^", "antes"]
+  ],
+  "definiciones": ["Examinar el yo pasado", "Buscar variantes específicas"]
+ },
+ {
+  "titulo": "Alomancia de Peltre",
+  "definiciones": ["Viaje acelerado", "Filtrado metabólico"]
+ },
+ {
+  "titulo": "Feruquimia de Acero",
+  "definiciones": ["Fingir la muerte", "Escuadrón ficticio", "Escabullirse"]
+ },
+ {
+  "titulo": "Feruquimia de Atium",
+  "cambios": [
+   ["#### Juventud – Metal divino", "obtienes 2 cargas.\n\n", ""]
+  ],
+  "definiciones": ["Pasar inadvertido", "Anciano venerable", "¿Quién es usted?"]
+ },
+ {
+  "titulo": "Feruquimia de Bendaleo",
+  "definiciones": ["Permanecer oculto mucho tiempo", "Mantenimiento de reservas", "Ganar concursos de comida"]
+ },
+ {
+  "titulo": "Feruquimia de Bronce",
+  "definiciones": ["Noche en vela", "Ayuda para dormir", "Productividad incansable"]
+ },
+ {
+  "titulo": "Feruquimia de Cadmio",
+  "definiciones": ["Inmovilidad absoluta", "Optimización del ejercicio", "Fingir la muerte"]
+ },
+ {
+  "titulo": "Feruquimia de Cinc",
+  "definiciones": ["Dejar pasar el tiempo", "Predicción"]
+ },
+ {
+  "titulo": "Feruquimia de Cobre",
+  "cambios": [
+   ["#### Recuerdos – Metal cognitivo La feruquimia", "#### La feruquimia"]
+  ],
+  "definiciones": ["Inocencia amnésica", "Compartimentar", "Memoria perfecta"]
+ },
+ {
+  "titulo": "Feruquimia de Cromo",
+  "definiciones": ["Ignorancia feliz", "Impresión nítida", "Identificar a un espectador clave"]
+ },
+ {
+  "titulo": "Feruquimia de Duraluminio",
+  "definiciones": ["El alma de la fiesta", "Inadvertido"]
+ },
+ {
+  "titulo": "Feruquimia de Electro",
+  "definiciones": ["Evitar provocaciones", "Evitar distracciones", "Derribar barreras"]
+ },
+ {
+  "titulo": "Feruquimia de Estaño",
+  "definiciones": ["Rastreo de sabueso", "Percepción minuciosa", "Bloqueo sensorial"]
+ },
+ {
+  "titulo": "Feruquimia de Hierro",
+  "definiciones": ["Conservación del impulso", "Atravesar el suelo", "Peso muerto"]
+ },
+ {
+  "titulo": "Feruquimia de Latón",
+  "definiciones": ["Enfriar un objeto", "Calentar un objeto", "Prender un objeto"]
+ },
+ {
+  "titulo": "Feruquimia de Nicrosil",
+  "cambios": [
+   ["Mediante la feruquimia de nicrosil, es posible", "más allá de sus efectos más básicos.", "^", "antes"]
+  ],
+  "definiciones": ["Vida oculta", "Superar límites"]
+ },
+ {
+  "titulo": "Feruquimia de Oro",
+  "definiciones": ["Despertar compasión", "Ignorar el dolor", "Recobrar la sobriedad"]
+ },
+ {
+  "titulo": "Feruquimia de Peltre",
+  "cambios": [
+   ["#### Fuerza – Metal físico\n", ""],
+   ["Mediante la feruquimia de peltre", "de su portador en cada momento.", "^", "antes"]
+  ],
+  "definiciones": ["Demostración de fuerza", "Luchador insignificante", "Ajuste de tamaño"]
+ }
+]

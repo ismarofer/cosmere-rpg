@@ -1,0 +1,461 @@
+{
+ "tema": "Metas y recompensas",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Propósito y obstáculo",
+   "reglas": [
+    {
+     "slug": "proposito-y-obstaculo",
+     "titulo": "Propósito y obstáculo",
+     "fuentes": [
+      "recompensa-proposito-y-obstaculo",
+      {
+       "id": "recompensa-como-usar-los-propositos-y-los-obstaculos",
+       "encabezado": "Cómo usar los propósitos y los obstáculos"
+      },
+      {
+       "id": "recompensa-ejemplos-de-propositos",
+       "encabezado": "Ejemplos de propósitos"
+      }
+     ]
+    },
+    {
+     "slug": "obstaculo",
+     "titulo": "Obstáculo",
+     "fuentes": [
+      "recompensa-obstaculo",
+      {
+       "id": "recompensa-ejemplos-de-obstaculos",
+       "encabezado": "Ejemplos de obstáculos"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Metas",
+   "reglas": [
+    {
+     "slug": "metas",
+     "titulo": "Metas",
+     "fuentes": [
+      "recompensa-metas",
+      {
+       "id": "recompensa-ejemplos-de-metas",
+       "encabezado": "Ejemplos de metas"
+      }
+     ]
+    },
+    {
+     "slug": "creacion-de-metas",
+     "titulo": "Creación de metas",
+     "fuentes": [
+      "recompensa-creacion-de-metas",
+      {
+       "id": "recompensa-sugerir-metas",
+       "encabezado": "Sugerir metas"
+      }
+     ]
+    },
+    {
+     "slug": "como-hacer-avanzar-las-metas",
+     "titulo": "Cómo hacer avanzar las metas",
+     "fuentes": [
+      "recompensa-como-hacer-avanzar-las-metas"
+     ]
+    },
+    {
+     "slug": "conclusion-de-metas",
+     "titulo": "Conclusión de metas",
+     "fuentes": [
+      "recompensa-conclusion-de-metas",
+      {
+       "id": "recompensa-conclusion-mediante-el-exito",
+       "encabezado": "Conclusión mediante el éxito"
+      },
+      {
+       "id": "recompensa-conclusion-mediante-el-crecimiento",
+       "encabezado": "Conclusión mediante el crecimiento"
+      },
+      {
+       "id": "recompensa-conclusion-mediante-el-fracaso",
+       "encabezado": "Conclusión mediante el fracaso"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Recompensas",
+   "reglas": [
+    {
+     "slug": "recompensas",
+     "titulo": "Recompensas",
+     "fuentes": [
+      "recompensa-recompensas",
+      {
+       "id": "recompensa-recompensas-de-meta",
+       "encabezado": "Recompensas de meta"
+      },
+      {
+       "id": "recompensa-categorias-de-recompensa",
+       "encabezado": "Categorías de recompensa"
+      },
+      {
+       "id": "recompensa-recompensas-espontaneas",
+       "encabezado": "Recompensas espontáneas"
+      },
+      {
+       "id": "recompensa-conexiones",
+       "encabezado": "Conexiones"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Compañeros",
+   "reglas": [
+    {
+     "slug": "companeros",
+     "titulo": "Compañeros",
+     "fuentes": [
+      "recompensa-companeros",
+      {
+       "id": "recompensa-actividades-de-los-companeros",
+       "encabezado": "Actividades de los compañeros"
+      },
+      {
+       "id": "recompensa-ejemplos-de-companeros-por-rango",
+       "encabezado": "Ejemplos de compañeros por rango"
+      },
+      {
+       "id": "recompensa-ejemplo-de-companero-musculo-a-sueldo",
+       "encabezado": "Ejemplo de compañero: músculo a sueldo"
+      },
+      {
+       "id": "recompensa-ejemplo-de-companero-guia",
+       "encabezado": "Ejemplo de compañero: guía"
+      },
+      {
+       "id": "recompensa-ejemplo-de-companero-especialista",
+       "encabezado": "Ejemplo de compañero: especialista"
+      }
+     ]
+    },
+    {
+     "slug": "los-companeros-en-las-escenas",
+     "titulo": "Los compañeros en las escenas",
+     "fuentes": [
+      "recompensa-los-companeros-en-las-escenas"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Clavos hemalúrgicos",
+   "reglas": [
+    {
+     "slug": "clavos-hemalurgicos",
+     "titulo": "Clavos hemalúrgicos",
+     "fuentes": [
+      "recompensa-clavos-hemalurgicos",
+      {
+       "id": "recompensa-recompensas-hemalurgicas",
+       "encabezado": "Recompensas hemalúrgicas"
+      },
+      {
+       "id": "recompensa-recompensas-hemalurgicas-por-rango",
+       "encabezado": "Recompensas hemalúrgicas por rango"
+      },
+      {
+       "id": "recompensa-como-obtener-clavos-duplicados",
+       "encabezado": "Cómo obtener clavos duplicados"
+      },
+      {
+       "id": "recompensa-pericia-hemalurgo",
+       "encabezado": "Pericia Hemalurgo"
+      },
+      {
+       "id": "recompensa-efectos-de-los-clavos-hemalurgicos",
+       "encabezado": "Efectos de los clavos hemalúrgicos"
+      },
+      {
+       "id": "recompensa-influencia-de-las-esquirlas",
+       "encabezado": "Influencia de las Esquirlas"
+      },
+      {
+       "id": "recompensa-ejemplos-de-influencia-de-las-esquirlas",
+       "encabezado": "Ejemplos de influencia de las esquirlas"
+      },
+      {
+       "id": "recompensa-bendiciones-kandra-y-clavos-hemalurgicos",
+       "encabezado": "Bendiciones kandra y clavos hemalúrgicos"
+      }
+     ]
+    },
+    {
+     "slug": "implantar-y-extraer-clavos-hemalurgicos",
+     "titulo": "Implantar y extraer clavos hemalúrgicos",
+     "fuentes": [
+      "recompensa-implantar-y-extraer-clavos-hemalurgicos",
+      {
+       "id": "recompensa-extraer-el-clavo-a-un-enemigo",
+       "encabezado": "Extraer el clavo a un enemigo"
+      },
+      {
+       "id": "recompensa-perturbacion-de-la-redespiritu",
+       "encabezado": "Perturbación de la redespíritu"
+      }
+     ]
+    },
+    {
+     "slug": "efectos-conocidos-de-los-clavos-hemalurgicos",
+     "titulo": "Efectos conocidos de los clavos hemalúrgicos",
+     "fuentes": [
+      "recompensa-efectos-conocidos-de-los-clavos-hemalurgicos"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Creaciones raras y medallones",
+   "reglas": [
+    {
+     "slug": "creaciones-raras",
+     "titulo": "Creaciones raras",
+     "fuentes": [
+      "recompensa-creaciones-raras",
+      {
+       "id": "recompensa-granadas-alomanticas",
+       "encabezado": "Granadas alománticas"
+      },
+      {
+       "id": "recompensa-sombrero-forrado-de-aluminio",
+       "encabezado": "Sombrero forrado de aluminio"
+      }
+     ]
+    },
+    {
+     "slug": "medallones-feruquimicos",
+     "titulo": "Medallones feruquímicos",
+     "fuentes": [
+      "recompensa-medallones-feruquimicos",
+      {
+       "id": "recompensa-uso-de-medallones-feruquimicos",
+       "encabezado": "Uso de medallones feruquímicos"
+      },
+      {
+       "id": "recompensa-rango-de-recompensa-del-medallon",
+       "encabezado": "Rango de recompensa del medallón"
+      },
+      {
+       "id": "recompensa-recarga-de-medallones",
+       "encabezado": "Recarga de medallones"
+      },
+      {
+       "id": "recompensa-poderes-de-los-medallones-feruquimicos",
+       "encabezado": "Poderes de los medallones feruquímicos"
+      },
+      {
+       "id": "recompensa-mentes-de-metal-desligadas",
+       "encabezado": "Mentes de metal desligadas"
+      },
+      {
+       "id": "recompensa-mentes-de-metal-desligadas-por-rango",
+       "encabezado": "Mentes de metal desligadas por rango"
+      }
+     ]
+    },
+    {
+     "slug": "cuerpos-verdaderos-kandra",
+     "titulo": "Cuerpos Verdaderos kandra",
+     "fuentes": [
+      "recompensa-cuerpos-verdaderos-kandra",
+      {
+       "id": "recompensa-ejemplos-de-cuerpos-verdaderos-kandra",
+       "encabezado": "Ejemplos de Cuerpos Verdaderos kandra"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Metales raros",
+   "reglas": [
+    {
+     "slug": "metales-raros",
+     "titulo": "Metales raros",
+     "fuentes": [
+      "recompensa-metales-raros",
+      {
+       "id": "recompensa-concesion-de-metales-raros",
+       "encabezado": "Concesión de metales raros"
+      },
+      {
+       "id": "recompensa-ejemplos-de-concesion-de-metales-raros",
+       "encabezado": "Ejemplos de concesión de metales raros"
+      },
+      {
+       "id": "recompensa-suministros-recurrentes-de-metales-raros",
+       "encabezado": "Suministros recurrentes de metales raros"
+      },
+      {
+       "id": "recompensa-el-lerasium-y-las-capacidades-alomanticas",
+       "encabezado": "El lerasium y las capacidades alománticas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Patrocinadores",
+   "reglas": [
+    {
+     "slug": "patrocinadores",
+     "titulo": "Patrocinadores",
+     "fuentes": [
+      "recompensa-patrocinadores",
+      {
+       "id": "recompensa-expectativas-de-los-patrocinadores",
+       "encabezado": "Expectativas de los patrocinadores"
+      },
+      {
+       "id": "recompensa-beneficios-de-los-patrocinadores",
+       "encabezado": "Beneficios de los patrocinadores"
+      },
+      {
+       "id": "recompensa-comodidades-de-patrocinador-por-rango",
+       "encabezado": "Comodidades de patrocinador por rango"
+      },
+      {
+       "id": "recompensa-ejemplo-de-patrocinador-casa-noble-de-scadrial",
+       "encabezado": "Ejemplo de patrocinador: casa noble de Scadrial"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Organizaciones",
+   "reglas": [
+    {
+     "slug": "organizaciones",
+     "titulo": "Organizaciones",
+     "fuentes": [
+      "recompensa-organizaciones",
+      {
+       "id": "recompensa-unirse-a-una-organizacion",
+       "encabezado": "Unirse a una organización"
+      },
+      {
+       "id": "recompensa-beneficios-de-la-organizacion",
+       "encabezado": "Beneficios de la organización"
+      },
+      {
+       "id": "recompensa-liderar-una-organizacion",
+       "encabezado": "Liderar una organización"
+      },
+      {
+       "id": "recompensa-evolucion-de-las-organizaciones",
+       "encabezado": "Evolución de las organizaciones"
+      },
+      {
+       "id": "recompensa-escala-de-la-organizacion",
+       "encabezado": "Escala de la organización"
+      },
+      {
+       "id": "recompensa-metas-y-recompensas-de-organizacion",
+       "encabezado": "Metas y recompensas de organización"
+      },
+      {
+       "id": "recompensa-mejoras-de-organizacion",
+       "encabezado": "Mejoras de organización"
+      },
+      {
+       "id": "recompensa-mejoras-de-organizacion-2",
+       "encabezado": "Mejoras de organización"
+      },
+      {
+       "id": "recompensa-ejemplo-de-organizacion-empresa-comercial",
+       "encabezado": "Ejemplo de organización: empresa comercial"
+      },
+      {
+       "id": "recompensa-beneficios-de-una-empresa-comercial",
+       "encabezado": "Beneficios de una empresa comercial"
+      },
+      {
+       "id": "recompensa-ejemplo-de-organizacion-grupo-politico",
+       "encabezado": "Ejemplo de organización: grupo político"
+      },
+      {
+       "id": "recompensa-beneficios-de-un-grupo-politico",
+       "encabezado": "Beneficios de un grupo político"
+      },
+      {
+       "id": "recompensa-ejemplo-de-organizacion-red-criminal",
+       "encabezado": "Ejemplo de organización: red criminal"
+      },
+      {
+       "id": "recompensa-beneficios-de-una-red-criminal",
+       "encabezado": "Beneficios de una red criminal"
+      },
+      {
+       "id": "recompensa-ejemplo-de-organizacion-celula-de-resistencia",
+       "encabezado": "Ejemplo de organización: célula de resistencia"
+      },
+      {
+       "id": "recompensa-beneficios-de-una-celula-de-resistencia",
+       "encabezado": "Beneficios de una célula de resistencia"
+      },
+      {
+       "id": "recompensa-ejemplo-de-organizacion-club-social",
+       "encabezado": "Ejemplo de organización: club social"
+      },
+      {
+       "id": "recompensa-beneficios-de-un-club-social",
+       "encabezado": "Beneficios de un club social"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Refugios",
+   "reglas": [
+    {
+     "slug": "refugios",
+     "titulo": "Refugios",
+     "fuentes": [
+      "recompensa-refugios",
+      {
+       "id": "recompensa-refugios-basicos",
+       "encabezado": "Refugios básicos"
+      },
+      {
+       "id": "recompensa-mejoras-de-refugio",
+       "encabezado": "Mejoras de refugio"
+      },
+      {
+       "id": "recompensa-traslado-de-refugios",
+       "encabezado": "Traslado de refugios"
+      },
+      {
+       "id": "recompensa-mejoras-de-refugio-2",
+       "encabezado": "Mejoras de refugio"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "recompensa-como-aprovechar-las-metas-como-dj",
+  "recompensa-como-aprovechar-las-metas-como-jugador",
+  "recompensa-consejo-para-la-dj-cuando-concluir-una-meta",
+  "recompensa-consejo-para-la-dj-ofrecer-recompensas",
+  "recompensa-enfoques-de-la-interpretacion",
+  "recompensa-interpretacion",
+  "recompensa-interpretacion-en-primera-persona"
+ ]
+}

@@ -1,0 +1,154 @@
+{
+ "tema": "Dirección del juego",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Uso de las eras",
+   "reglas": [
+    {
+     "slug": "uso-de-las-eras",
+     "titulo": "Uso de las eras",
+     "fuentes": [
+      "direccion-uso-de-las-eras"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Seguridad en la mesa",
+   "reglas": [
+    {
+     "slug": "la-sesion-cero",
+     "titulo": "La sesión cero",
+     "fuentes": [
+      "direccion-la-sesion-cero"
+     ]
+    },
+    {
+     "slug": "lineas-y-velos",
+     "titulo": "Líneas y velos",
+     "fuentes": [
+      "direccion-lineas-y-velos",
+      {
+       "id": "direccion-lineas",
+       "encabezado": "Líneas"
+      },
+      {
+       "id": "direccion-velos",
+       "encabezado": "Velos"
+      },
+      {
+       "id": "direccion-lineas-y-velos-durante-el-juego",
+       "encabezado": "Líneas y velos durante el juego"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "direccion-a-quien-se-dirigen-las-reglas",
+  "direccion-actividades-con-mucho-en-juego",
+  "direccion-actividades-con-poco-en-juego",
+  "direccion-artes-investidas",
+  "direccion-artes-metalicas",
+  "direccion-aventuras",
+  "direccion-aventuras-publicadas",
+  "direccion-cambio-y-revolucion",
+  "direccion-caminos-de-nacidos-del-metal-por-era",
+  "direccion-caminos-heroicos",
+  "direccion-caminos-heroicos-2",
+  "direccion-caminos-heroicos-por-era",
+  "direccion-canon-y-continuidad",
+  "direccion-clasismo-y-esclavitud",
+  "direccion-como-elegir-los-personajes-adecuados",
+  "direccion-como-empezar-en-niveles-superiores",
+  "direccion-como-estructurar-una-campana",
+  "direccion-como-estructurar-una-sesion-de-juego",
+  "direccion-como-evocar-scadrial",
+  "direccion-como-hacer-progresar-las-metas",
+  "direccion-como-incluir-la-marginacion-de-manera-responsable",
+  "direccion-como-incrementar-la-capacidad-de-decision-de-los-jugadores",
+  "direccion-como-otorgar-metas",
+  "direccion-como-recompensar-el-progreso",
+  "direccion-como-usar-las-oportunidades-y-las-complicaciones",
+  "direccion-comprobaciones",
+  "direccion-conclusion-de-metas",
+  "direccion-conocimiento-de-la-ambientacion",
+  "direccion-consentimiento-y-abuso",
+  "direccion-continuidad",
+  "direccion-crea-el-personaje-y-subelo-de-nivel",
+  "direccion-creacion-de-personajes",
+  "direccion-creacion-de-personajes-en-niveles-superiores",
+  "direccion-cuando-pedir-pruebas-de-habilidad",
+  "direccion-cuantas-escenas",
+  "direccion-cuidado-con-la-marginacion-dentro-del-grupo",
+  "direccion-designar-un-espacio",
+  "direccion-diversidad-funcional",
+  "direccion-el-dado-de-trama-en-el-combate",
+  "direccion-el-dado-de-trama-fuera-del-combate",
+  "direccion-el-mundo-de-ceniza",
+  "direccion-el-primer-paso",
+  "direccion-el-scadrial-del-canon",
+  "direccion-eleccion-de-una-era",
+  "direccion-elecciones-dificiles",
+  "direccion-elige-recompensas-y-objetos",
+  "direccion-entre-eras",
+  "direccion-era-de-los-originadores",
+  "direccion-especialidades-exclusivas-de-ambientacion",
+  "direccion-especismo-y-hemalurgia",
+  "direccion-eugenesia",
+  "direccion-frecuencia-de-la-subida-de-nivel",
+  "direccion-genero-y-sexualidad",
+  "direccion-giros-de-guion",
+  "direccion-guia-de-seguridad",
+  "direccion-hacer-avanzar-la-historia",
+  "direccion-ideas-para-aventuras",
+  "direccion-ideas-para-aventuras-2",
+  "direccion-interseccionalidad",
+  "direccion-intimidad",
+  "direccion-introduccion-a-la-direccion-del-juego",
+  "direccion-jugadores-que-piden-subir-la-apuesta",
+  "direccion-jugadores-que-sugieren-desenlaces",
+  "direccion-momentos-dramaticos",
+  "direccion-momentos-elegidos-cuidadosamente",
+  "direccion-momentos-significativos",
+  "direccion-muerte-de-personajes",
+  "direccion-mundos-aparte-virtudes-y-limitaciones",
+  "direccion-niveles",
+  "direccion-niveles-similares",
+  "direccion-nota-sobre-los-destripes",
+  "direccion-nuevos-jugadores-y-el-canon",
+  "direccion-objetos-y-recompensas",
+  "direccion-origenes",
+  "direccion-otras-eras",
+  "direccion-otro-eje",
+  "direccion-palabrotas",
+  "direccion-para-empezar",
+  "direccion-personajes-de-otros-mundos",
+  "direccion-prerrequisitos-de-recompensa",
+  "direccion-programacion-de-sesiones",
+  "direccion-pura-chiripa",
+  "direccion-que-hacemos-con-el-canon",
+  "direccion-recompensas",
+  "direccion-recompensas-2",
+  "direccion-reconocer-las-realidades-vividas",
+  "direccion-representacion-de-un-mundo-cambiante",
+  "direccion-scadrial-clasico",
+  "direccion-seguridad",
+  "direccion-seguridad-y-sensibilidad-en-el-imperio-final",
+  "direccion-tematica",
+  "direccion-trastornos-de-salud-mental",
+  "direccion-tus-propias-aventuras",
+  "direccion-un-apunte-de-brandon",
+  "direccion-un-apunte-sobre-el-estilo-de-direccion",
+  "direccion-uso-colaborativo-del-dado-de-trama",
+  "direccion-uso-de-contenido-de-otras-ambientaciones",
+  "direccion-uso-de-las-herramientas-de-seguridad",
+  "direccion-uso-de-potencias-junto-a-la-alomancia",
+  "direccion-uso-de-sucesos",
+  "direccion-uso-del-dado-de-trama",
+  "direccion-ventajas-y-desventajas-narrativas",
+  "direccion-violencia-sangre-y-terror",
+  "direccion-vuestro-scadrial"
+ ]
+}

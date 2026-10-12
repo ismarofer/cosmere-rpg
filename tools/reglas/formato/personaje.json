@@ -1,0 +1,229 @@
+[
+ {
+  "titulo": "Atributos",
+  "cambios": [
+   [
+    "determinan tus rasgos innatos.\n\nDurante el juego",
+    "determinan tus rasgos innatos. Durante el juego"
+   ],
+   [
+    "representa tu resistencia al daño.\n\nTe permite reducir",
+    "representa tu resistencia al daño. Te permite reducir"
+   ],
+   [
+    "\n\nel Reino Físico, el Reino Cognitivo y el Reino Espiritual. Muchas",
+    "son habilidades espirituales.",
+    ""
+   ]
+  ],
+  "definiciones": [
+   "Atributos",
+   "Defensas",
+   "Desvío",
+   "Pericias",
+   "Salud, concentración e Investidura"
+  ]
+ },
+ {
+  "titulo": "Fuerza",
+  "cambios": [
+   [
+    "Fuerza Cap. de levantamiento Cap. de carga",
+    "9 o más 5000 kilos 2500 kilos",
+    "| Fuerza | Cap. de levantamiento | Cap. de carga |\n|---|---|---|\n| 0 | 50 kilos | 25 kilos |\n| 1 a 2 | 100 kilos | 50 kilos |\n| 3 a 4 | 250 kilos | 125 kilos |\n| 5 a 6 | 500 kilos | 250 kilos |\n| 7 a 8 | 2500 kilos | 1250 kilos |\n| 9 o más | 5000 kilos | 2500 kilos |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Velocidad",
+  "cambios": [
+   [
+    "#### Valor de movimiento",
+    "La Velocidad es tu rapidez y destreza. Representa la delicadeza y presteza en general.\n\n#### Valor de movimiento"
+   ],
+   [
+    "Velocidad Movimiento",
+    "9 o más 24 metros por acción",
+    "| Velocidad | Movimiento |\n|---|---|\n| 0 | 6 metros por acción |\n| 1 a 2 | 7,5 metros por acción |\n| 3 a 4 | 9 metros por acción |\n| 5 a 6 | 12 metros por acción |\n| 7 a 8 | 18 metros por acción |\n| 9 o más | 24 metros por acción |"
+   ],
+   [
+    "Si necesitas determinar tu valor de movimiento cuando no estás en combate",
+    "#### Movimiento fuera del combate\nSi necesitas determinar tu valor de movimiento cuando no estás en combate"
+   ]
+  ]
+ },
+ {
+  "titulo": "Intelecto",
+  "cambios": [
+   [
+    "#### Pericias adicionales",
+    "El Intelecto es tu inteligencia aplicada y tu ingenio. Representa la capacidad de acumular y recordar conocimientos, así como de deducir hechos.\n\n#### Pericias adicionales"
+   ]
+  ]
+ },
+ {
+  "titulo": "Voluntad",
+  "cambios": [
+   [
+    "#### Dado de recuperación\nVoluntad Dado de recuperación",
+    "9 o más 1d20",
+    "| Voluntad | Dado de recuperación |\n|---|---|\n| 0 | 1d4 |\n| 1 a 2 | 1d6 |\n| 3 a 4 | 1d8 |\n| 5 a 6 | 1d10 |\n| 7 a 8 | 1d12 |\n| 9 o más | 1d20 |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Discernimiento",
+  "cambios": [
+   [
+    "#### Sentidos",
+    "El Discernimiento es tu sabiduría y conexión con el mundo que te rodea. Representa la capacidad de percibir el entorno y relacionarte con los demás.\n\n#### Sentidos"
+   ],
+   [
+    "#### Tabla de alcance\nDiscernimiento Alcance",
+    "No se ve afectado por los sentidos ofuscados",
+    "#### Alcance de los sentidos\n| Discernimiento | Alcance |\n|---|---|\n| 0 | 1,5 m |\n| 1 a 2 | 3 m |\n| 3 a 4 | 6 m |\n| 5 a 6 | 15 m |\n| 7 a 8 | 30 m |\n| 9 o más | No se ve afectado por los sentidos ofuscados |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Presencia",
+  "cambios": [
+   [
+    "#### Características afectadas",
+    "La Presencia es tu carisma y porte. Representa la capacidad de influir en los demás, establecer relaciones y llegar a las masas.\n\n#### Características afectadas"
+   ]
+  ]
+ },
+ {
+  "titulo": "Físico, Cognitivo y Espiritual",
+  "definiciones": [
+   "Físico",
+   "Cognitivo",
+   "Espiritual"
+  ]
+ },
+ {
+  "titulo": "Defensas",
+  "cambios": [
+   [
+    "Cuando haces una prueba de habilidad dirigida hacia otro personaje",
+    "#### Las defensas y la clase de dificultad\nCuando haces una prueba de habilidad dirigida hacia otro personaje"
+   ]
+  ],
+  "definiciones": [
+   "Cómo ajustar las CD"
+  ]
+ },
+ {
+  "titulo": "Salud, concentración e Investidura",
+  "cambios": [
+   [
+    "\n\nEn ciertas situaciones, tus sentidos sobrenaturales",
+    "cuántos adversarios te esperan allí.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Sentidos sobrenaturales",
+  "cambios": [
+   [
+    "con la colaboración de la DJ.",
+    "con la colaboración de la DJ.\n\nEn ciertas situaciones, tus sentidos sobrenaturales podrían permitirte conocer datos de forma automática que aquellos con sentidos mundanos tendrían que descubrir mediante una prueba. Por ejemplo, un oído sobrenatural te permitiría escuchar sin esfuerzo una conversación susurrada en el otro extremo de un salón de baile abarrotado.\n\nEn otros casos, estas facultades te permitirán hacer pruebas (usando Percepción o Deducción, por ejemplo) para obtener información que a otros les resultaría imposible obtener. Por ejemplo, un tacto sobrenatural te permitiría detectar la vibración de pasos enemigos al otro lado de un muro de piedra; si además superas una prueba de Deducción, podrías llegar a saber cuántos adversarios te esperan allí."
+   ]
+  ]
+ },
+ {
+  "titulo": "Pericias culturales",
+  "definiciones": [
+   "Ejemplos"
+  ]
+ },
+ {
+  "titulo": "Pericias en arma",
+  "definiciones": [
+   "Ejemplos"
+  ]
+ },
+ {
+  "titulo": "Pericias en armadura",
+  "definiciones": [
+   "Ejemplos"
+  ]
+ },
+ {
+  "titulo": "Pericias de utilidad",
+  "definiciones": [
+   "Ejemplos"
+  ]
+ },
+ {
+  "titulo": "Pericias especializadas",
+  "definiciones": [
+   "Restricciones"
+  ]
+ },
+ {
+  "titulo": "Pasos de la creación de personajes",
+  "cambios": [
+   [
+    "1. Elige tus orígenes. 2. Elige tu camino inicial. 3. Elige tus atributos. 4. Elige tus habilidades y pericias. 5. Elige tus talentos. 6. Equípate. 7. Cuenta tu historia. 8. Calcula tus características finales.",
+    "◆ 1. Elige tus orígenes.\n◆ 2. Elige tu camino inicial.\n◆ 3. Elige tus atributos.\n◆ 4. Elige tus habilidades y pericias.\n◆ 5. Elige tus talentos.\n◆ 6. Equípate.\n◆ 7. Cuenta tu historia.\n◆ 8. Calcula tus características finales."
+   ],
+   [
+    "construir arquetipos icónicos u viaje por Scadrial empieza",
+    "construir arquetipos icónicos.\n\nTu viaje por Scadrial empieza"
+   ],
+   [
+    "Tu viaje por Scadrial empieza",
+    "el inicio de la historia que definirá su lugar en el mundo.",
+    "^",
+    "antes"
+   ]
+  ]
+ },
+ {
+  "titulo": "Progreso de los personajes",
+  "cambios": [
+   [
+    "1.\tIncrementas el nivel de tu personaje en 1.",
+    "5.\tObtienes un talento nuevo.",
+    "◆ 1. Incrementas el nivel de tu personaje en 1.\n◆ 2. Si así lo indica tu nuevo nivel, incrementas un atributo y sus características relacionadas.\n◆ 3. Incrementas tu salud.\n◆ 4. Obtienes grados en habilidad.\n◆ 5. Obtienes un talento nuevo."
+   ],
+   [
+    "#### Paso 4: Obtienes grados en habilidad",
+    "#### Paso 3: Incrementas tu salud\nIncrementa tu salud máxima y actual en la cantidad que se especifica en la tabla Progreso de los personajes para el nuevo nivel.\n\n#### Paso 4: Obtienes grados en habilidad"
+   ],
+   [
+    "\n\n| Rango | Nivel |",
+    "\n\n#### Progreso de los personajes\n| Rango | Nivel |"
+   ],
+   [
+    "#### Niveles y metas",
+    "la DJ debería intentar narrar.",
+    "#### Cómo subir de nivel",
+    "antes"
+   ]
+  ]
+ },
+ {
+  "titulo": "Rangos de juego",
+  "definiciones": [
+   "Rango 1 (niveles 1 a 5)",
+   "Rango 2 (niveles 6 a 10)",
+   "Rango 3 (niveles 11 a 15)",
+   "Rango 4 (niveles 16 a 20)",
+   "Rango 5 (nivel 21 o más)"
+  ]
+ },
+ {
+  "titulo": "Cómo elegir recompensas",
+  "cambios": [
+   [
+    "\n\n#### Paso 3: Incrementas tu salud",
+    "para el nuevo nivel.",
+    ""
+   ]
+  ]
+ }
+]

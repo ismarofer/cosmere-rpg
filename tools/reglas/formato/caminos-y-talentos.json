@@ -1,0 +1,172 @@
+[
+ {
+  "titulo": "Camino y habilidad iniciales",
+  "definiciones": [
+   "Reposo",
+   "Estados",
+   "Daño, lesiones y muerte",
+   "Rondas y turnos",
+   "Acciones y reacciones",
+   "Ataques",
+   "Objetivos y alcance",
+   "Movimiento y posicionamiento",
+   "Cómo resistirse a la influencia"
+  ]
+ },
+ {
+  "titulo": "Cómo usar los talentos",
+  "cambios": [
+   [
+    "Activación especial (*). Hay talentos",
+    "en cualquier momento que te encuentres con esa situación.",
+    "#### Cómo usar los talentos fuera del combate",
+    "antes"
+   ]
+  ],
+  "definiciones": [
+   "Nombre",
+   "Prerrequisito",
+   "Activación",
+   "Descripción narrativa",
+   "Descripción del efecto",
+   "Acción (1)",
+   "Acción gratuita (0)",
+   "Reacción (r)",
+   "Activación especial (*)",
+   "Siempre activo (8)"
+  ]
+ },
+ {
+  "titulo": "Cuándo activar talentos y efectos",
+  "cambios": [
+   [
+    "\n\n#### Acumulación de talentos y efectos",
+    "puede aplicarse varias veces.",
+    ""
+   ]
+  ],
+  "definiciones": [
+   "Cuando",
+   "Antes",
+   "Después",
+   "Mientras",
+   "Hasta"
+  ]
+ },
+ {
+  "titulo": "Elección de talentos duplicados",
+  "cambios": [
+   [
+    "\n\nAtributos. Suele ser buena idea",
+    "herramientas de seres divinos o empleados",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo usar los caminos de nacidos del metal",
+  "definiciones": [
+   "Brumoso",
+   "Nacido de la bruma (Era 1)",
+   "Feruquimista (Era 1)",
+   "Ferrin (Era 2)",
+   "Nacidoble (Era 2)"
+  ]
+ },
+ {
+  "titulo": "Elección de un talento de ruptura o de herencia",
+  "cambios": [
+   [
+    "Si usas alomancia, añade",
+    "◆ **Alomancia.** Si usas alomancia, añade"
+   ],
+   [
+    "“Alomancia: uso de la Investidura”). Si usas feruquimia,",
+    "“Alomancia: uso de la Investidura”).\n◆ **Feruquimia.** Si usas feruquimia,"
+   ],
+   [
+    "“Feruquimia: uso de mentes de metal”). Si usas tanto",
+    "“Feruquimia: uso de mentes de metal”).\n◆ **Ambas.** Si usas tanto"
+   ]
+  ],
+  "definiciones": [
+   "En tu hoja de personaje"
+  ]
+ },
+ {
+  "titulo": "Alomancia: uso de la Investidura",
+  "cambios": [
+   [
+    "#### Alomancia: Entrenamiento en las artes alománticas",
+    "#### Entrenamiento en las artes alománticas"
+   ]
+  ]
+ },
+ {
+  "titulo": "Gestión de los metales",
+  "cambios": [
+   [
+    "\n\nAlmacenar un atributo requiere tiempo",
+    "almacenar durante un descanso largo te deja Agotado.",
+    ""
+   ],
+   [
+    "si el metal resulta difícil de",
+    "si el metal resulta difícil de romper en un tamaño o forma que puedas tragar. Además, si un metal es difícil de conseguir en la narrativa actual, la DJ podría pedirte que lleves la cuenta de tus reservas.\n\nLos poderes alománticos alcanzan su mayor eficacia al quemar metal puro (o, en el caso de las aleaciones, aquellas con proporciones calibradas con precisión por un metalúrgico). Además, ingerir metales no alománticos puede resultar extremadamente peligroso (consulta “Consumo de metales impuros”)."
+   ]
+  ]
+ },
+ {
+  "titulo": "Savantismo alomántico",
+  "cambios": [
+   [
+    "#### Atium intuitivo",
+    "en la sección “Alomancia de atium” del capítulo 6.",
+    "#### Manifestaciones del savantismo",
+    "antes"
+   ]
+  ]
+ },
+ {
+  "titulo": "Feruquimia: uso de mentes de metal",
+  "cambios": [
+   [
+    "Solo tú puedes almacenar cargas en tus propias mentes de metal.",
+    "Solo tú puedes almacenar cargas en tus propias mentes de metal.\n\nAlmacenar un atributo requiere tiempo, como se especifica en cada poder feruquímico. La sección “Duración de las acciones de Almacenar” del capítulo 6 ofrece más pautas sobre cuánto tiempo se tarda en almacenar cada carga.\n\nTal como se detalla en “Descanso” en el capítulo 9, puedes almacenar cargas durante un descanso corto o largo, pero al hacerlo renuncias a los otros beneficios de dicho descanso; además, almacenar durante un descanso largo te deja Agotado."
+   ],
+   [
+    "\n\nHasta que no completes esta meta de nacido del metal",
+    "los requisitos iniciales de tu meta de nacido del metal.",
+    ""
+   ],
+   [
+    "\n\n#### Feruquimia: Fabricación de una mente de metal",
+    "(o tienen una aleación adecuada).",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Metas y recompensas de nacido del metal",
+  "cambios": [
+   [
+    "mientras trabajas en tu meta).",
+    "mientras trabajas en tu meta).\n\nHasta que no completes esta meta de nacido del metal, no podrás usar todo tu poder ni adquirir sus talentos. En su lugar, solo podrás emplear una versión naciente del mismo (consulta “Poderes nacientes” en el capítulo 6). Una vez completada la meta, desbloquearás todo el poder y podrás elegir talentos de su árbol, como en cualquier otro camino. Las dos secciones siguientes describen cómo progresar en tu meta de nacido del metal y reclamar su recompensa. (El capítulo 8 presenta las reglas generales para metas y recompensas).\n\nSi quieres crear un personaje que ya tenga experiencia con su poder (quizá un matón brazo de peltre retirado), habla con la DJ y considera elegir el equipo inicial de Guardador o de Fugitivo (que permiten completar de inmediato tu meta inicial de nacido del metal). Alternativamente, la DJ y tú podríais acordar una razón por la que tu personaje no está usando todo su poder en este momento (una lesión o falta de metal, por ejemplo), o la DJ podría ajustar los requisitos iniciales de tu meta de nacido del metal.\n\n#### Feruquimia: fabricar una mente de metal\nPara que un feruquimista pueda almacenar y decantar su poder con facilidad, necesita una mente de metal de un tamaño y pureza suficientes. Según el tipo de metal, conseguir lo necesario para fabricar una mente de metal no es tarea fácil. Además, pocas piezas de metal en circulación son completamente puras (o tienen una aleación adecuada)."
+   ]
+  ]
+ },
+ {
+  "titulo": "Cómo crear un brumoso",
+  "definiciones": [
+   "Atributos",
+   "Caminos heroicos",
+   "Habilidades"
+  ]
+ },
+ {
+  "titulo": "Talento principal de brumoso",
+  "definiciones": [
+   "Habilidad inicial: Alomancia"
+  ]
+ }
+]

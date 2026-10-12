@@ -1,0 +1,788 @@
+{
+ "tema": "Combate",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Turnos y rondas",
+   "reglas": [
+    {
+     "slug": "orden-del-combate",
+     "titulo": "Orden del combate",
+     "fuentes": [
+      "combate-introduccion-al-combate",
+      "combate-orden-del-combate"
+     ]
+    },
+    {
+     "slug": "rondas-y-turnos",
+     "titulo": "Rondas y turnos",
+     "fuentes": [
+      "combate-rondas-y-turnos"
+     ]
+    },
+    {
+     "slug": "fases-del-turno",
+     "titulo": "Fases del turno",
+     "fuentes": [
+      "combate-fases-del-turno",
+      {
+       "id": "combate-turnos-de-los-pnjs-aliados",
+       "encabezado": "Turnos de los PNJs aliados"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Acciones y reacciones",
+   "reglas": [
+    {
+     "slug": "acciones-y-reacciones",
+     "titulo": "Acciones y reacciones",
+     "fuentes": [
+      "combate-acciones-y-reacciones",
+      {
+       "id": "combate-obtencion-de-acciones-y-reacciones",
+       "encabezado": "Obtener acciones"
+      },
+      {
+       "id": "combate-obtener-acciones"
+      },
+      {
+       "id": "combate-obtener-reacciones",
+       "encabezado": "Obtener reacciones"
+      },
+      {
+       "id": "combate-contare-hasta-diez",
+       "encabezado": "Contaré hasta diez…"
+      },
+      {
+       "id": "personaje-acciones-y-reacciones",
+       "encabezado": "En resumen"
+      }
+     ]
+    },
+    {
+     "slug": "acciones",
+     "titulo": "Acciones",
+     "fuentes": [
+      "combate-acciones",
+      {
+       "id": "combate-maniobras-especiales-y-disparos-precisos",
+       "encabezado": "Maniobras especiales y disparos precisos"
+      },
+      {
+       "id": "combate-improvisacion-de-acciones",
+       "encabezado": "Improvisación de acciones"
+      }
+     ]
+    },
+    {
+     "slug": "acciones-gratuitas",
+     "titulo": "Acciones gratuitas",
+     "fuentes": [
+      "combate-acciones-gratuitas"
+     ]
+    },
+    {
+     "slug": "reacciones",
+     "titulo": "Reacciones",
+     "fuentes": [
+      "combate-reacciones"
+     ]
+    },
+    {
+     "slug": "sorpresa",
+     "titulo": "Sorpresa",
+     "fuentes": [
+      "combate-sorpresa"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Ataques",
+   "reglas": [
+    {
+     "slug": "ataques",
+     "titulo": "Ataques",
+     "fuentes": [
+      "combate-ataques"
+     ]
+    },
+    {
+     "slug": "como-hacer-un-ataque",
+     "titulo": "Cómo hacer un ataque",
+     "fuentes": [
+      "combate-como-hacer-un-ataque",
+      {
+       "id": "combate-paso-1-elige-tu-objetivo",
+       "encabezado": "Paso 1: Elige tu objetivo"
+      },
+      {
+       "id": "combate-paso-3-resuelve-el-dano",
+       "hasta": "Fallo. Si la prueba",
+       "encabezado": "Paso 3: Resuelve el daño"
+      }
+     ]
+    },
+    {
+     "slug": "paso-2-haz-la-prueba-de-ataque-y-tira-los-dados-de-dano",
+     "titulo": "Paso 2: Haz la prueba de ataque y tira los dados de daño",
+     "fuentes": [
+      "combate-paso-2-haz-la-prueba-de-ataque-y-tira-los-dados-de-dano"
+     ]
+    },
+    {
+     "slug": "fallo",
+     "titulo": "Fallo",
+     "fuentes": [
+      {
+       "id": "combate-paso-3-resuelve-el-dano",
+       "desde": "Fallo. Si la prueba",
+       "hasta": "Rasguño. Al fallar"
+      }
+     ]
+    },
+    {
+     "slug": "rasguno",
+     "titulo": "Rasguño",
+     "fuentes": [
+      {
+       "id": "combate-paso-3-resuelve-el-dano",
+       "desde": "Rasguño. Al fallar",
+       "hasta": "Impacto. Si la prueba",
+       "reemplazar": [
+        [
+         "puedes gastar\n\n1 punto",
+         "puedes gastar 1 punto"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "slug": "impacto",
+     "titulo": "Impacto",
+     "fuentes": [
+      {
+       "id": "combate-paso-3-resuelve-el-dano",
+       "desde": "Impacto. Si la prueba",
+       "hasta": "Impacto crítico."
+      }
+     ]
+    },
+    {
+     "slug": "impacto-critico",
+     "titulo": "Impacto crítico",
+     "fuentes": [
+      {
+       "id": "combate-paso-3-resuelve-el-dano",
+       "desde": "Impacto crítico."
+      }
+     ]
+    },
+    {
+     "slug": "ataques-con-armas",
+     "titulo": "Ataques con armas",
+     "fuentes": [
+      "combate-ataques-con-armas"
+     ]
+    },
+    {
+     "slug": "ataques-sin-armas",
+     "titulo": "Ataques sin armas",
+     "fuentes": [
+      "objeto-ataques-sin-armas"
+     ]
+    },
+    {
+     "slug": "armas-improvisadas",
+     "titulo": "Armas improvisadas",
+     "fuentes": [
+      "objeto-armas-improvisadas"
+     ]
+    },
+    {
+     "slug": "ataques-cuerpo-a-cuerpo",
+     "titulo": "Ataques cuerpo a cuerpo",
+     "fuentes": [
+      "combate-ataques-cuerpo-a-cuerpo"
+     ]
+    },
+    {
+     "slug": "ataques-a-distancia",
+     "titulo": "Ataques a distancia",
+     "fuentes": [
+      "combate-ataques-a-distancia"
+     ]
+    },
+    {
+     "slug": "ataques-a-distancia-y-cercania",
+     "titulo": "Ataques a distancia y cercanía",
+     "fuentes": [
+      "combate-ataques-a-distancia-y-cercania"
+     ]
+    },
+    {
+     "slug": "punto-de-apoyo-inestable",
+     "titulo": "Punto de apoyo inestable",
+     "fuentes": [
+      "combate-punto-de-apoyo-inestable"
+     ]
+    },
+    {
+     "slug": "ataques-con-mas-de-un-objetivo",
+     "titulo": "Ataques con más de un objetivo",
+     "fuentes": [
+      "combate-ataques-con-mas-de-un-objetivo"
+     ]
+    },
+    {
+     "slug": "ataques-de-zona",
+     "titulo": "Ataques de zona",
+     "fuentes": [
+      "combate-ataques-de-zona"
+     ]
+    },
+    {
+     "slug": "maniobras-creativas",
+     "titulo": "Maniobras creativas",
+     "fuentes": [
+      "combate-maniobras-creativas"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Daño, lesiones y muerte",
+   "reglas": [
+    {
+     "slug": "dano",
+     "titulo": "Daño",
+     "fuentes": [
+      "descanso-dano-lesiones-y-muerte",
+      "descanso-dano"
+     ]
+    },
+    {
+     "slug": "tipos-de-dano",
+     "titulo": "Tipos de daño",
+     "fuentes": [
+      "descanso-tipos-de-dano"
+     ]
+    },
+    {
+     "slug": "lesiones",
+     "titulo": "Lesiones",
+     "fuentes": [
+      "descanso-lesiones",
+      {
+       "id": "descanso-sufrir-una-lesion",
+       "encabezado": "Sufrir una lesión"
+      },
+      {
+       "id": "descanso-duracion-de-las-lesiones",
+       "encabezado": "Duración de las lesiones"
+      },
+      {
+       "id": "descanso-efectos-de-las-lesiones",
+       "encabezado": "Efectos de las lesiones"
+      },
+      {
+       "id": "descanso-efectos-de-las-lesiones-2"
+      },
+      {
+       "id": "descanso-los-pnjs-menores-y-las-lesiones",
+       "encabezado": "Los PNJs menores y las lesiones"
+      },
+      {
+       "id": "descanso-recuperacion-de-lesiones",
+       "encabezado": "Recuperación de lesiones"
+      },
+      {
+       "id": "descanso-lesiones-frente-a-diversidad-funcional",
+       "encabezado": "Lesiones frente a diversidad funcional"
+      },
+      {
+       "id": "descanso-representacion-de-lesiones-y-diversidad-funcional",
+       "encabezado": "Representación de lesiones y diversidad funcional"
+      }
+     ]
+    },
+    {
+     "slug": "tiradas-de-lesion",
+     "titulo": "Tiradas de lesión",
+     "fuentes": [
+      "descanso-tiradas-de-lesion"
+     ]
+    },
+    {
+     "slug": "muerte",
+     "titulo": "Muerte",
+     "fuentes": [
+      "descanso-muerte",
+      {
+       "id": "descanso-volver-a-la-vida",
+       "encabezado": "Volver a la vida"
+      },
+      {
+       "id": "descanso-la-muerte-y-los-efectos-investidos",
+       "encabezado": "La muerte y los efectos Investidos"
+      }
+     ]
+    },
+    {
+     "slug": "adversarios-derrotados",
+     "titulo": "Adversarios derrotados",
+     "fuentes": [
+      {
+       "id": "direccion-adversarios-derrotados",
+       "hasta": "suponer que el adversario"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Armas en combate",
+   "reglas": [
+    {
+     "slug": "armas",
+     "titulo": "Armas",
+     "fuentes": [
+      "objeto-armas",
+      {
+       "id": "objeto-rasgos-de-las-armas",
+       "encabezado": "Rasgos de las armas"
+      },
+      {
+       "id": "objeto-armas-armas-especiales",
+       "encabezado": "Armas especiales"
+      },
+      {
+       "id": "objeto-hojas-koloss",
+       "encabezado": "Hojas koloss"
+      },
+      {
+       "id": "objeto-palos-de-ruido",
+       "encabezado": "Palos de ruido"
+      },
+      {
+       "id": "objeto-a-merced-de-otro",
+       "encabezado": "A merced de otro"
+      },
+      {
+       "id": "objeto-bastones-de-duelo",
+       "encabezado": "Bastones de duelo"
+      },
+      {
+       "id": "objeto-dinamita",
+       "encabezado": "Dinamita"
+      },
+      {
+       "id": "objeto-ametralladora-rotatoria",
+       "encabezado": "Ametralladora rotatoria"
+      }
+     ]
+    },
+    {
+     "slug": "armas-cuerpo-a-cuerpo",
+     "titulo": "Armas cuerpo a cuerpo",
+     "fuentes": [
+      "objeto-armas-cuerpo-a-cuerpo"
+     ]
+    },
+    {
+     "slug": "armas-a-distancia",
+     "titulo": "Armas a distancia",
+     "fuentes": [
+      "objeto-armas-a-distancia"
+     ]
+    },
+    {
+     "slug": "alcance-de-las-armas",
+     "titulo": "Alcance de las armas",
+     "fuentes": [
+      "objeto-alcance-de-las-armas"
+     ]
+    },
+    {
+     "slug": "empunar-armas",
+     "titulo": "Empuñar armas",
+     "fuentes": [
+      {
+       "id": "objeto-empunar-armas",
+       "hasta": "de ese talento: Entrenar"
+      }
+     ]
+    },
+    {
+     "slug": "preparar-las-armas",
+     "titulo": "Preparar las armas (desenvainar)",
+     "fuentes": [
+      "objeto-preparar-las-armas"
+     ]
+    },
+    {
+     "slug": "armas-en-la-mano-secundaria",
+     "titulo": "Armas en la mano secundaria",
+     "fuentes": [
+      "objeto-armas-en-la-mano-secundaria"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Objetivos y alcance",
+   "reglas": [
+    {
+     "slug": "alcance-del-efecto",
+     "titulo": "Alcance del efecto",
+     "fuentes": [
+      "combate-alcance-del-efecto"
+     ]
+    },
+    {
+     "slug": "alcance",
+     "titulo": "Alcance",
+     "fuentes": [
+      "combate-alcance",
+      {
+       "id": "combate-objetivos-y-alcance",
+       "encabezado": "Objetivos y alcance"
+      }
+     ]
+    },
+    {
+     "slug": "alcance-corto-y-largo",
+     "titulo": "Alcance corto y largo",
+     "fuentes": [
+      "combate-alcance-corto-y-largo"
+     ]
+    },
+    {
+     "slug": "cercania",
+     "titulo": "Cercanía",
+     "fuentes": [
+      "combate-cercania"
+     ]
+    },
+    {
+     "slug": "efectos-de-zona",
+     "titulo": "Efectos de zona",
+     "fuentes": [
+      "combate-efectos-de-zona",
+      {
+       "id": "combate-situar-los-efectos-de-zona",
+       "encabezado": "Situar los efectos de zona"
+      },
+      {
+       "id": "combate-los-efectos-de-zona-y-los-sentidos",
+       "encabezado": "Los efectos de zona y los sentidos"
+      },
+      {
+       "id": "combate-los-efectos-de-zona-y-las-barreras",
+       "encabezado": "Los efectos de zona y las barreras"
+      }
+     ]
+    },
+    {
+     "slug": "designar-a-personajes-y-objetos-como-objetivos",
+     "titulo": "Designar a personajes y objetos como objetivos",
+     "fuentes": [
+      "combate-designar-a-personajes-y-objetos-como-objetivos"
+     ]
+    },
+    {
+     "slug": "linea-de-efecto",
+     "titulo": "Línea de efecto",
+     "fuentes": [
+      "combate-linea-de-efecto"
+     ]
+    },
+    {
+     "slug": "localizar-y-sentir-a-los-objetivos",
+     "titulo": "Localizar y sentir a los objetivos",
+     "fuentes": [
+      "combate-localizar-y-sentir-a-los-objetivos"
+     ]
+    },
+    {
+     "slug": "influir-en-un-objetivo",
+     "titulo": "Influir en un objetivo",
+     "fuentes": [
+      "combate-influir-en-un-objetivo"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Movimiento y espacio",
+   "reglas": [
+    {
+     "slug": "movimiento-y-posicionamiento",
+     "titulo": "Movimiento y posicionamiento",
+     "fuentes": [
+      "combate-movimiento-y-posicionamiento"
+     ]
+    },
+    {
+     "slug": "tamano-y-espacio",
+     "titulo": "Tamaño y espacio",
+     "fuentes": [
+      "combate-tamano-y-espacio"
+     ]
+    },
+    {
+     "slug": "tamano-de-personajes",
+     "titulo": "Tamaño de personajes",
+     "fuentes": [
+      "combate-tamano-de-personajes"
+     ]
+    },
+    {
+     "slug": "espacio",
+     "titulo": "Espacio",
+     "fuentes": [
+      "combate-espacio"
+     ]
+    },
+    {
+     "slug": "apretujarse-a-traves-de-zonas-pequenas",
+     "titulo": "Apretujarse a través de zonas pequeñas",
+     "fuentes": [
+      "combate-apretujarse-a-traves-de-zonas-pequenas"
+     ]
+    },
+    {
+     "slug": "tipos-de-movimiento",
+     "titulo": "Tipos de movimiento",
+     "fuentes": [
+      "combate-tipos-de-movimiento"
+     ]
+    },
+    {
+     "slug": "movimiento-estandar",
+     "titulo": "Movimiento estándar",
+     "fuentes": [
+      "combate-movimiento-estandar"
+     ]
+    },
+    {
+     "slug": "trepar-arrastrarse-y-nadar",
+     "titulo": "Trepar, arrastrarse y nadar",
+     "fuentes": [
+      "combate-trepar-arrastrarse-y-nadar"
+     ]
+    },
+    {
+     "slug": "saltar",
+     "titulo": "Saltar",
+     "fuentes": [
+      "combate-saltar"
+     ]
+    },
+    {
+     "slug": "moverse-sigilosamente",
+     "titulo": "Moverse sigilosamente",
+     "fuentes": [
+      "combate-moverse-sigilosamente"
+     ]
+    },
+    {
+     "slug": "volar",
+     "titulo": "Volar",
+     "fuentes": [
+      "combate-volar"
+     ]
+    },
+    {
+     "slug": "moverse-alrededor-de-los-demas",
+     "titulo": "Moverse alrededor de los demás",
+     "fuentes": [
+      "combate-moverse-alrededor-de-los-demas"
+     ]
+    },
+    {
+     "slug": "movimiento-forzado",
+     "titulo": "Movimiento forzado",
+     "fuentes": [
+      "combate-movimiento-forzado"
+     ]
+    },
+    {
+     "slug": "caidas",
+     "titulo": "Caídas",
+     "fuentes": [
+      "combate-caidas"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Cuadrícula táctica (variante)",
+   "reglas": [
+    {
+     "slug": "cuadricula-tactica-cuando-usarla",
+     "titulo": "Cuadrícula táctica: cuándo usarla",
+     "fuentes": [
+      "combate-variante-uso-de-una-cuadricula",
+      {
+       "id": "combate-cuadricula-tactica",
+       "encabezado": "Cuadrícula táctica"
+      },
+      {
+       "id": "combate-alcance-y-linea-de-efecto",
+       "encabezado": "Alcance y línea de efecto en cuadrícula"
+      },
+      {
+       "id": "combate-tamanos-y-zonas-de-efecto",
+       "encabezado": "Tamaños y zonas de efecto en cuadrícula"
+      },
+      {
+       "id": "combate-movimiento",
+       "encabezado": "Movimiento en cuadrícula"
+      },
+      {
+       "id": "combate-esquinas",
+       "encabezado": "Esquinas"
+      }
+     ]
+    },
+    {
+     "slug": "cobertura",
+     "titulo": "Cobertura",
+     "fuentes": [
+      {
+       "id": "combate-cobertura",
+       "hasta": "#### Terreno difícil"
+      }
+     ]
+    },
+    {
+     "slug": "terreno-dificil",
+     "titulo": "Terreno difícil",
+     "fuentes": [
+      {
+       "id": "combate-cobertura",
+       "desde": "El terreno difícil exige"
+      }
+     ]
+    },
+    {
+     "slug": "terreno-peligroso",
+     "titulo": "Terreno peligroso",
+     "fuentes": [
+      "combate-terreno-peligroso",
+      "combate-terreno-peligroso-2"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Monturas",
+   "reglas": [
+    {
+     "slug": "combate-sobre-monturas",
+     "titulo": "Combate sobre monturas",
+     "fuentes": [
+      "combate-combate-sobre-monturas",
+      {
+       "id": "combate-montar",
+       "encabezado": "Montar"
+      },
+      {
+       "id": "combate-uso-de-capacidades-de-la-montura",
+       "encabezado": "Uso de capacidades de la montura"
+      },
+      {
+       "id": "combate-ataques-a-monturas",
+       "encabezado": "Ataques a monturas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Oportunidades y complicaciones",
+   "reglas": [
+    {
+     "slug": "oportunidades-y-complicaciones-en-combate",
+     "titulo": "Oportunidades y Complicaciones en combate",
+     "fuentes": [
+      "combate-oportunidades-y-complicaciones-en-combate"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Amenaza y dificultad (DJ)",
+   "reglas": [
+    {
+     "slug": "eleccion-de-adversarios",
+     "titulo": "Elección de adversarios",
+     "fuentes": [
+      "direccion-eleccion-de-adversarios"
+     ]
+    },
+    {
+     "slug": "calculo-de-la-amenaza-total",
+     "titulo": "Cálculo de la amenaza total",
+     "fuentes": [
+      "direccion-calculo-de-la-amenaza-total",
+      {
+       "id": "direccion-como-escalar-la-amenaza",
+       "encabezado": "Cómo escalar la amenaza"
+      },
+      {
+       "id": "direccion-escalado-de-amenazas-de-adversarios",
+       "encabezado": "Escalado de amenazas de adversarios"
+      }
+     ]
+    },
+    {
+     "slug": "como-decidir-la-dificultad-de-la-escena",
+     "titulo": "Cómo decidir la dificultad de la escena",
+     "fuentes": [
+      "direccion-como-decidir-la-dificultad-de-la-escena",
+      {
+       "id": "direccion-configuracion-de-las-escenas-de-combate",
+       "encabezado": "Configuración de las escenas de combate"
+      },
+      {
+       "id": "direccion-como-determinar-el-rango-de-juego",
+       "encabezado": "Cómo determinar el rango de juego"
+      },
+      {
+       "id": "direccion-el-grupo-promedio",
+       "encabezado": "El grupo promedio"
+      },
+      {
+       "id": "direccion-como-ajustar-la-salud-de-los-adversarios",
+       "encabezado": "Cómo ajustar la salud de los adversarios"
+      },
+      {
+       "id": "direccion-picos-de-poder",
+       "encabezado": "Picos de poder"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "combate-ataques-sin-armas-y-armas-improvisadas",
+  "combate-consejo-para-la-dj-reglas-de-combate-en-otras-escenas",
+  "combate-tipos-de-dano-y-valor-de-desvio",
+  "descanso-consejo-para-la-dj-poner-a-los-pjs-en-situaciones-de-peligro-mortal",
+  "direccion-como-anadir-variedad-a-las-escenas-de-combate",
+  "direccion-como-desafiar-a-los-nacidos-del-metal",
+  "direccion-ideas-para-oportunidades-y-complicaciones",
+  "direccion-importancia-de-la-escena-previa",
+  "direccion-mezcla-de-enemigos",
+  "direccion-objetivos-ajenos-a-la-lucha",
+  "direccion-recursos-y-oportunidades",
+  "direccion-tiradas-de-los-pjs",
+  "direccion-variedad-en-el-terreno"
+ ]
+}

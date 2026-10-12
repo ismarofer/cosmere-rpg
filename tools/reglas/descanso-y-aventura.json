@@ -1,0 +1,226 @@
+{
+ "tema": "Descanso y aventura",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Escenas y tiempo",
+   "reglas": [
+    {
+     "slug": "escenas",
+     "titulo": "Escenas",
+     "fuentes": [
+      "descanso-escenas",
+      {
+       "id": "descanso-transicion-entre-escenas",
+       "encabezado": "Transición entre escenas"
+      },
+      {
+       "id": "descanso-caracteristicas-entre-escenas",
+       "encabezado": "Características entre escenas"
+      },
+      {
+       "id": "descanso-tiempo",
+       "encabezado": "Tiempo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Sucesos",
+   "reglas": [
+    {
+     "slug": "sucesos",
+     "titulo": "Sucesos",
+     "fuentes": [
+      "descanso-sucesos",
+      {
+       "id": "descanso-oportunidades",
+       "encabezado": "Oportunidades"
+      },
+      {
+       "id": "descanso-complicaciones",
+       "encabezado": "Complicaciones"
+      },
+      {
+       "id": "descanso-contribuciones-de-los-pnjs",
+       "encabezado": "Contribuciones de los PNJs a un suceso"
+      },
+      {
+       "id": "descanso-activacion-de-un-suceso",
+       "encabezado": "Activación de un suceso"
+      }
+     ]
+    },
+    {
+     "slug": "medidores-de-suceso",
+     "titulo": "Medidores de suceso",
+     "fuentes": [
+      "descanso-medidores-de-suceso"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Descanso",
+   "reglas": [
+    {
+     "slug": "descanso",
+     "titulo": "Descanso",
+     "fuentes": [
+      "descanso-descanso"
+     ]
+    },
+    {
+     "slug": "descanso-corto",
+     "titulo": "Descanso corto",
+     "fuentes": [
+      {
+       "id": "descanso-recuperar-salud-y-concentracion",
+       "encabezado": "Recuperar salud y concentración"
+      },
+      {
+       "id": "descanso-beneficios-alternativos",
+       "encabezado": "Beneficios alternativos"
+      },
+      {
+       "id": "descanso-otros-efectos-del-descanso-corto",
+       "encabezado": "Otros efectos"
+      }
+     ]
+    },
+    {
+     "slug": "descanso-largo",
+     "titulo": "Descanso largo",
+     "fuentes": [
+      {
+       "id": "descanso-recuperar-salud-y-concentracion-2",
+       "encabezado": "Recuperar salud y concentración"
+      },
+      {
+       "id": "descanso-beneficios-alternativos-2",
+       "encabezado": "Beneficios alternativos"
+      },
+      {
+       "id": "descanso-otros-efectos-del-descanso-largo",
+       "encabezado": "Otros efectos"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Reposo",
+   "reglas": [
+    {
+     "slug": "reposo",
+     "titulo": "Reposo",
+     "fuentes": [
+      "descanso-reposo",
+      {
+       "id": "descanso-como-introducir-el-reposo",
+       "encabezado": "Cómo introducir el reposo"
+      },
+      {
+       "id": "descanso-el-reposo-entre-sesiones",
+       "encabezado": "El reposo entre sesiones"
+      },
+      {
+       "id": "descanso-como-resolver-el-reposo",
+       "encabezado": "Cómo resolver el reposo"
+      },
+      {
+       "id": "descanso-actividades-simples-y-ambiciosas",
+       "encabezado": "Actividades simples y ambiciosas"
+      },
+      {
+       "id": "descanso-desenlaces-de-la-actividad",
+       "encabezado": "Desenlaces de la actividad"
+      }
+     ]
+    },
+    {
+     "slug": "ideas-para-actividades-de-reposo",
+     "titulo": "Ideas para actividades de reposo",
+     "fuentes": [
+      "descanso-ideas-para-actividades-de-reposo",
+      {
+       "id": "descanso-autorreflexion",
+       "encabezado": "Autorreflexión"
+      },
+      {
+       "id": "descanso-entrenamiento",
+       "encabezado": "Entrenamiento"
+      },
+      {
+       "id": "descanso-manufactura",
+       "encabezado": "Manufactura en el reposo"
+      },
+      {
+       "id": "descanso-mentoria-en-las-artes-metalicas",
+       "encabezado": "Mentoría en las artes metálicas"
+      },
+      {
+       "id": "descanso-investigacion",
+       "encabezado": "Investigación"
+      },
+      {
+       "id": "descanso-recuperacion",
+       "encabezado": "Recuperación"
+      },
+      {
+       "id": "descanso-trabajar-en-una-profesion",
+       "encabezado": "Trabajar en una profesión"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Estados y duraciones",
+   "reglas": [
+    {
+     "slug": "estados",
+     "titulo": "Estados",
+     "fuentes": [
+      "descanso-estados"
+     ],
+     "anexo": "Este juego incluye los estados que se describen en el [[#/c/estado|catálogo de estados]]."
+    },
+    {
+     "slug": "duraciones",
+     "titulo": "Duraciones",
+     "fuentes": [
+      "descanso-duraciones"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Comida y agua",
+   "reglas": [
+    {
+     "slug": "comida-y-agua",
+     "titulo": "Comida y agua",
+     "fuentes": [
+      "descanso-comida-y-agua"
+     ]
+    },
+    {
+     "slug": "comida-insuficiente",
+     "titulo": "Comida insuficiente",
+     "fuentes": [
+      "descanso-comida-insuficiente"
+     ]
+    },
+    {
+     "slug": "agua-insuficiente",
+     "titulo": "Agua insuficiente",
+     "fuentes": [
+      "descanso-agua-insuficiente"
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": []
+}

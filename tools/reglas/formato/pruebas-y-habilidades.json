@@ -1,0 +1,38 @@
+[
+ {
+  "titulo": "Habilidades",
+  "definiciones": [
+   "Título y atributo",
+   "Tareas relevantes",
+   "Situaciones especiales",
+   "Cómo obtener ventaja"
+  ]
+ },
+ {
+  "titulo": "Pruebas enfrentadas",
+  "cambios": [
+   [
+    "Si sacas un resultado más alto que tu oponente,",
+    "◆ Si sacas un resultado más alto que tu oponente,"
+   ],
+   [
+    "te permitiría conservar la pistola. Si sacas un resultado más bajo",
+    "te permitiría conservar la pistola.\n◆ Si sacas un resultado más bajo"
+   ],
+   [
+    "va a parar a la suya. Si empatas",
+    "va a parar a la suya.\n◆ Si empatas"
+   ]
+  ]
+ },
+ {
+  "titulo": "Habilidades alternativas",
+  "cambios": [
+   [
+    "\n\n(consulta “Objetivo y alcance” en el capítulo 10). Si tratas de esconderte",
+    "◆ Fintar en una dirección antes de moverte hacia otra.",
+    ""
+   ]
+  ]
+ }
+]

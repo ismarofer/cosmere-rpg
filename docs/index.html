@@ -7,19 +7,22 @@
   <title>Cosmere RPG · Consulta de reglas</title>
   <link rel="icon" type="image/svg+xml" href="img/cosmere.svg">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="personaje/css/personaje.css">
+  <link rel="stylesheet" href="proyector/css/proyector.css">
+  <link rel="stylesheet" href="combates/css/combates.css">
 </head>
 <body>
   <header class="top">
     <a class="brand" href="#/"><span class="logo" aria-hidden="true"></span>Cosmere RPG</a>
     <button type="button" id="navtoggle" class="navtoggle" aria-label="Menú"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     <nav id="nav" class="nav" aria-label="Categorías"></nav>
-    <a class="btn" href="personaje/index.html" title="Crear y gestionar hojas de personaje">Personajes</a>
     <div id="hdrslot" class="searchbox">
       <input id="q" type="search" placeholder="Buscar reglas, talentos, armas…  ( / )" autocomplete="off" spellcheck="false" aria-label="Buscar">
     </div>
   </header>
 
   <main id="view" class="view"><p id="loading" class="muted">Cargando…</p></main>
+  <section id="pyr" hidden></section>
 
   <div id="drawer" class="drawer" hidden>
     <aside class="panel" id="dinner" role="dialog" aria-modal="true"></aside>
@@ -31,6 +34,18 @@
   <script src="js/curated.js"></script>
   <script src="js/icons.js"></script>
   <script src="js/search.js"></script>
+  <script src="personaje/js/rules.js"></script>
+  <script src="personaje/js/engine.js"></script>
+  <script src="personaje/js/store.js"></script>
+  <script src="personaje/js/ui-common.js"></script>
+  <script src="personaje/js/wizard.js"></script>
+  <script src="personaje/js/sheet.js"></script>
+  <script src="personaje/js/app.js"></script>
+  <script src="proyector/js/vista.js"></script>
+  <script src="combates/js/amenaza.js"></script>
+  <script src="combates/js/adversarios.js"></script>
+  <script src="combates/js/combate.js"></script>
+  <script src="combates/js/vista.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

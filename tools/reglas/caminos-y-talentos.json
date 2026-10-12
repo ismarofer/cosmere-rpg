@@ -1,0 +1,306 @@
+{
+ "tema": "Caminos y talentos",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Cómo usar caminos y talentos",
+   "reglas": [
+    {
+     "slug": "como-progresar-por-un-camino",
+     "titulo": "Cómo progresar por un camino",
+     "fuentes": [
+      "camino-como-progresar-por-un-camino",
+      {
+       "id": "camino-como-usar-los-caminos-y-los-talentos",
+       "encabezado": "Cómo usar los caminos y los talentos"
+      },
+      {
+       "id": "camino-caminos-heroicos-y-de-nacido-del-metal",
+       "encabezado": "Caminos heroicos y de nacido del metal"
+      },
+      {
+       "id": "camino-acceso-a-otros-talentos",
+       "encabezado": "Acceso a otros talentos"
+      },
+      {
+       "id": "camino-talentos-con-metas",
+       "encabezado": "Talentos con metas"
+      }
+     ]
+    },
+    {
+     "slug": "camino-y-habilidad-iniciales",
+     "titulo": "Camino y habilidad iniciales",
+     "fuentes": [
+      "camino-camino-y-habilidad-iniciales",
+      {
+       "id": "camino-talento-principal",
+       "encabezado": "Talento principal"
+      },
+      {
+       "id": "camino-como-crear-tu-heroe",
+       "encabezado": "Cómo crear tu héroe"
+      },
+      {
+       "id": "camino-consejos-para-la-creacion",
+       "encabezado": "Consejos para la creación"
+      },
+      {
+       "id": "camino-terminos-de-capitulos-posteriores",
+       "encabezado": "Términos de capítulos posteriores"
+      }
+     ]
+    },
+    {
+     "slug": "como-usar-los-talentos",
+     "titulo": "Cómo usar los talentos",
+     "fuentes": [
+      "camino-como-usar-los-talentos",
+      {
+       "id": "camino-resumenes-de-talentos",
+       "encabezado": "Resúmenes de talentos"
+      },
+      {
+       "id": "camino-anatomia-de-un-talento",
+       "encabezado": "Anatomía de un talento"
+      },
+      {
+       "id": "camino-activacion-de-talentos",
+       "encabezado": "Activación de talentos"
+      },
+      {
+       "id": "camino-como-usar-los-talentos-fuera-del-combate",
+       "encabezado": "Cómo usar los talentos fuera del combate"
+      },
+      {
+       "id": "camino-objetivos-de-talentos",
+       "encabezado": "Objetivos de talentos"
+      }
+     ]
+    },
+    {
+     "slug": "cuando-activar-talentos-y-efectos",
+     "titulo": "Cuándo activar talentos y efectos",
+     "fuentes": [
+      "camino-cuando-activar-talentos-y-efectos"
+     ]
+    },
+    {
+     "slug": "eleccion-de-talentos-duplicados",
+     "titulo": "Elección de talentos duplicados",
+     "fuentes": [
+      "camino-eleccion-de-talentos-duplicados",
+      {
+       "id": "camino-talentos-con-nombres-duplicados",
+       "encabezado": "Talentos con nombres duplicados"
+      },
+      {
+       "id": "camino-nombres-de-efectos-duplicados",
+       "encabezado": "Nombres de efectos duplicados"
+      },
+      {
+       "id": "camino-pericias-duplicadas",
+       "encabezado": "Pericias duplicadas"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Caminos de nacidos del metal",
+   "reglas": [
+    {
+     "slug": "como-usar-los-caminos-de-nacidos-del-metal",
+     "titulo": "Cómo usar los caminos de nacidos del metal",
+     "fuentes": [
+      "camino-como-usar-los-caminos-de-nacidos-del-metal",
+      {
+       "id": "camino-opciones-de-los-caminos-de-nacidos-del-metal",
+       "encabezado": "Opciones de los caminos de nacidos del metal"
+      },
+      {
+       "id": "camino-eleccion-de-poderes",
+       "encabezado": "Elección de poderes"
+      }
+     ]
+    },
+    {
+     "slug": "como-usar-las-habilidades-investidas",
+     "titulo": "Cómo usar las habilidades Investidas",
+     "fuentes": [
+      "camino-como-usar-las-habilidades-investidas"
+     ]
+    },
+    {
+     "slug": "eleccion-de-un-talento-de-ruptura-o-de-herencia",
+     "titulo": "Elección de un talento de ruptura o de herencia",
+     "fuentes": [
+      "camino-eleccion-de-un-talento-de-ruptura-o-de-herencia"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Alomancia: uso de la Investidura y los metales",
+   "reglas": [
+    {
+     "slug": "alomancia-uso-de-la-investidura",
+     "titulo": "Alomancia: uso de la Investidura",
+     "fuentes": [
+      "camino-alomancia-uso-de-la-investidura",
+      {
+       "id": "camino-alomancia-entrenamiento-en-las-artes-alomanticas",
+       "encabezado": "Alomancia: Entrenamiento en las artes alománticas"
+      }
+     ]
+    },
+    {
+     "slug": "gasto-de-investidura",
+     "titulo": "Gasto de Investidura",
+     "fuentes": [
+      "camino-gasto-de-investidura"
+     ]
+    },
+    {
+     "slug": "reposicion-de-las-reservas-de-metal",
+     "titulo": "Reposición de las reservas de metal",
+     "fuentes": [
+      "camino-reposicion-de-las-reservas-de-metal"
+     ]
+    },
+    {
+     "slug": "consumo-de-metales-impuros",
+     "titulo": "Consumo de metales impuros",
+     "fuentes": [
+      "camino-consumo-de-metales-impuros"
+     ]
+    },
+    {
+     "slug": "gestion-de-los-metales",
+     "titulo": "Gestión de los metales",
+     "fuentes": [
+      "camino-gestion-de-los-metales",
+      {
+       "id": "camino-metales-de-otras-fuentes",
+       "encabezado": "Metales de otras fuentes"
+      }
+     ]
+    },
+    {
+     "slug": "quedar-desprovisto-de-metales-raros",
+     "titulo": "Quedar Desprovisto de metales raros",
+     "fuentes": [
+      "camino-quedar-desprovisto-de-metales-raros"
+     ]
+    },
+    {
+     "slug": "savantismo-alomantico",
+     "titulo": "Savantismo alomántico",
+     "fuentes": [
+      {
+       "id": "camino-savantismo-alomantico",
+       "hasta": "sa antismo"
+      },
+      {
+       "id": "camino-como-crear-un-brumoso",
+       "desde": "savantismo. Una persona se convierte",
+       "hasta": "Habilidades. Casi todos"
+      },
+      {
+       "id": "camino-atium-intuitivo",
+       "encabezado": "Atium intuitivo",
+       "hasta": "“No todo el mundo es un nacido"
+      },
+      {
+       "id": "camino-manifestaciones-del-savantismo",
+       "encabezado": "Manifestaciones del savantismo"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Feruquimia: mentes de metal",
+   "reglas": [
+    {
+     "slug": "feruquimia-uso-de-mentes-de-metal",
+     "titulo": "Feruquimia: uso de mentes de metal",
+     "fuentes": [
+      "camino-feruquimia-uso-de-mentes-de-metal",
+      {
+       "id": "camino-adquisicion-de-mentes-de-metal",
+       "encabezado": "Adquisición de mentes de metal"
+      },
+      {
+       "id": "camino-almacenamiento-de-atributos-en-mentes-de-metal",
+       "encabezado": "Almacenamiento de atributos en mentes de metal"
+      },
+      {
+       "id": "camino-decantacion-de-mentes-de-metal",
+       "encabezado": "Decantación de mentes de metal"
+      },
+      {
+       "id": "camino-multiples-mentes-de-metal",
+       "encabezado": "Múltiples mentes de metal"
+      },
+      {
+       "id": "camino-mantenimiento-de-las-mentes-de-metal",
+       "encabezado": "Mantenimiento de las mentes de metal"
+      },
+      {
+       "id": "camino-feruquimia-fabricacion-de-una-mente-de-metal",
+       "encabezado": "Feruquimia: Fabricación de una mente de metal"
+      }
+     ]
+    },
+    {
+     "slug": "metas-y-recompensas-de-nacido-del-metal",
+     "titulo": "Metas y recompensas de nacido del metal",
+     "fuentes": [
+      "camino-metas-y-recompensas-de-nacido-del-metal",
+      {
+       "id": "recompensa-metas-de-nacido-del-metal",
+       "encabezado": "Metas de nacido del metal"
+      },
+      {
+       "id": "recompensa-recompensas-de-nacido-del-metal",
+       "encabezado": "Recompensas de nacido del metal"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Brumoso",
+   "reglas": [
+    {
+     "slug": "como-crear-un-brumoso",
+     "titulo": "Cómo crear un brumoso",
+     "fuentes": [
+      {
+       "id": "camino-como-crear-un-brumoso",
+       "hasta": "savantismo. Una persona se convierte"
+      },
+      {
+       "id": "camino-como-crear-un-brumoso",
+       "desde": "Habilidades. Casi todos"
+      }
+     ]
+    },
+    {
+     "slug": "talento-principal-de-brumoso",
+     "titulo": "Talento principal de brumoso",
+     "fuentes": [
+      "camino-talento-principal-de-brumoso"
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "camino-como-usar-las-artes-metalicas",
+  "camino-lo-que-se-sabe-frente-a-lo-que-es-posible",
+  "camino-poderes-de-las-artes-metalicas",
+  "personaje-caminos-heroicos-y-de-nacido-del-metal",
+  "personaje-como-usar-los-caminos-y-los-talentos"
+ ]
+}

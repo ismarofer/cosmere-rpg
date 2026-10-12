@@ -19,8 +19,9 @@ import json, re, sys, unicodedata
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from buscador_efectos import aplicar as aplicar_efectos, OBJ_NOMBRE
-from buscador_personaje import reorganizar
-from buscador_extras import build_mini, build_creacion, apply_ambientacion, link_talents, split_ascendencias
+from buscador_personaje import redirige_modificadores, reorganizar
+from buscador_reglas import build_reglas
+from buscador_extras import build_mini, build_creacion, apply_ambientacion, aplicar_eras, es_basura, link_talents, split_ascendencias
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -509,7 +510,7 @@ CURATED_WEAPONS = [
 # nombre, desvío, rasgos, experto, peso, precio, era
 CURATED_ARMOR = [
     ("Uniforme", 0, "Presentable", "—", "2,5 kg", "20 ar", "Ambas"),
-    ("Capa de bruma", 0, "Única", "Única", "2,5 kg", "Solo recompensa", "Era 1"),
+    ("Capa de bruma", 0, "Única", "Única", "2,5 kg", "Solo recompensa", "Ambas"),
     ("Cuero", 1, "—", "Presentable", "5 kg", "30 ar", "Ambas"),
     ("Gabán de bruma", 1, "Presentable", "Única", "5 kg", "Solo recompensa", "Era 2"),
     ("Coraza", 2, "Voluminosa [3]", "Presentable", "15 kg", "50 ar", "Ambas"),
@@ -1014,14 +1015,19 @@ def main():
     base = finalize(base)
     limpiar_reglas(base)
     dj = finalize(dedupe(DJ_ENTRIES))
+    base = [e for e in base if not es_basura(e)]
     apply_ambientacion(base)
     apply_ambientacion(dj)
+    aplicar_eras(base)
+    aplicar_eras(dj)
     link_talents(base)
     split_ascendencias(base)
     nuevas, arboles = aplicar_efectos(base)
     reorganizar(base, dj)
     base = base + finalize(nuevas)
+    redirige_modificadores(base)
     base = base + acciones_de_caminos(base)
+    n_reglas = build_reglas(base)
     s1 = dump(base, "DATA_BASE", OUT / "base.js", {"DATA_ARBOLES": arboles, "DATA_OBJETIVOS": OBJ_NOMBRE})
     s2 = dump(dj, "DATA_DJ", OUT / "dj.js")
     from collections import Counter
@@ -1030,7 +1036,7 @@ def main():
     print(f"base.js {s1/1024:.0f} KB | dj.js {s2/1024:.0f} KB")
     print("base:", dict(c))
     print("dj:  ", dict(d))
-    print("equipo:", n_equipo, "| adversarios:", n_adv)
+    print("equipo:", n_equipo, "| adversarios:", n_adv, "| microrreglas:", n_reglas)
 
 if __name__ == "__main__":
     main()

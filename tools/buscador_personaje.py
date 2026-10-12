@@ -1,7 +1,14 @@
 """Reorganiza las entradas de personaje/origen por los pasos de la creación de personaje.
 Se aplica después de finalize(): los ids no cambian, solo la categoría. Los enlaces [[cat|Título]] se reescriben solos."""
+import json
 import re
+from pathlib import Path
+
 from buscador_extras import norm
+from buscador_limpieza import aplicar_formato, limpia
+
+# correcciones de formato del catálogo Orígenes (mismo formato que las de las microrreglas)
+FORMATO_ORIGENES = Path(__file__).parent / "reglas" / "formato" / "catalogo" / "origen.json"
 
 SECCIONES_BASICAS = {
     "El Jdr del Cosmere", "Cómo Usar Este Libro", "Bienvenidos a Scadrial", "¿Qué Es un Juego de Rol?",
@@ -51,7 +58,7 @@ def _nueva_cat(e):
 def _clave(titulo):
     t = norm(titulo)
     t = re.sub(r"^(los|las|el|la)\s+", "", t)
-    return re.sub(r"[aos]$", "", t)
+    return re.sub(r"(?:os|as|[aos])$", "", t)  # «Peregrinos» / «Pericia Peregrina»
 
 
 ASCENDENCIAS = [
@@ -61,7 +68,7 @@ ASCENDENCIAS = [
 ]
 
 
-def _bloque(fuentes, enlaces):
+def _bloque(fuentes, enlaces, titulo="Qué modifica"):
     lineas = []
     for src in fuentes:
         for ef in (src.get("x") or {}).get("efectos", []):
@@ -70,15 +77,38 @@ def _bloque(fuentes, enlaces):
         lineas.append(f"◆ Ver: [[{destino}|{etiqueta}]]")
     if not lineas:
         return ""
-    return "\n\n#### Qué modifica\n" + "\n".join(lineas)
+    return f"\n\n#### {titulo}\n" + "\n".join(lineas)
+
+
+# Introducciones de los árboles de ascendencia («los personajes kandra tienen a su disposición los siguientes talentos»): sin la
+# lista del libro no dicen nada; la página de la ascendencia ya enlaza a su árbol
+SIN_TEXTO = {"origen-talentos-kandra", "origen-talentos-de-sangre-koloss"}
 
 
 def enriquecer_origenes(base):
+    """El catálogo Orígenes solo lleva lo que se elige: ascendencias, culturas, pericias culturales y Bendiciones kandra. La
+    «Elección de ascendencia» se funde en su ascendencia y los nombres típicos, en su cultura. Los textos de reglas y trasfondo
+    (cuerpos y contratos kandra, historia de los koloss, introducciones…) pasan a ser microrreglas (tools/reglas/origenes.json)."""
     by_id = {e["id"]: e for e in base}
+    for e in base:
+        if e["cat"] == "origen":
+            e["body"] = limpia(e["body"])
+    _recoloca_kandra(by_id)
+    quitar = {id(by_id[i]) for i in SIN_TEXTO if i in by_id}
     for pid, eid, ruta, etiqueta in ASCENDENCIAS:
         p, el = by_id.get(pid), by_id.get(eid)
         if p and el:
-            p["body"] += _bloque([el], [(ruta, etiqueta), ("origen", el["title"])])
+            p["body"] += "\n\n#### " + el["title"] + "\n" + el["body"].strip() + _bloque([], [(ruta, etiqueta)], "Ver también")
+            quitar.add(id(el))
+    culturas = {_clave(c["title"]): c for c in base if c["cat"] == "origen" and c["f"].get("seccion") == "Cultura"
+                and not c["id"].startswith(("origen-pericia", "origen-nombres"))}
+    for n in base:
+        if n["id"].startswith("origen-nombres-"):
+            c = culturas.get(_clave(re.sub(r"^Nombres\s+(de\s+)?", "", n["title"])))
+            if c:
+                c["body"] += "\n\n#### Nombres\n" + n["body"].strip()
+                quitar.add(id(n))
+    base[:] = [e for e in base if id(e) not in quitar]
     pericias = [e for e in base if e["id"].startswith("origen-pericia-")]
     for c in base:
         if c["cat"] != "origen" or c["f"].get("seccion") != "Cultura":
@@ -89,6 +119,26 @@ def enriquecer_origenes(base):
         m = [p for p in pericias if _clave(re.sub(r"^Pericias?\s+", "", p["title"])) == k]
         if m:
             c["body"] += _bloque(m, [("origen", m[0]["title"])])
+    formato = json.loads(FORMATO_ORIGENES.read_text(encoding="utf-8")) if FORMATO_ORIGENES.exists() else []
+    for e in base:
+        if e["cat"] == "origen":
+            e["body"] = aplicar_formato(e["title"], e["body"], formato)
+
+
+def _recoloca_kandra(by_id):
+    """El PDF parte la lista de Bendiciones kandra: la mitad acaba en «Contratos kandra» y, a cambio, el párrafo del Cuerpo
+    Verdadero (que es de «Cuerpos kandra») acaba en las Bendiciones."""
+    ben, con, cue = (by_id.get("origen-" + s) for s in ("bendiciones-kandra", "contratos-kandra", "cuerpos-kandra"))
+    if not (ben and con and cue):
+        return
+    i = con["body"].find("Bendición de la Presencia.")
+    j = ben["body"].find("Cuando no adoptan la forma de otra especie")
+    if i < 0 or j < 0:
+        raise ValueError("cambió el texto de las Bendiciones kandra: revisa _recoloca_kandra")
+    resto = con["body"][i:].strip()
+    con["body"] = con["body"][:i].strip()
+    cue["body"] = cue["body"].strip() + "\n\n" + ben["body"][j:].strip()
+    ben["body"] = ben["body"][:j].strip() + " " + resto
 
 
 def reorganizar(base, dj):
@@ -119,3 +169,11 @@ def reorganizar(base, dj):
     for e in base + dj:
         e["body"] = patron.sub(reescribe, e["body"])
     return len(quitar)
+
+
+def redirige_modificadores(base):
+    """Los modificadores de una «Elección de ascendencia» enlazan a su ascendencia, donde ahora está ese texto."""
+    destino = {eid: pid for pid, eid, _, _ in ASCENDENCIAS}
+    for e in base:
+        if e["cat"] == "modificador" and e.get("x", {}).get("fuente_id") in destino:
+            e["x"]["fuente_id"] = destino[e["x"]["fuente_id"]]

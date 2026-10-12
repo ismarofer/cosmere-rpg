@@ -218,7 +218,7 @@
             h('b', null, nombreMetal(clave, p.metal)),
             h('label', { class: 'chk noprint' }, h('input', { type: 'checkbox', checked: p.desbloqueado, onchange: e => cambiar(c => { c.poderes[idx].desbloqueado = e.target.checked; }) }), ' Desbloqueado'),
             p.desbloqueado ? null : h('span', { class: 'chip small soft' }, 'latente'),
-            m && m.arbol ? h('a', { class: 'enl noprint', href: `../index.html#/arbol/${m.arbol}`, target: '_blank', rel: 'noopener' }, 'árbol') : null,
+            m && m.arbol ? h('a', { class: 'enl noprint', href: `index.html#/arbol/${m.arbol}`, target: '_blank', rel: 'noopener' }, 'árbol') : null,
             clave === 'feruquimia' && p.desbloqueado ? h('span', { class: 'cargas' }, h('b', null, 'Cargas '),
               contador(c.estado.cargas[p.metal] || 0, { min: 0, max: a ? a.cargas : 2, etiqueta: 'Cargas de ' + p.metal, alCambiar: v => cambiar(c => { c.estado.cargas[p.metal] = v; }) }),
               ` / ${a ? a.cargas : 2}`) : null);
@@ -299,7 +299,7 @@
       h('h4', null, 'Datos'),
       h('div', { class: 'acciones' },
         h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar JSON'),
-        h('button', { type: 'button', class: 'btn', onclick: () => { const copia = PJ.store.duplicar(c); PJ.store.guardar(copia); location.hash = '#/p/' + copia.id; } }, 'Duplicar'),
+        h('button', { type: 'button', class: 'btn', onclick: () => { const copia = PJ.store.duplicar(c); PJ.store.guardar(copia); location.hash = '#/personajes/p/' + copia.id; } }, 'Duplicar'),
         h('button', { type: 'button', class: 'btn peligro', onclick: () => { if (confirm(`¿Borrar a «${c.nombre || 'Sin nombre'}»? No se puede deshacer.`)) { PJ.store.borrar(c.id); location.hash = '#/'; } } }, 'Borrar personaje')));
 
     // ---------------- Cabecera y ensamblado
@@ -315,12 +315,12 @@
       h('header', { class: 'cab-hoja' },
         h('div', null, h('h2', null, c.nombre || 'Personaje sin nombre'), h('div', { class: 'muted' }, `${sub} · nivel ${d.nivel} (rango ${d.rango})` + (c.jugador ? ` · ${c.jugador}` : ''))),
         h('div', { class: 'acciones noprint' },
-          h('button', { type: 'button', class: 'btn primario', disabled: c.nivel >= 30, onclick: () => { c.nivel++; PJ.aplicarPoderesIniciales(c); guardar(); location.hash = `#/p/${c.id}/nivel/atributos`; } }, 'Subir de nivel'),
-          h('a', { class: 'btn', href: `#/p/${c.id}/crear/datos`, title: 'Abre el asistente de creación para cambiar lo que quieras' }, 'Editar personaje'),
+          h('button', { type: 'button', class: 'btn primario', disabled: c.nivel >= 30, onclick: () => { c.nivel++; PJ.aplicarPoderesIniciales(c); guardar(); location.hash = `#/personajes/p/${c.id}/nivel/atributos`; } }, 'Subir de nivel'),
+          h('a', { class: 'btn', href: `#/personajes/p/${c.id}/crear/datos`, title: 'Abre el asistente de creación para cambiar lo que quieras' }, 'Editar personaje'),
           h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, 'Imprimir'),
           h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar'))),
       d.pendientes || d.errores ? h('div', { class: 'banda noprint' }, d.errores ? `${d.errores} error(es)` : '', d.errores && d.pendientes ? ' · ' : '', d.pendientes ? `${d.pendientes} pendiente(s) de completar. ` : '',
-        h('a', { href: `#/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
+        h('a', { href: `#/personajes/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
       h('nav', { class: 'tabs noprint' }, TABS.map(([k, n]) => h('button', { type: 'button', class: 'tab', 'data-tab': k, onclick: () => mostrar(k) }, n))),
       TABS.map(([k]) => paneles[k])));
     mostrar(tabActual);

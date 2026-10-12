@@ -1,0 +1,276 @@
+[
+ {
+  "titulo": "Propósito y obstáculo",
+  "cambios": [
+   [
+    "\n\nincluso quieras contar la historia trágica",
+    "para saber cómo gestionar esa tensión.",
+    ""
+   ]
+  ],
+  "definiciones": [
+   "Salvar a los demás",
+   "Buscar la verdad",
+   "Alcanzar nuevas cotas",
+   "Encontrar la conexión",
+   "Buscar justicia",
+   "Preservar la vida"
+  ]
+ },
+ {
+  "titulo": "Obstáculo",
+  "cambios": [
+   [
+    "Tienes problemas para confiar en los demás.\n\nEn el pasado",
+    "Tienes problemas para confiar en los demás. En el pasado"
+   ]
+  ],
+  "definiciones": [
+   "Arrepentimiento profundo",
+   "Miedo específico",
+   "Rencoroso",
+   "Inseguridad",
+   "Desconfianza"
+  ]
+ },
+ {
+  "titulo": "Metas",
+  "cambios": [
+   [
+    "mientras se esfuerza por lograrlas.",
+    "mientras se esfuerza por lograrlas.\n\nEmpiezas con una o dos metas y puedes obtener más durante el juego. En la hoja de personaje, cada meta incluye tres casillas de hito que representan tu progreso. De la DJ y de ti depende decidir qué se considera un hito para cada meta.\n\nCuando concluyes una meta, recibes una recompensa (consulta “Recompensas” más adelante en este capítulo). Concluir una meta puede significar que la has alcanzado, pero también que la has dejado atrás, que has descubierto algo que la reemplaza o que has logrado otra cosa que el personaje considera más importante."
+   ]
+  ],
+  "definiciones": [
+   "Cerrar un contrato comercial lucrativo",
+   "Reunir a especialistas para un golpe",
+   "Enmendar un error del pasado",
+   "Inventar una tecnología novedosa",
+   "Vengarse de alguien"
+  ]
+ },
+ {
+  "titulo": "Creación de metas",
+  "cambios": [
+   [
+    "el lord Legislador. Quizá",
+    "el lord Legislador. Quizá incluso quieras contar la historia trágica de alguien que nunca alcanza su potencial y se hunde en decisiones cada vez más nefastas, aunque conviene valorar si esta trayectoria resultará satisfactoria para ti (y para el resto de jugadores). Si eliges una meta que crees que el personaje nunca alcanzará, consulta “Conclusión de metas” para saber cómo gestionar esa tensión."
+   ]
+  ],
+  "definiciones": [
+   "Meta del personaje",
+   "Meta del jugador",
+   "Cómo avanzar"
+  ]
+ },
+ {
+  "titulo": "Cómo hacer avanzar las metas",
+  "cambios": [
+   [
+    "\n\nlo largo de una historia mientras se esfuerza",
+    "otra cosa que el personaje considera más importante.",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Compañeros",
+  "cambios": [
+   [
+    "#### Ejemplos de compañeros por rango",
+    "*Consulta el apéndice “Compañeros animales”.",
+    "cuando la narrativa lo requiera.",
+    "despues"
+   ],
+   [
+    "ya sea mediante\n\nayuda directa",
+    "ya sea mediante ayuda directa"
+   ]
+  ],
+  "definiciones": [
+   "Perfil",
+   "Perfil",
+   "Perfil"
+  ]
+ },
+ {
+  "titulo": "Los compañeros en las escenas",
+  "definiciones": [
+   "Varios compañeros",
+   "Bonificaciones de desarrollo"
+  ]
+ },
+ {
+  "titulo": "Patrocinadores",
+  "cambios": [
+   [
+    "Rango de PJ Número de conexiones\n\n1 2\n\n2 3\n\n3 4\n\n4 o más 5",
+    "| Rango de PJ | Número de conexiones |\n|---|---|\n| 1 | 2 |\n| 2 | 3 |\n| 3 | 4 |\n| 4 o más | 5 |"
+   ]
+  ],
+  "definiciones": [
+   "Cumbres del poder"
+  ]
+ },
+ {
+  "titulo": "Organizaciones",
+  "cambios": [
+   [
+    "#### Escala de la organización\n\n|",
+    "|"
+   ],
+   [
+    "#### Mejoras de organización\nNombre Descripción Efectos",
+    "uno ya existente.",
+    "| Mejora | Descripción | Efectos |\n|---|---|---|\n| Equipo avanzado | La organización ha adquirido herramientas o equipo útil para sus fines. | Se obtiene uno o más objetos necesarios para el éxito de la organización. Pueden incluirse artículos que solo estén disponibles como recompensa, siempre que el rango requerido no supere la escala de la organización. |\n| Héroes del pueblo | La organización ha conectado con la comunidad y goza del favor del pueblo. | Al viajar por zonas donde opere la organización, sus miembros pueden esperar comida, cobijo (con alojamientos modestos) y que el pueblo los oculte de las autoridades si es preciso. |\n| Reclutamiento | Habéis trabajado para que la organización crezca, atrayendo a numerosos miembros nuevos. | Incrementa la escala de la organización en 1. Esta mejora puede elegirse hasta cuatro veces, pero sin superar la escala máxima que dicte el rango del líder. |\n| Red de contactos ampliada | La organización puede recurrir a especialistas en poco tiempo para completar tareas que de otro modo serían imposibles. | Una vez por sesión, uno o más miembros pueden solicitar ayuda especializada. Elige a un integrante; durante la próxima semana, contará con un compañero Especialista a elección del grupo (consulta “Compañeros”). |\n| Red de transporte | La organización controla una flota de barcos, una red ferroviaria o incluso una aeronave. | Una red de transporte permite a los miembros trasladar personas y suministros de forma rápida y segura entre múltiples ubicaciones. |\n| Refugio | La organización dispone de un refugio para sus miembros. | La organización obtiene un refugio nuevo (consulta “Refugios”) o añade una mejora a uno ya existente. |"
+   ],
+   [
+    "\n\nque use su influencia y les dé acceso",
+    "sobre el alcance de estos favores.",
+    ""
+   ],
+   [
+    "recurrir a un contacto político para",
+    "recurrir a un contacto político para que use su influencia y les dé acceso a una persona importante, una ubicación segura o un evento privado. La tabla Beneficios de un grupo político muestra cómo este acceso aumenta con la escala de la organización. Como siempre, la DJ tiene la última palabra sobre el alcance de estos favores."
+   ],
+   [
+    "tabla Beneficios de una célula de resistencia. Cada",
+    "tabla Beneficios de una célula de resistencia. Cada personaje puede beneficiarse de este efecto una sola vez por sesión."
+   ]
+  ],
+  "definiciones": [
+   "Margen de beneficio",
+   "Favores políticos",
+   "Contactos criminales",
+   "Por la causa",
+   "Murmullos incesantes"
+  ]
+ },
+ {
+  "titulo": "Refugios",
+  "cambios": [
+   [
+    "\n\npersonaje puede beneficiarse de este efecto una sola vez por sesión.",
+    ""
+   ],
+   [
+    "#### Mejoras de refugio\nNombre Descripción Efectos",
+    "moverse sin que tú intervengas).\n\nReservas de metal",
+    "#### Tabla de mejoras de refugio\n| Mejora | Descripción | Efectos |\n|---|---|---|\n| Almacén | El refugio dispone de un espacio dedicado a guardar suministros útiles. | Tras un descanso corto o largo en el refugio, un personaje puede obtener un objeto que no sea un arma, con un valor máximo de 10 ar (en la Era 1) o 50 ar (en la Era 2). |\n| Armería | El refugio tiene un arsenal impresionante. | Tras un descanso corto o largo en el refugio, un personaje puede reponer toda su munición estándar para armas a distancia, o bien obtener un arma o pieza de armadura con un valor máximo de 25 ar (en la Era 1) o 150 ar (en la Era 2). |\n| Despensa | El refugio tiene una despensa repleta de comida y bebida. | Tras un descanso corto o largo en el refugio, un personaje obtiene raciones de comida callejera para un día. |\n| Mesa de trabajo | El refugio tiene un espacio de trabajo con herramientas y suministros para fabricar objetos nuevos. | Los personajes que se encuentran en el refugio obtienen una ventaja en todas las pruebas para manufacturar objetos. |\n| Mobiliario selecto | El refugio está decorado con gusto para que la banda se sienta cómoda. | Esta mejora puede elegirse hasta tres veces; la calidad del alojamiento del refugio mejora según las veces que se haya elegido: confortable (1 vez), lujoso (2 veces) o aristocrático (3 veces). |\n| Movilidad | El refugio se encuentra dentro de un vehículo, embarcación o nave, lo que permite trasladarlo con facilidad. | El refugio está integrado en un objeto móvil, como un vagón de tren o una embarcación. Puede desplazarse (o incluso moverse sin que tú intervengas). |"
+   ],
+   [
+    "\n\nEl refugio tiene un almacén dedicado a los metales",
+    "pruebas para manufacturar objetos.",
+    "\n| Reservas de metal | El refugio tiene un almacén dedicado a los metales, lo que permite a la banda estar siempre provista para sus artes metálicas. | Los personajes en tu refugio obtienen ventaja en todas las pruebas para manufacturar objetos. |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Clavos hemalúrgicos",
+  "cambios": [
+   [
+    "Interacciones breves. Cuando",
+    "Armonía se da cuenta y termina la conversación.",
+    "Interacciones breves. Cuando una Esquirla contacta con un hemalurgo, suele hacerlo de forma escueta. Es probable que siembre una idea, intente influir en una opinión o comparta información crítica para incitar acciones que favorezcan sus planes, pero es excepcionalmente raro mantener una charla extensa con una Esquirla. Cuando hables con ellas, recuerda que alargar una conversación privada puede resultar aburrido o incluso molesto para el resto del grupo.\n\nPruebas al conversar con Esquirlas. La DJ tiene el control total sobre cuándo una Esquirla decide iniciar el contacto con un personaje hemalurgo. Si te has comunicado con una Esquirla en el pasado, puedes intentar captar su atención, pero podría estar distraída o no tener interés en hablar contigo en este momento.\n\nLa tabla Ejemplos de influencia de las Esquirlas ofrece inspiración para las pruebas que podrías hacer al conversar con una de ellas. La dificultad de estas pruebas puede variar según el poder y el acceso de la Esquirla. Por ejemplo, la influencia de una Esquirla encarcelada podría requerir una prueba CD 15, mientras que la misma prueba sería CD 20 para una Esquirla que ostente todo su poder.\n\nResistirse a la influencia de una Esquirla. En circunstancias especiales, una Esquirla podría intentar obligarte a hacer algo, pero puedes resistirte a su influencia como harías con cualquier otro personaje (consulta “Cómo resistirse a la influencia” en el capítulo 11). Aunque una Esquirla puede agotar tu concentración mientras te resistes, no puede obligarte a nada... a menos que tu personaje tenga suficientes clavos hemalúrgicos como para quedar totalmente bajo su control, en cuyo caso pasaría a ser un PNJ (como se indica en la sección anterior “Perturbación de la redespíritu”).\n\n#### Ejemplos de influencia de las Esquirlas\n| Contacto | CD de la prueba | Éxito | Fallo |\n|---|---|---|---|\n| Mientras se enfrenta a otro nacido de la bruma en un duelo con cuchillos de obsidiana, Veda hace una prueba de Disciplina para ignorar el agravio de Ruina. | CD 15 | Veda logra mantener la Serenidad y concentrarse en su tarea. | Veda se inquieta y pierde 2 puntos de concentración. |\n| Tras una vaga disculpa de Armonía, Rendell hace una prueba de Engaño para embaucarlo y que revele quién traicionó a su banda. | CD 25 | Armonía aconseja a Rendell que deje atrás las rivalidades de su adolescencia y, al hacerlo, revela la identidad del traidor. | Armonía se da cuenta y termina la conversación. |"
+   ],
+   [
+    "\n\nPuedes usar 1 para lanzar una granada infusa",
+    "| 3 o más | 5 puntos de Investidura. |",
+    ""
+   ]
+  ],
+  "definiciones": [
+   "Poder nuevo",
+   "Poder existente",
+   "No es una mente de metal",
+   "Redespíritu perturbada",
+   "Interacciones breves",
+   "Pruebas al conversar con Esquirlas",
+   "Resistirse a la influencia de una Esquirla",
+   "Añadir un clavo hemalúrgico",
+   "Bendiciones y límites de clavos"
+  ]
+ },
+ {
+  "titulo": "Implantar y extraer clavos hemalúrgicos",
+  "cambios": [
+   [
+    "cuando esto sucede, el personaje",
+    "cuando esto sucede, el personaje… (el texto del libro está cortado aquí; según “Resistirse a la influencia de una Esquirla”, el personaje pasa a ser un PNJ)."
+   ]
+  ],
+  "definiciones": [
+   "Retener al objetivo",
+   "Rellenar un medidor de suceso",
+   "Derrotar al objetivo"
+  ]
+ },
+ {
+  "titulo": "Efectos conocidos de los clavos hemalúrgicos",
+  "cambios": [
+   [
+    "Rango de PJ* Metal Efecto",
+    "u oro.\n\nPeltre Otorga un poder feruquímico físico. Elige entre feruquimia de hierro, peltre, acero o estaño.",
+    "| Rango de PJ* | Metal | Efecto |\n|---|---|---|\n| 2 | Cinc | Otorga fortaleza emocional. Tu Voluntad aumenta en 1. |\n| 2 | Cobre | Otorga fortaleza mental. Tu Intelecto aumenta en 1. |\n| 2 | Estaño | Otorga sentidos agudizados. Tu Discernimiento aumenta en 1. |\n| 2 | Hierro | Otorga fuerza. Tu Fuerza aumenta en 1. |\n| 3 | Acero | Otorga un poder alomántico físico. Elige entre alomancia de hierro, peltre, acero o estaño. |\n| 3 | Bendaleo | Otorga un poder feruquímico espiritual. Elige entre feruquimia de aluminio, cromo, duraluminio o nicrosil. |\n| 3 | Bronce | Otorga un poder alomántico mental. Elige entre alomancia de latón, bronce, cobre o cinc. |\n| 3 | Cadmio | Otorga un poder alomántico temporal. Elige entre alomancia de bendaleo, cadmio, electro u oro. |\n| 3 | Electro | Otorga un poder alomántico de mejora. Elige entre alomancia de aluminio, cromo, duraluminio o nicrosil. |\n| 3 | Latón | Otorga un poder feruquímico cognitivo. Elige entre feruquimia de latón, bronce, cobre o cinc. |\n| 3 | Oro | Otorga un poder feruquímico híbrido. Elige entre feruquimia de bendaleo, cadmio, electro u oro. |\n| 3 | Peltre | Otorga un poder feruquímico físico. Elige entre feruquimia de hierro, peltre, acero o estaño. |"
+   ]
+  ]
+ },
+ {
+  "titulo": "Creaciones raras",
+  "cambios": [
+   [
+    "tal y como muestra la tabla Granadas alománticas por rango.",
+    "tal y como muestra la tabla Granadas alománticas por rango.\n\nPuedes usar 1 para lanzar una granada infusa a un espacio situado a 9 metros o menos, provocando que libere la Investidura. Colabora con la DJ para determinar los efectos exactos; por lo general, la granada se descarga en todas direcciones con efectos similares al poder almacenado. Cuanta más Investidura contenga, más espectaculares serán los efectos.\n\nMientras esté infusa con un poder, la granada no puede infundirse con la Investidura de otro distinto; por ejemplo, si contiene alomancia de acero, no podrá albergar alomancia de latón. Una vez liberada la Investidura, puedes volver a infundirla con cualquier poder alomántico.\n\n#### Granadas alománticas por rango\n| Rango de PJ | Investidura máxima de la granada |\n|---|---|\n| 1 | 1 punto de Investidura. |\n| 2 | 3 puntos de Investidura. |\n| 3 o más | 5 puntos de Investidura. |"
+   ],
+   [
+    "\n\nprobable que siembre una idea",
+    "“Perturbación de la redespíritu”).",
+    ""
+   ]
+  ]
+ },
+ {
+  "titulo": "Medallones feruquímicos",
+  "cambios": [
+   [
+    "elige sus metales de la tabla",
+    "elige sus metales de la tabla Poderes de los medallones feruquímicos (máximo 3). Esta tabla indica el rango de recompensa para un medallón con un solo poder. Si el medallón tiene más de uno, suma los rangos de cada poder individual; el total resultante será el rango de recompensa del medallón."
+   ],
+   [
+    "\n\nPoderes de los medallones feruquímicos (máximo 3). Esta tabla",
+    "el rango de recompensa del medallón.",
+    ""
+   ],
+   [
+    "Rango de PJ Carga máxima\n\n2 Mente de metal desligada con un máximo de 4 cargas.\n\n3 o más Mente de metal desligada con un máximo de 8 cargas.",
+    "| Rango de PJ | Carga máxima |\n|---|---|\n| 2 | Mente de metal desligada con un máximo de 4 cargas. |\n| 3 o más | Mente de metal desligada con un máximo de 8 cargas. |"
+   ]
+  ],
+  "definiciones": [
+   "Cargas máximas",
+   "Gastar y almacenar cargas",
+   "Número de poderes"
+  ]
+ },
+ {
+  "titulo": "Cuerpos Verdaderos kandra",
+  "definiciones": [
+   "Atractivo cristalino",
+   "Mente de metal esquelética",
+   "Alománticamente inerte"
+  ]
+ },
+ {
+  "titulo": "Metales raros",
+  "cambios": [
+   [
+    "#### UNA VALIOSA CUENTA DE ATIUM Suministros de metales raros\nMetal\n\n",
+    "#### Suministros de metales raros\n"
+   ]
+  ],
+  "definiciones": [
+   "Lerasium puro",
+   "Aleación de lerasium"
+  ]
+ }
+]

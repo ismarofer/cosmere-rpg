@@ -1,0 +1,735 @@
+{
+ "tema": "Artes metálicas",
+ "reglas_por_grupo": [
+  {
+   "nombre": "Cómo usar las artes metálicas",
+   "reglas": [
+    {
+     "slug": "como-usar-las-artes-metalicas",
+     "titulo": "Cómo usar las artes metálicas",
+     "fuentes": [
+      "arte-como-usar-las-artes-metalicas",
+      {
+       "id": "arte-poderes-de-las-artes-metalicas",
+       "encabezado": "Poderes de las artes metálicas"
+      },
+      {
+       "id": "arte-lo-que-se-sabe-frente-a-lo-que-es-posible",
+       "encabezado": "Lo que se sabe frente a lo que es posible"
+      }
+     ]
+    },
+    {
+     "slug": "poderes-nacientes",
+     "titulo": "Poderes nacientes",
+     "fuentes": [
+      "arte-poderes-nacientes",
+      {
+       "id": "arte-poderes-alomanticos-nacientes",
+       "encabezado": "Poderes alománticos nacientes"
+      },
+      {
+       "id": "arte-ejemplos-de-poderes-nacientes",
+       "encabezado": "Ejemplos de poderes nacientes"
+      }
+     ]
+    },
+    {
+     "slug": "progresion-del-poder",
+     "titulo": "Progresión del poder",
+     "fuentes": [
+      "arte-progresion-del-poder",
+      {
+       "id": "arte-progresion-de-las-artes-metalicas",
+       "encabezado": "Progresión de las artes metálicas"
+      }
+     ]
+    },
+    {
+     "slug": "alcance-de-artes-metalicas",
+     "titulo": "Alcance de artes metálicas",
+     "fuentes": [
+      "arte-alcance-de-artes-metalicas"
+     ]
+    },
+    {
+     "slug": "limite-de-artes-metalicas",
+     "titulo": "Límite de artes metálicas",
+     "fuentes": [
+      "arte-limite-de-artes-metalicas"
+     ]
+    },
+    {
+     "slug": "dado-de-artes-metalicas",
+     "titulo": "Dado de artes metálicas",
+     "fuentes": [
+      "arte-dado-de-artes-metalicas"
+     ]
+    },
+    {
+     "slug": "duracion-de-las-artes-metalicas",
+     "titulo": "Duración de las artes metálicas",
+     "fuentes": [
+      "arte-duracion-de-las-artes-metalicas"
+     ]
+    },
+    {
+     "slug": "mantenimiento-de-los-poderes",
+     "titulo": "Mantenimiento de los poderes",
+     "fuentes": [
+      "arte-mantenimiento-de-los-poderes"
+     ]
+    },
+    {
+     "slug": "finalizacion-de-un-poder",
+     "titulo": "Finalización de un poder",
+     "fuentes": [
+      "arte-finalizacion-de-un-poder"
+     ]
+    },
+    {
+     "slug": "duracion-de-las-acciones-de-almacenar",
+     "titulo": "Duración de las acciones de Almacenar",
+     "fuentes": [
+      "arte-duracion-de-las-acciones-de-almacenar"
+     ]
+    },
+    {
+     "slug": "duracion-fuera-del-combate",
+     "titulo": "Duración fuera del combate",
+     "fuentes": [
+      "arte-duracion-fuera-del-combate"
+     ]
+    },
+    {
+     "slug": "como-usar-las-artes-metalicas-de-forma-creativa",
+     "titulo": "Cómo usar las artes metálicas de forma creativa",
+     "fuentes": [
+      "arte-como-usar-las-artes-metalicas-de-forma-creativa"
+     ]
+    },
+    {
+     "slug": "materiales-alomanticamente-inertes",
+     "titulo": "Materiales alománticamente inertes",
+     "fuentes": [
+      "arte-materiales-alomanticamente-inertes"
+     ]
+    },
+    {
+     "slug": "aluminio",
+     "titulo": "Aluminio",
+     "fuentes": [
+      "arte-aluminio",
+      {
+       "id": "arte-eleccion-de-alomancia-de-aluminio",
+       "encabezado": "Elección de alomancia de aluminio"
+      },
+      {
+       "id": "arte-alomancia-de-aluminio",
+       "encabezado": "Alomancia de aluminio"
+      }
+     ]
+    },
+    {
+     "slug": "anatomia-de-un-poder",
+     "titulo": "Anatomía de un poder",
+     "fuentes": [
+      "arte-anatomia-de-un-poder"
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Metales de Scadrial",
+   "reglas": [
+    {
+     "slug": "metales-en-la-alomancia",
+     "titulo": "Metales en la alomancia",
+     "fuentes": [
+      "arte-metales-en-la-alomancia",
+      {
+       "id": "arte-metales-en-la-alomancia-2",
+       "encabezado": "Tabla de metales alománticos"
+      }
+     ]
+    },
+    {
+     "slug": "metales-en-la-feruquimia",
+     "titulo": "Metales en la feruquimia",
+     "fuentes": [
+      "arte-metales-en-la-feruquimia",
+      {
+       "id": "arte-metales-en-la-feruquimia-2",
+       "encabezado": "Tabla de metales feruquímicos"
+      }
+     ]
+    },
+    {
+     "slug": "metales-divinos",
+     "titulo": "Metales divinos",
+     "fuentes": [
+      "arte-metales-divinos"
+     ]
+    },
+    {
+     "slug": "metales-descubiertos-y-perdidos",
+     "titulo": "Metales descubiertos y perdidos",
+     "fuentes": [
+      "arte-metales-descubiertos-y-perdidos",
+      {
+       "id": "arte-metales-de-scadrial",
+       "encabezado": "Metales de Scadrial"
+      },
+      {
+       "id": "arte-metales-comunes-y-raros",
+       "encabezado": "Metales comunes y raros"
+      },
+      {
+       "id": "arte-ambas-eras",
+       "encabezado": "Ambas eras"
+      },
+      {
+       "id": "arte-toda-la-era-1",
+       "encabezado": "Toda la Era 1"
+      },
+      {
+       "id": "arte-final-de-la-era-1",
+       "encabezado": "Final de la Era 1"
+      },
+      {
+       "id": "arte-x",
+       "encabezado": "Metales de la Era 2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Alomancia",
+   "reglas": [
+    {
+     "slug": "alomancia-de-acero",
+     "titulo": "Alomancia de Acero",
+     "fuentes": [
+      {
+       "id": "arte-empujones-de-acero-dificiles",
+       "encabezado": "Empujones de acero difíciles"
+      },
+      {
+       "id": "arte-usos-creativos",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-fisico-externo-empujon-consejo-para-la-dj-tamano-frente-a-peso",
+       "encabezado": "Físico – Externo – Empujón Consejo para la DJ: Tamaño frente a peso"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-atium",
+     "titulo": "Alomancia de Atium",
+     "fuentes": [
+      {
+       "id": "arte-el-atium-autentico",
+       "encabezado": "El atium auténtico"
+      },
+      {
+       "id": "arte-propiedades-unicas",
+       "encabezado": "Propiedades únicas"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-bendaleo",
+     "titulo": "Alomancia de Bendaleo",
+     "fuentes": [
+      {
+       "id": "arte-burbujas-solapadas",
+       "encabezado": "Burbujas solapadas"
+      },
+      {
+       "id": "arte-interaccion-con-la-burbuja",
+       "encabezado": "Interacción con la burbuja"
+      },
+      {
+       "id": "arte-usos-creativos-2",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-bronce",
+     "titulo": "Alomancia de Bronce",
+     "fuentes": [
+      {
+       "id": "arte-buscar-entre-la-multitud",
+       "encabezado": "Buscar entre la multitud"
+      },
+      {
+       "id": "arte-deteccion-de-efectos-sutiles",
+       "encabezado": "Detección de efectos sutiles"
+      },
+      {
+       "id": "arte-usos-creativos-3",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-mental-interno-empujon",
+       "encabezado": "Mental – Interno – Empujón"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-cadmio",
+     "titulo": "Alomancia de Cadmio",
+     "fuentes": [
+      {
+       "id": "arte-burbujas-solapadas-2",
+       "encabezado": "Burbujas solapadas"
+      },
+      {
+       "id": "arte-usos-creativos-4",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-pulsadores-y-granadas-alomanticas",
+       "encabezado": "Pulsadores y granadas alománticas"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-cinc",
+     "titulo": "Alomancia de Cinc",
+     "fuentes": [
+      {
+       "id": "arte-complicaciones",
+       "encabezado": "Complicaciones"
+      },
+      {
+       "id": "arte-manipulaciones-solapadas",
+       "encabezado": "Manipulaciones solapadas"
+      },
+      {
+       "id": "arte-control-de-pnjs",
+       "encabezado": "Control de PNJs"
+      },
+      {
+       "id": "arte-usos-creativos-5",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-mental-externo-tiron",
+       "encabezado": "Mental – Externo – Tirón"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-cobre",
+     "titulo": "Alomancia de Cobre",
+     "fuentes": [
+      {
+       "id": "arte-traspasar-nubes-de-cobre",
+       "encabezado": "Traspasar nubes de cobre"
+      },
+      {
+       "id": "arte-usos-creativos-6",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-cromo",
+     "titulo": "Alomancia de Cromo",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-7",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-duraluminio",
+     "titulo": "Alomancia de Duraluminio",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-8",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-mejora-interno-empujon-eleccion-de-alomancia-de-duraluminio",
+       "encabezado": "Mejora – Interno – Empujón Elección de alomancia de duraluminio"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-electro",
+     "titulo": "Alomancia de Electro",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-9",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-temporal-interno-empujon",
+       "encabezado": "Temporal – Interno – Empujón"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-estano",
+     "titulo": "Alomancia de Estaño",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-10",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-hierro",
+     "titulo": "Alomancia de Hierro",
+     "fuentes": [
+      {
+       "id": "arte-tirones-de-hierro-dificiles",
+       "encabezado": "Tirones de hierro difíciles"
+      },
+      {
+       "id": "arte-usos-creativos-11",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-consejo-para-la-dj-tamano-frente-a-peso",
+       "encabezado": "Consejo para la DJ: Tamaño frente a peso"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-laton",
+     "titulo": "Alomancia de Latón",
+     "fuentes": [
+      {
+       "id": "arte-mental-externo-empujon",
+       "encabezado": "Mental – Externo – Empujón"
+      },
+      {
+       "id": "arte-complicaciones-2",
+       "encabezado": "Complicaciones"
+      },
+      {
+       "id": "arte-control-de-pnjs-2",
+       "encabezado": "Control de PNJs"
+      },
+      {
+       "id": "arte-usos-creativos-12",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-nicrosil",
+     "titulo": "Alomancia de Nicrosil",
+     "fuentes": [
+      {
+       "id": "arte-estallidos-en-capacidades-que-no-progresan",
+       "encabezado": "Estallidos en capacidades que no progresan"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-oro",
+     "titulo": "Alomancia de Oro",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-13",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "alomancia-de-peltre",
+     "titulo": "Alomancia de Peltre",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-14",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Feruquimia",
+   "reglas": [
+    {
+     "slug": "feruquimia-de-acero",
+     "titulo": "Feruquimia de Acero",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-15",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-aluminio",
+     "titulo": "Feruquimia de Aluminio",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-16",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-atium",
+     "titulo": "Feruquimia de Atium",
+     "fuentes": [
+      {
+       "id": "arte-juventud-metal-divino",
+       "encabezado": "Juventud – Metal divino"
+      },
+      {
+       "id": "arte-atium-autentico",
+       "encabezado": "Atium auténtico"
+      },
+      {
+       "id": "arte-cambio-de-tamano",
+       "encabezado": "Cambio de tamaño"
+      },
+      {
+       "id": "arte-usos-creativos-17",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-bendaleo",
+     "titulo": "Feruquimia de Bendaleo",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-18",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-consejo-para-la-dj-la-feruquimia-de-bendaleo-y-el-canon",
+       "encabezado": "Consejo para la DJ: La feruquimia de bendaleo y el canon"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-bronce",
+     "titulo": "Feruquimia de Bronce",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-19",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-cadmio",
+     "titulo": "Feruquimia de Cadmio",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-20",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-cinc",
+     "titulo": "Feruquimia de Cinc",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-21",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-cobre",
+     "titulo": "Feruquimia de Cobre",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-22",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-recuerdos-metal-cognitivo-la-feruquimia-de-cobre-y-el-pueblo-terrisano",
+       "encabezado": "Recuerdos – Metal cognitivo La feruquimia de cobre y el pueblo terrisano"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-cromo",
+     "titulo": "Feruquimia de Cromo",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-23",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-fortuna-que-no-suerte",
+       "encabezado": "Fortuna, que no suerte"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-duraluminio",
+     "titulo": "Feruquimia de Duraluminio",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-24",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-electro",
+     "titulo": "Feruquimia de Electro",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-25",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-estano",
+     "titulo": "Feruquimia de Estaño",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-26",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-consejo-para-la-dj-la-feruquimia-de-estano-y-el-canon",
+       "encabezado": "Consejo para la DJ: La feruquimia de estaño y el canon"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-hierro",
+     "titulo": "Feruquimia de Hierro",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-27",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-laton",
+     "titulo": "Feruquimia de Latón",
+     "fuentes": [
+      {
+       "id": "arte-la-feruquimia-de-laton-y-los-pueblos-del-sur",
+       "encabezado": "La feruquimia de latón y los pueblos del sur"
+      },
+      {
+       "id": "arte-usos-creativos-28",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-nicrosil",
+     "titulo": "Feruquimia de Nicrosil",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-29",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-eleccion-del-nicrosil-como-ferrin",
+       "encabezado": "Elección del nicrosil como ferrin"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-oro",
+     "titulo": "Feruquimia de Oro",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-30",
+       "encabezado": "Usos creativos"
+      }
+     ]
+    },
+    {
+     "slug": "feruquimia-de-peltre",
+     "titulo": "Feruquimia de Peltre",
+     "fuentes": [
+      {
+       "id": "arte-usos-creativos-31",
+       "encabezado": "Usos creativos"
+      },
+      {
+       "id": "arte-fuerza-metal-fisico",
+       "encabezado": "Fuerza – Metal físico"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nombre": "Hemalurgia",
+   "reglas": [
+    {
+     "slug": "hemalurgia",
+     "titulo": "Hemalurgia",
+     "fuentes": [
+      "arte-hemalurgia",
+      {
+       "id": "arte-un-arte-prohibido",
+       "encabezado": "Un arte prohibido"
+      },
+      {
+       "id": "camino-la-hemalurgia-en-el-jdr-del-cosmere",
+       "encabezado": "La hemalurgia en el JdR del Cosmere"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "descartar": [
+  "arte-cargas",
+  "arte-objetos-con-caracteristicas",
+  "arte-objetos-investidos",
+  "arte-rasgos-de-experto",
+  "arte-talentos-de-alomancia-de-acero",
+  "arte-talentos-de-alomancia-de-atium",
+  "arte-talentos-de-alomancia-de-bendaleo",
+  "arte-talentos-de-alomancia-de-bronce",
+  "arte-talentos-de-alomancia-de-cadmio",
+  "arte-talentos-de-alomancia-de-cinc",
+  "arte-talentos-de-alomancia-de-cobre",
+  "arte-talentos-de-alomancia-de-cromo",
+  "arte-talentos-de-alomancia-de-duraluminio",
+  "arte-talentos-de-alomancia-de-electro",
+  "arte-talentos-de-alomancia-de-estano",
+  "arte-talentos-de-alomancia-de-hierro",
+  "arte-talentos-de-alomancia-de-laton",
+  "arte-talentos-de-alomancia-de-nicrosil",
+  "arte-talentos-de-alomancia-de-oro",
+  "arte-talentos-de-alomancia-de-peltre",
+  "arte-talentos-de-feruquimia-de-acero",
+  "arte-talentos-de-feruquimia-de-aluminio",
+  "arte-talentos-de-feruquimia-de-atium",
+  "arte-talentos-de-feruquimia-de-bendaleo",
+  "arte-talentos-de-feruquimia-de-bronce",
+  "arte-talentos-de-feruquimia-de-cadmio",
+  "arte-talentos-de-feruquimia-de-cinc",
+  "arte-talentos-de-feruquimia-de-cobre",
+  "arte-talentos-de-feruquimia-de-cromo",
+  "arte-talentos-de-feruquimia-de-duraluminio",
+  "arte-talentos-de-feruquimia-de-electro",
+  "arte-talentos-de-feruquimia-de-estano",
+  "arte-talentos-de-feruquimia-de-hierro",
+  "arte-talentos-de-feruquimia-de-laton",
+  "arte-talentos-de-feruquimia-de-oro",
+  "arte-talentos-de-feruquimia-de-peltre",
+  "arte-uso-de-objetos"
+ ]
+}

@@ -24,6 +24,17 @@
     }
     return store.get('cosmere_dj', '') === '1';
   }
+  // Ambientación por URL: ?ambientacion=stormlight | mistborn/1 | mistborn-2 | cosmere (o vacío). Se guarda como la elegida en la cabecera.
+  function initAmbientacion() {
+    const sp = new URLSearchParams(location.search);
+    if (!sp.has('ambientacion')) return;
+    const v = sp.get('ambientacion').trim().toLowerCase().replace(/-/g, '/');
+    const id = v === 'cosmere' ? '' : v;
+    if (C.ambientaciones.some((a) => a.id === id)) { ambientacion = id; store.set('cosmere_ambientacion', id); }
+    sp.delete('ambientacion');
+    const qs = sp.toString();
+    try { history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash); } catch (e) { /* file:// restrictivo */ }
+  }
   function loadScript(src) {
     return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
   }
@@ -1099,6 +1110,7 @@
 
   async function main() {
     DJ = initDJ();
+    initAmbientacion();
     if (DJ) { try { await loadScript('data/dj.js'); } catch (e) { DJ = false; } }
     setup();
     const ld = $('#loading'); if (ld) ld.remove();

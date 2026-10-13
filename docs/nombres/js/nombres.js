@@ -123,8 +123,7 @@
       <h2>Generador de nombres</h2>
       <p class="nm-nota">Nombres típicos de cada cultura del Manual (cap. 2 · Cultura). «Inventados» combina sus sonidos para crear nombres nuevos con el mismo estilo. Pulsa un nombre para copiarlo; ☆ lo guarda.</p>
       <div class="nm-col">
-        <div class="nm-fila"><span class="nm-et">Cultura</span>${vis.map(c => chip(st.culturas.includes(c.id), 'cult', c.id, esc(c.label) + (todas ? ` <small>${esc(ambTxt(c.amb))}</small>` : ''))).join('')}
-          <button type="button" class="nm-link" data-a="todas">todas</button><button type="button" class="nm-link" data-a="ninguna">ninguna</button></div>
+        <div class="nm-fila"><span class="nm-et">Cultura</span>${vis.map(c => chip(st.culturas.includes(c.id), 'cult', c.id, esc(c.label) + (todas ? ` <small>${esc(ambTxt(c.amb))}</small>` : ''))).join('')}</div>
         <div class="nm-fila"><span class="nm-et">Tipo</span>${chip(st.modo === 'libro', 'modo', 'libro', 'Del libro')}${chip(st.modo === 'mezcla', 'modo', 'mezcla', 'Mezcla')}${chip(st.modo === 'inventado', 'modo', 'inventado', 'Inventados')}
           ${vis.some(c => c.listaClanes.length && st.culturas.includes(c.id)) ? `<label class="nm-chk"><input type="checkbox" data-a="clan"${st.clan ? ' checked' : ''}> con clan koloss</label>` : ''}</div>
         <div class="nm-fila"><span class="nm-et">Cuántos</span><input type="number" min="1" max="60" value="${st.cantidad}" data-a="cant" class="nm-num">
@@ -148,9 +147,7 @@
     const b = ev.target.closest('[data-a]');
     if (!b || !root.contains(b)) return;
     const a = b.dataset.a, v = b.dataset.v;
-    if (a === 'cult') { st.culturas = st.culturas.includes(v) ? st.culturas.filter(x => x !== v) : st.culturas.concat(v); }
-    else if (a === 'todas') st.culturas = visibles().map(c => c.id);
-    else if (a === 'ninguna') st.culturas = [];
+    if (a === 'cult') st.culturas = [v]; // selección exclusiva
     else if (a === 'modo') st.modo = v;
     else if (a === 'tirar') tirar();
     else if (a === 'copiar') return copiar(v, b);
@@ -181,7 +178,7 @@
     // la ambientación de la cabecera puede haber cambiado desde la última vez: solo se mantienen las culturas visibles
     const vis = visibles().map(c => c.id);
     const antes = st.culturas.join();
-    st.culturas = st.culturas.filter(id => vis.includes(id));
+    st.culturas = st.culturas.filter(id => vis.includes(id)).slice(0, 1); // exclusiva: un guardado antiguo con varias se reduce a una
     if (!st.culturas.length) st.culturas = vis.slice(0, 1);
     if (st.culturas.join() !== antes) res = [];
     if (!res.length && st.culturas.length) tirar();

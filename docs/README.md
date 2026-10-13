@@ -15,6 +15,7 @@ Abre `docs/index.html` en el navegador (funciona con doble clic, sin servidor) o
 - **Ambientación**: selector global en la cabecera, junto a «Cosmere RPG» (decisions/interfaz/filtro-ambientacion-en-listas.md). Cambia lo que se ve en todas las páginas, menús y herramientas; ninguna lista tiene filtro propio.
 - **Ámbito (detalle)**: cada entrada está etiquetada: *Mistborn* (general), *Mistborn Era 1*, *Mistborn Era 2*, *Stormlight* o *Cosmere* (lo común a todas, fuente «Manual del Juego»; ver [decisions/reglas/contenido-comun-entre-ambientaciones.md](../decisions/reglas/contenido-comun-entre-ambientaciones.md)). Elegir una era muestra lo general más lo de esa era.
 - **Modo DJ** (adversarios, módulos y Legado): sin interruptor en pantalla. Se activa abriendo la página con `?dj=1` (`index.html?dj=1`) y se desactiva con `?dj=0`. Se recuerda en el navegador y el parámetro desaparece de la barra de direcciones. Sin él, esos datos ni se cargan.
+- **Ambientación por URL**: `?ambientacion=stormlight`, `mistborn/1` (o `mistborn-1`), `mistborn/2` o `cosmere` (equivale a elegirla en la cabecera). Se recuerda en el navegador y el parámetro desaparece de la barra. Se puede combinar con `?dj=1`.
 
 ## Estructura
 

@@ -210,34 +210,36 @@
     return { role: 'button', tabindex: '0', 'aria-label': 'Ver descripción completa de ' + limpioTitulo(e.title), onclick: abrir,
       onkeydown: ev => { if (ev.target === ev.currentTarget && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); abrir(); } } };
   };
-  const tarjeta = (e, { clase = '', antes = null, despues = [] } = {}) =>
-    h('li', { class: 'talento clic ' + clase, ...abre(e) },
-      h('div', { class: 'cab' }, antes, h('strong', { class: 'tit' }, limpioTitulo(e.title)), despues),
+  // Los <li> no pueden tener role=button ni contener controles anidados: la fila entera abre el panel con el ratón y,
+  // para teclado y lectores de pantalla, el título es un botón de verdad.
+  const INTERACTIVOS = 'button, a, input, select, label, textarea';
+  const clicFila = abrir => ev => { const t = ev.target.closest(INTERACTIVOS); if (t && ev.currentTarget.contains(t)) return; abrir(); };
+  const tituloBoton = (abrir, titulo, etiqueta) =>
+    h('button', { type: 'button', class: 'tit-btn', 'aria-label': 'Ver descripción completa de ' + etiqueta, onclick: ev => { ev.stopPropagation(); abrir(); } }, titulo);
+  const tarjeta = (e, { clase = '', antes = null, despues = [] } = {}) => {
+    const abrir = () => abrirPanel(e.id);
+    const titulo = limpioTitulo(e.title);
+    return h('li', { class: 'talento clic ' + clase, onclick: clicFila(abrir) },
+      h('div', { class: 'cab' }, antes, h('strong', { class: 'tit' }, tituloBoton(abrir, titulo, titulo)), despues),
       h('p', { class: 'corta' }, descCorta(e)));
+  };
 
   // Fila de lista unificada (todos los pasos del asistente): título, chips, descripción corta y acciones.
   // Pulsar la fila abre el panel lateral (`ref` = id de entrada, `panel` = objeto sintético); los controles internos no lo abren.
-  const INTERACTIVOS = 'button, a, input, select, label, textarea';
   const fila = ({ ref, panel, titulo, corta, antes = null, chips = [], accion = [], on = false, bloq = false, extra = [], clase = '' }) => {
     const destinoPanel = panel || ref;
     const attrs = { class: ['talento', destinoPanel ? 'clic' : '', on ? 'on' : '', bloq ? 'bloq' : '', clase].filter(Boolean).join(' ') };
-    if (destinoPanel) {
-      const abrir = () => abrirPanel(destinoPanel);
-      Object.assign(attrs, {
-        role: 'button', tabindex: '0', 'aria-label': 'Ver descripción completa de ' + titulo,
-        onclick: ev => { const t = ev.target.closest(INTERACTIVOS); if (t && ev.currentTarget.contains(t)) return; abrir(); },
-        onkeydown: ev => { if (ev.target === ev.currentTarget && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); abrir(); } },
-      });
-    }
+    const abrir = () => abrirPanel(destinoPanel);
+    if (destinoPanel) attrs.onclick = clicFila(abrir);
     return h('li', attrs,
-      h('div', { class: 'cab' }, antes, h('strong', { class: 'tit' }, titulo), chips, h('span', { class: 'acc' }, accion)),
+      h('div', { class: 'cab' }, antes, h('strong', { class: 'tit' }, destinoPanel ? tituloBoton(abrir, titulo, titulo) : titulo), chips, h('span', { class: 'acc' }, accion)),
       corta ? h('p', { class: 'corta' }, corta) : null, extra);
   };
 
   const chipCoste = (raw, texto) => {
     const html = U.act(raw);
     if (!html) return h('span', { class: 'chip small coste' }, texto);
-    const s = h('span', { class: 'coste-ico', title: texto, 'aria-label': texto });
+    const s = h('span', { class: 'coste-ico', role: 'img', title: texto, 'aria-label': texto });
     s.innerHTML = html;
     return s;
   };

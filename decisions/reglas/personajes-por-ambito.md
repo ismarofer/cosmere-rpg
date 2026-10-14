@@ -1,6 +1,6 @@
 ---
 description: El personaje lleva su ámbito (Mistborn o Stormlight); lo que ofrece el asistente y la hoja sale de ese ámbito, no del filtro de la cabecera, y lo propio de cada mundo (artes metálicas, radiantes) va en pasos y módulos separados.
-applies-to: docs/personaje/js/rules.js (AMBITOS, ASCENDENCIAS_AMB, POTENCIAS), docs/personaje/js/engine.js (ambCubre, derivar, radiante), docs/personaje/js/wizard.js (pasoDatos, pasoRadiante, secuencia), docs/personaje/js/sheet.js
+applies-to: docs/personaje/js/rules.js (AMBITOS, ASCENDENCIAS_AMB, POTENCIAS), docs/personaje/js/engine.js (ambCubre, derivar, radiante), docs/personaje/js/wizard-*.js (pasoDatos, pasoRadiante, secuencia), docs/personaje/js/sheet.js
 ---
 
 # Personajes por ámbito (Mistborn / Stormlight)

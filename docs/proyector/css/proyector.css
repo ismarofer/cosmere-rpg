@@ -9,8 +9,8 @@
 #pyr button:hover { background: #3f4250; }
 #pyr button.on { background: #b3541e; border-color: #e07a3c; color: #fff; }
 #pyr button.prim { background: #2a6b3c; border-color: #3d9955; color: #fff; }
-#pyr main { flex: 1; display: grid; grid-template-columns: 190px minmax(0, 1fr) 270px; min-height: 0; }
-#pyr aside { overflow-y: auto; padding: 8px; background: #1c1c21; }
+#pyr .pymain { flex: 1; display: grid; grid-template-columns: 190px minmax(0, 1fr) 270px; min-height: 0; }
+#pyr #lista, #pyr #panel { overflow-y: auto; padding: 8px; background: #1c1c21; }
 #pyr #lista { border-right: 1px solid #333; }
 #pyr #panel { border-left: 1px solid #333; }
 #pyr #drop { border: 2px dashed #555; border-radius: 6px; padding: 14px 6px; text-align: center; cursor: pointer; color: #999; }
@@ -56,8 +56,8 @@
 @media (max-width: 900px) {
   #pyr { height: auto; min-height: 0; }
   #pyr header { flex-wrap: wrap; }
-  #pyr main { grid-template-columns: minmax(0, 1fr); }
+  #pyr .pymain { grid-template-columns: minmax(0, 1fr); }
   #pyr #centro { height: 60vw; min-height: 240px; }
-  #pyr aside { overflow-y: visible; }
+  #pyr #lista, #pyr #panel { overflow-y: visible; }
   #pyr #lista, #pyr #panel { border: 0; border-top: 1px solid #333; }
 }

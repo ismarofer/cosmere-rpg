@@ -1,6 +1,6 @@
 ---
 description: La ambientación es un filtro global, en la cabecera junto a la marca; recorta menús, portada, listas, árboles, búsqueda y herramientas. Ninguna lista tiene filtro de ambientación propio.
-applies-to: docs/index.html (#ambpick), docs/js/app.js (visible, window.CosmereAmb), docs/js/curated.js (ambientaciones), docs/combates/js/vista.js y cualquier lista, tabla, catálogo o herramienta nueva
+applies-to: docs/index.html (#ambpick), docs/js/app-base.js (visible, window.CosmereAmb), docs/js/curated.js (ambientaciones), docs/combates/js/vista.js y cualquier lista, tabla, catálogo o herramienta nueva
 ---
 
 # Filtro global de ambientación (cabecera)

@@ -391,7 +391,7 @@ docs/personaje/
   js/engine.js            ← motor puro (sin DOM): PJ.derivar, prerrequisitos, talentos elegibles
   js/store.js             ← localStorage (cosmere-personajes-v1) + importar/exportar JSON
   js/ui-common.js         ← helpers de DOM
-  js/wizard.js            ← asistente de creación y de subida de nivel
+  js/wizard*.js           ← asistente de creación y de subida de nivel (partido en wizard-comun/datos/talentos/poderes/equipo + wizard.js)
   js/sheet.js             ← hoja con pestañas y módulos de nacido del metal
   js/app.js               ← router (hash)
 tools/test-personaje.mjs  ← pruebas del motor (node tools/test-personaje.mjs)

@@ -40,7 +40,7 @@
   // cantora: uno de los talentos de formas iniciales, junto a Cambiar de forma, que es automático).
   PJ.ASCENDENCIAS_STORMLIGHT = {
     humana: { n: 'Humana', arbol: null, auto: [], extraNivel1: true, origen: 'origen-stormlight-ascendencia-humana' },
-    cantora: { n: 'Cantora', arbol: 'ascendencia-cantora', auto: ['talento-cambiar-de-forma-principal-de-cantor'], extraNivel1: true, origen: 'origen-stormlight-ascendencia-cantora' },
+    cantora: { n: 'Cantora', arbol: 'ascendencia-cantora', auto: ['talento-cambiar-de-forma-principal-de-cantor'], extraNivel1: true, restrN1: 'formas',origen: 'origen-stormlight-ascendencia-cantora' },
   };
   PJ.ASCENDENCIAS_AMB = { Mistborn: PJ.ASCENDENCIAS, Stormlight: PJ.ASCENDENCIAS_STORMLIGHT };
   PJ.AMBITOS = {
@@ -115,6 +115,26 @@
   PJ.talentosAscendenciaExtra = (nivel, asc) => {
     const base = (asc && typeof asc === 'object' ? asc.extraNivel1 : asc === 'humana') ? 1 : 0;
     return base + [6, 11, 16, 21].filter(n => nivel >= n).length;
+  };
+  // Formas de cantor entre las que se elige el talento adicional de nivel 1 de la ascendencia cantora.
+  PJ.FORMAS_INICIALES_CANTOR = ['talento-formas-de-delicadeza', 'talento-formas-de-determinacion', 'talento-formas-de-sabiduria'];
+  // Huecos de talento de la ascendencia, uno por talento extra (mismo número que talentosAscendenciaExtra).
+  // Cada hueco es { texto, arboles | talentos } (manual, «Talentos adicionales de ascendencia»).
+  PJ.huecosAscendencia = (nivel, asc) => {
+    const out = [];
+    if (asc && asc.extraNivel1) {
+      out.push(asc.restrN1 === 'formas'
+        ? { texto: 'un talento de formas iniciales (delicadeza, determinación o sabiduría)', talentos: PJ.FORMAS_INICIALES_CANTOR }
+        : { texto: 'un talento de un camino heroico', arboles: PJ.CAMINOS_HEROICOS });
+    }
+    for (const n of [6, 11, 16, 21]) {
+      if (nivel < n) continue;
+      // en todos los rangos: del árbol propio de la ascendencia (si lo tiene) o de un camino heroico
+      out.push(asc && asc.arbol
+        ? { texto: `un talento del árbol de ${asc.n.toLowerCase()} o de un camino heroico`, arboles: [asc.arbol, ...PJ.CAMINOS_HEROICOS] }
+        : { texto: 'un talento de un camino heroico', arboles: PJ.CAMINOS_HEROICOS });
+    }
+    return out;
   };
   PJ.talentosLibres = (nivel, elecciones21) => (Math.min(nivel, 20) - 1) + (elecciones21 || []).filter(x => x === 'talento').length;
 

@@ -126,7 +126,7 @@
         <div class="nm-fila"><span class="nm-et">Cultura</span>${vis.map(c => chip(st.culturas.includes(c.id), 'cult', c.id, esc(c.label) + (todas ? ` <small>${esc(ambTxt(c.amb))}</small>` : ''))).join('')}</div>
         <div class="nm-fila"><span class="nm-et">Tipo</span>${chip(st.modo === 'libro', 'modo', 'libro', 'Del libro')}${chip(st.modo === 'mezcla', 'modo', 'mezcla', 'Mezcla')}${chip(st.modo === 'inventado', 'modo', 'inventado', 'Inventados')}
           ${vis.some(c => c.listaClanes.length && st.culturas.includes(c.id)) ? `<label class="nm-chk"><input type="checkbox" data-a="clan"${st.clan ? ' checked' : ''}> con clan koloss</label>` : ''}</div>
-        <div class="nm-fila"><span class="nm-et">Cuántos</span><input type="number" min="1" max="60" value="${st.cantidad}" data-a="cant" class="nm-num">
+        <div class="nm-fila"><span class="nm-et">Cuántos</span><input type="number" min="1" max="60" value="${st.cantidad}" data-a="cant" class="nm-num" aria-label="Cuántos nombres">
           <button type="button" class="btn primary nm-tirar" data-a="tirar">Generar</button>
           <button type="button" class="btn" data-a="copiar-todo"${res.length ? '' : ' disabled'}>Copiar todos</button></div>
       </div>

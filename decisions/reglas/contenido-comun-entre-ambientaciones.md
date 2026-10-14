@@ -1,6 +1,6 @@
 ---
 description: Lo que es igual en todas las ambientaciones cargadas pasa a ambientación «Cosmere» y fuente «Manual del Juego»; lo que cambia, aunque se parezca, se queda en su ambientación.
-applies-to: tools/build-buscador.py (libro_de), tools/buscador_personaje.py (UTILIDAD_COMUN), tools/buscador_stormlight.py, docs/js/curated.js (ambientacionPath), docs/js/app.js (visible, ambCubre)
+applies-to: tools/build-buscador.py (libro_de), tools/buscador_personaje.py (UTILIDAD_COMUN), tools/buscador_stormlight.py, docs/js/curated.js (ambientacionPath), docs/js/app-base.js (visible, ambCubre)
 ---
 
 # Contenido común entre ambientaciones: ambientación Cosmere y fuente Manual del Juego

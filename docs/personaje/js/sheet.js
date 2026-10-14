@@ -28,12 +28,13 @@
 
     // ---------------- Resumen
     const caja = (titulo, ...cont) => h('div', { class: 'caja' }, h('div', { class: 'caja-t' }, titulo), ...cont);
-    const rec = (nombre, clave, max, extra) => h('div', { class: 'recurso' },
+    const rec = (nombre, clave, max, extra) => h('div', { class: 'recurso ' + clave },
       h('span', { class: 'rec-n' }, nombre),
       contador(actual(c.estado[clave], max), { min: 0, max, etiqueta: nombre, alCambiar: v => cambiar(c => { c.estado[clave] = v; }) }),
       h('span', { class: 'de' }, '/ ' + max),
       h('button', { type: 'button', class: 'mini noprint', title: 'Restablecer al máximo', onclick: () => cambiar(c => { c.estado[clave] = null; }) }, '↺'),
-      extra || null);
+      extra || null,
+      h('span', { class: 'rec-bar', role: 'presentation' }, h('i', { style: `width:${max ? Math.max(0, Math.min(100, actual(c.estado[clave], max) / max * 100)) : 0}%` })));
 
     const atributo = k => {
       const a = d.atributos[k], n = PJ.ATR[k].n;
@@ -353,7 +354,7 @@
       });
     };
     raiz.innerHTML = '';
-    raiz.appendChild(h('div', { class: 'hoja' },
+    raiz.appendChild(h('div', { class: 'hoja', 'data-amb': PJ.ambito(c).toLowerCase() },
       h('header', { class: 'cab-hoja' },
         h('div', null, h('h2', null, c.nombre || 'Personaje sin nombre'), h('div', { class: 'muted' }, `${sub} · nivel ${d.nivel} (rango ${d.rango})` + (c.jugador ? ` · ${c.jugador}` : ''))),
         h('div', { class: 'acciones noprint' },
@@ -362,7 +363,7 @@
           h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, 'Imprimir'),
           h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar'))),
       d.pendientes || d.errores ? h('div', { class: 'banda noprint' }, d.errores ? `${d.errores} error(es)` : '', d.errores && d.pendientes ? ' · ' : '', d.pendientes ? `${d.pendientes} pendiente(s) de completar. ` : '',
-        h('a', { href: `#/personajes/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
+        h('a', { class: 'subrayado', href: `#/personajes/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
       h('nav', { class: 'tabs noprint' }, TABS.map(([k, n]) => h('button', { type: 'button', class: 'tab', 'data-tab': k, onclick: () => mostrar(k) }, k === 'poderes' && stormlight ? 'Radiante' : n))),
       TABS.map(([k]) => paneles[k])));
     mostrar(tabActual);

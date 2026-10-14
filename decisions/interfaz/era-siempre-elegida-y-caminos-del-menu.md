@@ -1,6 +1,6 @@
 ---
 description: Mistborn se filtra siempre por era; una era muestra lo suyo más lo común a ambas, y el menú de caminos se acota con el mismo filtro.
-applies-to: docs/js/curated.js (ambientaciones), docs/js/app.js (visible, treeShown, menú y portada), tools/buscador_extras.py (aplicar_eras)
+applies-to: docs/js/curated.js (ambientaciones), docs/js/app-base.js (visible), docs/js/app-arboles.js (treeShown), docs/js/app.js (menú y portada), tools/buscador_extras.py (aplicar_eras)
 ---
 
 # Mistborn siempre por era; menú de caminos filtrado

@@ -191,6 +191,60 @@ if (PJ.store) {
   eq('importación conserva los talentos de Ideal', rr.talentos, [PRIMER, SEGUNDO]);
 }
 
+// --- Huecos restringidos por ascendencia (bloqueo duro)
+{
+  const h = PJ.nuevoPersonaje({ ascendencia: 'humana', camino: 'guerrero', nivel: 2 });
+  const primero = slug => D.arbol[slug].talentos.find(id => PJ.talentosElegibles(h, PJ.derivar(h), slug).some(x => x.id === id && x.ev.cumple));
+  const heroico = primero('lider'), otro = primero('brumoso');
+  const d0 = PJ.derivar(h);
+  eq('humano: un hueco restringido', d0.presupuesto.talentos.huecosDef.length, 1);
+  eq('humano con 2 huecos: cualquiera vale mientras quede margen', [PJ.puedeElegirTalento(h, d0, otro), PJ.puedeElegirTalento(h, d0, heroico)], [true, true]);
+  h.talentos = [otro];
+  const d1 = PJ.derivar(h);
+  eq('humano: último hueco reservado al camino heroico', [PJ.puedeElegirTalento(h, d1, primero('nacido-de-la-bruma')), PJ.puedeElegirTalento(h, d1, heroico)], [false, true]);
+  h.ignorarPrerreq = true;
+  cierto('ignorar prerrequisitos desbloquea la restricción de ascendencia', PJ.puedeElegirTalento(h, d1, primero('nacido-de-la-bruma')));
+  h.ignorarPrerreq = false;
+  cierto('humano: aviso pendiente de ascendencia', d1.avisos.some(a => /ascendencia exige/.test(a.texto)));
+  h.talentos = [otro, heroico];
+  cierto('humano: hueco cubierto', PJ.derivar(h).presupuesto.talentos.huecos[0].cubierto);
+  const h6 = PJ.nuevoPersonaje({ ascendencia: 'humana', camino: 'guerrero', nivel: 6 });
+  eq('humano rango 2: dos huecos heroicos', PJ.derivar(h6).presupuesto.talentos.huecosDef.length, 2);
+  const kn = PJ.nuevoPersonaje({ ascendencia: 'kandra', camino: 'guerrero', nivel: 6 });
+  eq('kandra rango 2: un hueco de su árbol o heroico', PJ.derivar(kn).presupuesto.talentos.huecosDef.length, 1);
+  const cn = PJ.nuevoPersonaje({ ambito: 'Stormlight', ascendencia: 'cantora', camino: 'erudito' });
+  const dcn = PJ.derivar(cn);
+  eq('cantor: solo formas iniciales en el hueco de nivel 1', [PJ.puedeElegirTalento(cn, dcn, 'talento-formas-de-delicadeza'), PJ.puedeElegirTalento(cn, dcn, 'talento-mente-ambiciosa')], [true, false]);
+}
+
+// --- Subida de nivel: presupuestos por nivel y ascendencia
+{
+  const presup = (opc, nivel, el21) => {
+    const c = PJ.nuevoPersonaje(opc); c.nivel = nivel; if (el21) c.elecciones21 = el21;
+    const d = PJ.derivar(c), t = d.presupuesto.talentos;
+    return { talentos: t.total, huecos: t.huecosDef.length, grados: d.presupuesto.grados.total, subidas: d.presupuesto.atributosSubidas.total, errores: d.errores };
+  };
+  const humana = { ascendencia: 'humana', camino: 'guerrero' };
+  eq('humano nivel 1', presup(humana, 1), { talentos: 1, huecos: 1, grados: 4, subidas: 0, errores: 0 });
+  eq('humano nivel 3 (primera mejora de atributo)', presup(humana, 3), { talentos: 3, huecos: 1, grados: 8, subidas: 1, errores: 0 });
+  eq('humano nivel 6 (segundo hueco heroico)', presup(humana, 6), { talentos: 7, huecos: 2, grados: 14, subidas: 2, errores: 0 });
+  eq('humano nivel 11', presup(humana, 11), { talentos: 13, huecos: 3, grados: 24, subidas: 3, errores: 0 });
+  eq('humano nivel 21 (elige grado)', presup(humana, 21, ['grado']), { talentos: 24, huecos: 5, grados: 43, subidas: 6, errores: 0 });
+  eq('kandra nivel 1: sin talento adicional', presup({ ascendencia: 'kandra', camino: 'agente' }, 1).huecos, 0);
+  eq('kandra nivel 6: un hueco', presup({ ascendencia: 'kandra', camino: 'agente' }, 6).huecos, 1);
+  eq('cantora nivel 1', presup({ ambito: 'Stormlight', ascendencia: 'cantora', camino: 'erudito' }, 1).huecos, 1);
+  eq('cantora nivel 16', presup({ ambito: 'Stormlight', ascendencia: 'cantora', camino: 'erudito' }, 16).huecos, 4);
+  // los huecos de rango se aplican al subir, y no antes
+  const sube = PJ.nuevoPersonaje(humana); sube.nivel = 5;
+  const antes = PJ.derivar(sube).presupuesto.talentos.huecosDef.length;
+  sube.nivel = 6;
+  eq('subir al rango 2 añade un hueco restringido', PJ.derivar(sube).presupuesto.talentos.huecosDef.length, antes + 1);
+  // bajar de nivel con mejoras aplicadas se señala como error, no se descarta en silencio
+  const baja = PJ.nuevoPersonaje(humana); baja.nivel = 6; baja.atributos.subidas = ['fuerza', 'velocidad']; baja.nivel = 2;
+  cierto('bajar de nivel con mejoras sobrantes avisa', PJ.derivar(baja).errores > 0);
+}
+
+
 console.log(`\n${ok} comprobaciones correctas, ${fallos} fallos.`);
 process.exit(fallos ? 1 : 0);
 

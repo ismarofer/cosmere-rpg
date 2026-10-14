@@ -29,7 +29,7 @@
       h('p', { class: 'muted' }, 'Los personajes se guardan solo en este navegador. Exporta una copia en JSON para no perderlos o para llevarlos a otro equipo.'),
       todos.length ? h('div', { class: 'cartas' }, todos.map(c => {
         const d = PJ.derivar(c);
-        return h('a', { class: 'carta', href: '#/personajes/p/' + c.id },
+        return h('a', { class: 'carta', 'data-amb': PJ.ambito(c).toLowerCase(), href: '#/personajes/p/' + c.id },
           h('b', null, c.nombre || 'Sin nombre'),
           h('span', null, `${PJ.ambito(c) === 'Stormlight' ? 'Stormlight · ' : ''}${PJ.ascDe(c).n} · ${PJ.ui.nombreCamino(c.camino) || 'sin camino'}${d.radiante ? ' · ' + d.radiante.nombre : ''} · nivel ${d.nivel}`),
           d.pendientes ? h('span', { class: 'mal' }, `${d.pendientes} pendiente(s) de completar`) : null);

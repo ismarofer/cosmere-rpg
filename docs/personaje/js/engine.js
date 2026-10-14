@@ -319,6 +319,10 @@
     const libres = R.talentosLibres(nivel, c.elecciones21);
     const extra = R.talentosAscendenciaExtra(nivel, asc);
     const talentosTotal = libres + extra;
+    const huecosDef = R.huecosAscendencia(nivel, asc);
+    const cubiertos = PJ.huecosCubiertos(huecosDef, elegidos);
+    const huecos = huecosDef.map((h, i) => ({ texto: h.texto, cubierto: cubiertos[i] }));
+    huecos.filter(h => !h.cubierto).forEach(h => aviso('pendiente', `Tu ascendencia exige ${h.texto}.`));
     if (elegidos.length > talentosTotal) aviso('error', `Tienes ${elegidos.length} talentos elegidos y solo ${talentosTotal} disponibles.`);
     else if (elegidos.length < talentosTotal) aviso('pendiente', `Te faltan ${talentosTotal - elegidos.length} talentos por elegir.`);
     if (!c.camino) aviso('pendiente', 'Elige tu camino inicial.');
@@ -389,7 +393,7 @@
       presupuesto: {
         atributosCreacion: sub.creacion, atributosSubidas: sub.subidas,
         grados: { total: totalGrados, usados: usadosGrados, max: gradoMax },
-        talentos: { total: talentosTotal, usados: elegidos.length, libres, extra },
+        talentos: { total: talentosTotal, usados: elegidos.length, libres, extra, huecosDef, huecos },
         pericias: { total: periciasTotal, usadas: periciasUsadas },
       },
       talentos: { auto, elegidos, todos: idsPoseidos }, ctxPre, bonos, noAplicados, artes,
@@ -398,6 +402,30 @@
       pendientes: avisos.filter(a => a.tipo === 'pendiente').length,
       errores: avisos.filter(a => a.tipo === 'error').length,
     };
+  };
+
+  // Huecos de talento restringidos por la ascendencia: para cada hueco, si algún talento elegido lo cubre
+  // (cada talento cubre como mucho un hueco).
+  PJ.huecosCubiertos = function (huecos, ids) {
+    const D = PJ.datos();
+    const enArbol = id => Object.keys(D.arbol).filter(s => (D.arbol[s].talentos || []).includes(id));
+    const usados = new Set();
+    return huecos.map(h => {
+      const id = ids.find(x => !usados.has(x) && (h.talentos ? h.talentos.includes(x) : enArbol(x).some(s => h.arboles.includes(s))));
+      if (id) usados.add(id);
+      return !!id;
+    });
+  };
+
+  // Bloqueo duro: un talento solo se puede elegir si, tras añadirlo, quedan tantos huecos libres como huecos
+  // restringidos de la ascendencia sin cubrir.
+  PJ.puedeElegirTalento = function (c, d, id) {
+    const t = d.presupuesto.talentos;
+    const restantes = t.total - t.usados;
+    if (restantes <= 0) return false;
+    if (c.ignorarPrerreq) return true; // decisión de la DJ: se salta también las restricciones de ascendencia
+    const sin = PJ.huecosCubiertos(t.huecosDef, [...d.talentos.elegidos, id]).filter(x => !x).length;
+    return sin <= restantes - 1;
   };
 
   // Talentos disponibles para elegir (lista de entradas con estado de prerrequisitos)

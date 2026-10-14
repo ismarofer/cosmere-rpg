@@ -11,7 +11,7 @@
 .cb-acciones { display: flex; gap: .4rem; flex-wrap: wrap; margin: 0 0 .6rem; }
 .cb-x { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 .3rem; font: inherit; }
 .cb-x:hover { color: #b3261e; }
-.cb-abre { font-size: 1rem; color: var(--accent); }
+.cb-abre { font-size: 1rem; color: var(--accent-text); }
 .cb-fila[data-a="abrir-fila"] { cursor: pointer; }
 .cb-fila[data-a="abrir-fila"]:hover > td { background: var(--accent-soft); }
 .cb-rol { font-size: .72rem; padding: .05rem .45rem; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); }
@@ -22,7 +22,7 @@
 /* barra de amenaza */
 .cb-amenaza { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); padding: .6rem .9rem 1.9rem; margin-bottom: .8rem; }
 .cb-amenaza-t { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
-.cb-dif { font-weight: 700; padding: .05rem .6rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .85rem; white-space: nowrap; }
+.cb-dif { font-weight: 700; padding: .05rem .6rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); font-size: .85rem; white-space: nowrap; }
 .dif-facil .cb-dif, .cb-dif.dif-facil { background: #dff3e3; color: #1f6b34; }
 .dif-promedio .cb-dif, .cb-dif.dif-promedio { background: #fff0cc; color: #8a5a00; }
 .dif-dificil .cb-dif, .cb-dif.dif-dificil { background: #fde0d4; color: #a33a10; }
@@ -68,7 +68,7 @@
 .cb-rec { min-width: 8rem; }
 .cb-ctl { display: flex; align-items: center; gap: .25rem; margin-top: .2rem; }
 .cb-n { width: 3.4rem; font: inherit; font-variant-numeric: tabular-nums; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: .1rem .2rem; text-align: right; }
-.cb-man { color: var(--accent); font-weight: 700; }
+.cb-man { color: var(--accent-text); font-weight: 700; }
 .cb-n.manual { border-color: var(--accent); background: var(--accent-soft); }
 .cb-bar { display: block; height: 7px; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
 .cb-bar i { display: block; height: 100%; background: #b3541e; }

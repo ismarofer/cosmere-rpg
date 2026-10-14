@@ -16,14 +16,14 @@
   <button id="bImp">Importar .zip</button>
   <input type="file" id="fImp" accept=".zip" hidden>
 </header>
-<main>
-  <aside id="lista">
+<div class="pymain">
+  <section id="lista" aria-label="Biblioteca">
     <div id="drop">Suelta aquí imágenes o audio<br><small>o haz clic para elegirlas</small></div>
     <input type="file" id="fImg" accept="image/*" multiple hidden>
     <ul id="escenas"></ul>
-  </aside>
+  </section>
   <section id="centro"><canvas id="prev"></canvas></section>
-  <aside id="panel">
+  <section id="panel" aria-label="Controles">
     <fieldset><legend>Escena</legend>
       <input id="nombre" placeholder="Nombre">
       <label>Tipo <select id="tipo"><option value="mapa">Mapa (con niebla)</option><option value="imagen">Imagen</option></select></label>
@@ -82,8 +82,8 @@
       <div class="fila"><button id="bReal">Escala real</button><label><input type="checkbox" id="grid"> Cuadrícula</label></div>
       <label>px de pantalla por cm <input type="number" id="pxCm" min="5" step="0.5" value="38"></label>
     </fieldset>
-  </aside>
-</main>`;
+  </section>
+</div>`;
   const SCRIPTS = ['niebla', 'render', 'almacen', 'musica', 'consola'];
   function cargar(i) {
     if (i >= SCRIPTS.length) return;

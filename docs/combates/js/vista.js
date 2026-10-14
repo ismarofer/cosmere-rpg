@@ -22,6 +22,10 @@
   function cambiar(texto, fn) { CB.cambiar(enc, texto, fn); guardar(); render(); }
   const comb = id => enc && enc.combatientes.find(c => c.id === id);
   const advDe = c => advs.find(a => a.nombre === c.fuente);
+  // Desvío a restar: el del combatiente, o el del módulo (kandra: 5) cuando el daño es por laceración.
+  const desvioEf = c => (ui.lacer ? Math.max(c.desvio, CB.efectos(c, advDe(c)).desvioLaceracion) : c.desvio);
+  const fichaMod = m => { const d = CB.datosModulo(m); const k = d && mods.find(x => x.id === d.id); return k && k.ficha; };
+  const modEnlace = m => (fichaMod(m) ? `<a href="#/e/${esc(fichaMod(m))}" title="Ver el módulo en el libro">${esc(m.nombre)}</a>` : esc(m.nombre));
   function aviso(t) {
     ui.aviso = t;
     const el = root.querySelector('#cb-aviso');
@@ -86,7 +90,7 @@
   const campoMax = (c, k, l) => `<label class="cb-campo">${l} máx. <input type="number" class="cb-n" min="${k === 'salud' ? 1 : 0}" data-a="val" data-id="${c.id}" data-k="${k}" data-c="max" value="${c[k].max}"></label>`;
   function vModificar(c) {
     const am = CB.resumenAmenaza(enc).enemigos.find(e => e.id === c.id);
-    const ap = c.modulos || [], usados = new Set(ap.map(m => m.id));
+    const ap = c.modulos || [], usados = new Set(ap.map(m => (CB.datosModulo(m) || m).id));
     const porFam = {};
     mods.filter(m => !usados.has(m.id)).forEach(m => { (porFam[m.familia] = porFam[m.familia] || []).push(m); });
     return `<h4>Modificar</h4><div class="cb-mod">
@@ -94,9 +98,45 @@
         <label class="cb-campo">Desvío <input type="number" class="cb-n" min="0" data-a="desvio-val" data-id="${c.id}" value="${c.desvio}"></label>
         <label class="cb-campo" title="Vacía la casilla para volver al valor calculado">Amenaza <input type="number" step="0.25" min="0" class="cb-n ${am.manual ? 'manual' : ''}" data-a="amenaza" data-id="${c.id}" value="${String(am.valor)}"></label>
         ${am.manual ? `<span class="muted">calculada ${num(am.calculada)}</span>` : ''}</div>
-      <div class="cb-estados"><b>Módulos</b> ${ap.map(m => `<span class="chip soft"><a href="#/e/${esc(m.id)}" title="Ver el módulo en el libro">${esc(m.nombre)}</a><button class="cb-x" data-a="modulo-quitar" data-id="${c.id}" data-m="${esc(m.id)}" title="Quitar módulo">✕</button></span>`).join('') || '<span class="muted">ninguno</span>'}
+      <div class="cb-estados"><b>Módulos</b> ${ap.map(m => `<span class="chip soft">${modEnlace(m)}<button class="cb-x" data-a="modulo-quitar" data-id="${c.id}" data-m="${esc(m.id)}" title="Quitar módulo">✕</button></span>`).join('') || '<span class="muted">ninguno</span>'}
         <select data-a="modulo-add" data-id="${c.id}"><option value="">+ módulo…</option>${Object.keys(porFam).map(f => `<optgroup label="${esc(f)}">${porFam[f].map(m => `<option value="${esc(m.id)}">${esc(m.nombre)}</option>`).join('')}</optgroup>`).join('')}</select></div>
-      <p class="nota">El libro no da cifras para los módulos: ajusta a mano los máximos, el desvío y la amenaza si el módulo los cambia.</p></div>`;
+      ${vEfectos(c)}</div>`;
+  }
+
+  // Resumen de lo que hacen los módulos aplicados (Investidura, habilidades, defensas, desvío, amenaza) y avisos de reglas.
+  function vEfectos(c) {
+    const ef = CB.efectos(c, advDe(c));
+    if (!ef.mods.length) return '<p class="nota">Al añadir un módulo se aplican sus acciones y rasgos, la Investidura y las habilidades que da, las defensas y la amenaza.</p>';
+    const li = [];
+    if (ef.factorAmenaza > 1) li.push('Amenaza ×1,5 (el primer módulo la aumenta en la mitad).');
+    if (ef.investidura != null) li.push(`Investidura: al menos ${ef.investidura} (2 + Discernimiento o Presencia).`);
+    ef.habilidades.forEach(h => li.push(`${esc(h.n)} ${h.mod >= 0 ? '+' : ''}${h.mod}${h.grados != null ? ` (${h.grados} grados)` : ''} — ${esc(h.nota)}.`));
+    if (ef.escala) li.push(`Artes metálicas (rango ${c.rango}): dado ${ef.escala.dado}, alcance ${ef.escala.alcance}.`);
+    const d = ef.defensas;
+    if (d.fis || d.cog || d.esp) li.push(`Defensas: ${[['física', d.fis], ['cognitiva', d.cog], ['espiritual', d.esp]].filter(x => x[1]).map(x => `${x[0]} ${x[1] > 0 ? '+' : ''}${x[1]}`).join(', ')}.`);
+    ef.notas.forEach(n => li.push(esc(n)));
+    return `<ul class="cb-efectos">${li.map(x => `<li>${x}</li>`).join('')}${ef.avisos.map(x => `<li class="mal">⚠ ${esc(x)}</li>`).join('')}</ul>`;
+  }
+
+  // Acciones y rasgos que aportan los módulos aplicados, con los cálculos del libro resueltos para el rango del adversario.
+  function vModulos(c) {
+    const ef = CB.efectos(c, advDe(c));
+    if (!ef.mods.length) return '';
+    const rango = c.rango || 1;
+    const texto = t => esc(CB.textoModulo(t, rango)).replace(/\n/g, '<br>');
+    const accion = (a, mid, j) => {
+      const coste = a.cab ? CB.adversarios.costeDe('(' + a.cab + ')') : null;
+      const falta = coste && coste.recurso && c[coste.recurso].act < coste.cantidad;
+      const noRango = a.rangoMin && rango < a.rangoMin;
+      return `<li class="${falta || noRango ? 'sin-coste' : ''}"><div class="cb-it"><div class="cb-it-t">${a.glifo != null ? act(a.glifo) : ''}<b>${esc(a.n)}</b>${a.rangoMin ? ` <span class="chip small soft">rango ≥${a.rangoMin}</span>` : ''}${a.cab ? ` <span class="chip small">${esc(CB.textoModulo(a.cab.replace(/^Coste:\s*/i, ''), rango))}</span>` : ''}${a.glifo === 'r' ? ' <span class="chip small">reacción</span>' : ''}</div>
+          <p>${texto(a.texto)}</p></div>
+        ${coste && coste.recurso ? `<button class="btn small" data-a="pagar" data-id="${c.id}" data-m="${esc(mid)}" data-j="${j}" title="Descontar el coste del recurso">Usar</button>` : ''}</li>`;
+    };
+    const rasgo = a => `<li><div class="cb-it"><div class="cb-it-t"><b>${esc(a.n)}</b>${a.rangoMin ? ` <span class="chip small soft">rango ≥${a.rangoMin}</span>` : ''}${a.cab ? ` <span class="chip small">${esc(CB.textoModulo(a.cab, rango))}</span>` : ''}</div><p>${texto(a.texto)}</p></div></li>`;
+    const bloques = ef.mods.filter(m => m.acciones.length || m.rasgos.length).map(m => `<li class="cb-mod-t"><span class="chip small">${esc(m.nombre)}</span>${m.era ? ` <span class="chip small soft">Era ${m.era}</span>` : ''}</li>`
+      + m.acciones.map((a, j) => accion(a, m.id, j)).join('') + m.rasgos.map(rasgo).join('')).join('');
+    const base = ef.acciones.map(a => `<li><div class="cb-it"><div class="cb-it-t">${act(a.glifo)}<b>${esc(a.n)}</b> <span class="chip small">${esc(a.modulo)}</span></div></div></li>`).join('');
+    return `<h4>Módulos</h4><ul class="cb-acc">${base}${bloques}</ul>`;
   }
 
   function vDetalle(c) {
@@ -104,7 +144,8 @@
     const B = g.PJ.datos();
     const estados = B.byId, lista = B.base.filter(e => e.cat === 'estado');
     const dano = ui.dano[c.id] || '';
-    const previo = dano ? Math.max(0, +dano - (ui.desvio && !ui.perforante ? c.desvio : 0)) : null;
+    const previo = dano ? Math.max(0, +dano - (ui.desvio && !ui.perforante ? desvioEf(c) : 0)) : null;
+    const efM = CB.efectos(c, adv);
     let acciones = '';
     if (adv) {
       acciones = `<h4>Acciones</h4><ul class="cb-acc">${adv.acciones.map((a, i) => {
@@ -116,8 +157,10 @@
       if (adv.rasgos.length) acciones += `<h4>Rasgos</h4><ul class="cb-acc">${adv.rasgos.map(x => `<li><div class="cb-it"><div class="cb-it-t"><b>${esc(x.n)}</b>${x.coste ? ` <span class="chip small">${esc(x.coste.texto)}</span>` : ''}</div><p>${esc(x.texto)}</p></div></li>`).join('')}</ul>`;
       if (c.rol === 'Jefe') acciones += '<p class="nota">Jefe: un turno rápido y uno lento por ronda; tras el turno de un enemigo puede gastar 1 de concentración para una acción 1 o 0 extra, y 1 en su turno para eliminar un estado.</p>';
     } else acciones = '<p class="muted">Adversario sin ficha: edita sus valores en la tabla.</p>';
+    acciones += vModulos(c);
     return `<td colspan="8"><div class="cb-dano"><input type="number" min="0" placeholder="Daño" data-a="dano-in" data-id="${c.id}" value="${esc(dano)}">
-          <label class="chk"><input type="checkbox" data-a="desvio" ${ui.desvio ? 'checked' : ''}> restar desvío (${c.desvio})</label>
+          <label class="chk"><input type="checkbox" data-a="desvio" ${ui.desvio ? 'checked' : ''}> restar desvío (${desvioEf(c)})</label>
+          ${efM.desvioLaceracion ? `<label class="chk" title="Los kandra tienen desvío ${efM.desvioLaceracion} solo contra laceración"><input type="checkbox" data-a="lacer" ${ui.lacer ? 'checked' : ''}> por laceración</label>` : ''}
           <label class="chk"><input type="checkbox" data-a="perforante" ${ui.perforante ? 'checked' : ''}> perforante</label>
           <button class="btn small" data-a="dano" data-id="${c.id}">Daño</button><button class="btn small" data-a="curar" data-id="${c.id}">Curar</button>
           <span class="muted" data-prev="${c.id}">${previo != null ? `→ ${previo} de daño` : ''}</span></div><div class="cb-det">
@@ -128,7 +171,7 @@
         <div class="cb-estados"><b>Estados</b> ${c.estados.map((e, i) => `<span class="chip soft">${estados[e.id] ? `<a href="#/e/${esc(e.id)}">${esc(e.nombre)}</a>` : esc(e.nombre)}<button class="cb-x" data-a="estado-quitar" data-id="${c.id}" data-i="${i}">✕</button></span>`).join('') || '<span class="muted">ninguno</span>'}
           <select data-a="estado-add" data-id="${c.id}"><option value="">+ estado…</option>${lista.map(e => `<option value="${esc(e.id)}">${esc(e.title)}</option>`).join('')}</select></div>
         <label class="cb-campo">Notas <textarea data-a="notas" data-id="${c.id}" rows="2">${esc(c.notas)}</textarea></label>
-        <p class="nota">${adv ? `Defensas ${adv.defensas.fis}/${adv.defensas.cog}/${adv.defensas.esp}${adv.sentidos ? ' · Sentidos ' + esc(adv.sentidos) : ''}${adv.movimiento ? ' · Mov. ' + esc(adv.movimiento) : ''} · ` : ''}Salud en el libro: ${c.saludRango && c.saludRango[0] ? c.saludRango[0] + ' a ' + c.saludRango[1] : '—'}</p>
+        <p class="nota">${adv ? `Defensas ${adv.defensas.fis + efM.defensas.fis}/${adv.defensas.cog + efM.defensas.cog}/${adv.defensas.esp + efM.defensas.esp}${adv.sentidos ? ' · Sentidos ' + esc(adv.sentidos) : ''}${adv.movimiento ? ' · Mov. ' + esc(adv.movimiento) : ''} · ` : ''}Salud en el libro: ${c.saludRango && c.saludRango[0] ? c.saludRango[0] + ' a ' + c.saludRango[1] : '—'}</p>
         ${adv && adv.tacticas ? `<h4>Tácticas</h4><p class="cb-tacticas">${esc(adv.tacticas)}</p>` : ''}
       </div></div></td>`;
   }
@@ -169,7 +212,7 @@
         </div></section>
       ${vAmenaza(r)}
       <div class="cb-cuerpo"><section class="cb-col cb-principal">${vTabla(r)}
-          <p class="nota">Los módulos (alomancia, feruquimia, clavos) aumentan la amenaza pero el libro no da cifra: ajústala a mano en su casilla.</p>
+          <p class="nota">Los módulos aumentan en la mitad la amenaza del adversario (solo con el primero, y no si ya usaba un arte Investido ni con la alomancia de bronce); puedes ajustarla a mano en su casilla.</p>
           <label class="cb-campo">Notas del encuentro <textarea data-a="notas-enc" rows="2">${esc(enc.notas)}</textarea></label></section>
         <section class="cb-col cb-picker"><h3>Adversarios</h3>
           <div class="cb-filtros"><span class="muted">Fuente:</span>${['', ...new Set(advs.map(a => a.libro).filter(Boolean))].map(l => `<button class="chip${ui.libro === l ? ' on' : ''}" data-a="libro" data-id="${esc(l)}">${g.UI && g.UI.ic ? g.UI.ic('book', 'sm') : ''}${l ? esc(l) : 'Todas'}</button>`).join('')}</div>
@@ -225,14 +268,14 @@
         const n = parseInt(ui.dano[id], 10);
         if (!(n > 0)) return aviso('Escribe una cantidad.');
         if (a === 'dano') {
-          const real = Math.max(0, n - (ui.desvio && !ui.perforante ? c.desvio : 0));
-          cambiar(`${c.nombre}: −${real} salud${real !== n ? ` (${n} − desvío ${c.desvio})` : ''}`, e => CB.daño(e.combatientes.find(x => x.id === id), n, { desvio: ui.desvio, perforante: ui.perforante }));
+          const dv = desvioEf(c), real = Math.max(0, n - (ui.desvio && !ui.perforante ? dv : 0));
+          cambiar(`${c.nombre}: −${real} salud${real !== n ? ` (${n} − desvío ${dv})` : ''}`, e => CB.daño(e.combatientes.find(x => x.id === id), n, { desvio: ui.desvio, perforante: ui.perforante, valorDesvio: dv }));
         } else cambiar(`${c.nombre}: +${n} salud`, e => CB.curar(e.combatientes.find(x => x.id === id), n));
         ui.dano[id] = ''; render();
         break;
       }
       case 'pagar': {
-        const x = advDe(c).acciones[+ds.i];
+        const x = ds.m ? (() => { const a = CB.efectos(c, advDe(c)).mods.find(m => m.id === ds.m).acciones[+ds.j]; return { n: a.n, coste: CB.adversarios.costeDe('(' + a.cab + ')') }; })() : advDe(c).acciones[+ds.i];
         if (c[x.coste.recurso].act < x.coste.cantidad) return aviso(`${c.nombre} no tiene ${x.coste.cantidad} de ${x.coste.recurso === 'investidura' ? 'Investidura' : 'concentración'} para ${x.n}.`);
         cambiar(`${c.nombre}: ${x.n}`, e => CB.gastar(e.combatientes.find(y => y.id === id), x.coste.recurso, x.coste.cantidad));
         break;
@@ -261,7 +304,8 @@
       case 'val': cambiar(`${c.nombre}: ${t.dataset.k} ${t.dataset.c === 'max' ? 'máx.' : ''} = ${t.value}`, e => (t.dataset.c === 'max' ? CB.fijarMax : CB.fijar)(e.combatientes.find(x => x.id === c.id), t.dataset.k, v)); break;
       case 'desvio': ui.desvio = t.checked; render(); break;
       case 'perforante': ui.perforante = t.checked; render(); break;
-      case 'modulo-add': { const m = mods.find(x => x.id === t.value); if (m) cambiar(`${c.nombre}: módulo ${m.nombre}`, e => CB.añadirModulo(e.combatientes.find(x => x.id === c.id), m)); break; }
+      case 'lacer': ui.lacer = t.checked; render(); break;
+      case 'modulo-add': { const m = mods.find(x => x.id === t.value); if (m) cambiar(`${c.nombre}: módulo ${m.nombre}`, e => CB.añadirModulo(e.combatientes.find(x => x.id === c.id), m, advDe(c))); break; }
       case 'estado-add': if (t.value) { const s = g.PJ.datos().byId[t.value]; cambiar(`${c.nombre}: ${s.title}`, e => { e.combatientes.find(x => x.id === c.id).estados.push({ id: s.id, nombre: s.title }); }); } break;
       default: break;
     }
@@ -273,7 +317,7 @@
     else if (t.dataset.a === 'dano-in') {
       ui.dano[t.dataset.id] = t.value;
       const c = comb(t.dataset.id), p = root.querySelector(`[data-prev="${t.dataset.id}"]`);
-      if (c && p) p.textContent = t.value ? `→ ${Math.max(0, +t.value - (ui.desvio && !ui.perforante ? c.desvio : 0))} de daño` : '';
+      if (c && p) p.textContent = t.value ? `→ ${Math.max(0, +t.value - (ui.desvio && !ui.perforante ? desvioEf(c) : 0))} de daño` : '';
     }
   }
 
@@ -296,7 +340,9 @@
     bib = cargar();
     enc = bib.encuentros.find(e => e.id === bib.abierto) || null;
     advs = g.DATA_DJ && g.PJ && g.PJ.datos ? CB.adversarios.todos(g.DATA_DJ) : null;
-    mods = g.DATA_DJ ? CB.adversarios.modulos(g.DATA_DJ) : [];
+    mods = CB.catalogoModulos(g.DATA_DJ);
+    // combates guardados antes de los módulos: se completan con los atributos del adversario (los necesitan sus efectos)
+    if (advs) bib.encuentros.forEach(e => e.combatientes.forEach(c => { const a = advDe(c); if (a && !c.atributos) { c.atributos = a.atributos; c.artesPrevios = a.investidura > 0; } }));
     render();
     root.onclick = alClic; root.onchange = alCambiar; root.oninput = alEscribir;
     if (!atajos) {

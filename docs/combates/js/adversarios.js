@@ -62,6 +62,7 @@
       concentracion: f.concentracion || 0, investidura: f.investidura || 0,
       desvio: f.desvio || 0, movimiento: f.movimiento, sentidos: f.sentidos,
       defensas: { fis: f.def_fis, cog: f.def_cog, esp: f.def_esp },
+      atributos: { fue: f.fue || 0, vel: f.vel || 0, int: f.int || 0, vol: f.vol || 0, dis: f.dis || 0, pre: f.pre || 0 },
       rasgos: b.rasgos, acciones: b.acciones, tacticas: b.tacticas,
     };
   }
@@ -85,5 +86,5 @@
     return out;
   }
 
-  CB.adversarios = { leer, todos, bloques, modulos };
+  CB.adversarios = { leer, todos, bloques, modulos, costeDe };
 })(typeof window !== 'undefined' ? window : globalThis);

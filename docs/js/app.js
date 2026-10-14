@@ -62,7 +62,6 @@
     }).join('');
     el.innerHTML = `
       <section class="hero">
-        <h1><span class="logo big" aria-hidden="true"></span>${esc(C.brand)}</h1>
         <div id="heroslot" class="heroslot"></div>
       </section>
       <section class="menugrid">${groups}</section>`;
@@ -201,12 +200,10 @@
     // selector de ambientación, en la cabecera junto a la marca: cambia lo que se ve en la página y en los menús
     const slotAmb = $('#ambpick');
     if (slotAmb) {
-      const icono = () => { const a = C.ambientaciones.find((x) => x.id === A.ambientacion); return a && a.ic ? ic(a.ic, 'sm') : ''; };
-      slotAmb.innerHTML = `<span class="ambic" aria-hidden="true">${icono()}</span><select id="ambsel" aria-label="Ambientación">${C.ambientaciones.map((a) =>
+      slotAmb.innerHTML = `<select id="ambsel" aria-label="Ambientación">${C.ambientaciones.map((a) =>
         `<option value="${esc(a.id)}"${a.id === A.ambientacion ? ' selected' : ''}>${esc(a.label)}</option>`).join('')}</select>`;
       $('#ambsel').addEventListener('change', (ev) => {
         A.ambientacion = ev.target.value; store.set('cosmere_ambientacion', A.ambientacion); computeAllow(); buildMenu();
-        $('.ambic', slotAmb).innerHTML = icono();
         const { raw } = parseHash();
         if (raw.startsWith('/e/')) { renderBase(A.lastBase); route(); } else route();
       });

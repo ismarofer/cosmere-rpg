@@ -9,7 +9,7 @@ const BASICO = [
   'data/base.js', 'js/curated.js', 'js/icons.js', 'js/search.js', 'js/app-base.js', 'js/app-ficha.js', 'js/app-arboles.js', 'js/app-catalogo.js', 'js/app.js',
   'personaje/js/rules.js', 'personaje/js/engine.js', 'personaje/js/store.js', 'personaje/js/ui-common.js',
   'personaje/js/wizard-comun.js', 'personaje/js/wizard-datos.js', 'personaje/js/wizard-talentos.js', 'personaje/js/wizard-poderes.js', 'personaje/js/wizard-equipo.js', 'personaje/js/wizard.js', 'personaje/js/sheet.js', 'personaje/js/app.js', 'proyector/js/vista.js',
-  'combates/js/amenaza.js', 'combates/js/adversarios.js', 'combates/js/combate.js', 'combates/js/vista.js',
+  'combates/js/amenaza.js', 'combates/js/adversarios.js', 'combates/js/modulos-datos.js', 'combates/js/modulos.js', 'combates/js/combate.js', 'combates/js/vista.js',
   'nombres/js/nombres.js', 'img/cosmere.svg', 'img/mistborn.svg', 'img/stormlight.svg',
 ];
 

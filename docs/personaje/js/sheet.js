@@ -339,7 +339,7 @@
       h('div', { class: 'acciones' },
         h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar JSON'),
         h('button', { type: 'button', class: 'btn', onclick: () => { const copia = PJ.store.duplicar(c); PJ.store.guardar(copia); location.hash = '#/personajes/p/' + copia.id; } }, 'Duplicar'),
-        h('button', { type: 'button', class: 'btn peligro', onclick: () => { if (confirm(`¿Borrar a «${c.nombre || 'Sin nombre'}»? No se puede deshacer.`)) { PJ.store.borrar(c.id); location.hash = '#/'; } } }, 'Borrar personaje')));
+        h('button', { type: 'button', class: 'btn peligro', onclick: () => { if (confirm(`¿Borrar a «${c.nombre || 'Sin nombre'}»? No se puede deshacer.`)) { PJ.store.borrar(c.id); location.hash = '#/personajes'; } } }, 'Borrar personaje')));
 
     // ---------------- Cabecera y ensamblado
     const sub = [PJ.ascDe(c).n, PJ.ui.nombreCamino(c.camino) || 'sin camino', d.radiante ? d.radiante.nombre : null, stormlight ? 'Stormlight' : `Era ${c.era}`].filter(Boolean).join(' · ');
@@ -358,10 +358,8 @@
       h('header', { class: 'cab-hoja' },
         h('div', null, h('h2', null, c.nombre || 'Personaje sin nombre'), h('div', { class: 'muted' }, `${sub} · nivel ${d.nivel} (rango ${d.rango})` + (c.jugador ? ` · ${c.jugador}` : ''))),
         h('div', { class: 'acciones noprint' },
-          h('button', { type: 'button', class: 'btn primario', disabled: c.nivel >= 30, onclick: () => { c.nivel++; PJ.aplicarPoderesIniciales(c); guardar(); location.hash = `#/personajes/p/${c.id}/nivel/atributos`; } }, 'Subir de nivel'),
-          h('a', { class: 'btn', href: `#/personajes/p/${c.id}/crear/datos`, title: 'Abre el asistente de creación para cambiar lo que quieras' }, 'Editar personaje'),
-          h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, 'Imprimir'),
-          h('button', { type: 'button', class: 'btn', onclick: () => descargar(`${slugNombre(c.nombre)}.json`, PJ.store.exportar(c)) }, 'Exportar'))),
+          h('a', { class: 'btn', href: '#/personajes' }, '← Mis personajes'),
+          h('a', { class: 'btn primario', href: `#/personajes/p/${c.id}/crear/datos`, title: 'Edita el personaje; el nivel se cambia en el primer paso' }, 'Editar'))),
       d.pendientes || d.errores ? h('div', { class: 'banda noprint' }, d.errores ? `${d.errores} error(es)` : '', d.errores && d.pendientes ? ' · ' : '', d.pendientes ? `${d.pendientes} pendiente(s) de completar. ` : '',
         h('a', { class: 'subrayado', href: `#/personajes/p/${c.id}/crear/resumen` }, 'Ver en el asistente')) : null,
       h('nav', { class: 'tabs noprint' }, TABS.map(([k, n]) => h('button', { type: 'button', class: 'tab', 'data-tab': k, onclick: () => mostrar(k) }, k === 'poderes' && stormlight ? 'Radiante' : n))),

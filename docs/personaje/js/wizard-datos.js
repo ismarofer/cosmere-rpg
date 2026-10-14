@@ -29,18 +29,21 @@
           h('select', { onchange: e => cambiar(c => { c.era = +e.target.value; PJ.aplicarPoderesIniciales(c); }) },
             h('option', { value: 1, selected: c.era === 1 }, 'Era 1 (Imperio Final)'),
             h('option', { value: 2, selected: c.era === 2 }, 'Era 2 (Elendel)'))),
-        modo === 'crear' ? h('label', null, 'Nivel inicial',
+        h('label', null, 'Nivel',
           h('input', {
-            type: 'number', min: 1, max: 30, value: c.nivelInicial,
+            type: 'number', min: 1, max: 30, value: c.nivel,
             onchange: e => cambiar(c => {
               const n = Math.max(1, Math.min(30, parseInt(e.target.value, 10) || 1));
-              c.nivelInicial = n; c.nivel = n;
+              // sin nada elegido aún es el nivel con el que se crea (pide lo acumulado hasta él); después, es subir o bajar de nivel
+              const nuevo = !(c.camino || c.talentos.length || c.pericias.length || c.equipo.length || c.armas.length || c.kit);
+              c.nivel = n;
+              if (nuevo || n < c.nivelInicial) c.nivelInicial = n;
               c.atributos.subidas = c.atributos.subidas.slice(0, PJ.subidasAtributo(n));
               c.elecciones21 = (c.elecciones21 || []).slice(0, Math.max(0, n - 20));
               while (c.elecciones21.length < Math.max(0, n - 20)) c.elecciones21.push('grado');
               PJ.aplicarPoderesIniciales(c);
             }),
-          })) : null),
+          }))),
       h('h3', null, 'Ascendencia'),
       h('ul', { class: 'lista talentos' }, Object.entries(PJ.ASCENDENCIAS_AMB[PJ.ambito(c)]).map(([k, a]) => {
         const on = c.ascendencia === k;

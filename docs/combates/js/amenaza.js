@@ -36,6 +36,7 @@
     return { clave: 'extremo', etiqueta: 'Por encima de difícil' };
   }
 
+  CB.aCuarto = aCuarto;
   CB.amenazaAdversario = amenazaAdversario;
   CB.rangoDeNivel = rangoDeNivel;
   CB.objetivos = objetivos;

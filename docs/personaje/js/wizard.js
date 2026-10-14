@@ -1,4 +1,4 @@
-/* Asistente paso a paso: creación (con nivel inicial superior) y subida de nivel. Secuencias y carcasa. */
+/* Asistente paso a paso: crear y editar un personaje (subir de nivel = cambiar el nivel en el primer paso). Secuencias y carcasa. */
 (function (g) {
   'use strict';
   const PJ = g.PJ;
@@ -14,7 +14,6 @@
   };
   PJ.secuencia = (modo, c) => {
     const stormlight = PJ.ambito(c) === 'Stormlight';
-    if (modo === 'nivel') return ['atributos', 'habilidades', 'talentos', 'pericias', stormlight ? 'radiante' : 'poderes', 'resumen'];
     const s = ['datos', 'camino', 'atributos', 'habilidades', 'talentos', 'pericias'];
     if (stormlight) { if (PJ.derivar(c).radiante) s.push('radiante'); }
     else if (PJ.CAMINOS_METAL.includes(c.camino)) s.push('poderes');
@@ -40,7 +39,7 @@
     const seq = PJ.secuencia(modo, c);
     const paso = seq.includes(pasoPedido) ? pasoPedido : seq[0];
     const idx = seq.indexOf(paso);
-    const base = `#/personajes/p/${c.id}/${modo === 'nivel' ? 'nivel' : 'crear'}/`;
+    const base = `#/personajes/p/${c.id}/crear/`;
     const guardar = () => { if (!PJ.store.guardar(c)) PJ.ui.aviso('No se pudo guardar en el navegador. Exporta el personaje a JSON.'); };
     const pintar = () => PJ.renderAsistente(raiz, c, modo, paso);
     const cambiar = fn => {
@@ -60,7 +59,7 @@
     };
     const aside = h('aside', { class: 'lateral' });
     const d = PJ.derivar(c);
-    const titulo = modo === 'nivel' ? `Subir a nivel ${c.nivel}` : 'Crear personaje';
+    const titulo = 'Editar personaje';
     const prev = idx > 0 ? h('a', { class: 'btn', href: base + seq[idx - 1], rel: 'prev' }, '← Anterior') : h('span', { class: 'btn-hueco' });
     const sig = idx < seq.length - 1 ? h('a', { class: 'btn primario', href: base + seq[idx + 1], rel: 'next' }, 'Siguiente →') :
       h('a', { class: 'btn primario', href: `#/personajes/p/${c.id}` }, 'Terminar y abrir la hoja');
@@ -68,7 +67,9 @@
     raiz.appendChild(h('div', { class: 'asistente', 'data-amb': PJ.ambito(c).toLowerCase() },
       h('div', { class: 'cab-asistente' },
         h('h2', null, titulo),
-        h('a', { class: 'btn small', href: `#/personajes/p/${c.id}` }, modo === 'nivel' ? 'Volver a la hoja' : 'Guardar y salir')),
+        h('div', { class: 'acciones' },
+          h('a', { class: 'btn small', href: '#/personajes' }, '← Mis personajes'),
+          h('a', { class: 'btn small', href: `#/personajes/p/${c.id}` }, 'Guardar y salir'))),
       h('div', { class: 'barra-pasos' },
         prev,
         h('nav', { class: 'pasos', 'aria-label': 'Pasos' }, seq.map((k, i) => h('a', { href: base + k, class: 'paso-tab' + (k === paso ? ' on' : '') + (i < idx ? ' hecho' : ''), 'aria-current': k === paso ? 'step' : null }, `${i + 1}. ${PJ.PASOS[k].n}`))),

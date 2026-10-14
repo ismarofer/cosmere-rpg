@@ -3,7 +3,7 @@
    #/personajes/nuevo                 crea un personaje y abre el asistente
    #/personajes/p/<id>                hoja
    #/personajes/p/<id>/crear/<paso>   asistente de creación
-   #/personajes/p/<id>/nivel/<paso>   asistente de subida de nivel */
+   #/personajes/p/<id>/nivel/<paso>   alias antiguo de la edición (subir de nivel se hace en el primer paso) */
 (function (g) {
   'use strict';
   const PJ = g.PJ;
@@ -29,10 +29,17 @@
       h('p', { class: 'muted' }, 'Los personajes se guardan solo en este navegador. Exporta una copia en JSON para no perderlos o para llevarlos a otro equipo.'),
       todos.length ? h('div', { class: 'cartas' }, todos.map(c => {
         const d = PJ.derivar(c);
-        return h('a', { class: 'carta', 'data-amb': PJ.ambito(c).toLowerCase(), href: '#/personajes/p/' + c.id },
-          h('b', null, c.nombre || 'Sin nombre'),
-          h('span', null, `${PJ.ambito(c) === 'Stormlight' ? 'Stormlight · ' : ''}${PJ.ascDe(c).n} · ${PJ.ui.nombreCamino(c.camino) || 'sin camino'}${d.radiante ? ' · ' + d.radiante.nombre : ''} · nivel ${d.nivel}`),
-          d.pendientes ? h('span', { class: 'mal' }, `${d.pendientes} pendiente(s) de completar`) : null);
+        const papelera = h('button', {
+          type: 'button', class: 'btn icono peligro carta-borrar', title: 'Borrar personaje', 'aria-label': `Borrar a ${c.nombre || 'Sin nombre'}`,
+          onclick: () => { if (confirm(`¿Borrar a «${c.nombre || 'Sin nombre'}»? No se puede deshacer.`)) { PJ.store.borrar(c.id); lista(raiz); } },
+        });
+        papelera.innerHTML = g.UI ? g.UI.ic('trash') : '✕';
+        return h('div', { class: 'carta-wrap' },
+          h('a', { class: 'carta', 'data-amb': PJ.ambito(c).toLowerCase(), href: '#/personajes/p/' + c.id },
+            h('b', null, c.nombre || 'Sin nombre'),
+            h('span', null, `${PJ.ambito(c) === 'Stormlight' ? 'Stormlight · ' : ''}${PJ.ascDe(c).n} · ${PJ.ui.nombreCamino(c.camino) || 'sin camino'}${d.radiante ? ' · ' + d.radiante.nombre : ''} · nivel ${d.nivel}`),
+            d.pendientes ? h('span', { class: 'mal' }, `${d.pendientes} pendiente(s) de completar`) : null),
+          papelera);
       })) : h('p', { class: 'vacio' }, 'Todavía no hay ningún personaje. Crea uno con el asistente paso a paso.')));
   }
 
@@ -40,10 +47,8 @@
   function montar(el, sub) {
     const partes = (sub || '').split('/').filter(Boolean);
     el.innerHTML = '';
-    const barra = h('p', { class: 'noprint pjbar' }, h('a', { href: '#/personajes' }, '← Mis personajes'));
     const raiz = h('div', { id: 'vista' });
-    el.appendChild(barra); el.appendChild(raiz);
-    barra.hidden = !partes.length;
+    el.appendChild(raiz);
     if (!partes.length) return lista(raiz);
     if (partes[0] === 'nuevo') {
       // La ambientación de la cabecera decide con qué ámbito y era arranca el personaje (se puede cambiar en el primer paso)
@@ -56,7 +61,8 @@
     if (partes[0] === 'p' && partes[1]) {
       const c = PJ.store.cargar(partes[1]);
       if (!c) { raiz.appendChild(h('p', { class: 'vacio' }, 'No se encuentra ese personaje. ', h('a', { href: '#/personajes' }, 'Volver a la lista'))); return; }
-      if (partes[2] === 'crear' || partes[2] === 'nivel') return PJ.renderAsistente(raiz, c, partes[2], partes[3]);
+      if (partes[2] === 'nivel') { location.replace(`#/personajes/p/${c.id}/crear/${partes[3] || 'datos'}`); return; }   // alias antiguo
+      if (partes[2] === 'crear') return PJ.renderAsistente(raiz, c, 'crear', partes[3]);
       return PJ.renderHoja(raiz, c);
     }
     lista(raiz);
